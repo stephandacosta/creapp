@@ -61,7 +61,6 @@ function handleError(res, statusCode) {
 
 // Gets a list of Things
 export function index(req, res) {
-  console.log('things has been called');
   Thing.findAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
