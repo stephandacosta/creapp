@@ -5,6 +5,7 @@
 
 'use strict';
 import Thing from '../api/thing/thing.model';
+import BuyReq from '../api/buyreq/buyreq.model';
 
 Thing.find({}).removeAsync()
   .then(() => {
@@ -38,3 +39,56 @@ Thing.find({}).removeAsync()
     });
   });
 
+BuyReq.find({}).removeAsync()
+  .then(() => {
+    BuyReq.create({
+      // _reqId: new mongoose.Types.ObjectId,
+      // created: new Date,
+      user: 'somedude@somemail.com',
+      title: 'a piece of land in the fields',
+      info: 'I am looking for something cheap',
+
+      landOnly: true,
+      landWithProperty: true,
+      Leisure: false,
+      Retail: true,
+      Office: false,
+      Industrial: false,
+      Multifamily: false,
+      priceMin: 1.2,
+      priceMax: 2.4,
+
+      buy: true,
+      lease: true,
+      exchange: false,
+
+      zipCodes: ['91032','4535','4534'],
+      polygon: [91.23, 45.34, 44.65],
+      active: true
+    }, {
+      // _reqId: new mongoose.Types.ObjectId,
+      // created: new Date,
+      user: 'someotherdude@somemail.com',
+      title: 'a restaurant',
+      info: 'in a cool place',
+
+      landOnly: false,
+      landWithProperty: true,
+      Leisure: true,
+      Retail: false,
+      Office: false,
+      Industrial: false,
+      Multifamily: false,
+      priceMin: 1.2,
+      priceMax: 2.4,
+
+      buy: true,
+      lease: true,
+      exchange: false,
+
+      zipCodes: ['91032','4535','4534'],
+      polygon: [91.23, 45.34, 44.65],
+      active: true
+    });
+
+  });
