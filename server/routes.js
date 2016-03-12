@@ -6,10 +6,20 @@
 
 import errors from './components/errors';
 import path from 'path';
+var ExpressStormpath = require('express-stormpath');
+
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
+  app.use('/api/buyreqs', require('./api/buyreq'));
+  // includes condition stormpath user login validation to protect endpoint
+  app.use('/api/things', ExpressStormpath.loginRequired, require('./api/thing'));
+
+  // this would return the groups, seems to have a big in stormpath sdk
+  // app.use('/groups', ExpressStormpath.loginRequired, function (req, res) {
+  //   res.json(req.user.groups);
+  // });
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

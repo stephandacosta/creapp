@@ -9,6 +9,9 @@ import mongoose from 'mongoose';
 mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
+var ExpressStormpath = require('express-stormpath');
+var path = require('path');
+var bodyParser = require('body-parser');
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -22,6 +25,18 @@ if (config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
+// stormpath init on server
+app.use(ExpressStormpath.init(app,{
+  website: true,
+  expand: {
+    groups:true
+  },
+  web: {
+    spaRoot: path.join(__dirname, '..','client','index.html')
+  }
+}));
+app.use(bodyParser.urlencoded({ extended: true })); //ensure that your server-side framework is decoding complex form objects in POST bodies
+
 var server = http.createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
@@ -33,7 +48,13 @@ function startServer() {
   });
 }
 
-setImmediate(startServer);
+// start server after  stormpath SDK is received
+app.on('stormpath.ready',function() {
+  // Start server
+  setImmediate(startServer);
+});
+
+
 
 // Expose app
 exports = module.exports = app;

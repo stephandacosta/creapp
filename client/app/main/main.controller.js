@@ -11,6 +11,7 @@ class MainController {
     $http.get('/api/things').then(response => {
       this.awesomeThings = response.data;
     });
+
   }
 
   addThing() {

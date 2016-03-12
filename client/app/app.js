@@ -5,11 +5,20 @@ angular.module('creapp3App', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ui.router'
+  'ui.router',
+  'stormpath',
+  'stormpath.templates'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+  })
+  // stormpath init
+  .run(function($stormpath){
+    $stormpath.uiRouter({
+      loginState: 'login',
+      defaultPostLoginState: 'main'
+    });
   });
