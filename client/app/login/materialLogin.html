@@ -1,0 +1,45 @@
+<md-card>
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Login</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <div ng-show="!viewModel" class="sp-loading">
+    <div layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    Loading...
+  </div>
+
+
+  <form ng-hide="accepted || !viewModel" ng-submit="submit()" layout="column">
+
+    <md-input-container class="md-block" flex-gt-sm ng-repeat="field in viewModel.form.fields">
+      <label>{{field.label}}</label>
+      <input name="{{field.name}}" id="sp-{{field.name}}" type="{{field.type}}" ng-model="formModel[field.name]" ng-disabled="posting" ng-required="field.required">
+    </md-input-container>
+
+    <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
+
+    <div layout="row">
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="posting">
+        Login
+      </md-button>
+      <a class="md-primary md-button md-ink-ripple" aria-label="Forgot Password" href="/forgot">
+        Forgot Password
+        <div class="md-ripple-container"></div>
+      </a>
+    </div>
+
+    <div ng-show="viewModel.accountStores.length">
+      <p>Or login with:</p>
+      <button ng-repeat="accountStore in viewModel.accountStores" type="button" class="md-button btn-{{accountStore.provider.providerId}}" sp-social-login="{{accountStore.provider.providerId}}" sp-client-id="{{accountStore.provider.clientId}}" sp-scope="{{accountStore.provider.scope}}">
+        {{providerName}}
+      </button>
+    </div>
+
+  </form>
+
+</md-card>
