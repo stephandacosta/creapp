@@ -5,6 +5,7 @@ angular.module('creapp3App', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngMaterial',
   'ui.router',
   'stormpath',
   'stormpath.templates'
@@ -12,9 +13,16 @@ angular.module('creapp3App', [
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
-
     $locationProvider.html5Mode(true);
   })
+
+// material theme pallette
+  // .config(function($mdThemingProvider) {
+  //   $mdThemingProvider.theme('default')
+  //     .primaryPalette('pink')
+  //     .accentPalette('orange');
+  // });
+
   // stormpath init
   .run(function($stormpath){
     $stormpath.uiRouter({

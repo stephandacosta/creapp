@@ -1,0 +1,116 @@
+<div layout="row" ng-cloak>
+
+  <div flex></div>
+
+  <md-card flex="80" layout="column">
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Requirement Input</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <div layout="row">
+
+      <div flex="50" layout="column" layout-padding layout-margin>
+
+        <md-input-container layout-padding>
+          <label>Title</label>
+          <input type="text" ng-model="req.title">
+        </md-input-container>
+
+        <md-input-container>
+          <label>Information</label>
+          <textarea ng-model="req.info" md-maxlength="500" rows="10" md-select-on-focus></textarea>
+        </md-input-container>
+
+        <div layout-padding>
+          <!-- <label>Zip Codes</label> -->
+          <md-chips
+            ng-model="req.zipCodes"
+            readonly="false"
+            placeholder="Zip Codes"
+            delete-button-label="Remove Zip Code"
+            delete-hint="Press delete to remove Zip Code"
+            secondary-placeholder="Enter Zip Code">
+          </md-chips>
+        </div>
+
+      </div>
+
+      <div flex layout="column" layout-padding layout-margin>
+
+        <div flex layout="row">
+
+          <md-input-container flex="60">
+            <label>Type</label>
+            <md-select ng-model="req.type">
+              <md-option ng-repeat="type in types" value="{{type}}">
+                {{type}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container flex layout="column" layout-wrap layout-gt-sm="row" >
+            <!-- <div flex-xs flex="50"> -->
+              <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
+                Land Only
+              </md-checkbox>
+            <!-- </div> -->
+
+            <!-- <div flex-xs flex="50"> -->
+              <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
+                Land and Property
+              </md-checkbox>
+            <!-- </div> -->
+          </md-input-container>
+
+        </div>
+
+        <div layout="row">
+          <md-input-container  layout="row" layout-padding>
+            <label>Min Price</label>
+            <input type="number" ng-model="req.priceMin">
+          </md-input-container>
+          <md-input-container  layout="row" layout-padding>
+            <label>Max Price</label>
+            <input type="number" ng-model="req.priceMax">
+          </md-input-container>
+        </div>
+
+        <!-- <label> Purchase Type </label> -->
+        <md-input-container layout="column" layout-wrap layout-gt-sm="row" >
+          <div flex-xs flex="33">
+            <md-checkbox class="md-primary" ng-model="req.buy" aria-label="buy">
+              Buy
+            </md-checkbox>
+          </div>
+          <div flex-xs flex="33">
+            <md-checkbox class="md-primary" ng-model="req.lease" aria-label="lease">
+              Lease
+            </md-checkbox>
+          </div>
+          <div flex-xs flex="33">
+            <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="lease">
+              Exchange
+            </md-checkbox>
+          </div>
+        </md-input-container>
+
+      </div>
+
+    </div>
+
+    <md-card-actions layout="row" layout-align="center center">
+      <md-button flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq()">
+        Publish
+      </md-button>
+    </md-card-actions>
+
+
+  </md-card>
+
+  <div flex></div>
+
+</div>
+

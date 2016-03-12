@@ -1,21 +1,87 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">creapp3</a>
-    </div>
-    <div collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
 
-<!--       <ul class="nav navbar-nav">
-        <li ng-repeat="item in nav.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
-        </li>
-      </ul> -->
+<md-toolbar layout="row">
+
+  <div flex class="md-toolbar-tools" layout="row">
+
+    <div flex="10">
+      <h1><span> CRE APP </span></h1>
+    </div>
+
+    <div flex layout="row">
+
+      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" ng-repeat="item in nav.menu" ui-sref="{{item.state}}" ui-sref-active="active" style="vertical-align: middle;">
+        {{item.title}}
+      </md-button>
+
+      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" if-user ui-sref="buyreqs" ui-sref-active="active">
+        Find
+      </md-button>
+
+      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" if-user ui-sref="addreq" ui-sref-active="active">
+        Add
+      </md-button>
+
+
+<!--         <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
+        Admin Console
+      </md-button> -->
+
+    </div>
+      <span flex></span>
+
+    <div if-not-user flex  layout-align="end center" class="md-toolbar-tools" layout="row">
+
+      <md-button ui-sref="login" ui-sref-active="active">
+        Login
+      </md-button>
+
+      <md-button if-not-user ui-sref="register" ui-sref-active="active">
+        Register
+      </md-button>
+
+    </div>
+
+
+    <div if-user class="md-toolbar-tools" layout="row">
+
+      <md-menu>
+
+        <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple" ng-click="nav.openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
+          <md-tooltip md-direction="left">
+              Account
+            </md-tooltip>
+          <i class="material-icons" style="vertical-align: middle;">person</i>
+        </button>
+
+        <md-menu-content class="md-primary" width="4">
+
+          <md-menu-item>
+            <md-button ui-sref="profile" ui-sref-active="active"> 
+              Profile
+            </md-button>
+          </md-menu-item>
+
+          <md-menu-item >
+            <md-button ui-sref="main" sp-logout>
+              Logout
+            </md-button>
+          </md-menu-item>
+
+        </md-menu-content>
+
+      </md-menu>
+
+    </div>
+
+  </div>
+</md-toolbar>
+
+
+
+<!-- 
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavbarController">
+  <div class="container">
 
       <ul class="nav navbar-nav">
         <li ng-repeat="item in nav.menu" ui-sref-active="active">
@@ -30,15 +96,15 @@
         <li if-not-user ui-sref-active="active">
             <a ui-sref="login">Login</a>
         </li>
-        <li if-user ui-sref-active="active">
+        <li if-user >
             <a ui-sref="main" sp-logout>Logout</a>
         </li>
         <li if-user ui-sref-active="active">
             <a ui-sref="buyreqs">Buy Reqs</a>
         </li>
-<!--         <li if-user-in-group="admins" ui-sref-active="active">
+         <li if-user-in-group="admins" ui-sref-active="active">
           <a ng-href="/admin">Admin Console</a>
-        </li> -->
+        </li>
       </ul>
 
     </div>
@@ -46,3 +112,6 @@
 </div>
 
 
+
+
+ -->

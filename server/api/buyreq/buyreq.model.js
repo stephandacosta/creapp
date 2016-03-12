@@ -11,11 +11,7 @@ var BuyreqSchema = new mongoose.Schema({
 
   landOnly: Boolean,
   landWithProperty: Boolean,
-  Leisure: Boolean,
-  Retail: Boolean,
-  Office: Boolean,
-  Industrial: Boolean,
-  Multifamily: Boolean,
+  type: String,
   priceMin: Number,
   priceMax: Number,
 

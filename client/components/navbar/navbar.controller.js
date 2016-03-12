@@ -10,8 +10,14 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
+  openMenu($mdOpenMenu, ev) {
+    $mdOpenMenu(ev);
+  }
+
   constructor() {
-    }
+  }
+
+
 }
 
 angular.module('creapp3App')
