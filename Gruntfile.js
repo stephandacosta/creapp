@@ -401,7 +401,7 @@ module.exports = function (grunt) {
       },
       azure: {
         options: {
-          remote: 'azure',
+          remote: 'https://GoingMerryDev@creapp.scm.azurewebsites.net:443/creapp.git',
           branch: 'master'
         }
       },
