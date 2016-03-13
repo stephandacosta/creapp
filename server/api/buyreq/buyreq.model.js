@@ -12,7 +12,6 @@ var BuyreqSchema = new mongoose.Schema({
   landOnly: Boolean,
   landWithProperty: Boolean,
   type: String,
-  priceMin: Number,
   priceMax: Number,
 
   buy: Boolean,

@@ -1,0 +1,50 @@
+
+/*overflow info box*/
+.md-list-item-text > div {
+  overflow: scroll;
+  word-wrap: break-word;
+  white-space:normal;
+  /*border: solid;*/
+}
+
+
+md-slider-container {
+  min-width:300px;
+  margin-right:50px;
+}
+
+.req.price{
+  margin:0;
+}
+
+/*color sliders*/
+.md-track.md-track-fill {
+ background-color: rgb(63,81,181);
+}
+
+md-slider[disabled] .md-track-fill {
+    display: block;
+}
+
+md-slider[disabled]:not(.md-min) .md-thumb:after {
+    background-color: rgb(63,81,181);
+}
+
+/*color chips*/
+.md-chips md-chip {
+  background-color: rgb(63,81,181);
+  color: white;
+}
+
+.req.zip{
+  min-width:350px;
+}
+
+.req.landproperty {
+  max-width: 200px;
+}
+
+.req.landproperty, .req.type, .req.info {
+  /*border: solid 0.5px;*/
+
+}
