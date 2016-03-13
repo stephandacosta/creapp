@@ -1,7 +1,27 @@
-<div>This is the buyreqs view.</div>
 
-<ul>
-  <li ng-repeat="buyreq in buyreqs">
-    {{buyreq._id}} {{buyreq.title}}
-  </li>
-<ul>
+<md-grid-list
+          md-cols="5"
+          md-cols-xs="2"
+          md-row-height="200px"
+          md-row-height-xs="100px"
+          md-gutter="8px">
+
+  <md-grid-tile ng-repeat="buyreq in buyreqs">
+
+    <!-- <md-grid-tile-header>{{buyreq.title}}</md-grid-tile-Header> -->
+
+    <md-card layout="column" layout-fill >
+
+      <md-card-title>
+        <md-card-title-text>
+          <span><h4>{{buyreq.title}}</h4></span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-content><h5>{{buyreq.info}}</h5></md-content>
+
+    </md-card>
+
+  </md-grid-tile>
+
+</md-gridlist>
