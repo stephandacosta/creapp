@@ -1,81 +1,83 @@
 
 
+<md-content layout-padding>
 
- <md-content layout="column" layout-margin>
+  <md-grid-list
+        md-cols="4"
+        md-row-height="2:1"
+        md-gutter="12px" >
 
-  <md-card flex layout="column" layout-fill ng-repeat="buyreq in buyreqs">
+    <md-grid-tile md-rowspan="2" md-colspan="1" md-colspan-sm="1"  ng-repeat="buyreq in buyreqs">
 
-    <div layout="row"  layout-align="center center">
-
-      <span><h2 class="md-headline">{{buyreq.title}}</h4></span>
-
-      <span flex></span>
-
-      <md-slider-container>
-        <md-slider class="md-primary" min="0" max="5" ng-model="buyreq.priceMax" aria-label="Max Price" ng-readonly="true" ng-disabled="true">
-        </md-slider>
-      <span><h5 class="req price">Price Max: {{ buyreq.priceMax }}</h5></span>
-      </md-slider-container>
-
-      <div class="req landproperty" flex="column">
-        <div ng-show="buyreq.landWithProperty">
-          <i class="material-icons">location_city</i> land+property
-        </div>
-        <div ng-show="buyreq.landOnly">
-          <i class="material-icons">crop_free</i> land only
-        </div>
-      </div>
-
-      <div class="req type md-primary md-button" flex="20" layout-align="start start" layout="row">
-        <div class="md-list-item-text" layout="column">
-          <h3 class="md-title">{{ buyreq.type }}</h3>
-        </div>
-      </div>
-
-    </div>
-
-    <div layout="row">
-
-      <div class="req info" flex="60" layout-align="start start" layout-margin layout="row">
-        <div class="md-list-item-text">
-          <!-- <h2>{{ buyreq.title }}</h2> -->
-          <div><p>{{ buyreq.info }}</p></div>
-        </div>
-      </div>
+<!--       <md-grid-tile-header>
+        <h4 class="md-headline">{{buyreq.title}}</h4>
+      </md-grid-tile-header> -->
 
 
-      <div flex layout="column">
-        <div flex class="req zip" >
-          <p>Zip codes</p>
-          <md-chips ng-model="buyreq.zipCodes" readonly="true"></md-chips>
-        </div>
-      </div>
+      <md-content class="md-whiteframe-3dp" layout="column" layout-fill layout-padding>
 
-      <span flex></span>
+        <md-tabs md-border-bottom>
+         <md-tab>
+            <md-tab-label>
+              <i class="material-icons">info_outline</i>
+            </md-tab-label>
+            <md-tab-body layout="column" layout-align="center center">
+              <h3 class="md-subhead">{{buyreq.title}}</h3>
 
-      <div flex layout="column" layout-align="center center">
-        <a class="md-fab md-mini md-primary md-button md-ink-ripple" aria-label="Contact">
-          <md-tooltip md-direction="bottom">
-              Location
-          </md-tooltip>
-          <i class="material-icons" style="vertical-align: middle;">location_on</i>
-        </a>
-        <a class="md-fab md-mini md-primary md-button md-mini md-ink-ripple" aria-label="Contact">
-          <md-tooltip md-direction="bottom">
-              More Info
-          </md-tooltip>
-          <i class="material-icons" style="vertical-align: middle;">info_outline</i>
-        </a>
-        <a class="md-fab md-mini md-primary md-button md-mini md-ink-ripple" aria-label="Contact">
-          <md-tooltip md-direction="bottom">
-              Contact
-          </md-tooltip>
-          <i class="material-icons" style="vertical-align: middle;">mail_outline</i>
-        </a>
-      </div>
+ 
+              <div class="req landproperty" flex="column">
+                <div ng-show="buyreq.landWithProperty" >
+                  <i class="material-icons">location_city</i> land+property
+                </div>
+                <div ng-show="buyreq.landOnly">
+                  <i class="material-icons">crop_free</i> land only
+                </div>
+              </div>
 
-    </div>
 
-  </md-card>
+
+              <div class="req price" flex="row">
+                <div><h5>Max {{ buyreq.priceMax }} $/sft</h5></div>
+              </div>
+
+            </md-tab-body>
+          </md-tab>
+
+
+          <md-tab>
+            <md-tab-label>
+              <i class="material-icons">description</i>
+            </md-tab-label>
+            <md-tab-body layout="column">
+                <div><p >{{ buyreq.info }}</p></div>
+            </md-tab-body>
+          </md-tab>
+
+
+          <md-tab>
+            <md-tab-label>
+              <i class="material-icons">place</i>
+            </md-tab-label>
+            <md-tab-body layout="column" class="md-padding" layout-align="center center">
+              <div flex>
+                <p>Zip codes</p>
+                <md-chips ng-model="buyreq.zipCodes" readonly="true"></md-chips>
+              </div>
+            </md-tab-body>
+          </md-tab>
+
+        </md-tabs>
+
+        <!-- <div class="md-padding" layout="row" layout-sm="column" layout-align="left center" style="padding-top: 0;"> -->
+          <span>
+          contact
+        </span>
+        <!-- </div> -->
+
+      </md-content>
+
+    </md-grid-tile>
+
+  </md-grid-list>
 
 </md-content>
