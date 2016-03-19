@@ -1,10 +1,54 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('BuyreqsCtrl', function ($scope, $http) {
-    $scope.message = 'Hello';
-    console.log('hello');
-    $http.get('/api/buyreqs').then(response => {
-      $scope.buyreqs = response.data;
+  .controller('BuyreqsCtrl', function ($scope, $http, $filter) {
+
+    $scope.types=['All','Land','Leisure','Retail','Office','Industrial','Mulitfamily'];
+
+    $scope.search = {
+      zipCodes:[],
+      price:undefined,
+      sqft:undefined,
+      type: 'All'
+    };
+
+    var getBuyReqs = function(search){
+      var query = {};
+      if (search.zipCodes.length) {
+        query.zipCodes = { $in:search.zipCodes};
+      }
+      $http.get('/api/buyreqs', {params: { query }}).then(response => {
+        $scope.buyreqs = response.data;
+        $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
+        $scope.maxSqft = Math.max(...$scope.buyreqs.map(function(req){return req.sqft;}));
+        if (!$scope.search.price) {
+          $scope.search.price=$scope.maxPrice;
+        }
+        if (!$scope.search.sqft) {
+          $scope.search.sqft=$scope.maxSqft;
+        }
+      });
+    };
+
+    $scope.$watchCollection('search.zipCodes',function(newValue, oldValue){
+      if (!(angular.equals(newValue,oldValue))) {
+        getBuyReqs($scope.search);
+      }
     });
+
+    $scope.maxprice = function(item){
+      return ($scope.search.price===(0 || undefined) ? true : item.price <= $scope.search.price);
+    };
+
+    $scope.maxsqft = function(item){
+      return ($scope.search.sqft===(0 || undefined) ? true : item.sqft <= $scope.search.sqft);
+    };
+
+    $scope.typematch = function(item){
+      return ($scope.search.price==='All' ? true : angular.equals(item.type,$scope.search.type) );
+    };
+
+    getBuyReqs($scope.search);
+
+
   });

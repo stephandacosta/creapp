@@ -61,7 +61,8 @@ function handleError(res, statusCode) {
 
 // Gets a list of Buyreqs
 export function index(req, res) {
-  Buyreq.findAsync()
+  var query = req.query.query && JSON.parse(req.query.query);
+  Buyreq.findAsync(query)
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

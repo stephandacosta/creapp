@@ -1,18 +1,40 @@
-<!-- <md-content id="search">
-
-        <div layout-padding>
-          <label>Zip Codes</label>
-          <md-chips
-            ng-model="find.zipCodes"
-            readonly="false"
-            placeholder="Zip Codes"
-            delete-button-label="Remove Zip Code"
-            delete-hint="Press delete to remove Zip Code"
-            secondary-placeholder="Enter Zip Code">
-          </md-chips>
-        </div>
-
-</md-content> -->
+<md-content id="search" layout="column" layout-gt-md="row">
+  <div layout-padding>
+    <md-input-container>
+      <label>Type</label>
+      <md-select ng-model="search.type">
+        <md-option ng-repeat="type in types" value="{{type}}">
+          {{type}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+  <div layout-padding>
+    <label>Zip Codes</label>
+    <md-chips
+      ng-model="search.zipCodes"
+      readonly="false"
+      placeholder="Enter Zip Codes"
+      delete-button-label="Remove Zip Code"
+      delete-hint="Press delete to remove Zip Code"
+      secondary-placeholder="Enter Zip Code">
+    </md-chips>
+  </div>
+  <div layout-padding>
+    <label>Max Price: {{search.price}}/sqft</label>
+    <md-slider-container>
+      <md-slider ng-model="search.price" min="0" max="{{maxPrice}}" step="0.1">
+      </md-slider>
+    </md-slider-container>
+  </div> 
+    <div layout-padding>
+    <label>Max Area: {{search.sqft}} sqft</label>
+    <md-slider-container>
+      <md-slider ng-model="search.sqft" min="0" max="{{maxSqft}}" step="1">
+      </md-slider>
+    </md-slider-container>
+  </div> 
+</md-content>
 
 
 <md-content>
@@ -22,12 +44,7 @@
         md-row-height-gt-md="1:1" md-row-height="2:2"
         md-gutter="12px" md-gutter-gt-sm="8px" >
 
-    <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs">
-
-<!--       <md-grid-tile-header>
-        <h4 class="md-headline">{{buyreq.title}}</h4>
-      </md-grid-tile-header> -->
-
+    <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs | filter:search.type | filter:maxprice | filter:maxsqft">
 
       <md-content class="md-whiteframe-3dp" layout="column" layout-fill layout-padding>
 
@@ -37,7 +54,8 @@
               <i class="material-icons">info_outline</i>
             </md-tab-label>
             <md-tab-body layout="column" layout-align="center center">
-              <h3 class="md-subhead">{{buyreq.title}}</h3>
+              <h3 class="md-body-2">{{buyreq.title}}</h3>
+              <h4 class="md-subhead">Type: {{buyreq.type}}</h4>
 
  
               <div class="req landproperty" flex="column">
@@ -51,9 +69,11 @@
 
 
 
-              <div class="req price" flex="row">
-                <div><h5>Max {{ buyreq.price }} $/sft</h5></div>
+              <div layout="row">
+                <div flex><h5>Max {{ buyreq.price }} $/sft</h5></div>
+                <div flex><h5>Area {{ buyreq.sqft }} sft</h5></div>
               </div>
+
 
             </md-tab-body>
           </md-tab>
