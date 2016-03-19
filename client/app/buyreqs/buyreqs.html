@@ -1,13 +1,28 @@
+<!-- <md-content id="search">
+
+        <div layout-padding>
+          <label>Zip Codes</label>
+          <md-chips
+            ng-model="find.zipCodes"
+            readonly="false"
+            placeholder="Zip Codes"
+            delete-button-label="Remove Zip Code"
+            delete-hint="Press delete to remove Zip Code"
+            secondary-placeholder="Enter Zip Code">
+          </md-chips>
+        </div>
+
+</md-content> -->
 
 
 <md-content>
 
   <md-grid-list
-        md-cols="4"
-        md-row-height="2:1"
-        md-gutter="12px" >
+   md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
 
-    <md-grid-tile md-rowspan="2" md-colspan="1" md-colspan-sm="1"  ng-repeat="buyreq in buyreqs">
+    <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs">
 
 <!--       <md-grid-tile-header>
         <h4 class="md-headline">{{buyreq.title}}</h4>
@@ -37,7 +52,7 @@
 
 
               <div class="req price" flex="row">
-                <div><h5>Max {{ buyreq.priceMax }} $/sft</h5></div>
+                <div><h5>Max {{ buyreq.price }} $/sft</h5></div>
               </div>
 
             </md-tab-body>

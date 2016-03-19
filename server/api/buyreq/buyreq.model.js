@@ -12,13 +12,13 @@ var BuyreqSchema = new mongoose.Schema({
   landOnly: Boolean,
   landWithProperty: Boolean,
   type: String,
-  priceMax: Number,
+  price: Number,
+  sqft:Number,
 
   buy: Boolean,
-  lease: Boolean,
   exchange: Boolean,
 
-  zipCodes: [],
+  zipCodes: [String],
   polygon: [Number],
   active: Boolean
 });
