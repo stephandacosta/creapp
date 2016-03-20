@@ -38,7 +38,7 @@ BuyReq.find({}).removeAsync()
       exchange: false,
 
       zipCodes: ['91032','4535','4534'],
-      polygon: [91.23, 45.34, 44.65],
+      polygon: [],
       active: true
     }, {
       // _reqId: new mongoose.Types.ObjectId,
@@ -58,7 +58,7 @@ BuyReq.find({}).removeAsync()
       exchange: false,
 
       zipCodes: ['91032','4535','4534'],
-      polygon: [91.23, 45.34, 44.65],
+      polygon: [],
       active: true
     }, {
       // _reqId: new mongoose.Types.ObjectId,
@@ -78,7 +78,7 @@ BuyReq.find({}).removeAsync()
       exchange: false,
 
       zipCodes: ['91032','4535','4534','43253','234325','123434','324234','42343'],
-      polygon: [91.23, 45.34, 44.65],
+      polygon: [],
       active: true
     }, {
       // _reqId: new mongoose.Types.ObjectId,
@@ -98,31 +98,7 @@ BuyReq.find({}).removeAsync()
       exchange: false,
 
       zipCodes: ['91032','4535','4534','43253','234325','123434','324234','42342'],
-      polygon: [91.23, 45.34, 44.65],
-      active: true
-    }, {
-      // _reqId: new mongoose.Types.ObjectId,
-      created: new Date,
-      user: 'someotherdude@somemail.com',
-      title: 'a restaurant',
-      info: 'I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa',
-
-      landOnly: false,
-      landWithProperty: true,
-      type: 'Leisure',
-
-      landOnly: false,
-      landWithProperty: true,
-      type: 'Leisure',
-
-      price: 1.2,
-      sqft: 70, 
-
-      buy: true,
-      exchange: false,
-
-      zipCodes: ['91032','4535','4534','43253','234325','123434','324234','42342'],
-      polygon: [91.23, 45.34, 44.65],
+      polygon: [],
       active: true
     }, {
       // _reqId: new mongoose.Types.ObjectId,
@@ -146,8 +122,35 @@ BuyReq.find({}).removeAsync()
       exchange: false,
 
       zipCodes: ['91032','4535','4534','43253','234325','123434','324234','42342'],
-      polygon: [91.23, 45.34, 44.65],
+      polygon: [],
+      active: true
+    }, {
+      // _reqId: new mongoose.Types.ObjectId,
+      created: new Date,
+      user: 'someotherdude@somemail.com',
+      title: 'a restaurant',
+      info: 'I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa',
+
+      landOnly: false,
+      landWithProperty: true,
+      type: 'Leisure',
+
+      landOnly: false,
+      landWithProperty: true,
+      type: 'Leisure',
+
+      price: 1.2,
+      sqft: 70, 
+
+      buy: true,
+      exchange: false,
+
+      zipCodes: ['91032','4535','4534','43253','234325','123434','324234','42342'],
+      polygon: [],
       active: true
     });
 
   });
+
+
+

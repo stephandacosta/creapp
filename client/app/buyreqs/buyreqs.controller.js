@@ -45,10 +45,19 @@ angular.module('creapp3App')
     };
 
     $scope.typematch = function(item){
-      return ($scope.search.price==='All' ? true : angular.equals(item.type,$scope.search.type) );
+      return (($scope.search.type==='All') ? true : angular.equals(item.type,$scope.search.type) );
     };
 
     getBuyReqs($scope.search);
+
+
+    $scope.map = {
+      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      initCenter: [37.4259332,-122.3413094],
+    };
+
+
 
 
   });

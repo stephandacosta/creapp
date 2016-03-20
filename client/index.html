@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+      <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -41,7 +42,7 @@
 
     <!-- Add your site or application content here -->
     <navbar></navbar>
-    <div ui-view=""></div>
+    <div layout="column" layout-fill ui-view=""></div>
     <footer></footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -73,25 +74,33 @@
       <script src="bower_components/angular-aria/angular-aria.js"></script>
       <script src="bower_components/angular-messages/angular-messages.js"></script>
       <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
+      <script src="bower_components/graham_scan/graham_scan.min.js"></script>
+      <script src="bower_components/concavehull/dist/concavehull.min.js"></script>
+      <script src="bower_components/evispa-timo-jsclipper/clipper.js"></script>
+      <script src="bower_components/leaflet.freedraw/dist/leaflet.freedraw.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/profile/profile.controller.js"></script>
+      <script src="app/main/main.js"></script>
+      <script src="app/addreq/addreqmap.directive.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/buyreqs/buyreqs.controller.js"></script>
       <script src="app/buyreqs/buyreqs.js"></script>
+      <script src="app/buyreqs/buyreqsmap.directive.js"></script>
       <script src="app/forgot/forgot.controller.js"></script>
       <script src="app/forgot/forgot.js"></script>
       <script src="app/login/login.controller.js"></script>
       <script src="app/login/login.js"></script>
       <script src="app/main/main.controller.js"></script>
-      <script src="app/main/main.js"></script>
       <script src="app/addreq/addreq.js"></script>
+      <script src="app/profile/profile.controller.js"></script>
       <script src="app/profile/profile.js"></script>
       <script src="app/register/register.controller.js"></script>
       <script src="app/register/register.js"></script>

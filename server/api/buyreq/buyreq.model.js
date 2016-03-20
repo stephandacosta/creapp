@@ -19,7 +19,7 @@ var BuyreqSchema = new mongoose.Schema({
   exchange: Boolean,
 
   zipCodes: [String],
-  polygon: [Number],
+  polygon: [],
   active: Boolean
 });
 

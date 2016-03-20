@@ -3,7 +3,7 @@
 angular.module('creapp3App')
   .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast) {
 
-    $scope.types=['Land','Leisure','Retail','Office','Industrial','Mulitfamily'];
+    $scope.types=['Leisure','Retail','Office','Industrial','Mulitfamily','Land',];
 
     var emptyReq = {
       // _reqId: new mongoose.Types.ObjectId,
@@ -30,6 +30,30 @@ angular.module('creapp3App')
 
     $scope.req = _.cloneDeep(emptyReq);
 
+    $scope.map = {
+      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      initCenter: [37.4259332,-122.3413094],
+      modes : L.FreeDraw.MODES,
+      mode : L.FreeDraw.MODES.ALL,
+      isDisabled : function(mode) {
+          return !(mode & $scope.map.mode);
+      },
+      toggleMode : function(mode) {
+        if ($scope.map.isDisabled(mode)) {
+          // Enabled the mode.
+          $scope.map.mode = $scope.map.mode | mode;
+          return;
+        }
+        // Otherwise disable it.
+        $scope.map.mode = $scope.map.mode ^ mode;
+      },
+      setModeOnly : function(mode) {
+        $scope.map.mode = $scope.map.modes.view | mode; //change this
+      }
+    };
+
+
     $scope.addReq = function(){
       var parentEl = document.getElementById('addReqForm');
       $http.post('/api/buyreqs', $scope.req).then(function(){
@@ -51,6 +75,7 @@ angular.module('creapp3App')
         );
       });
     }
+
 
 
   });

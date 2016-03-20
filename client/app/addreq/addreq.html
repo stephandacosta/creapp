@@ -1,8 +1,6 @@
-<div id="addReqForm" layout="row" ng-cloak>
+<div layout="row" ng-cloak>
 
-  <div flex></div>
-
-  <md-card flex="80" layout="column">
+  <md-card id="addReqForm" flex="50" layout="column">
 
     <md-card-title>
       <md-card-title-text>
@@ -24,8 +22,8 @@
           <textarea ng-model="req.info" md-maxlength="500" rows="10" md-select-on-focus></textarea>
         </md-input-container>
 
-        <div layout-padding>
-          <!-- <label>Zip Codes</label> -->
+<!--         <div layout-padding ng-model="req.polygon">
+          <label>Zip Codes</label>
           <md-chips
             ng-model="req.zipCodes"
             readonly="false"
@@ -34,7 +32,7 @@
             delete-hint="Press delete to remove Zip Code"
             secondary-placeholder="Enter Zip Code">
           </md-chips>
-        </div>
+        </div> -->
 
       </div>
 
@@ -104,7 +102,7 @@
     </div>
 
     <md-card-actions layout="row" layout-align="center center">
-      <md-button flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq()">
+      <md-button flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq(req)">
         Publish
       </md-button>
     </md-card-actions>
@@ -112,7 +110,7 @@
 
   </md-card>
 
-  <div flex></div>
+  <div flex class="addreqmap" data-mode="mode"></div>
 
 </div>
 

@@ -1,113 +1,124 @@
-<md-content id="search" layout="column" layout-gt-md="row">
-  <div layout-padding>
-    <md-input-container>
-      <label>Type</label>
-      <md-select ng-model="search.type">
-        <md-option ng-repeat="type in types" value="{{type}}">
-          {{type}}
-        </md-option>
-      </md-select>
-    </md-input-container>
-  </div>
-  <div layout-padding>
-    <label>Zip Codes</label>
-    <md-chips
-      ng-model="search.zipCodes"
-      readonly="false"
-      placeholder="Enter Zip Codes"
-      delete-button-label="Remove Zip Code"
-      delete-hint="Press delete to remove Zip Code"
-      secondary-placeholder="Enter Zip Code">
-    </md-chips>
-  </div>
-  <div layout-padding>
-    <label>Max Price: {{search.price}}/sqft</label>
-    <md-slider-container>
-      <md-slider ng-model="search.price" min="0" max="{{maxPrice}}" step="0.1">
-      </md-slider>
-    </md-slider-container>
-  </div> 
-    <div layout-padding>
-    <label>Max Area: {{search.sqft}} sqft</label>
-    <md-slider-container>
-      <md-slider ng-model="search.sqft" min="0" max="{{maxSqft}}" step="1">
-      </md-slider>
-    </md-slider-container>
-  </div> 
-</md-content>
+
+  <div flex layout="row">
+
+    <div flex="50">
+
+      <md-content id="search" layout="column" layout-gt-md="row">
+        <div layout-padding>
+          <md-input-container>
+            <label>Type</label>
+            <md-select ng-model="search.type">
+              <md-option ng-repeat="type in types" value="{{type}}">
+                {{type}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+<!--         <div layout-padding>
+          <label>Zip Codes</label>
+          <md-chips
+            ng-model="search.zipCodes"
+            readonly="false"
+            placeholder="Enter Zip Codes"
+            delete-button-label="Remove Zip Code"
+            delete-hint="Press delete to remove Zip Code"
+            secondary-placeholder="Enter Zip Code">
+          </md-chips>
+        </div> -->
+        <div layout-padding>
+          <label>Max Price: {{search.price}}/sqft</label>
+          <md-slider-container>
+            <md-slider ng-model="search.price" min="0" max="{{maxPrice}}" step="0.1">
+            </md-slider>
+          </md-slider-container>
+        </div> 
+          <div layout-padding>
+          <label>Max Area: {{search.sqft}} sqft</label>
+          <md-slider-container>
+            <md-slider ng-model="search.sqft" min="0" max="{{maxSqft}}" step="1">
+            </md-slider>
+          </md-slider-container>
+        </div> 
+      </md-content>
 
 
-<md-content>
+      <md-content>
 
-  <md-grid-list
-   md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+        <md-grid-list
+         md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5"
+              md-row-height-gt-md="1:1" md-row-height="2:2"
+              md-gutter="12px" md-gutter-gt-sm="8px" >
 
-    <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs | filter:search.type | filter:maxprice | filter:maxsqft">
+          <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs | filter:typematch | filter:maxprice | filter:maxsqft">
 
-      <md-content class="md-whiteframe-3dp" layout="column" layout-fill layout-padding>
+            <md-content class="md-whiteframe-3dp" layout="column" layout-fill layout-padding>
 
-        <md-tabs layout-fill>
-         <md-tab>
-            <md-tab-label>
-              <i class="material-icons">info_outline</i>
-            </md-tab-label>
-            <md-tab-body layout="column" layout-align="center center">
-              <h3 class="md-body-2">{{buyreq.title}}</h3>
-              <h4 class="md-subhead">Type: {{buyreq.type}}</h4>
+              <md-tabs layout-fill>
+               <md-tab>
+                  <md-tab-label>
+                    <i class="material-icons">info_outline</i>
+                  </md-tab-label>
+                  <md-tab-body layout="column" layout-align="center center">
+                    <h3 class="md-body-2">{{buyreq.title}}</h3>
+                    <h4 class="md-subhead">Type: {{buyreq.type}}</h4>
 
- 
-              <div class="req landproperty" flex="column">
-                <div ng-show="buyreq.landWithProperty" >
-                  <i class="material-icons">location_city</i> land+property
-                </div>
-                <div ng-show="buyreq.landOnly">
-                  <i class="material-icons">crop_free</i> land only
-                </div>
-              </div>
-
-
-
-              <div layout="row">
-                <div flex><h5>Max {{ buyreq.price }} $/sft</h5></div>
-                <div flex><h5>Area {{ buyreq.sqft }} sft</h5></div>
-              </div>
+       
+                    <div class="req landproperty" flex="column">
+                      <div ng-show="buyreq.landWithProperty" >
+                        <i class="material-icons">location_city</i> land+property
+                      </div>
+                      <div ng-show="buyreq.landOnly">
+                        <i class="material-icons">crop_free</i> land only
+                      </div>
+                    </div>
 
 
-            </md-tab-body>
-          </md-tab>
+
+                    <div layout="row">
+                      <div flex><h5>Max {{ buyreq.price }} $/sft</h5></div>
+                      <div flex><h5>Area {{ buyreq.sqft }} sft</h5></div>
+                    </div>
 
 
-          <md-tab>
-            <md-tab-label>
-              <i class="material-icons">description</i>
-            </md-tab-label>
-            <md-tab-body layout="column">
-                <div><p >{{ buyreq.info }}</p></div>
-            </md-tab-body>
-          </md-tab>
+                  </md-tab-body>
+                </md-tab>
 
 
-          <md-tab>
-            <md-tab-label>
-              <i class="material-icons">place</i>
-            </md-tab-label>
-            <md-tab-body layout="column" class="md-padding" layout-align="center center">
-              <div flex>
-                <p>Zip codes</p>
-                <md-chips ng-model="buyreq.zipCodes" readonly="true"></md-chips>
-              </div>
-            </md-tab-body>
-          </md-tab>
+                <md-tab>
+                  <md-tab-label>
+                    <i class="material-icons">description</i>
+                  </md-tab-label>
+                  <md-tab-body layout="column">
+                      <div><p >{{ buyreq.info }}</p></div>
+                  </md-tab-body>
+                </md-tab>
 
-        </md-tabs>
 
+                <md-tab>
+                  <md-tab-label>
+                    <i class="material-icons">place</i>
+                  </md-tab-label>
+                  <md-tab-body layout="column" class="md-padding" layout-align="center center">
+                    <div flex>
+                      <p >{{ buyreq.polygon }}</p>
+                    </div>
+                  </md-tab-body>
+                </md-tab>
+
+              </md-tabs>
+
+
+            </md-content>
+
+          </md-grid-tile>
+
+        </md-grid-list>
 
       </md-content>
 
-    </md-grid-tile>
+    </div>
 
-  </md-grid-list>
+    <div flex class="buyreqsmap" data-mode="mode"></div>
 
-</md-content>
+  </div>
+
