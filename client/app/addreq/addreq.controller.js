@@ -4,23 +4,22 @@ angular.module('creapp3App')
   .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast) {
 
     $scope.types=['Leisure','Retail','Office','Industrial','Mulitfamily','Land',];
-
+console.log($rootScope.user.username);
     var emptyReq = {
-      // _reqId: new mongoose.Types.ObjectId,
       created: new Date,
-      user: 'somedude@somemail.com',
+      user: $rootScope.user.username,
+
+      type: '',
       title: '',
       info: '',
 
       landOnly: false,
       landWithProperty: false,
-      type: 'Agriculture',
 
-      priceMin: undefined,
-      priceMax: undefined,
+      price: undefined,
+      sqft: undefined,
 
       buy: false,
-      lease: false,
       exchange: false,
 
       zipCodes: [],

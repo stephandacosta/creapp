@@ -1,7 +1,7 @@
 
   <div flex layout="row">
 
-    <div flex="50">
+    <div flex="50" style="overflow:scroll;">
 
       <md-content id="search" layout="column" layout-gt-md="row">
         <div layout-padding>
@@ -42,83 +42,45 @@
       </md-content>
 
 
-      <md-content>
+      <md-content layout="column">
 
-        <md-grid-list
-         md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5"
-              md-row-height-gt-md="1:1" md-row-height="2:2"
-              md-gutter="12px" md-gutter-gt-sm="8px" >
+        <div class="md-whiteframe-2dp" layout="column" layout-padding ng-repeat="buyreq in buyreqs | filter:typematch | filter:maxprice | filter:maxsqft">
 
-          <md-grid-tile md-rowspan="1" md-colspan="1" ng-repeat="buyreq in buyreqs | filter:typematch | filter:maxprice | filter:maxsqft">
+          <div flex layout="row">
 
-            <md-content class="md-whiteframe-3dp" layout="column" layout-fill layout-padding>
+            <div flex layout="column">
+              <h3 class="md-subhead">{{buyreq.title}}</h3>
+              <h5>Max {{ buyreq.price }} $/sft</h5>
+              <h5>Area {{ buyreq.sqft }} sft</h5>
+            </div>
 
-              <md-tabs layout-fill>
-               <md-tab>
-                  <md-tab-label>
-                    <i class="material-icons">info_outline</i>
-                  </md-tab-label>
-                  <md-tab-body layout="column" layout-align="center center">
-                    <h3 class="md-body-2">{{buyreq.title}}</h3>
-                    <h4 class="md-subhead">Type: {{buyreq.type}}</h4>
+            <span flex></span>
 
-       
-                    <div class="req landproperty" flex="column">
-                      <div ng-show="buyreq.landWithProperty" >
-                        <i class="material-icons">location_city</i> land+property
-                      </div>
-                      <div ng-show="buyreq.landOnly">
-                        <i class="material-icons">crop_free</i> land only
-                      </div>
-                    </div>
+            <div layout="column" layout-align="start end">
+              <span><h3 class="md-title">{{buyreq.type}}</h3></span>
+              <span ng-show="buyreq.landWithProperty" >
+                land+property
+              </span>
+              <span ng-show="buyreq.landOnly">
+                land only
+              </span>
 
+              <span flex></span>
 
+              <button class="md-fab md-button md-mini" >
+                <i class="material-icons" style="vertical-align: middle;">info_outline</i>
+              </button>
+            </div>
 
-                    <div layout="row">
-                      <div flex><h5>Max {{ buyreq.price }} $/sft</h5></div>
-                      <div flex><h5>Area {{ buyreq.sqft }} sft</h5></div>
-                    </div>
+          </div>
 
-
-                  </md-tab-body>
-                </md-tab>
-
-
-                <md-tab>
-                  <md-tab-label>
-                    <i class="material-icons">description</i>
-                  </md-tab-label>
-                  <md-tab-body layout="column">
-                      <div><p >{{ buyreq.info }}</p></div>
-                  </md-tab-body>
-                </md-tab>
-
-
-                <md-tab>
-                  <md-tab-label>
-                    <i class="material-icons">place</i>
-                  </md-tab-label>
-                  <md-tab-body layout="column" class="md-padding" layout-align="center center">
-                    <div flex>
-                      <p >{{ buyreq.polygon }}</p>
-                    </div>
-                  </md-tab-body>
-                </md-tab>
-
-              </md-tabs>
-
-
-            </md-content>
-
-          </md-grid-tile>
-
-        </md-grid-list>
+        </div>
 
       </md-content>
 
     </div>
 
-    <div flex class="buyreqsmap" data-mode="mode"></div>
+    <div flex class="buyreqsmap"></div>
 
   </div>
 

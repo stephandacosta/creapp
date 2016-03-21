@@ -9,15 +9,15 @@
 
     <div flex layout="row">
 
-      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" ng-repeat="item in nav.menu" ui-sref="{{item.state}}" ui-sref-active="active" style="vertical-align: middle;">
+      <md-button class="md-primary md-ink-ripple navtitle" ng-repeat="item in nav.menu" ui-sref="{{item.state}}" ui-sref-active="active" style="vertical-align: middle;">
         {{item.title}}
       </md-button>
 
-      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" if-user ui-sref="buyreqs" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="buyreqs" ui-sref-active="active">
         Find
       </md-button>
 
-      <md-button class="md-raised md-primary md-hue-1 md-ink-ripple" if-user ui-sref="addreq" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="addreq" ui-sref-active="active">
         Add
       </md-button>
 

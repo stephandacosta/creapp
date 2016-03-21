@@ -32,6 +32,7 @@
       <link rel="stylesheet" href="app/reset/reset.css">
       <link rel="stylesheet" href="app/verify/verify.css">
       <link rel="stylesheet" href="components/footer/footer.css">
+      <link rel="stylesheet" href="components/navbar/navbar.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -41,8 +42,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <navbar></navbar>
-    <div layout="column" layout-fill ui-view=""></div>
+    <navbar ng-cloak></navbar>
+    <div layout="column" layout-fill ui-view="" ng-cloak></div>
     <footer></footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

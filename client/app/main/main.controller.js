@@ -24,6 +24,8 @@ class MainController {
   deleteThing(thing) {
     this.$http.delete('/api/things/' + thing._id);
   }
+
+
 }
 
 angular.module('creapp3App')
