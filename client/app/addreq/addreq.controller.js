@@ -4,10 +4,9 @@ angular.module('creapp3App')
   .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast) {
 
     $scope.types=['Leisure','Retail','Office','Industrial','Mulitfamily','Land',];
-console.log($rootScope.user.username);
+
     var emptyReq = {
       created: new Date,
-      user: $rootScope.user.username,
 
       type: '',
       title: '',
@@ -32,29 +31,16 @@ console.log($rootScope.user.username);
     $scope.map = {
       tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      initCenter: [37.4259332,-122.3413094],
-      modes : L.FreeDraw.MODES,
-      mode : L.FreeDraw.MODES.ALL,
-      isDisabled : function(mode) {
-          return !(mode & $scope.map.mode);
-      },
-      toggleMode : function(mode) {
-        if ($scope.map.isDisabled(mode)) {
-          // Enabled the mode.
-          $scope.map.mode = $scope.map.mode | mode;
-          return;
-        }
-        // Otherwise disable it.
-        $scope.map.mode = $scope.map.mode ^ mode;
-      },
-      setModeOnly : function(mode) {
-        $scope.map.mode = $scope.map.modes.view | mode; //change this
-      }
+      initCenter: [37.4259332,-122.3413094]
     };
 
 
     $scope.addReq = function(){
+      //need to add user on submit because not available on load
+      emptyReq.user=$rootScope.user.username;
+      // set up parent element where toast will drop from
       var parentEl = document.getElementById('addReqForm');
+      // post req to server then drop toast
       $http.post('/api/buyreqs', $scope.req).then(function(){
         $mdToast.show(
           $mdToast.simple()

@@ -13,8 +13,17 @@ angular.module('creapp3App')
         }).addTo(map);
 
         var freeDraw = new L.FreeDraw({
-            mode: scope.map.mode
+            mode: L.FreeDraw.MODES.ALL
         });
+
+        L.easyButton('<i class="material-icons" style="font-size: 19px;">edit_location</i>',function() {
+          freeDraw.setMode(L.FreeDraw.MODES.EDIT | L.FreeDraw.MODES.DELETE);
+        }).addTo(map);
+        L.easyButton('<i class="material-icons" style="font-size: 19px;">edit</i>',function() {
+          freeDraw.setMode(L.FreeDraw.MODES.ALL);
+        }).addTo(map);
+
+
 
         //freeDraw.options.setEvents(['mousedown', 'mouseup', 'dblclick']);
         //freeDraw.options.setHullAlgorithm(false);
@@ -22,27 +31,23 @@ angular.module('creapp3App')
         //freeDraw.options.destroyPreviousPolygon(true);
         //freeDraw.options.exitModeAfterCreate(false);
 
-        freeDraw.on('mode', function modeReceived(eventData) {
-            scope.map.mode = eventData.mode;
-            if (!scope.$root.$$phase) {
-                scope.$apply();
-            }
+        // freeDraw.on('mode', function modeReceived(eventData) {
+        //   // do something on mode change
+        // });
 
-        });
-
-        scope.$watch('map.mode', function modeReceived(mode) {
-            freeDraw.setMode(mode);
-        });
 
         freeDraw.on('markers', function getMarkers(eventData) {
+          if (eventData.latLngs.length) {
             scope.req.polygon = eventData.latLngs[0].map(function(point){
               return [point.lat, point.lng];
             });
-            console.log(scope.req.polygon);
-            if (!scope.req.polygon.length){
-              scope.map.mode = L.FreeDraw.MODES.ALL;
-              scope.$apply();
-            }
+            // console.log('unset create');
+            // freeDraw.unsetMode(L.FreeDraw.MODES.CREATE);
+            // freeDraw.setMode(L.FreeDraw.MODES.EDIT | L.FreeDraw.MODES.DELETE);
+          } else {
+            freeDraw.setMode(L.FreeDraw.MODES.ALL);
+            // freeDraw.unsetMode(L.FreeDraw.MODES.EDIT | L.FreeDraw.MODES.DELETE);
+          }
         });
 
         map.addLayer(freeDraw);
