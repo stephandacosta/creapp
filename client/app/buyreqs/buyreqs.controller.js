@@ -6,7 +6,6 @@ angular.module('creapp3App')
     $scope.types=['All','Land','Leisure','Retail','Office','Industrial','Mulitfamily'];
 
     $scope.search = {
-      zipCodes:[],
       price:undefined,
       sqft:undefined,
       type: 'All'
@@ -14,9 +13,9 @@ angular.module('creapp3App')
 
     var getBuyReqs = function(search){
       var query = {};
-      if (search.zipCodes.length) {
-        query.zipCodes = { $in:search.zipCodes};
-      }
+      // if (search.zipCodes.length) {
+      //   query.zipCodes = { $in:search.zipCodes};
+      // }
       $http.get('/api/buyreqs', {params: { query }}).then(response => {
         $scope.buyreqs = response.data;
         $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
@@ -30,11 +29,11 @@ angular.module('creapp3App')
       });
     };
 
-    $scope.$watchCollection('search.zipCodes',function(newValue, oldValue){
-      if (!(angular.equals(newValue,oldValue))) {
-        getBuyReqs($scope.search);
-      }
-    });
+    // $scope.$watchCollection('search.zipCodes',function(newValue, oldValue){
+    //   if (!(angular.equals(newValue,oldValue))) {
+    //     getBuyReqs($scope.search);
+    //   }
+    // });
 
     $scope.maxprice = function(item){
       return ($scope.search.price===(0 || undefined) ? true : item.price <= $scope.search.price);
