@@ -15,13 +15,14 @@
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
       <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-      <link rel="stylesheet" href="bower_components/Leaflet.EasyButton/src/easy-button.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/addreq/addreq.css">
+      <link rel="stylesheet" href="app/addreq/addreqForm/addreqForm.css">
+      <link rel="stylesheet" href="app/addreq/addreqMap/addreqMap.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/buyreqs/buyreqs.css">
@@ -82,15 +83,15 @@
       <script src="bower_components/concavehull/dist/concavehull.min.js"></script>
       <script src="bower_components/evispa-timo-jsclipper/clipper.js"></script>
       <script src="bower_components/leaflet.freedraw/dist/leaflet.freedraw.js"></script>
-      <script src="bower_components/Leaflet.EasyButton/src/easy-button.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/main/main.js"></script>
-      <script src="app/addreq/addreqmap.directive.js"></script>
+      <script src="app/main/main.controller.js"></script>
+      <script src="app/addreq/addreqForm/addreqForm.directive.js"></script>
+      <script src="app/addreq/addreqMap/addreqMap.directive.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
       <script src="app/app.constant.js"></script>
@@ -101,8 +102,8 @@
       <script src="app/forgot/forgot.js"></script>
       <script src="app/login/login.controller.js"></script>
       <script src="app/login/login.js"></script>
-      <script src="app/main/main.controller.js"></script>
       <script src="app/addreq/addreq.js"></script>
+      <script src="app/main/main.js"></script>
       <script src="app/profile/profile.controller.js"></script>
       <script src="app/profile/profile.js"></script>
       <script src="app/register/register.controller.js"></script>

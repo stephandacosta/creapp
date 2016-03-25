@@ -1,99 +1,37 @@
-<md-countent layout="row" ng-cloak>
+<div layout="row" layout-fill>
 
-  <md-card id="addReqForm" flex="50" layout="column">
+  <!-- sidenav for input form -->
+  <md-sidenav md-is-locked-open="openedSidenav" md-component-id="left" class="md-sidenav-left">
+    <addreq-form></addreq-form>
+  </md-sidenav>
 
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline" >Requirement Input </span>
-      </md-card-title-text>
-    </md-card-title>
+  <!-- side toolbar -->
+  <div layout="column" class="sidetoolbar" >
+ 
+    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('edit')">
+      <md-tooltip md-direction="right" style="z-index:1000;">edit or delete area</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">edit_location</i>
+    </md-button>
 
+    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('all')">
+      <md-tooltip md-direction="right">draw new area</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">edit</i>
+    </md-button>
 
-    <div flex layout="column" layout-padding layout-margin>
+    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="openSidenav()">
+      <md-tooltip md-direction="right">edit requirement details</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">comment</i>
+    </md-button>
 
-      <div layout="row">
-        <md-input-container flex="50">
-          <label>Type</label>
-          <md-select ng-model="req.type">
-            <md-option ng-repeat="type in types" value="{{type}}">
-              {{type}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-        <span flex></span>
-      </div>
+    <md-button class="md-fab md-mini md-warn map-zoom-control" ng-click="clearPolygons()">
+      <md-tooltip md-direction="right">clear all areas</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">delete</i>
+    </md-button>
 
-      <md-input-container layout-padding>
-        <label>Title</label>
-        <input type="text" ng-model="req.title">
-      </md-input-container>
+  </div>
 
-      <md-input-container>
-        <label>Information</label>
-        <textarea ng-model="req.info" md-maxlength="500" rows="10" md-select-on-focus></textarea>
-      </md-input-container>
-
-      <div layout="row">
-        <md-input-container  layout="row" layout-padding>
-          <label>Square Feet</label>
-          <input type="number" ng-model="req.sqft">
-        </md-input-container>
-        <md-input-container  layout="row" layout-padding>
-          <label>Max Price</label>
-          <input type="number" ng-model="req.price">
-        </md-input-container>
-      </div>
-
-      <md-input-container flex layout="column" layout-wrap layout-gt-sm="row" >
-        <div flex-xs flex="50">
-          <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
-            Land Only
-          </md-checkbox>
-        </div>
-        <div flex-xs flex="50">
-          <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
-            Land and Property
-          </md-checkbox>
-        </div>
-      </md-input-container>
-
-      <md-input-container layout="column" layout-wrap layout-gt-sm="row" >
-        <div flex-xs flex="50">
-          <md-checkbox class="md-primary" ng-model="req.buy" aria-label="buy">
-            Buy
-          </md-checkbox>
-        </div>
-        <div flex-xs flex="50">
-          <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="lease">
-            Exchange
-          </md-checkbox>
-        </div>
-      </md-input-container>
+  <!-- map container -->
+  <addreq-map flex ng-cloak></addreq-map>
 
 
-<!--         <div layout-padding ng-model="req.polygon">
-        <label>Zip Codes</label>
-        <md-chips
-          ng-model="req.zipCodes"
-          readonly="false"
-          placeholder="Zip Codes"
-          delete-button-label="Remove Zip Code"
-          delete-hint="Press delete to remove Zip Code"
-          secondary-placeholder="Enter Zip Code">
-        </md-chips>
-      </div> -->
-
-    </div>
-
-    <md-card-actions layout="row" layout-align="center center">
-      <md-button flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq(req)">
-        Publish
-      </md-button>
-    </md-card-actions>
-
-  </md-card>
-
-  <div flex class="addreqmap" data-mode="mode"></div>
-
-</md-content>
-
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast) {
+  .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast, $mdSidenav) {
 
     $scope.types=['Leisure','Retail','Office','Industrial','Mulitfamily','Land',];
 
@@ -31,9 +31,17 @@ angular.module('creapp3App')
     $scope.map = {
       tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      initCenter: [37.4259332,-122.3413094]
+      initCenter: [37.4259332,-122.3413094],
+      MODES: L.FreeDraw.MODES,
+      mode : L.FreeDraw.MODES.VIEW,
+      setMode : function (mode) {
+        var modemap={
+          edit: ($scope.map.MODES.EDIT | $scope.map.MODES.DELETE),
+          all: $scope.map.MODES.ALL
+        };
+        $scope.map.mode = modemap[mode];
+      }
     };
-
 
     $scope.addReq = function(){
       //need to add user on submit because not available on load
@@ -59,7 +67,19 @@ angular.module('creapp3App')
             .hideDelay(5000)
         );
       });
-    }
+    };
+
+    $scope.cleanReq = function(){
+      $scope.req = _.cloneDeep(emptyReq);
+    };
+
+    $scope.clearPolygons = function(){
+      $scope.req.polygon = [];
+    };
+
+    $scope.openSidenav = function(){
+      $scope.openedSidenav = !$scope.openedSidenav;
+    };
 
 
 

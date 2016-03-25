@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: addreqmap', function () {
+describe('Directive: addreqMap', function () {
 
   // load the directive's module
   beforeEach(module('creapp3App'));
@@ -13,8 +13,8 @@ describe('Directive: addreqmap', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<addreqmap></addreqmap>');
+    element = angular.element('<addreq-map></addreq-map>');
     element = $compile(element)(scope);
-    element.text().should.equal('this is the addreqmap directive');
+    element.text().should.equal('this is the addreqMap directive');
   }));
 });
