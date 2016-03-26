@@ -1,37 +1,41 @@
-<div layout="row" layout-fill>
+<div flex layout="column">
 
-  <!-- sidenav for input form -->
-  <md-sidenav md-is-locked-open="openedSidenav" md-component-id="left" class="md-sidenav-left">
-    <addreq-form></addreq-form>
-  </md-sidenav>
+  <div flex layout="row">
 
-  <!-- side toolbar -->
-  <div layout="column" class="sidetoolbar" >
- 
-    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('edit')">
-      <md-tooltip md-direction="right" style="z-index:1000;">edit or delete area</md-tooltip>
-      <i class="material-icons"  style="vertical-align:middle;">edit_location</i>
-    </md-button>
+    <!-- sidenav for input form -->
+    <md-sidenav md-is-locked-open="openedSidenav" md-component-id="left" class="md-sidenav-left">
+      <addreq-form></addreq-form>
+    </md-sidenav>
 
-    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('all')">
-      <md-tooltip md-direction="right">draw new area</md-tooltip>
-      <i class="material-icons"  style="vertical-align:middle;">edit</i>
-    </md-button>
+    <!-- side toolbar -->
+    <div layout="column" class="sidetoolbar" >
+   
+      <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('edit')">
+        <md-tooltip md-direction="right" style="z-index:1000;">edit or delete area</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">timeline</i>
+      </md-button>
 
-    <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="openSidenav()">
-      <md-tooltip md-direction="right">edit requirement details</md-tooltip>
-      <i class="material-icons"  style="vertical-align:middle;">comment</i>
-    </md-button>
+      <md-button class="md-fab md-mini md-primary map-zoom-control" ng-click="map.setMode('all')">
+        <md-tooltip md-direction="right">draw new area</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">edit</i>
+      </md-button>
 
-    <md-button class="md-fab md-mini md-warn map-zoom-control" ng-click="clearPolygons()">
-      <md-tooltip md-direction="right">clear all areas</md-tooltip>
-      <i class="material-icons"  style="vertical-align:middle;">delete</i>
-    </md-button>
+      <md-button class="md-fab md-mini md-primary map-zoom-control" hide-gt-xs ng-click="openSidenav()">
+        <md-tooltip md-direction="right">edit requirement</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">comment</i>
+      </md-button>
+
+      <md-button class="md-fab md-mini md-warn map-zoom-control" ng-click="clearPolygons()">
+        <md-tooltip md-direction="right">clear all areas</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">delete</i>
+      </md-button>
+
+    </div>
+
+    <!-- map container -->
+    <addreq-map flex ng-cloak></addreq-map>
+
 
   </div>
-
-  <!-- map container -->
-  <addreq-map flex ng-cloak></addreq-map>
-
 
 </div>

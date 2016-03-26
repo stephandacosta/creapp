@@ -39,8 +39,10 @@ angular.module('creapp3App')
         // this fires on zoom as well
         freeDraw.on('markers', function getMarkers(eventData) {
           if (eventData.latLngs.length) {
-            scope.req.polygon = eventData.latLngs[0].map(function(point){
-              return [point.lat, point.lng];
+            scope.req.polygons = eventData.latLngs.map(function(polygon){
+              return polygon.map(function(point){
+                return [point.lat, point.lng];
+              });
             });
           }
         });
@@ -63,7 +65,7 @@ angular.module('creapp3App')
           freeDraw.setMode(scope.map.mode);
         });
 
-        scope.$watch('req.polygon.length',function(newValue){
+        scope.$watch('req.polygons.length',function(newValue){
           if (!newValue){
             freeDraw.clearPolygons();
           }

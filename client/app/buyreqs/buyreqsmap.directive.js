@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('buyreqsmap', function () {
+  .directive('buyreqsmap', function ($timeout) {
     return {
       restrict: 'C',
       scope: false,
@@ -15,16 +15,16 @@ angular.module('creapp3App')
         scope.$watchCollection('buyreqs', function(){
           if (scope.buyreqs) {
             scope.buyreqs.forEach(function(req){
-              if (req.polygon.length>0) { 
-                var polygon = L.polygon(req.polygon).addTo(map);
-                polygon.bindPopup(req.title);
-              }
+              req.polygons.forEach(function(polygon){
+                var renderedPolygon = L.polygon(polygon).addTo(map);
+                renderedPolygon.bindPopup(req.title);
+              });
             });
           }
         });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material
-        setTimeout(function(){map.invalidateSize(); },200);
+        $timeout(function(){map.invalidateSize(); },200);
 
       }
     };

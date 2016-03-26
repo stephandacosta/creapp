@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('BuyreqsCtrl', function ($scope, $http, $filter) {
+  .controller('BuyreqsCtrl', function (appConfig, $scope, $http) {
 
-    $scope.types=['All','Land','Leisure','Retail','Office','Industrial','Mulitfamily'];
+    $scope.types= appConfig.creTypes;
 
     $scope.search = {
+      type: 'Any',
       price:undefined,
-      sqft:undefined,
-      type: 'All'
+      sqft:undefined
     };
 
     var getBuyReqs = function(search){
@@ -44,7 +44,7 @@ angular.module('creapp3App')
     };
 
     $scope.typematch = function(item){
-      return (($scope.search.type==='All') ? true : angular.equals(item.type,$scope.search.type) );
+      return (($scope.search.type==='Any') ? true : angular.equals(item.type,$scope.search.type) );
     };
 
     getBuyReqs($scope.search);

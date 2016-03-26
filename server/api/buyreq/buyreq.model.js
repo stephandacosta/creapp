@@ -18,7 +18,7 @@ var BuyreqSchema = new mongoose.Schema({
   buy: Boolean,
   exchange: Boolean,
 
-  polygon: [],
+  polygons: [],
   active: Boolean
 });
 

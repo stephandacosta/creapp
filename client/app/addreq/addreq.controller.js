@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('AddreqCtrl', function ($scope, $rootScope, $http, $mdToast, $mdSidenav) {
+  .controller('AddreqCtrl', function ( appConfig, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia) {
 
-    $scope.types=['Leisure','Retail','Office','Industrial','Mulitfamily','Land',];
+    // list of available types
+    $scope.types=appConfig.creTypes;
 
+    // and empty req to initialize
     var emptyReq = {
       created: new Date,
 
@@ -22,12 +24,14 @@ angular.module('creapp3App')
       exchange: false,
 
       zipCodes: [],
-      polygon: [],
+      polygons: [],
       active: true
     };
 
+    // put empty req into scope
     $scope.req = _.cloneDeep(emptyReq);
 
+    // map settings
     $scope.map = {
       tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -43,11 +47,12 @@ angular.module('creapp3App')
       }
     };
 
+    // post the req
     $scope.addReq = function(){
       //need to add user on submit because not available on load
       emptyReq.user=$rootScope.user.username;
       // set up parent element where toast will drop from
-      var parentEl = document.getElementById('addReqForm');
+      var parentEl = document.getElementsByTagName('addreq-form')[0];
       // post req to server then drop toast
       $http.post('/api/buyreqs', $scope.req).then(function(){
         $mdToast.show(
@@ -69,14 +74,22 @@ angular.module('creapp3App')
       });
     };
 
+    // clear all for button click
     $scope.cleanReq = function(){
       $scope.req = _.cloneDeep(emptyReq);
     };
 
+    // clear polygons for button click
     $scope.clearPolygons = function(){
-      $scope.req.polygon = [];
+      $scope.req.polygons = [];
     };
 
+    // hide sidenav on smaller screens
+    $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
+      $scope.openedSidenav =  big;
+    });
+
+    // open sidenav for button click
     $scope.openSidenav = function(){
       $scope.openedSidenav = !$scope.openedSidenav;
     };
