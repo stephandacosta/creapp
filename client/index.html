@@ -44,9 +44,12 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <navbar ng-cloak></navbar>
-    <div layout="column" layout-fill ui-view="" ng-cloak></div>
-    <footer></footer>
+
+    <div layout="column" layout-fill>
+      <navbar></navbar>
+      <div flex layout="column" ui-view=""></div>
+      <footer></footer>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
