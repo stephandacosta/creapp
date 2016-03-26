@@ -1,0 +1,77 @@
+<md-card>
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Create Account</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <div flex layout="column" ng-show="created && !enabled">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+      Your account has been created.  Please check your email for a verification link.
+      </span>
+      <span flex></span>
+    </div>
+    <a class="md-button md-primary md-ink-ripple" href="/login">
+      Back to Login
+    </a>
+  </div>
+
+  <div flex layout="column" ng-show="created && enabled && !authenticating">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+        Your account has been created.  
+      </span>
+      <span flex></span>
+    </div>
+    <a class="md-button md-primary md-ink-ripple" href="/login">
+      Login Now
+    </a>
+  </div>
+
+
+  <div flex>
+
+    <div ng-show="!viewModel" class="sp-loading">
+      <div layout="row" layout-sm="column" layout-align="space-around">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+      Loading...
+    </div>
+
+
+    <form ng-hide="!viewModel || (created && !authenticating)" ng-submit="submit()" layout="column">
+
+      <md-input-container class="md-block" flex-gt-sm ng-repeat="field in viewModel.form.fields">
+        <label for="sp-{{field.name}}">{{field.label}}</label>
+          <input name="{{field.name}}" id="sp-{{field.name}}" type="{{field.type}}" ng-model="formModel[field.name]" ng-disabled="creating" ng-required="field.required">
+      </md-input-container>
+
+      <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
+
+      <div layout="row">
+        <md-button type="submit" class="md-raised md-primary" ng-disabled="creating">
+          Register
+        </md-button>
+        <a class="md-primary md-button md-ink-ripple" aria-label="Go to Login" href="/login">
+          Back to Login
+          <div class="md-ripple-container"></div>
+        </a>
+      </div>
+
+    <div ng-show="viewModel.accountStores.length">
+      <p>Or register with:</p>
+      <button ng-repeat="accountStore in viewModel.accountStores" type="button" sp-social-login="{{accountStore.provider.providerId}}" sp-client-id="{{accountStore.provider.clientId}}" sp-scope="{{accountStore.provider.scope}}">
+        {{providerName}}
+      </button>
+    </div>
+
+    </form>
+
+  </div>
+
+</md-card>
+

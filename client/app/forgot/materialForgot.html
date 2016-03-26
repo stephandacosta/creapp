@@ -1,0 +1,55 @@
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Recover Password</span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <div flex layout="column" ng-show="sent">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+      We have sent a password reset link to the email address of the account that you specified.
+      Please check your email for this message, then click on the link.
+      </span>
+      <span flex></span>
+    </div>
+    <a class="md-button md-primary md-ink-ripple" href="/login">
+      Back to Login
+    </a>
+  </div>
+
+  <div flex layout="column" ng-show="requestFailed">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+      Sorry, there was a problem with that email or username.  Please try again.
+      </span>
+      <span flex></span>
+    </div>
+  </div>
+
+ <form ng-hide="sent" ng-submit="submit()" layout="column">
+
+    <md-input-container class="md-block" flex-gt-sm >
+      <label>Email or Username</label>
+      <input id="spEmail" ng-model="formModel.email" ng-disabled="posting">
+    </md-input-container>
+
+    <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
+
+    <div layout="row">
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="posting">
+        Request Password Reset
+      </md-button>
+      <a class="md-primary md-button md-ink-ripple" aria-label="Back to Login" href="/login">
+        Back to Login
+        <div class="md-ripple-container"></div>
+      </a>
+    </div>
+
+
+  </form>
+
+
+</md-card>

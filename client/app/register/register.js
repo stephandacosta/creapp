@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('register', {
         url: '/register',
-        templateUrl: 'app/register/my-register.html',
+        templateUrl: 'app/register/register.html',
         controller: 'RegisterCtrl'
       });
   });

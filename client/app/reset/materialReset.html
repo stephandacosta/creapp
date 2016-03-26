@@ -1,0 +1,52 @@
+<md-card>
+
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Password Reset</span>
+    </md-card-title-text>
+  </md-card-title>
+
+
+  <div flex layout="column" ng-show="verifying">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+        We are verifying this link
+      </span>
+      <span flex></span>
+    </div>
+  </div>
+
+  <div flex layout="column" ng-show="reset">
+    <div flex layout="row">
+      <span flex></span>
+      <span flex="80" class="md-warn">
+        Your new password has been set.
+      </span>
+      <span flex></span>
+    </div>
+    <a class="md-button md-primary md-ink-ripple" href="/login">
+      Login Now
+    </a>
+  </div>
+
+
+  <form ng-show="verified && !reset" ng-submit="submit()" layout="column">
+
+    <md-input-container class="md-block" flex-gt-sm >
+      <label>New Password</label>
+      <input class="form-control" id="spUsername" ng-model="formModel.password" type="password" ng-disabled="posting">
+    </md-input-container>
+
+    <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
+
+    <div layout="row">
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="posting">
+        Set New Password
+      </md-button>
+    </div>
+
+  </form>
+
+
+</md-card>
