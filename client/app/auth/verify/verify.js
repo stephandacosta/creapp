@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('verify', {
         url: '/verify?sptoken',
-        templateUrl: 'app/verify/verify.html',
+        templateUrl: 'app/auth/verify/verify.html',
         controller: 'VerifyCtrl'
       });
   });

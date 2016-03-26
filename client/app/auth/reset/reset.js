@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('reset', {
         url: '/reset?sptoken',
-        templateUrl: 'app/reset/reset.html',
+        templateUrl: 'app/auth/reset/reset.html',
         controller: 'ResetCtrl'
       });
   });

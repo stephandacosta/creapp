@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('forgot', {
         url: '/forgot',
-        templateUrl: 'app/forgot/forgot.html',
+        templateUrl: 'app/auth/forgot/forgot.html',
         controller: 'ForgotCtrl'
       });
   });

@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'app/login/login.html',
+        templateUrl: 'app/auth/login/login.html',
         controller: 'LoginCtrl'
       });
   });
