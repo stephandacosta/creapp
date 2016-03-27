@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('BuyreqsCtrl', function (appConfig, $scope, $http) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http) {
 
-    $scope.types= appConfig.creTypes;
+    $scope.types= appConstants.creTypes;
 
     $scope.search = {
       type: 'Any',

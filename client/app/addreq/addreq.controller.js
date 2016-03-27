@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('AddreqCtrl', function ( appConfig, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia) {
+  .controller('AddreqCtrl', function ( appConstants, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia) {
 
     // list of available types
-    $scope.types=appConfig.creTypes;
+    $scope.types=appConstants.creTypes;
 
     // and empty req to initialize
     var emptyReq = {

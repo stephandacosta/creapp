@@ -29,4 +29,8 @@ angular.module('creapp3App', [
       loginState: 'login',
       defaultPostLoginState: 'main'
     });
+  })
+
+  .constant('appConstants', {
+    creTypes:['Any','Leisure','Retail','Office','Multifamily','Industrial','Agriculture']
   });
