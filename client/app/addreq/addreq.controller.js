@@ -23,8 +23,8 @@ angular.module('creapp3App')
       buy: false,
       exchange: false,
 
-      zipCodes: [],
       polygons: [],
+      centers: [],
       active: true
     };
 
@@ -82,6 +82,7 @@ angular.module('creapp3App')
     // clear polygons for button click
     $scope.clearPolygons = function(){
       $scope.req.polygons = [];
+      $scope.req.centers = [];
     };
 
     // hide sidenav on smaller screens

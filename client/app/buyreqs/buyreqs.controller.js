@@ -18,6 +18,14 @@ angular.module('creapp3App')
       // }
       $http.get('/api/buyreqs', {params: { query }}).then(response => {
         $scope.buyreqs = response.data;
+        // to log for seeding
+        // $scope.buyreqs.forEach(function(req){
+        //   req.centers = req.polygons.map(function(polygon){
+        //     var center = L.polygon(polygon).getBounds().getCenter();
+        //     return [center.lat, center.lng];
+        //   });
+        // });
+        // console.log($scope.buyreqs);
         $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
         $scope.maxSqft = Math.max(...$scope.buyreqs.map(function(req){return req.sqft;}));
         if (!$scope.search.price) {
