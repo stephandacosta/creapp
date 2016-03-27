@@ -1,6 +1,6 @@
 <md-list >
 
-  <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in buyreqs | filter:typematch | filter:maxprice | filter:maxsqft">
+  <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs">
     <div flex layout="row">
 
       <div class="md-list-item-text">

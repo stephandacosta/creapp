@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('BuyreqsCtrl', function (appConstants, $scope, $http) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter) {
 
     $scope.types= appConstants.creTypes;
 
@@ -43,17 +43,31 @@ angular.module('creapp3App')
     //   }
     // });
 
-    $scope.maxprice = function(item){
+    var maxprice = function(item){
       return ($scope.search.price===(0 || undefined) ? true : item.price <= $scope.search.price);
     };
 
-    $scope.maxsqft = function(item){
+    var maxsqft = function(item){
       return ($scope.search.sqft===(0 || undefined) ? true : item.sqft <= $scope.search.sqft);
     };
 
-    $scope.typematch = function(item){
+    var typematch = function(item){
       return (($scope.search.type==='Any') ? true : angular.equals(item.type,$scope.search.type) );
     };
+
+    var updateFilter = function(){
+       var filtered;
+       filtered = $filter('filter')($scope.buyreqs, typematch);
+       filtered = $filter('filter')(filtered, maxprice);
+       filtered = $filter('filter')(filtered, maxsqft);
+       $scope.filteredReqs = filtered;
+    }
+
+    $scope.$watchCollection('search', function() {
+      updateFilter();
+    });
+
+    // updateFilter();
 
     getBuyReqs($scope.search);
 

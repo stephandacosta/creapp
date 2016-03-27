@@ -13,9 +13,10 @@ angular.module('creapp3App')
         }).addTo(map);
         var polygonsLayer = L.layerGroup().addTo(map);
 
-        scope.$watchCollection('buyreqs', function(){
-          if (scope.buyreqs) {
-            scope.buyreqs.forEach(function(req){
+        scope.$watchCollection('filteredReqs', function(){
+          polygonsLayer.clearLayers();
+          if (scope.filteredReqs) {
+            scope.filteredReqs.forEach(function(req){
               polygonsLayer.addLayer(L.multiPolygon(req.polygons).bindPopup(req.title));
             });
           }
