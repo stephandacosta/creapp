@@ -1,0 +1,28 @@
+<md-toolbar class="md-primary md-hue-2" layout="row" layout-xs="column" style="height:70px">
+
+<div layout-padding>
+      <label>Type</label>
+      <md-select ng-model="search.type" placeholder="Type" style="padding:0;margin:0;">
+        <md-option ng-repeat="type in types" value="{{type}}">
+          {{type}}
+        </md-option>
+      </md-select>
+</div>
+
+<div flex layout-padding>
+      <label>Max Price: {{search.price}}/sqft</label>
+      <md-slider-container>
+        <md-slider ng-model="search.price" min="0" max="{{maxPrice}}" step="0.1">
+        </md-slider>
+      </md-slider-container>
+</div>
+
+<div flex layout-padding>
+      <label>Max Area: {{search.sqft}} sqft</label>
+      <md-slider-container>
+        <md-slider ng-model="search.sqft" min="0" max="{{maxSqft}}" step="1">
+        </md-slider>
+      </md-slider-container>
+</div>
+
+</md-toolbar>

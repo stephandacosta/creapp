@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('buyreqsmap', function ($timeout) {
+  .directive('reqMap', function ($timeout) {
     return {
-      restrict: 'C',
+      restrict: 'E',
       scope: false,
-      link: function link(scope, element) {
+      link: function (scope, element, attrs) {
 
         var map = new L.Map(element[0]).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {

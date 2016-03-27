@@ -1,86 +1,13 @@
 
   <div flex layout="row">
 
-    <div flex="50" style="overflow:scroll;">
-
-      <md-content id="search" layout="column" layout-gt-md="row">
-        <div layout-padding>
-          <md-input-container>
-            <label>Type</label>
-            <md-select ng-model="search.type">
-              <md-option ng-repeat="type in types" value="{{type}}">
-                {{type}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-        </div>
-<!--         <div layout-padding>
-          <label>Zip Codes</label>
-          <md-chips
-            ng-model="search.zipCodes"
-            readonly="false"
-            placeholder="Enter Zip Codes"
-            delete-button-label="Remove Zip Code"
-            delete-hint="Press delete to remove Zip Code"
-            secondary-placeholder="Enter Zip Code">
-          </md-chips>
-        </div> -->
-        <div layout-padding>
-          <label>Max Price: {{search.price}}/sqft</label>
-          <md-slider-container>
-            <md-slider ng-model="search.price" min="0" max="{{maxPrice}}" step="0.1">
-            </md-slider>
-          </md-slider-container>
-        </div> 
-          <div layout-padding>
-          <label>Max Area: {{search.sqft}} sqft</label>
-          <md-slider-container>
-            <md-slider ng-model="search.sqft" min="0" max="{{maxSqft}}" step="1">
-            </md-slider>
-          </md-slider-container>
-        </div> 
-      </md-content>
-
-
-      <md-content layout="column">
-
-        <div class="md-whiteframe-2dp" layout="column" layout-padding ng-repeat="buyreq in buyreqs | filter:typematch | filter:maxprice | filter:maxsqft">
-
-          <div flex layout="row">
-
-            <div flex layout="column">
-              <h3 class="md-subhead">{{buyreq.title}}</h3>
-              <h5>Max {{ buyreq.price }} $/sft</h5>
-              <h5>Area {{ buyreq.sqft }} sft</h5>
-            </div>
-
-            <span flex></span>
-
-            <div layout="column" layout-align="start end">
-              <span><h3 class="md-title">{{buyreq.type}}</h3></span>
-              <span ng-show="buyreq.landWithProperty" >
-                land+property
-              </span>
-              <span ng-show="buyreq.landOnly">
-                land only
-              </span>
-
-              <span flex></span>
-
-              <button class="md-fab md-button md-mini" >
-                <i class="material-icons" style="vertical-align: middle;">info_outline</i>
-              </button>
-            </div>
-
-          </div>
-
-        </div>
-
-      </md-content>
-
+    <div flex-xs="50" flex-sm="40" flex="33" style="overflow:scroll;">
+      <req-list></req-list>
     </div>
 
-    <div flex class="buyreqsmap"></div>
+    <div flex layout="column">
+      <req-filter></req-filter>
+      <req-map flex></req-map>
+    </div>
 
   </div>
-
