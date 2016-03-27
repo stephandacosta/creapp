@@ -11,14 +11,12 @@ angular.module('creapp3App')
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
+        var polygonsLayer = L.layerGroup().addTo(map);
 
         scope.$watchCollection('buyreqs', function(){
           if (scope.buyreqs) {
             scope.buyreqs.forEach(function(req){
-              req.polygons.forEach(function(polygon){
-                var renderedPolygon = L.polygon(polygon).addTo(map);
-                renderedPolygon.bindPopup(req.title);
-              });
+              polygonsLayer.addLayer(L.multiPolygon(req.polygons).bindPopup(req.title));
             });
           }
         });
