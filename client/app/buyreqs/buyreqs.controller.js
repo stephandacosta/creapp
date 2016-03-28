@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia) {
 
     $scope.types= appConstants.creTypes;
 
@@ -11,13 +11,60 @@ angular.module('creapp3App')
       sqft:undefined
     };
 
+    $scope.map = {
+      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      initCenter: [37.4259332,-122.3413094],
+    };
+
+    var mapId = function(reqs){
+      if (reqs===undefined) {
+        return [];
+      } else {
+        return reqs.map(function(req){
+          return req._id;
+        });
+      }
+    };
+
+    var getAdditionalReqs = function (newReqs, oldReqs){
+      // console.log('newReqs', newReqs);
+      // console.log('oldReqs', oldReqs);
+      // console.log('additionalReqs', _.difference(mapId(newReqs),mapId(oldReqs)).length);
+
+      return _.difference(mapId(newReqs),mapId(oldReqs));
+    };
+
+    var updateMaxValues = function(){
+      $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
+      $scope.maxSqft = Math.max(...$scope.buyreqs.map(function(req){return req.sqft;}));
+    }
+
+    var restoreFilterParams = function(){
+      $scope.search.price=$scope.maxPrice;
+      $scope.search.sqft=$scope.maxSqft;
+    }
+
     var getBuyReqs = function(search){
+      // update mongo query object map bounds
       var query = {};
-      // if (search.zipCodes.length) {
-      //   query.zipCodes = { $in:search.zipCodes};
-      // }
+      query.centers = {
+        $geoWithin: {
+          $box: [
+            search.bounds[0],
+            search.bounds[1]
+          ]
+        }
+      };
+      // get data from server
       $http.get('/api/buyreqs', {params: { query }}).then(response => {
+
+        //stored additional reqs queried if any
+        var additionalReqs = getAdditionalReqs(response.data,$scope.buyreqs);
+
+        // update reqs in view
         $scope.buyreqs = response.data;
+
         // to log for seeding
         // $scope.buyreqs.forEach(function(req){
         //   req.centers = req.polygons.map(function(polygon){
@@ -26,14 +73,19 @@ angular.module('creapp3App')
         //   });
         // });
         // console.log($scope.buyreqs);
-        $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
-        $scope.maxSqft = Math.max(...$scope.buyreqs.map(function(req){return req.sqft;}));
-        if (!$scope.search.price) {
-          $scope.search.price=$scope.maxPrice;
-        }
-        if (!$scope.search.sqft) {
-          $scope.search.sqft=$scope.maxSqft;
-        }
+
+        // update max price and sqft in map bounds
+        // there is a bug to be fixed in 1.0 https://github.com/angular/material/issues/4371
+        updateMaxValues();
+
+        // restore filter params if additional reqs are in map
+        // if (additionalReqs.length){
+          restoreFilterParams();
+        // }
+
+        // apply filters
+        applyFilters();
+
       });
     };
 
@@ -55,30 +107,37 @@ angular.module('creapp3App')
       return (($scope.search.type==='Any') ? true : angular.equals(item.type,$scope.search.type) );
     };
 
-    var updateFilter = function(){
+    var applyFilters = function(){
        var filtered;
        filtered = $filter('filter')($scope.buyreqs, typematch);
        filtered = $filter('filter')(filtered, maxprice);
        filtered = $filter('filter')(filtered, maxsqft);
        $scope.filteredReqs = filtered;
+       $scope.$emit('filter:update');
     }
 
     $scope.$watchCollection('search', function() {
-      updateFilter();
+      applyFilters();
     });
 
-    // updateFilter();
+    $scope.$on('map:moved', function(event){
+      event.stopPropagation();
+      if ($scope.map.bounds) {
+        $scope.search.bounds=$scope.map.bounds;
+        getBuyReqs($scope.search);
+      }
+    });
 
-    getBuyReqs($scope.search);
+    // hide sidenav on smaller screens
+    $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
+      $scope.openedSidenav =  big;
+    });
 
-
-    $scope.map = {
-      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      initCenter: [37.4259332,-122.3413094],
+    // open sidenav for button click
+    $scope.openSidenav = function(){
+      $scope.openedSidenav = !$scope.openedSidenav;
     };
 
-
-
+    // getBuyReqs($scope.search);
 
   });

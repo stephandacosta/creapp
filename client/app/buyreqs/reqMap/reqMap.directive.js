@@ -13,13 +13,31 @@ angular.module('creapp3App')
         }).addTo(map);
         var polygonsLayer = L.layerGroup().addTo(map);
 
-        scope.$watchCollection('filteredReqs', function(){
+        scope.$on('filter:update', function(event){
+          event.stopPropagation();
           polygonsLayer.clearLayers();
           if (scope.filteredReqs) {
             scope.filteredReqs.forEach(function(req){
               polygonsLayer.addLayer(L.multiPolygon(req.polygons).bindPopup(req.title));
             });
           }
+        });
+
+        var contained = function(container,containee){
+          var sw=0, ne=1, x = 0, y = 1;
+          return (container[sw][x] <= containee[sw][x]) &&
+          (container[sw][y] <= containee[sw][y]) &&
+          (container[ne][x] >= containee[ne][x]) &&
+          (container[ne][y] >= containee[ne][y]);
+        };
+
+        map.on('moveend', function(e) {
+          var bounds = map.getBounds();
+          scope.map.bounds = [
+            [bounds._southWest.lat, bounds._southWest.lng],
+            [bounds._northEast.lat, bounds._northEast.lng]
+          ];
+          scope.$emit('map:moved');
         });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material

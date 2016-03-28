@@ -1,13 +1,12 @@
+<div flex layout="column">
+
+  <req-filter></req-filter>
 
   <div flex layout="row">
-
-    <div flex-xs="50" flex-sm="40" flex="33" style="overflow:scroll;">
-      <req-list></req-list>
-    </div>
-
-    <div flex layout="column">
-      <req-filter></req-filter>
-      <req-map flex></req-map>
-    </div>
-
+    <md-sidenav md-is-locked-open="openedSidenav" md-component-id="left" class="md-sidenav-left">
+      <req-list style="overflow:scroll;"></req-list>
+    </md-sidenav>
+    <req-map flex></req-map>
   </div>
+
+</div>
