@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('creapp3App')
+  .filter('checkmark', function(){
+    return function(input) {
+      return input ? '\u2713' : '\u2718';
+    };
+  })
   .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia) {
 
     $scope.types= appConstants.creTypes;
@@ -109,7 +114,8 @@ angular.module('creapp3App')
 
     var applyFilters = function(){
        var filtered;
-       filtered = $filter('filter')($scope.buyreqs, typematch);
+       filtered = $filter('filter')($scope.buyreqs,{_id:$scope.search.reqID})
+       filtered = $filter('filter')(filtered, typematch);
        filtered = $filter('filter')(filtered, maxprice);
        filtered = $filter('filter')(filtered, maxsqft);
        $scope.filteredReqs = filtered;

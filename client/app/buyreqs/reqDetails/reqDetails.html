@@ -1,0 +1,20 @@
+<md-content md-whiteframe="4" layout-margin>
+  <div>
+    <h3>Summary</h3>
+    <p>{{req.title}}</p>
+  </div>
+  <div>
+    <h3>Description</h3>
+    <p>{{ req.info}}</p>
+  </div>
+  <div>
+    <h3>Details</h3>
+    <p>Type: {{req.type}} </p>
+    <p>Max Price: {{ req.price }} $/sft</p>
+    <p>Min Area:  {{ req.sqft }} sqft</p>
+    <p>Buy {{ req.buy | checkmark }}</p>
+    <p>Exchange {{ req.exchange | checkmark }}</p>
+    <p>Land Only {{ req.landOnly | checkmark }}</p>
+    <p>Land and Property {{ req.landAndProperty | checkmark }}</p>
+  </div>
+</md-content>

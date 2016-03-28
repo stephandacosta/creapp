@@ -1,27 +1,29 @@
 <md-list >
+  <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs" ng-click="toggle(buyreq)">
+      <div flex layout="row">
 
-  <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs">
-    <div flex layout="row">
+        <div class="md-list-item-text">
+          <h3 class="md-title" style="color:#3F51B5">{{buyreq.type}}</h3>
+          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:250px;">{{buyreq.title}}</h3>
+          <p>Max {{ buyreq.price }} $/sft</p>
+          <p>Area {{ buyreq.sqft }} sft</p>
+        </div>
 
-      <div class="md-list-item-text">
-        <h3 class="md-title" style="color:#3F51B5">{{buyreq.type}}</h3>
-        <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:250px;">{{buyreq.title}}</h3>
-        <p>Max {{ buyreq.price }} $/sft</p>
-        <p>Area {{ buyreq.sqft }} sft</p>
+        <span flex></span>
+
+        <div layout="column">
+          <md-icon class="md-secondary" >
+            <i class="material-icons" style="font-size:32px;">info_outline</i>
+          </md-icon>
+        </div>
+
       </div>
 
-      <span flex></span>
-
-      <div layout="column">
-        <md-icon class="md-secondary" >
-          <i class="material-icons" style="font-size:32px;">info_outline</i>
-        </md-icon>
-      </div>
-
-    </div>
 
     <md-divider></md-divider>
 
   </md-list-item>
 
 </md-list>
+
+<req-details req="selected" ng-show="search.reqID"></req-details>
