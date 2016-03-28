@@ -10,5 +10,13 @@ angular.module('creapp3App')
         sp: {
           authenticate: true
         }
+      })
+      .state('editreq', {
+        url: '/editreq',
+        templateUrl: 'app/buyreqs/buyreqs.html',
+        controller: 'BuyreqsCtrl',
+        sp: {
+          authenticate: true
+        }
       });
   });

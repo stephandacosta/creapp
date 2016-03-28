@@ -6,7 +6,7 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia, $state) {
 
     $scope.types= appConstants.creTypes;
 
@@ -62,7 +62,8 @@ angular.module('creapp3App')
         }
       };
       // get data from server
-      $http.get('/api/buyreqs', {params: { query }}).then(response => {
+      var url = $state.current.name==='editreq' ? '/api/buyreqs?own=true': '/api/buyreqs?own=false';
+      $http.get(url, {params: { query }}).then(response => {
 
         //stored additional reqs queried if any
         var additionalReqs = getAdditionalReqs(response.data,$scope.buyreqs);

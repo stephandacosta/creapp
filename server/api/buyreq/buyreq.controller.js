@@ -61,7 +61,15 @@ function handleError(res, statusCode) {
 
 // Gets a list of Buyreqs
 export function index(req, res) {
+  // query from the initial request
   var query = req.query.query && JSON.parse(req.query.query);
+  // for buyreq.edit need to return reqs from user
+  if (req.query.own==='true'){
+    var userHref = req.user.href;
+    var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
+    var userquery = { user: userId };
+    query = { $and: [userquery, query]};
+  }
   Buyreq.findAsync(query)
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -77,7 +85,15 @@ export function show(req, res) {
 
 // Creates a new Buyreq in the DB
 export function create(req, res) {
-  Buyreq.createAsync(req.body)
+  var userHref = req.user.href;
+  var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
+  // this does not create new object, perhaps need for deepcopy
+  var addition = req.body;
+  addition.created = new Date;
+  addition.active = true;
+  addition.user = userId;
+  console.log('req.body',addition);
+  Buyreq.createAsync(addition)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

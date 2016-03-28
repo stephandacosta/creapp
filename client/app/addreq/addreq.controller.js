@@ -8,7 +8,7 @@ angular.module('creapp3App')
 
     // and empty req to initialize
     var emptyReq = {
-      created: new Date,
+      // created: new Date,
 
       type: '',
       title: '',
@@ -25,7 +25,7 @@ angular.module('creapp3App')
 
       polygons: [],
       centers: [],
-      active: true
+      // active: true
     };
 
     // put empty req into scope
@@ -50,7 +50,7 @@ angular.module('creapp3App')
     // post the req
     $scope.addReq = function(){
       //need to add user on submit because not available on load
-      emptyReq.user=$rootScope.user.username;
+      // emptyReq.user=$rootScope.user.username;
       // set up parent element where toast will drop from
       var parentEl = document.getElementsByTagName('addreq-form')[0];
       // post req to server then drop toast
