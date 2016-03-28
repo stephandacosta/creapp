@@ -1,3 +1,15 @@
+<div layout="row">
+
+  <md-button aria-label="filter" class="md-fab md-mini md-primary" ng-click="openfilter()">
+    <md-icon>filter_list</md-icon>
+  </md-button>
+
+  <div>
+    <h3>{{buyreqs.length}} found, {{filteredReqs.length}} filtered</h3>
+  </div>
+
+</div>
+
 <md-list >
   <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs" ng-click="toggle(buyreq)">
       <div flex layout="row">

@@ -157,4 +157,9 @@ angular.module('creapp3App')
     }
     // getBuyReqs($scope.search);
 
+    $scope.showfilter = false;
+    $scope.openfilter = function(){
+      $scope.showfilter = !$scope.showfilter;
+    };
+
   });
