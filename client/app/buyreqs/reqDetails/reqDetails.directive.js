@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqDetails', function () {
+  .directive('reqDetails', function ($state) {
     return {
       templateUrl: 'app/buyreqs/reqDetails/reqDetails.html',
       restrict: 'E',
@@ -9,6 +9,9 @@ angular.module('creapp3App')
         req:'=req'
       },
       link: function (scope, element, attrs) {
+        scope.editReq = function(req){
+          $state.go('addreq', {edit: {editMode: true, editReq:req}});
+        };
       }
     };
   });

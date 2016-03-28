@@ -1,7 +1,10 @@
 
 <div layout="row">
-  <md-button flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq()">
+  <md-button ng-if="addmode" flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq()">
     Publish
+  </md-button>
+  <md-button ng-if="!addmode" flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" >
+    Save
   </md-button>
   <md-button flex="30" class="md-ink-ripple" ng-click="cleanReq()">
     Cancel

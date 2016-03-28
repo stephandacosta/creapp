@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('AddreqCtrl', function ( appConstants, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia) {
+  .controller('AddreqCtrl', function ( appConstants, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia, $stateParams) {
 
     // list of available types
     $scope.types=appConstants.creTypes;
@@ -29,7 +29,13 @@ angular.module('creapp3App')
     };
 
     // put empty req into scope
-    $scope.req = _.cloneDeep(emptyReq);
+    if ($stateParams.edit.editMode){
+      $scope.addmode = false;
+      $scope.req = $stateParams.edit.editReq;
+    } else {
+      $scope.req = _.cloneDeep(emptyReq);
+      $scope.addmode = true;
+    }
 
     // map settings
     $scope.map = {
