@@ -18,7 +18,14 @@ angular.module('creapp3App')
           polygonsLayer.clearLayers();
           if (scope.filteredReqs) {
             scope.filteredReqs.forEach(function(req){
-              polygonsLayer.addLayer(L.multiPolygon(req.polygons).bindPopup(req.title));
+              polygonsLayer.addLayer(L.multiPolygon(req.polygons)
+              .on('click', function(e) {
+                  // this does not work, need to fix
+                  // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
+                  console.log(e);
+                  scope.toggle(req);
+                  scope.$digest();
+              }));
             });
           }
         });

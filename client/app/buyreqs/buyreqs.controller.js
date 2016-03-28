@@ -144,6 +144,17 @@ angular.module('creapp3App')
       $scope.openedSidenav = !$scope.openedSidenav;
     };
 
+    $scope.selected = {};
+
+    $scope.toggle=function(req){
+      if ($scope.search.reqID === req._id) {
+        $scope.selected = {};
+        $scope.search.reqID = '';
+      } else {
+        $scope.selected = req;
+        $scope.search.reqID = req._id;
+      }
+    }
     // getBuyReqs($scope.search);
 
   });
