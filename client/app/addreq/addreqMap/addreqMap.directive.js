@@ -45,7 +45,8 @@ angular.module('creapp3App')
               });
             });
             scope.req.centers = scope.req.polygons.map(function(polygon){
-              return L.polygon(polygon).getBounds().getCenter();
+              var center = L.polygon(polygon).getBounds().getCenter();
+              return [center.lat, center.lng];
             });
             // scope.req.centers.forEach(function(center){
             //   L.marker([center.lat, center.lng]).addTo(map);;
