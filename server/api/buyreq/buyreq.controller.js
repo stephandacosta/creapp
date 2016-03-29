@@ -92,7 +92,6 @@ export function create(req, res) {
   addition.created = new Date;
   addition.active = true;
   addition.user = userId;
-  console.log('req.body',addition);
   Buyreq.createAsync(addition)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
