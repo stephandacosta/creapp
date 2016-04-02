@@ -1,0 +1,28 @@
+<md-button class="md-raised md-primary" ui-sref="profile.edit">Edit Profile</md-button>
+<md-content layout="row">
+  <!-- <span flex></span> -->
+  <md-card flex="50">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline"><h3>{{user.givenName}}</h3></span>
+        <span class="md-title">Function</span>
+        <br>
+        <span class="md-subhead">RE License #</span>        
+        <span class="md-subhead">Loopnet Profile</span>
+        <span class="md-subhead">Linkedin Profile</span>
+      </md-card-title-text>
+      <md-card-title-media style="background-color:grey;">
+        <div class="md-media-lg card-media"></div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button flex="20" class="md-raised md-primary md-hue-1">Contact Me</md-button>
+    </md-card-actions>
+    <md-divider></md-divider>
+    <md-content layout-margin>
+      <h3 class="md-headline">Summary</h3>
+      <pre ng-bind="user | json"></pre>
+    </md-content>
+  </md-card>
+  <!-- <span flex></span> -->
+</md-content>

@@ -61,7 +61,7 @@
         <md-menu-content class="md-primary" width="4">
 
           <md-menu-item>
-            <md-button ui-sref="profile" ui-sref-active="active">
+            <md-button ui-sref="profile.view" ui-sref-active="active">
               Profile
             </md-button>
           </md-menu-item>
@@ -80,43 +80,3 @@
 
   </div>
 </md-toolbar>
-
-
-
-<!--
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavbarController">
-  <div class="container">
-
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in nav.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
-        </li>
-        <li if-user ui-sref-active="active">
-            <a ui-sref="profile">Profile</a>
-        </li>
-        <li if-not-user ui-sref-active="active">
-            <a ui-sref="register">Register</a>
-        </li>
-        <li if-not-user ui-sref-active="active">
-            <a ui-sref="login">Login</a>
-        </li>
-        <li if-user >
-            <a ui-sref="main" sp-logout>Logout</a>
-        </li>
-        <li if-user ui-sref-active="active">
-            <a ui-sref="buyreqs">Buy Reqs</a>
-        </li>
-         <li if-user-in-group="admins" ui-sref-active="active">
-          <a ng-href="/admin">Admin Console</a>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-
-
-
- -->
