@@ -22,7 +22,7 @@ angular.module('creapp3App')
               .on('click', function(e) {
                   // this does not work, need to fix
                   // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
-                  console.log(e);
+                  // console.log(e);
                   scope.toggle(req);
                   scope.$digest();
               }));
