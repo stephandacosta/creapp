@@ -10,6 +10,20 @@ angular.module('creapp3App')
           editReq : null
         }},
         templateUrl: 'app/addreq/addreq.html',
-        controller: 'AddreqCtrl'
+        controller: 'AddreqCtrl',
+        sp: {
+          authenticate: true
+        }
+      })
+      .state('editreq', {
+        params: {edit: {
+          editMode : true,
+          editReq : null
+        }},
+        templateUrl: 'app/addreq/addreq.html',
+        controller: 'AddreqCtrl',
+        sp: {
+          authenticate: true
+        }
       });
   });

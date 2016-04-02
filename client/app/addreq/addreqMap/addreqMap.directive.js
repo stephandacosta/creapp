@@ -48,14 +48,24 @@ angular.module('creapp3App')
               var center = L.polygon(polygon).getBounds().getCenter();
               return [center.lat, center.lng];
             });
-            // scope.req.centers.forEach(function(center){
-            //   L.marker([center.lat, center.lng]).addTo(map);;
-            // });
           }
         });
 
         // add freedraw object to the map
         map.addLayer(freeDraw);
+
+        // on edit mode set predefined polygons
+        if (!scope.addmode) {
+          // there is some bug here where polygons are joined together
+          // need fix
+          scope.req.polygons.forEach(function(polygon){
+            var latLngs = [];
+            polygon.forEach(function(point){
+              latLngs.push(L.latLng(point[0], point[1]));
+            });
+            freeDraw.predefinedPolygon(latLngs);
+          });
+        }
 
         // then sidenav updates, need to recenter map
         scope.$watch('openedSidenav',function(newvalue,oldvalue){

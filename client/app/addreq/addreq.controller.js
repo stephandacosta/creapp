@@ -28,7 +28,7 @@ angular.module('creapp3App')
       // active: true
     };
 
-    // put empty req into scope
+    // put empty req or req to edit in scope into scope
     if ($stateParams.edit.editMode){
       $scope.addmode = false;
       $scope.req = $stateParams.edit.editReq;
@@ -55,8 +55,7 @@ angular.module('creapp3App')
 
     // post the req
     $scope.addReq = function(){
-      //need to add user on submit because not available on load
-      // emptyReq.user=$rootScope.user.username;
+      // other properties such as user, date creation are added server side
       // set up parent element where toast will drop from
       var parentEl = document.getElementsByTagName('addreq-form')[0];
       // post req to server then drop toast
@@ -79,6 +78,32 @@ angular.module('creapp3App')
         );
       });
     };
+
+    // save req changes
+    $scope.saveEdit = function(){
+      // set up parent element where toast will drop from
+      var parentEl = document.getElementsByTagName('addreq-form')[0];
+      // put req to server then drop toast
+      $http.put('/api/buyreqs/' + $scope.req._id, $scope.req).then(function(){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('Your requirement edits were saved !')
+            .position('top right')
+            .parent(parentEl)
+            .hideDelay(5000)
+        );
+        $scope.req = _.cloneDeep(emptyReq);
+      }, function(){
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent('There was an issue in saving your edits')
+            .position('top right')
+            .position(parentEl)
+            .hideDelay(5000)
+        );
+      });
+    };
+
 
     // clear all for button click
     $scope.cleanReq = function(){

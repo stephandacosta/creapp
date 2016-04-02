@@ -10,7 +10,7 @@ angular.module('creapp3App')
       },
       link: function (scope, element, attrs) {
         scope.editReq = function(req){
-          $state.go('addreq', {edit: {editMode: true, editReq:req}});
+          $state.go('editreq', {edit: {editMode: true, editReq:req}});
         };
       }
     };

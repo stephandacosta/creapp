@@ -1,13 +1,23 @@
 
-<div layout="row">
-  <md-button ng-if="addmode" flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" ng-click="addReq()">
+
+<div layout="row" ng-if="addmode">
+  <md-button flex="30" class="md-raised md-primary md-hue-2 md-ink-ripple" ng-click="addReq()">
     Publish
-  </md-button>
-  <md-button ng-if="!addmode" flex="30" class="md-raised md-warn md-hue-1 md-ink-ripple" >
-    Save
   </md-button>
   <md-button flex="30" class="md-ink-ripple" ng-click="cleanReq()">
     Cancel
+  </md-button>
+</div>
+
+<div layout="row" ng-if="!addmode">
+  <md-button flex="30" class="md-raised md-primary md-hue-2 md-ink-ripple" ng-click="saveEdit()" >
+    Save
+  </md-button>
+  <md-button flex="30" class="md-ink-ripple" ng-click="cancelEdit()">
+    Cancel
+  </md-button>
+  <md-button flex="30" class="md-raised md-warn md-hue-1  md-ink-ripple" ng-click="deleteReq()">
+    Delete
   </md-button>
 </div>
 

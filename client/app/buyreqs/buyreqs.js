@@ -11,8 +11,8 @@ angular.module('creapp3App')
           authenticate: true
         }
       })
-      .state('editreq', {
-        url: '/editreq',
+      .state('myreqs', {
+        url: '/myreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
         sp: {

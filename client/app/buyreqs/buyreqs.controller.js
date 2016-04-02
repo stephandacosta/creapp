@@ -62,7 +62,7 @@ angular.module('creapp3App')
         }
       };
       // get data from server
-      var url = $state.current.name==='editreq' ? '/api/buyreqs?own=true': '/api/buyreqs?own=false';
+      var url = $state.current.name==='myreqs' ? '/api/buyreqs?own=true': '/api/buyreqs?own=false';
       $http.get(url, {params: { query }}).then(response => {
 
         //stored additional reqs queried if any
