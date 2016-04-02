@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('AddreqCtrl', function ( appConstants, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia, $stateParams) {
+  .controller('AddreqCtrl', function ( appConstants, $scope, $rootScope, $http, $mdToast, $mdSidenav, $mdMedia, $state, $stateParams) {
 
     // list of available types
     $scope.types=appConstants.creTypes;
@@ -57,7 +57,7 @@ angular.module('creapp3App')
     $scope.addReq = function(){
       // other properties such as user, date creation are added server side
       // set up parent element where toast will drop from
-      var parentEl = document.getElementsByTagName('addreq-form')[0];
+      var parentEl = document.getElementById('toasts');
       // post req to server then drop toast
       $http.post('/api/buyreqs', $scope.req).then(function(){
         $mdToast.show(
@@ -68,11 +68,12 @@ angular.module('creapp3App')
             .hideDelay(5000)
         );
         $scope.req = _.cloneDeep(emptyReq);
+        $state.go('myreqs');
       }, function(){
         $mdToast.show(
           $mdToast.simple()
             .textContent('There was an issue in saving your requisition')
-            .position('top right')
+            .position('top left')
             .position(parentEl)
             .hideDelay(5000)
         );
@@ -82,17 +83,18 @@ angular.module('creapp3App')
     // save req changes
     $scope.saveEdit = function(){
       // set up parent element where toast will drop from
-      var parentEl = document.getElementsByTagName('addreq-form')[0];
+      var parentEl = document.getElementById('toasts');
       // put req to server then drop toast
       $http.put('/api/buyreqs/' + $scope.req._id, $scope.req).then(function(){
         $mdToast.show(
           $mdToast.simple()
             .textContent('Your requirement edits were saved !')
-            .position('top right')
+            .position('top left')
             .parent(parentEl)
             .hideDelay(5000)
         );
         $scope.req = _.cloneDeep(emptyReq);
+        $state.go('myreqs');
       }, function(){
         $mdToast.show(
           $mdToast.simple()
