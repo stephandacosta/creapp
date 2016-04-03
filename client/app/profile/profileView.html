@@ -7,7 +7,7 @@
         <span class="md-headline"><h3>{{user.givenName}}</h3></span>
         <span class="md-title">Function</span>
         <br>
-        <span class="md-subhead">RE License #</span>        
+        <span class="md-subhead">RE License #{{user.customData.license}}</span>
         <span class="md-subhead">Loopnet Profile</span>
         <span class="md-subhead">Linkedin Profile</span>
       </md-card-title-text>
@@ -21,6 +21,7 @@
     <md-divider></md-divider>
     <md-content layout-margin>
       <h3 class="md-headline">Summary</h3>
+      <p>{{user.customData.summary}}</p> 
       <pre ng-bind="user | json"></pre>
     </md-content>
   </md-card>

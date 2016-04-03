@@ -28,11 +28,27 @@ var app = express();
 // stormpath init on server
 app.use(ExpressStormpath.init(app,{
   website: true,
-  expand: {
-    groups:true
-  },
   web: {
-    spaRoot: path.join(__dirname, '..','client','index.html')
+    spaRoot: path.join(__dirname, '..','client','index.html'),
+    me: {
+      expand: {
+        customData: true
+      }
+    },
+    register: {
+      form: {
+        fields: {
+          license: {
+            enabled: true,
+            label: 'RE license #',
+            name: 'license',
+            placeholder: 'XXXXX_XX',
+            required: true,
+            type: 'text'
+          }
+        }
+      }
+    }
   }
 }));
 app.use(bodyParser.urlencoded({ extended: true })); //ensure that your server-side framework is decoding complex form objects in POST bodies

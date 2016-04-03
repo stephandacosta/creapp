@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('ProfileCtrl', function ($scope, $rootScope) {
+  .controller('ProfileCtrl', function ($scope) {
     $scope.message = 'Hello';
-    // console.log('user',$rootScope.user);
   });
