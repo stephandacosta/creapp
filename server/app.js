@@ -13,6 +13,10 @@ var ExpressStormpath = require('express-stormpath');
 var path = require('path');
 var bodyParser = require('body-parser');
 
+// this setting is a hack due to problems with mongo-connect
+// https://github.com/kcbanner/connect-mongo/issues/214
+require('bluebird').config( { warnings: { wForgottenReturn: false } } );
+
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {
@@ -52,6 +56,7 @@ app.use(ExpressStormpath.init(app,{
   }
 }));
 app.use(bodyParser.urlencoded({ extended: true })); //ensure that your server-side framework is decoding complex form objects in POST bodies
+
 
 var server = http.createServer(app);
 require('./config/express')(app);
