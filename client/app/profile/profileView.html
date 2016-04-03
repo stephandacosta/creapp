@@ -1,29 +1,46 @@
-<md-button class="md-raised md-primary" ui-sref="profile.edit">Edit Profile</md-button>
+<div layout-margin>
+  <md-button class="md-raised md-primary" ui-sref="profile.edit">Edit Profile</md-button>
+</div>
+
 <md-content layout="row">
   <!-- <span flex></span> -->
-  <md-card flex="50">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline"><h3>{{user.givenName}}</h3></span>
-        <span class="md-title">Function</span>
-        <br>
+  <div flex-gt-sm="50" layout="column">
+
+    <md-card >
+      <md-card-header>
+        <md-card-header-text>
+        <span ng-if="user.customData.function" class="md-subtitle">{{user.customData.function}}</span>
         <span class="md-subhead">RE License #{{user.customData.license}}</span>
-        <span class="md-subhead">Loopnet Profile</span>
-        <span class="md-subhead">Linkedin Profile</span>
-      </md-card-title-text>
-      <md-card-title-media style="background-color:grey;">
-        <div class="md-media-lg card-media"></div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button flex="20" class="md-raised md-primary md-hue-1">Contact Me</md-button>
-    </md-card-actions>
-    <md-divider></md-divider>
-    <md-content layout-margin>
-      <h3 class="md-headline">Summary</h3>
-      <p>{{user.customData.summary}}</p> 
-      <pre ng-bind="user | json"></pre>
-    </md-content>
-  </md-card>
+        </md-card-header-text>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-fab md-primary md-hue-1">
+            <i class="material-icons" style="font-size:32px;vertical-align:middle;">mail_outline</i>
+          </md-button>
+        </md-card-actions>
+      </md-card-header>
+      <md-divider></md-divider>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{user.fullName}}</span>
+          <span class="md-body-1">{{user.email}}</span>
+          <br>
+          <span class="md-subhead">Loopnet Profile</span>
+          <a class="md-body-1" ng-if="user.customData.loopnet">{{user.customData.loopnet}}</a>
+          <span class="md-body-1" ng-if="!user.customData.loopnet">not set</span>
+          <a class="md-body-1">{{user.customData.loopnet}}</a>
+          <span class="md-subhead">Linkedin Profile</span>
+          <a class="md-body-1">{{user.customData.linkedin}}</a>
+          <span class="md-body-1" ng-if="!user.customData.linkedin">not set</span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <img ng-src="assets/images/user-default.png" class="md-media-sm card-media"></img>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-content>
+        <span class="md-subtitle"><h4>Summary</h4></span>
+        <span class="md-body-1">{{user.customData.summary}}</span>
+      </md-card-content>
+    </md-card>
+
   <!-- <span flex></span> -->
 </md-content>

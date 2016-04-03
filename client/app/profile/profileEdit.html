@@ -1,41 +1,54 @@
-<md-button class="md-raised md-primary" ui-sref="profile.view">View Profile</md-button>
-<md-content layout="row">
-  <!-- <span flex></span> -->
-  <md-card flex="50">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline"><h3>{{user.givenName}}</h3></span>
-        <md-input-container>
-          <label class="md-title">Function</label>
-          <input type="text" ng-model="user.function" required>
-        </md-input-container>
-        <md-input-container>
-          <label class="md-subhead">RE License #</label>
-          <input type="text" ng-model="user.license">
-        </md-input-container>
-        <md-input-container>
-          <label class="md-subhead">Loopnet Profile</label>
-          <input type="text" ng-model="user.loopnet">
-        </md-input-container>
-        <md-input-container>
-          <label class="md-subhead">Linkedin Profile</label>
-          <input type="text" ng-model="user.linkedin">
-        </md-input-container>
-      </md-card-title-text>
-      <md-card-title-media style="background-color:grey;">
-        <div class="md-media-lg card-media"></div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button flex="20" class="md-raised md-primary md-hue-1">Contact Me</md-button>
-    </md-card-actions>
-    <md-divider></md-divider>
-    <md-content flex layout-margin>
-      <h3 class="md-headline">Summary</h3>
-      <md-input-container flex layout="column">
-        <textarea flex ng-model="user.summary" required></textarea>
+<div layout="row" layout-margin>
+  <md-button class="md-raised md-primary" ui-sref="profile.view">View Profile</md-button>
+  <md-button class="md-raised md-primary" ng-click="saveUserEdits()">Save</md-button>
+</div>
+
+<div layout="column" layout-gt-sm="row" layout-margin style="overflow:scroll">
+
+  <md-content flex flex-gt-sm="60" layout="column" md-whiteframe="3" layout-padding >
+    <!-- <span flex></span> -->
+    <div flex layout="row">
+      <md-input-container flex class="md-block">
+        <label class="md-headline">First Name</label>
+        <input type="text" ng-model="userEdit.givenName"></input>
       </md-input-container>
-    </md-content>
-  </md-card>
-  <!-- <span flex></span> -->
-</md-content>
+      <md-input-container flex class="md-block">
+        <label class="md-headline">Last Name</label>
+        <input type="text" ng-model="userEdit.surname"></input>
+      </md-input-container>
+    </div>
+    <div flex>
+      <md-input-container class="md-block">
+        <label class="md-title">Headline</label>
+        <input type="text" ng-model="userEdit.customData.function"></input>
+      </md-input-container>
+    </div>
+    <div flex layout="row" class="md-block">
+      <span flex class="md-subhead">Email</span>
+      <md-checkbox class="md-primary" ng-model="userEdit.customData.privateEmail" aria-label="private">
+        Private
+      </md-checkbox>
+    </div>
+    <div flex>
+      <md-input-container class="md-block">
+        <label class="md-subhead">Loopnet Profile</label>
+        <input type="text" ng-model="userEdit.customData.loopnet"></input>
+      </md-input-container>
+    </div>
+    <div flex>
+      <md-input-container class="md-block">
+        <label class="md-subhead">Linkedin Profile</label>
+        <input type="text" ng-model="userEdit.customData.linkedin"></input>
+        <div class="md-caption">your picture will appear if you sign in with linkedin</div>
+      </md-input-container>
+    </div>
+  </md-content>
+
+  <md-content flex layout="column" md-whiteframe="3" layout-padding>
+    <md-input-container layout="column" class="md-block">
+      <label class="md-headline">Summary</label>
+      <textarea ng-model="userEdit.customData.summary"></textarea>
+    </md-input-container>
+  </md-content>
+
+</div>
