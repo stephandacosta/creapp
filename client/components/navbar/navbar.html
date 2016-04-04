@@ -3,36 +3,53 @@
 
   <div flex class="md-toolbar-tools" layout="row">
 
-    <div flex="10">
+    <div flex="20">
       <h1><span> CRE APP </span></h1>
     </div>
 
-    <div flex layout="row">
-
-      <md-button class="md-primary md-ink-ripple navtitle" ng-repeat="item in nav.menu" ui-sref="{{item.state}}" ui-sref-active="active" style="vertical-align: middle;">
-        {{item.title}}
-      </md-button>
-
+    <div hide-sm hide-xs flex layout="row">
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="buyreqs" ui-sref-active="active">
         Find
       </md-button>
-
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="addreq" ui-sref-active="active">
         Add
       </md-button>
-
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs" ui-sref-active="active">
         My Reqs
       </md-button>
+    </div>
 
+    <span flex hide-gt-sm></span>
 
-<!--         <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
+    <md-menu hide-gt-sm>
+      <md-button ng-click="nav.openMenu($mdOpenMenu, $event)">
+        <i class="material-icons" style="font-size:32px;vertical-align:middle;">menu</i>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item if-user >
+          <md-button ui-sref="buyreqs" ui-sref-active="active">
+            Find
+          </md-button>
+        </md-menu-item>
+        <md-menu-item if-user>
+          <md-button ui-sref="addreq" ui-sref-active="active">
+            Add
+          </md-button>
+        </md-menu-item>
+        <md-menu-item if-user >
+          <md-button ui-sref="myreqs" ui-sref-active="active">
+            My Reqs
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+        <!-- <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
         Admin Console
       </md-button> -->
 
-    </div>
 
-    <span flex></span>
+    <!-- <span flex></span> -->
 
     <div if-not-user flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 
