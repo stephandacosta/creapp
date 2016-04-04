@@ -9,10 +9,7 @@ class NavbarController {
 
   isCollapsed = true;
   //end-non-standard
-  var originatorEv;
   openMenu($mdOpenMenu, ev) {
-    console.log('hel');
-    originatorEv = ev;
     $mdOpenMenu(ev);
   }
 
