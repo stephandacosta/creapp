@@ -35,12 +35,12 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url('../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: url('../assets/fonts/material-design-icons/MaterialIcons-Regular.eot'); /* For IE6-8 */
   src: local('Material Icons'),
        local('MaterialIcons-Regular'),
-       url('../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2') format('woff2'),
-       url('../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff') format('woff'),
-       url('../bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf') format('truetype');
+       url('../assets/fonts/material-design-icons/MaterialIcons-Regular.woff2') format('woff2'),
+       url('../assets/fonts/material-design-icons/MaterialIcons-Regular.woff') format('woff'),
+       url('../assets/fonts/material-design-icons/MaterialIcons-Regular.ttf') format('truetype');
 }
 
 .material-icons {
@@ -78,4 +78,3 @@
   color: #000;
   padding: 0.2em 0;
 }
-
