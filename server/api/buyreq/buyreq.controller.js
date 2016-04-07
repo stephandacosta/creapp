@@ -30,7 +30,6 @@ function saveUpdates(updates) {
     updated.markModified('polygons');
     return updated.saveAsync()
       .spread(updated => {
-        console.log('updated from db', updated);
         return updated;
       });
   };

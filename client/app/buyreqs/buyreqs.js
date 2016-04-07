@@ -7,9 +7,9 @@ angular.module('creapp3App')
         url: '/buyreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
-        sp: {
-          authenticate: true
-        }
+        // sp: {
+        //   authenticate: true
+        // }
       })
       .state('myreqs', {
         url: '/myreqs',
