@@ -4,10 +4,10 @@
   <div flex class="md-toolbar-tools" layout="row">
 
     <div flex="20">
-      <h1><span> CRE APP </span></h1>
+      <h1><span> CREapp.us </span></h1>
     </div>
 
-    <div hide-sm hide-xs flex layout="row">
+    <div hide-xs flex layout="row">
       <md-button class="md-primary md-ink-ripple navtitle" ui-sref="buyreqs" ui-sref-active="active">
         Find
       </md-button>
@@ -19,52 +19,69 @@
       </md-button>
     </div>
 
-    <span flex hide-gt-sm></span>
+    <span flex></span>
 
-    <md-menu hide-gt-sm>
-      <md-button ng-click="nav.openMenu($mdOpenMenu, $event)">
-        <i class="material-icons" style="font-size:32px;vertical-align:middle;">menu</i>
-      </md-button>
-      <md-menu-content width="4">
-        <md-menu-item >
-          <md-button ui-sref="buyreqs" ui-sref-active="active">
-            Find
-          </md-button>
-        </md-menu-item>
-        <md-menu-item if-user>
-          <md-button ui-sref="addreq" ui-sref-active="active">
-            Add
-          </md-button>
-        </md-menu-item>
-        <md-menu-item if-user >
-          <md-button ui-sref="myreqs" ui-sref-active="active">
-            My Reqs
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
+    <div flex>
 
-        <!-- <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
-        Admin Console
-      </md-button> -->
+      <md-menu hide-gt-xs>
+        <md-button>
+          <md-icon ng-click="nav.openMenu($mdOpenMenu, $event)">
+            menu
+          </md-icon>
+        </md-button>
+        <md-menu-content width="4" class="md-primary">
+          <md-menu-item>
+            <md-button class="md-primary" ui-sref="buyreqs" ui-sref-active="active">
+              Find
+            </md-button>
+          </md-menu-item>
+          <md-menu-item if-user>
+            <md-button class="md-primary" ui-sref="addreq" ui-sref-active="active">
+              Add
+            </md-button>
+          </md-menu-item>
+          <md-menu-item if-user >
+            <md-button class="md-primary" ui-sref="myreqs" ui-sref-active="active">
+              My Reqs
+            </md-button>
+          </md-menu-item>
+          <md-menu-item  if-not-user >
+            <md-button class="md-primary" ui-sref="login" ui-sref-active="active">
+              Login
+            </md-button>
+          </md-menu-item>
+          <md-menu-item  if-not-user >
+            <md-button class="md-primary" ui-sref="register" ui-sref-active="active">
+              Register
+            </md-button>
+          </md-menu-item>
+          <!-- <md-menu-item >
+            <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
+              Admin Console
+            </md-button>
+          </md-menu-item > -->
+        </md-menu-content>
+      </md-menu>
+
+    </div>
 
 
     <!-- <span flex></span> -->
 
-    <div if-not-user flex  layout-align="end center" class="md-toolbar-tools" layout="row">
+    <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 
       <md-button ui-sref="login" ui-sref-active="active">
         Login
       </md-button>
 
-      <md-button if-not-user ui-sref="register" ui-sref-active="active">
+      <md-button ui-sref="register" ui-sref-active="active">
         Register
       </md-button>
 
     </div>
 
 
-    <div if-user class="md-toolbar-tools" layout="row">
+    <div if-user layout="row">
 
       <md-menu>
 
@@ -78,13 +95,13 @@
         <md-menu-content class="md-primary" width="4">
 
           <md-menu-item>
-            <md-button ui-sref="profile.view" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="profile.view" ui-sref-active="active">
               Profile
             </md-button>
           </md-menu-item>
 
           <md-menu-item >
-            <md-button ui-sref="main" sp-logout>
+            <md-button class="md-primary" ui-sref="main" sp-logout>
               Logout
             </md-button>
           </md-menu-item>
