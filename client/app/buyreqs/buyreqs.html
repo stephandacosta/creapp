@@ -1,12 +1,28 @@
-<div flex layout="column">
 
   <req-filter></req-filter>
 
   <div flex layout="row">
-    <md-sidenav md-is-locked-open="openedSidenav" md-component-id="left" class="md-sidenav-left">
+    <md-content ng-show="openedSidenav" flex-gt-sm="40" class="md-sidenav-left">
       <req-list style="overflow:scroll;"></req-list>
-    </md-sidenav>
-    <req-map flex></req-map>
-  </div>
+    </md-content>
 
-</div>
+
+    <!-- side toolbar -->
+    <md-content layout="column"  >
+
+      <md-button aria-label="filter" class="md-fab md-mini md-primary" ng-click="openfilter()">
+        <md-tooltip md-direction="bottom">Filter</md-tooltip>
+        <md-icon>filter_list</md-icon>
+      </md-button>
+<br>
+      <md-button class="md-fab md-mini md-primary" ng-click="openSidenav()">
+        <md-tooltip md-direction="bottom">List</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">comment</i>
+      </md-button>
+
+    </md-content>
+
+
+    <req-map flex></req-map>
+
+  </div>
