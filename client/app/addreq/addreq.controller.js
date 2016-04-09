@@ -124,5 +124,12 @@ angular.module('creapp3App')
     };
 
 
+    $scope.zoomIn = function(){
+      $scope.$emit('zoom:in');
+    };
+    $scope.zoomOut = function(){
+      $scope.$emit('zoom:out');
+    };
+
 
   });

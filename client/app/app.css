@@ -26,6 +26,10 @@ md-card-title-text > span {
   padding:0;
 }
 
+.sidetoolbar{
+  background-color: #9C27B0;
+}
+
 .md-open-menu-container {
   z-index:1000;
 }

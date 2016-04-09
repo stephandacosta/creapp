@@ -12,10 +12,19 @@ angular.module('creapp3App')
         element.addClass('addreqmap');
 
         //create map
-        var map = new L.Map(element[0]).setView(scope.map.initCenter, 10);
+        var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
+
+        scope.$on('zoom:out', function(){
+          event.stopPropagation();
+          map.zoomOut();
+        });
+        scope.$on('zoom:in', function(){
+          event.stopPropagation();
+          map.zoomIn();
+        });
 
         //create freedraw object
         var freeDraw = new L.FreeDraw();

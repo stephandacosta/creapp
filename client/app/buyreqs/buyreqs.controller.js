@@ -123,6 +123,13 @@ angular.module('creapp3App')
        $scope.$emit('filter:update');
     }
 
+    $scope.zoomIn = function(){
+      $scope.$emit('zoom:in');
+    };
+    $scope.zoomOut = function(){
+      $scope.$emit('zoom:out');
+    };
+
     $scope.$watchCollection('search', function() {
       applyFilters();
     });
@@ -134,16 +141,6 @@ angular.module('creapp3App')
         getBuyReqs($scope.search);
       }
     });
-
-    // hide sidenav on smaller screens
-    $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
-      $scope.openedSidenav =  big;
-    });
-
-    // open sidenav for button click
-    $scope.openSidenav = function(){
-      $scope.openedSidenav = !$scope.openedSidenav;
-    };
 
     $scope.selected = {};
 

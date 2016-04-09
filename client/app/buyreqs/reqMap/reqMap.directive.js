@@ -3,15 +3,25 @@
 angular.module('creapp3App')
   .directive('reqMap', function ($timeout) {
     return {
+      template: '<div></div>',
       restrict: 'E',
       scope: false,
       link: function (scope, element, attrs) {
 
-        var map = new L.Map(element[0]).setView(scope.map.initCenter, 10);
+        var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
         var polygonsLayer = L.layerGroup().addTo(map);
+
+        scope.$on('zoom:out', function(){
+          event.stopPropagation();
+          map.zoomOut();
+        });
+        scope.$on('zoom:in', function(){
+          event.stopPropagation();
+          map.zoomIn();
+        });
 
         scope.$on('filter:update', function(event){
           event.stopPropagation();

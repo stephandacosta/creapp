@@ -1,7 +1,3 @@
-.sidetoolbar{
-  background-color: #607D8B;
-}
-
 @media (min-width: 900px) {
   md-tooltip {
     font-size: 1rem;
