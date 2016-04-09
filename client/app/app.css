@@ -22,7 +22,9 @@ md-card-title-text > span {
   color:#424242 !important;
 }*/
 
-
+#mainContainer {
+  padding:0;
+}
 
 .md-open-menu-container {
   z-index:1000;
