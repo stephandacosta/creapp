@@ -17,11 +17,11 @@ angular.module('creapp3App', [
   })
 
 // material theme pallette
-  // .config(function($mdThemingProvider) {
-  //   $mdThemingProvider.theme('default')
-  //     .primaryPalette('pink')
-  //     .accentPalette('orange');
-  // });
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+    .primaryPalette('purple')
+    .accentPalette('amber');
+  })
 
   // stormpath init
   .run(function($stormpath){

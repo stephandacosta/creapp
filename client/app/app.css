@@ -1,3 +1,32 @@
+/*dark theme seetings*/
+/*md-card {
+  background-color:#F3E5F5;
+  color:#424242;
+}
+
+.md-whiteframe-3dp {
+  background-color:#F3E5F5;
+  color:#424242;
+}
+
+md-card > md-divider {
+  color:#424242 !important;
+  border-top-color:#424242 !important;
+}
+
+md-card-header-text > span{
+  color:#424242 !important;
+}
+
+md-card-title-text > span {
+  color:#424242 !important;
+}*/
+
+
+
+.md-open-menu-container {
+  z-index:1000;
+}
 
 /**
  * Bootstrap Fonts

@@ -1,12 +1,6 @@
-/*navbar {
-  position:fixed;
-  z-index: 3000;
-  height:40px;
-  width:100%;
-}*/
 
 .navtitle {
-  border: solid 1px #3F51B5;
+  border: solid 1px transparent;
 }
 
 .navtitle:hover {
