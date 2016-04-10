@@ -6,7 +6,12 @@
 
     <!-- list of buyreqs -->
     <div flex layout="column">
-      <md-subheader class="md-primary">item 1 of {{buyreqs.length}} filtered from {{filteredReqs.length}}</md-subheader>
+      <md-subheader ng-if="!search.reqID" class="md-primary" layout="row" layout-align="end center">
+        <span>item 1 of {{buyreqs.length}} filtered from {{filteredReqs.length}}</span>
+      </md-subheader>
+      <md-subheader ng-if="search.reqID" class="md-primary" layout="row" layout-align="end center">
+        <md-button ng-click="toggle(search.reqID)">close</md-button>
+      </md-subheader>
       <md-content style="overflow:scroll">
         <req-list></req-list>
       </md-content>
@@ -30,6 +35,6 @@
     </div>
 
     <!-- map -->
-    <req-map flex></req-map>
+    <req-map flex flex-xs="30"></req-map>
 
   </div>
