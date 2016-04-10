@@ -67,8 +67,8 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   // query from the initial request
   var query = req.query.query && JSON.parse(req.query.query);
-  // for buyreq.edit need to return reqs from user
-  if (req.query.own==='true'){
+  // for buyreqs/myreqs need to return reqs from user
+  if (req.user){
     var userHref = req.user.href;
     var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
     var userquery = { user: userId };
