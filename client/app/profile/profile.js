@@ -13,18 +13,16 @@ angular.module('creapp3App')
       })
       .state('profile.view', {
         url: '/view',
-        templateUrl: 'app/profile/profileView.html',
-        // controller: 'ProfileCtrl',
-        // sp: {
-          // authenticate: true
-        // }
+        templateUrl: 'app/profile/myProfile.html',
+        sp: {
+          authenticate: true
+        }
       })
       .state('profile.edit', {
         url: '/edit',
         templateUrl: 'app/profile/profileEdit.html',
-        // controller: 'ProfileCtrl',
-        // sp: {
-          // authenticate: true
-        // }
+        sp: {
+          authenticate: true
+        }
       });
   });

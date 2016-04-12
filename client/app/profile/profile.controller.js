@@ -7,7 +7,6 @@ angular.module('creapp3App')
 
     //funciton to show toasts
     var showToast = function(msg){
-      console.log('should show toast');
       $mdToast.show(
         $mdToast.simple()
         .textContent(msg)
@@ -22,6 +21,8 @@ angular.module('creapp3App')
         $user.get()
         .then(function (user) {
           showToast('user profile successfully updated');
+          // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
+          location.reload();
         })
         .catch(function (error) {
           showToast('user profile successfully but problem retrieving from server');

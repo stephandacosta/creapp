@@ -3,9 +3,9 @@
   <md-button class="md-raised md-primary" ng-click="saveUserEdits()">Save</md-button>
 </div>
 
-<div layout="column" layout-gt-sm="row" layout-margin style="overflow:scroll">
 
-  <md-content flex flex-gt-sm="60" layout="column" md-whiteframe="3" layout-padding >
+<div flex layout="column" layout-gt-sm="row" md-whiteframe="3" layout-padding layout-margin>
+  <div flex="10" layout="column" layout-margin>
     <!-- <span flex></span> -->
     <div flex layout="row">
       <md-input-container flex class="md-block">
@@ -24,7 +24,7 @@
       </md-input-container>
     </div>
     <div flex layout="row" class="md-block">
-      <span flex class="md-subhead">Email</span>
+      <span flex="20" class="md-subhead">Email</span>
       <md-checkbox class="md-primary" ng-model="userEdit.customData.privateEmail" aria-label="private">
         Private
       </md-checkbox>
@@ -42,13 +42,13 @@
         <div class="md-caption">your picture will appear if you sign in with linkedin</div>
       </md-input-container>
     </div>
-  </md-content>
+  </div>
 
-  <md-content flex layout="column" md-whiteframe="3" layout-padding>
+  <div flex layout="column" layout-padding>
     <md-input-container layout="column" class="md-block">
       <label class="md-headline">Summary</label>
       <textarea ng-model="userEdit.customData.summary"></textarea>
     </md-input-container>
-  </md-content>
+  </div>
 
 </div>

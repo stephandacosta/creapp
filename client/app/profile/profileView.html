@@ -1,10 +1,6 @@
-<div layout-margin>
-  <md-button class="md-raised md-primary" ui-sref="profile.edit">Edit Profile</md-button>
-</div>
-
 <md-content layout="row">
   <!-- <span flex></span> -->
-  <div flex-gt-sm="50" layout="column">
+  <div flex layout="column">
 
     <md-card >
       <md-card-header>
@@ -23,14 +19,13 @@
         <md-card-title-text>
           <span class="md-headline">{{user.fullName}}</span>
           <span class="md-body-1">{{user.email}}</span>
-          <br>
           <span class="md-subhead">Loopnet Profile</span>
           <a class="md-body-1" ng-if="user.customData.loopnet">{{user.customData.loopnet}}</a>
           <span class="md-body-1" ng-if="!user.customData.loopnet">not set</span>
-          <a class="md-body-1">{{user.customData.loopnet}}</a>
           <span class="md-subhead">Linkedin Profile</span>
           <a class="md-body-1">{{user.customData.linkedin}}</a>
           <span class="md-body-1" ng-if="!user.customData.linkedin">not set</span>
+          <br>
         </md-card-title-text>
         <md-card-title-media>
           <img ng-src="assets/images/user-default.png" class="md-media-sm card-media"></img>
