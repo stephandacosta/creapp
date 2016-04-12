@@ -12,6 +12,15 @@
 import _ from 'lodash';
 import Buyreq from './buyreq.model';
 
+// use stormpath node sdk to query users from Stormpath API
+var stormpath = require('stormpath');
+var apiKey = new stormpath.ApiKey(
+  process.env['STORMPATH_CLIENT_APIKEY_ID'],
+  process.env['STORMPATH_CLIENT_APIKEY_SECRET']
+);
+var client = new stormpath.Client({ apiKey: apiKey });
+
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -29,7 +38,7 @@ function saveUpdates(updates) {
     updated.markModified('centers');
     updated.markModified('polygons');
     return updated.saveAsync()
-      .spread(updated => {
+      .then(updated => {
         return updated;
       });
   };
@@ -85,6 +94,33 @@ export function show(req, res) {
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+// Gets user of single Buyreq from the DB
+export function getUser(req, res) {
+  console.log('params.id',req.params.id);
+  var href = 'https://api.stormpath.com/v1/accounts/' + req.params.id;
+  client.getAccount(href, function(err, account) {
+      if (err) {
+        console.log('error in getting user', err);
+        res.status(500).send(err);;
+      }
+      if (account) {
+        var accountToReturn = {
+          username: account.username,
+          email: (account.privateEmail?'':account.email),
+          givenName: account.givenName,
+          surname: account.surname,
+          fullName: account.fullName,
+          function: account.function,
+          license: account.license,
+          summary: account.summary
+        };
+        respondWithResult(res,200)(accountToReturn);
+      } else {
+        res.status(404).end();
+      }
+  });
 }
 
 // Creates a new Buyreq in the DB

@@ -22,7 +22,7 @@
     <req-filter hide-gt-xs flex="80" ng-show="showfilter"></req-filter>
     <md-content>
       <req-list></req-list>
-      <req-details req="selected" ng-show="search.reqID"></req-details>
+      <req-details req="selected" ng-if="search.reqID"></req-details>
     </md-content>
   </div>
 

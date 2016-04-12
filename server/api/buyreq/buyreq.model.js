@@ -5,7 +5,8 @@ var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var BuyreqSchema = new mongoose.Schema({
   created: { type: Date, default: Date.now },
   // select false so will not be returned by database
-  user: {type: String, select: false},
+// user: {type: String, select: false},
+  user: String,
 
   type: String,
   title: String,
