@@ -53,7 +53,7 @@ export function show(req, res) {
   client.getAccount(href, function(err, account) {
       if (err) {
         console.log('error in getting user', err);
-        res.status(500).send(err);;
+        res.status(err.status).send(err.userMessage);;
       }
       if (account) {
         var accountToReturn = {
@@ -68,7 +68,7 @@ export function show(req, res) {
         };
         respondWithResult(res,200)(accountToReturn);
       } else {
-        res.status(404).end();
+        res.status(500).end();
       }
   });
 }
