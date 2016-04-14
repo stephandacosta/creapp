@@ -1,11 +1,23 @@
 
+<md-sidenav ng-if="'userreqs' | isState" class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" style="z-index:2000;">
+  <md-toolbar class="md-theme-light" layout="row">
+    <h1 class="md-toolbar-tools">Your Broker</h1>
+    <span flex></span>
+    <md-button ng-click="toggleProfile()" class="md-primary md-hue-1">
+      <md-icon>close</md-icon>
+    </md-button>
+  </md-toolbar>
+  <md-content layout-padding>
+    <profile user="broker"></profile>
+  </md-content>
+</md-sidenav>
 
 <req-filter hide-xs></req-filter>
 
-<div flex layout="row" layout-xs="column" style="height:100vh;" >
+<div flex layout="row" layout-xs="column" style="height:90vh;" >
 
   <!-- list of buyreqs -->
-  <div flex-gt-sm="35" flex layout="column">
+  <div flex-gt-sm="33" flex layout="column">
     <md-toolbar class="md-primary md-hue-2" layout="row" md-scroll-shrink>
       <div ng-if="!search.reqID" class="md-toolbar-tools">
         <md-button aria-label="filter" class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="openfilter()">
@@ -28,13 +40,25 @@
 
 
   <!-- map -->
-  <div flex flex-xs="30" layout="row">
+  <div flex flex-xs="45" layout="row">
+
     <div layout="column" class="sidetoolbar" style="z-index:1000;">
-      <md-button class="md-fab md-mini md-accent" ng-click="zoomIn()"><md-tooltip md-direction="right">zoom in</md-tooltip><md-icon>zoom_in</md-icon></md-button>
-      <md-button class="md-fab md-mini md-accent" ng-click="zoomOut()"><md-tooltip md-direction="right">zoom out</md-tooltip><md-icon>zoom_out</md-icon></md-button>
+      <md-button class="md-fab md-mini md-accent" ng-click="zoomIn()">
+        <md-tooltip md-direction="right">zoom in</md-tooltip>
+        <md-icon>zoom_in</md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini md-accent" ng-click="zoomOut()">
+        <md-tooltip md-direction="right">zoom out</md-tooltip>
+        <md-icon>zoom_out</md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini md-primary md-hue-1" ng-click="toggleProfile()">
+        <md-tooltip md-direction="right">your broker</md-tooltip>
+        <md-icon>face</md-icon>
+      </md-button>
     </div>
-    <req-map flex>
-    </req-map>
+
+    <req-map flex style="border: solid #6A1B9A;"></req-map>
+
   </div>
 
 </div>

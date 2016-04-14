@@ -108,7 +108,7 @@ export function getUser(req, res) {
       if (account) {
         var accountToReturn = {
           username: account.username,
-          email: (account.privateEmail?'':account.email),
+          // email: (account.privateEmail?'':account.email),
           givenName: account.givenName,
           surname: account.surname,
           fullName: account.fullName,

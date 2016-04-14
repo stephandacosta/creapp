@@ -13,7 +13,7 @@ angular.module('creapp3App')
           $state.go('editreq', {edit: {editMode: true, editReq:req}});
         };
         if (scope.req && scope.req.user) {
-          var url = '/api/buyreqs/user/' + scope.req.user;
+          var url = '/api/users/' + scope.req.user;
           $http.get(url).then(response => {
             scope.user = response.data;
           })

@@ -6,7 +6,7 @@ angular.module('creapp3App')
       .state('buyreqs', {
         url: '/buyreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
-        controller: 'BuyreqsCtrl',
+        controller: 'BuyreqsCtrl'
         // sp: {
         //   authenticate: true
         // }
@@ -18,5 +18,10 @@ angular.module('creapp3App')
         sp: {
           authenticate: true
         }
+      })
+      .state('userreqs', {
+        url: '/broker/{brokerId}',
+        templateUrl: 'app/buyreqs/buyreqs.html',
+        controller: 'BuyreqsCtrl'
       });
   });

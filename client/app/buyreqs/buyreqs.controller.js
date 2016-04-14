@@ -6,7 +6,7 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia, $state) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia, $state, $stateParams,$mdSidenav) {
 
     $scope.types= appConstants.creTypes;
 
@@ -61,6 +61,9 @@ angular.module('creapp3App')
           ]
         }
       };
+      if (search.brokerId && $state.current.name==='userreqs'){
+        query.user = search.brokerId;
+      }
       // get data from server
       var url = $state.current.name==='myreqs' ? '/api/buyreqs/myreqs': '/api/buyreqs';
       $http.get(url, {params: { query }}).then(response => {
@@ -159,5 +162,20 @@ angular.module('creapp3App')
     $scope.openfilter = function(){
       $scope.showfilter = !$scope.showfilter;
     };
+
+    $scope.toggleProfile = function(){
+      $mdSidenav('left').toggle();
+    };
+
+    if ($stateParams.brokerId){
+      $scope.search.brokerId = $stateParams.brokerId;
+      // use resolve at router ?
+      var url = '/api/users/' +$stateParams.brokerId;
+      $http.get(url).then(response => {
+        $scope.broker = response.data;
+        console.log('$scope.broker',$scope.broker);
+      });
+    }
+
 
   });

@@ -11,7 +11,7 @@ var ExpressStormpath = require('express-stormpath');
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/users', ExpressStormpath.loginRequired, require('./api/user'));
+  app.use('/api/users', require('./api/user'));
   app.use('/api/buyreqs', require('./api/buyreq'));
   // includes condition stormpath user login validation to protect endpoint
   app.use('/api/things', ExpressStormpath.loginRequired, require('./api/thing'));

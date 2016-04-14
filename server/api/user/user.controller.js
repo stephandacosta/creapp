@@ -11,6 +11,69 @@
 
 import _ from 'lodash';
 
+var stormpath = require('stormpath');
+var apiKey = new stormpath.ApiKey(
+  process.env['STORMPATH_CLIENT_APIKEY_ID'],
+  process.env['STORMPATH_CLIENT_APIKEY_SECRET']
+);
+var client = new stormpath.Client({ apiKey: apiKey });
+
+
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if (entity) {
+      res.status(statusCode).json(entity);
+    }
+  };
+}
+
+
+function handleEntityNotFound(res) {
+  return function(entity) {
+    if (!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
+function handleError(res, statusCode) {
+  statusCode = statusCode || 500;
+  return function(err) {
+    res.status(statusCode).send(err);
+  };
+}
+
+// Gets user from the DB
+export function show(req, res) {
+  console.log('params.id',req.params.id);
+  var href = 'https://api.stormpath.com/v1/accounts/' + req.params.id;
+  client.getAccount(href, function(err, account) {
+      if (err) {
+        console.log('error in getting user', err);
+        res.status(500).send(err);;
+      }
+      if (account) {
+        var accountToReturn = {
+          username: account.username,
+          // email: (account.privateEmail?'':account.email),
+          givenName: account.givenName,
+          surname: account.surname,
+          fullName: account.fullName,
+          function: account.function,
+          license: account.license,
+          summary: account.summary
+        };
+        respondWithResult(res,200)(accountToReturn);
+      } else {
+        res.status(404).end();
+      }
+  });
+}
+
+
 // Updates an existing User in the DB
 export function update(req, res) {
   req.user.givenName =  req.body.givenName;
