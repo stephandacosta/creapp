@@ -167,13 +167,15 @@ angular.module('creapp3App')
       $mdSidenav('left').toggle();
     };
 
+    $scope.toggleProfile();
+
     if ($stateParams.brokerId){
       $scope.search.brokerId = $stateParams.brokerId;
       // use resolve at router ?
       var url = '/api/users/' +$stateParams.brokerId;
       $http.get(url).then(response => {
         $scope.broker = response.data;
-        console.log('$scope.broker',$scope.broker);
+        $scope.toggleProfile();
       });
     }
 
