@@ -32,5 +32,5 @@ angular.module('creapp3App', [
   })
 
   .constant('appConstants', {
-    creTypes:['Any','Leisure','Retail','Office','Multifamily','Industrial','Agriculture']
+    creTypes:['Any','Retail','Office','Leisure','Multifamily','Hotel','Senior Housing','Industrial','Health Care','Land','Agricultural', 'Other']
   });
