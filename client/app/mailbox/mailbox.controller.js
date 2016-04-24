@@ -24,6 +24,12 @@ function MailboxComponent($scope, $http, $mdToast) {
     );
   };
 
+  var getMails = function(){
+    $http.get('/api/mails').then(response => {
+      $scope.messages = response.data;
+    });
+  };
+
   $scope.deleteMsg = function(msg){
     $http.delete('/api/mails/' + msg._id).then(response => {
       showToast('the message was deleted');
@@ -32,12 +38,6 @@ function MailboxComponent($scope, $http, $mdToast) {
     });
   };
 
-  var getMails = function(){
-    $http.get('/api/mails').then(response => {
-      $scope.messages = response.data;
-      console.log($scope.messages);
-    });
-  };
 
   getMails();
 
