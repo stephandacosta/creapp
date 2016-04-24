@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('profile', function () {
+  .directive('profile', function ($mdDialog) {
     return {
       templateUrl: 'app/profile/profileView.html',
       restrict: 'E',
@@ -16,6 +16,22 @@ angular.module('creapp3App')
         } else {
           // scope.user =
         }
+
+        scope.showMailForm = function(ev){
+          $mdDialog.show({
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: true,
+            templateUrl:'app/mailForm/mailForm.html',
+            locals: {
+              userId: scope.user.userId,
+              brokerName: scope.user.fullName
+            },
+            controller: 'mailFormCtrl'
+          });
+        };
+
       }
     };
   });

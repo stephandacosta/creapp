@@ -1,0 +1,39 @@
+<md-dialog-content>
+  <div layout="column" md-whiteframe="3" layout-padding layout-margin>
+      <h3>to: {{brokerName}}</h3>
+      <h3>from:</h3>
+      <div layout="row">
+        <md-input-container flex class="md-block">
+          <label class="md-headline">First Name</label>
+          <input type="text" ng-model="mailForm.givenName"></input>
+        </md-input-container>
+        <md-input-container flex class="md-block">
+          <label class="md-headline">Last Name</label>
+          <input type="text" ng-model="mailForm.surname"></input>
+        </md-input-container>
+      </div>
+
+      <div>
+        <md-input-container class="md-block">
+          <label class="md-title">Email</label>
+          <input type="email" ng-model="mailForm.email"></input>
+        </md-input-container>
+      </div>
+
+      <h3>Message:</h3>
+      <div flex layout="column" layout-padding>
+        <md-input-container layout="column" class="md-block">
+          <!-- <label class="md-headline">Message</label> -->
+          <textarea ng-model="mailForm.message"></textarea>
+        </md-input-container>
+      </div>
+
+  </div>
+</md-dialog-content>
+
+<md-dialog-actions>
+  <div layout="row" layout-margin>
+    <md-button class="md-raised md-primary md-ink-ripple" ng-click="mailForm.send()">Send</md-button>
+    <md-button class="md-primary md-ink-ripple" ng-click="closeDialog()">Cancel</md-button>
+  </div>
+</md-dialog-actions>

@@ -50,21 +50,27 @@ function handleError(res, statusCode) {
 export function show(req, res) {
   console.log('params.id',req.params.id);
   var href = 'https://api.stormpath.com/v1/accounts/' + req.params.id;
-  client.getAccount(href, function(err, account) {
+  client.getAccount(href, { expand: 'customData' }, function(err, account) {
       if (err) {
         console.log('error in getting user', err);
         res.status(err.status).send(err.userMessage);;
       }
       if (account) {
+        // console.log('account',account);
         var accountToReturn = {
-          username: account.username,
+          userId: account.href.substr(account.href.lastIndexOf('/') + 1),
+          // username: account.username,
           // email: (account.privateEmail?'':account.email),
           givenName: account.givenName,
           surname: account.surname,
           fullName: account.fullName,
-          function: account.function,
-          license: account.license,
-          summary: account.summary
+          customData: {
+            function: account.customData.function,
+            license: account.customData.license,
+            summary: account.customData.summary,
+            loopnet: account.customData.loopnet,
+            linkedin: account.customData.linkedin
+          }
         };
         respondWithResult(res,200)(accountToReturn);
       } else {
