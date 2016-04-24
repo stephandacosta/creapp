@@ -1,0 +1,23 @@
+
+<md-list>
+  <md-list-item class="md-3-line md-offset" ng-repeat="msg in messages" ng-click="showMsg()">
+      <div flex="80" layout="row">
+
+        <div class="md-list-item-text">
+          <h3 class="md-title">from: {{msg.from_givenName}} {{msg.from_surname}}</h3>
+          <h4 class="md-subtitle" style="overflow:hidden;">Buy Req: {{msg.buyreq}}</h4>
+          <p style="overflow:hidden;">Message: {{msg.message}}</p>
+        </div>
+
+        <!-- <span flex></span> -->
+
+        <div layout="column">
+          <md-icon class="md-secondary" >
+            <i class="material-icons" style="font-size:32px;">chevron_right</i>
+          </md-icon>
+        </div>
+
+      </div>
+    <md-divider></md-divider>
+  </md-list-item>
+</md-list>
