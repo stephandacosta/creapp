@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-function MailboxComponent($scope, $http) {
+function MailboxComponent($scope, $http, $mdToast) {
   $scope.selected = null;
 
   $scope.toggleMsg = function(msg){
@@ -14,10 +14,32 @@ function MailboxComponent($scope, $http) {
     }
   };
 
-  $http.get('/api/mails').then(response => {
-    $scope.messages = response.data;
-    console.log($scope.messages);
-  });
+  var showToast = function(msg){
+    $mdToast.show(
+      $mdToast.simple()
+      .textContent(msg)
+      .position('top left')
+      .parent(document.getElementById('toasts'))
+      .hideDelay(3000)
+    );
+  };
+
+  $scope.deleteMsg = function(msg){
+    $http.delete('/api/mails/' + msg._id).then(response => {
+      showToast('the message was deleted');
+      getMails();
+      $scope.selected = null;
+    });
+  };
+
+  var getMails = function(){
+    $http.get('/api/mails').then(response => {
+      $scope.messages = response.data;
+      console.log($scope.messages);
+    });
+  };
+
+  getMails();
 
 }
 

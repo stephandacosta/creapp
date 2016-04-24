@@ -5,7 +5,7 @@
 
         <div class="md-list-item-text">
           <h3 class="md-title">from: {{msg.from_givenName}} {{msg.from_surname}}</h3>
-          <h4 class="md-subtitle" style="overflow:hidden;">Buy Req: {{msg.buyreq}}</h4>
+          <h4 class="md-subtitle" style="overflow:hidden;">Buy Req: {{msg.buyreqTitle}}</h4>
           <p style="overflow:hidden;">Message: {{msg.message}}</p>
         </div>
 
@@ -23,14 +23,19 @@
 
 <md-content layout="column" md-whiteframe-3dp ng-if="selected" layout-padding layout-margin>
 
-    <h3 class="md-title">Sender</h3>
-    <h4 class="md-subhead"> Name: {{selected.from_givenName}} {{selected.from_surname}}</h4>
-    <h4 class="md-subhead"> Email: {{selected.from_email}}</h4>
-    <md-divider></md-divider>
-    <h3 class="md-subtitle">Buy Req:</h3>
-    <p class="md-body-1">{{selected.buyreq}}</p>
-    <md-divider></md-divider>
-    <h4 class="md-subtitle">Message:</h4>
-    <p> {{selected.message}}</p>
+  <h3 class="md-title">Sender</h3>
+  <h4 class="md-subhead"> Name: {{selected.from_givenName}} {{selected.from_surname}} </h4>
+  <h4 class="md-subhead"> Email: {{selected.from_email}}</h4>
+  <md-divider></md-divider>
+  <h3 class="md-title">Buy Req:</h3>
+  <p class="md-body-1">{{selected.buyreqTitle}}</p>
+  <md-divider></md-divider>
+  <h3 class="md-title">Message:</h3>
+  <p> {{selected.message}}</p>
+  <br>
+  <div layout="row">
+    <span flex></span>
+    <md-button flex-no-grow class="md-raised md-warn md-ink-ripple" ng-click="deleteMsg(selected)">Delete</md-button>
+  </div>
 
 </md-content>

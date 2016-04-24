@@ -17,14 +17,14 @@
         <p>Type: {{req.type}} </p>
         <p>Max Price: {{ req.price }} $/sft</p>
         <p>Min Area:  {{ req.sqft }} sqft</p>
-        <p>Buy {{ req.buy | checkmark }}</p>
-        <p>Exchange {{ req.exchange | checkmark }}</p>
-        <p>Land Only {{ req.landOnly | checkmark }}</p>
-        <p>Land and Property {{ req.landAndProperty | checkmark }}</p>
+        <p ng-if="req.buy">Buy {{ req.buy | checkmark }}</p>
+        <p ng-if="req.exchange">Exchange {{ req.exchange | checkmark }}</p>
+        <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
+        <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
       </div>
     </md-tab>
     <md-tab label="Contact">
-      <profile user="user"></profile>
+      <profile user="user" buyreq="req"></profile>
     </md-tab>
   </md-tabs>
 </md-content>

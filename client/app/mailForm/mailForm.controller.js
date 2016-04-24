@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('mailFormCtrl', function ($scope, $mdDialog, $http, $mdToast, userId, brokerName) {
+  .controller('mailFormCtrl', function ($scope, $mdDialog, $http, $mdToast, userId, brokerName, buyreqId, buyreqTitle) {
 
 
     var showToast = function(msg){
@@ -17,6 +17,8 @@ angular.module('creapp3App')
     $scope.mailForm={};
     $scope.userId = userId;
     $scope.brokerName = brokerName;
+    $scope.buyreqId = buyreqId;
+    $scope.buyreqTitle = buyreqTitle;
     $scope.closeDialog = function() {
      $mdDialog.cancel();
    };
@@ -27,7 +29,9 @@ angular.module('creapp3App')
         from_givenName: $scope.mailForm.givenName,
         from_surname: $scope.mailForm.surname,
         message: $scope.mailForm.message,
-        user: $scope.userId
+        user: $scope.userId,
+        buyreqId: $scope.buyreqId,
+        buyreqTitle: $scope.buyreqTitle
       }).then(function(){
         $mdDialog.cancel();
         showToast('Your message was sent');

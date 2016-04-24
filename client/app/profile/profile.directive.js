@@ -6,16 +6,15 @@ angular.module('creapp3App')
       templateUrl: 'app/profile/profileView.html',
       restrict: 'E',
       scope: {
-        user: '=user'
+        user: '=user',
+        buyreq: '=buyreq'
       },
       link: function (scope, element, attrs) {
-        console.log('scope', scope);
-        console.log('scope.user in profile', scope.user);
-        if (scope.user=='me'){
-          // scope.user
-        } else {
-          // scope.user =
-        }
+        // if (scope.user=='me'){
+        //   // scope.user
+        // } else {
+        //   // scope.user =
+        // }
 
         scope.showMailForm = function(ev){
           $mdDialog.show({
@@ -26,7 +25,9 @@ angular.module('creapp3App')
             templateUrl:'app/mailForm/mailForm.html',
             locals: {
               userId: scope.user.userId,
-              brokerName: scope.user.fullName
+              brokerName: scope.user.fullName,
+              buyreqId: scope.buyreq._id,
+              buyreqTitle: scope.buyreq.title
             },
             controller: 'mailFormCtrl'
           });
