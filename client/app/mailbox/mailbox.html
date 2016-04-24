@@ -1,6 +1,6 @@
 
 <md-list>
-  <md-list-item class="md-3-line md-offset" ng-repeat="msg in messages" ng-click="showMsg()">
+  <md-list-item class="md-3-line md-offset" ng-repeat="msg in messages" ng-click="toggleMsg(msg)" ng-if="!selected || selected._id === msg._id">
       <div flex="80" layout="row">
 
         <div class="md-list-item-text">
@@ -9,7 +9,6 @@
           <p style="overflow:hidden;">Message: {{msg.message}}</p>
         </div>
 
-        <!-- <span flex></span> -->
 
         <div layout="column">
           <md-icon class="md-secondary" >
@@ -21,3 +20,17 @@
     <md-divider></md-divider>
   </md-list-item>
 </md-list>
+
+<md-content layout="column" md-whiteframe-3dp ng-if="selected" layout-padding layout-margin>
+
+    <h3 class="md-title">Sender</h3>
+    <h4 class="md-subhead"> Name: {{selected.from_givenName}} {{selected.from_surname}}</h4>
+    <h4 class="md-subhead"> Email: {{selected.from_email}}</h4>
+    <md-divider></md-divider>
+    <h3 class="md-subtitle">Buy Req:</h3>
+    <p class="md-body-1">{{selected.buyreq}}</p>
+    <md-divider></md-divider>
+    <h4 class="md-subtitle">Message:</h4>
+    <p> {{selected.message}}</p>
+
+</md-content>

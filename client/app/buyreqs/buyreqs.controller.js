@@ -118,7 +118,7 @@ angular.module('creapp3App')
 
     var applyFilters = function(){
        var filtered;
-       filtered = $filter('filter')($scope.buyreqs,{_id:$scope.search.reqID})
+       filtered = $filter('filter')($scope.buyreqs,{_id:$scope.search.reqID});
        filtered = $filter('filter')(filtered, typematch);
        filtered = $filter('filter')(filtered, maxprice);
        filtered = $filter('filter')(filtered, maxsqft);
