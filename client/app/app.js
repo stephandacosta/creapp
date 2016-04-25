@@ -19,8 +19,8 @@ angular.module('creapp3App', [
 // material theme pallette
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-    .primaryPalette('purple')
-    .accentPalette('amber');
+    .primaryPalette('teal')
+    .accentPalette('purple');
   })
 
   // stormpath init

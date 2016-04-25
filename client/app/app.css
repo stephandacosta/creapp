@@ -27,7 +27,11 @@ md-card-title-text > span {
 }
 
 .sidetoolbar{
-  background-color: #6A1B9A;
+  background-color: #009688;
+}
+
+req-map {
+  border: solid #009688;
 }
 
 .md-open-menu-container {
