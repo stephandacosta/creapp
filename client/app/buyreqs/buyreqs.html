@@ -20,7 +20,7 @@
   <div flex-gt-sm="33" flex layout="column">
     <md-toolbar class="md-primary md-hue-2" layout="row" md-scroll-shrink>
       <div ng-if="!search.reqID" class="md-toolbar-tools">
-        <md-button aria-label="filter" class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="openfilter()">
+        <md-button aria-label="filter" class="md-fab md-accent  md-mini md-ink-ripple" ng-click="openfilter()">
           <md-tooltip md-direction="right">Filter</md-tooltip>
           <md-icon>filter_list</md-icon>
         </md-button>
@@ -51,7 +51,7 @@
         <md-tooltip md-direction="right">zoom out</md-tooltip>
         <md-icon>zoom_out</md-icon>
       </md-button>
-      <md-button class="md-fab md-mini md-primary md-hue-1" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
+      <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
         <md-tooltip md-direction="right">your broker</md-tooltip>
         <md-icon>face</md-icon>
       </md-button>
