@@ -79,6 +79,22 @@ export function show(req, res) {
   });
 }
 
+export function getEmail(user, callback) {
+  var href = 'https://api.stormpath.com/v1/accounts/' + user;
+  client.getAccount(href, function(err, account) {
+      if (err) {
+        console.log('error in getting user', err);
+        callback('notfound');
+      }
+      if (account) {
+        callback(account);
+      } else {
+        callback('notfound');
+      }
+  });
+};
+
+
 
 // Updates an existing User in the DB
 export function update(req, res) {

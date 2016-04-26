@@ -12,6 +12,20 @@
 import _ from 'lodash';
 import Mail from './mail.model';
 
+
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+  host: 'mail.gandi.net',
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+      user: 'notification@creapp.us',
+      pass: 'z3buyreqsn0t1f1c4tion4cr3p'
+  }
+});
+
+
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -82,6 +96,21 @@ export function create(req, res) {
   var addition = req.body;
   addition.read = false;
   console.log('addition',addition);
+  require('../user/user.controller').getEmail(addition.user, function(account){
+    var mailOptions = {
+        from: '"CREAapp notification" <notification@creapp.us>', // sender address
+        to: account.email, // list of receivers
+        subject: 'interest in your buy requirement', // Subject line
+        text: 'Dear ' + account.fullName + ', ' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement headlined "' + addition.buyreqTitle + '" this is his message: ' + addition.message, // plaintext body
+        html: '<p>Dear ' + account.fullName + ',</p><p>' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement</p><p> buyer requirement: "' + addition.buyreqTitle + '"</p><p> this is his message: </p><p>' + addition.message +'</p>' // html body
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+        console.log('emailing error',error);
+      }
+      console.log('email sent to ',mailOptions.to,' info:',info);
+    });
+  });
   return Mail.create(addition)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
