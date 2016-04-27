@@ -15,12 +15,12 @@ import Mail from './mail.model';
 
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
-  host: 'mail.gandi.net',
+  host: process.env.CREAPP_MAILSERVICE,
   port: 465,
   secure: true, // use SSL
   auth: {
-      user: 'notification@creapp.us',
-      pass: 'z3buyreqsn0t1f1c4tion4cr3p'
+      user: process.env.CREAPP_MAILUSER,
+      pass: process.env.CREAPP_MAILPASS
   }
 });
 
