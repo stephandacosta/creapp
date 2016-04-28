@@ -33,7 +33,7 @@ var app = express();
 app.use(ExpressStormpath.init(app,{
   website: true,
   postRegistrationHandler: function (account, req, res, next) {
-    account.customData.privateEmail = true;
+    account.customData.privatePhone = true;
     account.customData.save(function (err) {
       if (err) { console.log('there was an error setting email to prvate:',err.userMessage);}
     });
