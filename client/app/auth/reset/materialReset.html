@@ -30,12 +30,22 @@
     </a>
   </div>
 
+  <div flex layout="column" ng-show="showVerificationError">
+      This password reset link is not valid.  You may request another
+      link by <a href="/forgot">clicking here</a>.
+  </div>
+
 
   <form ng-show="verified && !reset" ng-submit="submit()" layout="column">
 
     <md-input-container class="md-block" flex-gt-sm >
       <label>New Password</label>
-      <input class="form-control" id="spUsername" ng-model="formModel.password" type="password" ng-disabled="posting">
+      <input ng-model="formModel.password" type="password" ng-disabled="posting">
+    </md-input-container>
+
+    <md-input-container class="md-block" flex-gt-sm >
+      <label>Confirm New Password</label>
+      <input ng-model="formModel.confirmPassword" type="password" ng-disabled="posting">
     </md-input-container>
 
     <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
