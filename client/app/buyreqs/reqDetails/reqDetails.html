@@ -15,10 +15,11 @@
       <div>
         <h3>Details</h3>
         <p>Type: {{req.type}} </p>
-        <p>Max Price: {{ req.price }} $/sft</p>
-        <p>Min Area:  {{ req.sqft }} sqft</p>
+        <p>Price: {{ req.min_price }}$ - {{ req.max_price }}$</p>
+        <p>Area:  {{ req.min_sqft }}sqft - {{ req.max_sqft }}sqft</p>
         <p ng-if="req.buy">Buy {{ req.buy | checkmark }}</p>
         <p ng-if="req.exchange">Exchange {{ req.exchange | checkmark }}</p>
+        <p ng-if="req.lease">Lease {{ req.lease | checkmark }}</p>
         <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
         <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
       </div>

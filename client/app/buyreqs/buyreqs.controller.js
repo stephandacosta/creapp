@@ -12,8 +12,8 @@ angular.module('creapp3App')
 
     $scope.search = {
       type: 'Any',
-      price:undefined,
-      sqft:undefined
+      max_price:undefined,
+      min_sqft:undefined
     };
 
     $scope.map = {
@@ -41,13 +41,13 @@ angular.module('creapp3App')
     };
 
     var updateMaxValues = function(){
-      $scope.maxPrice = Math.max(...$scope.buyreqs.map(function(req){return req.price;}));
-      $scope.maxSqft = Math.max(...$scope.buyreqs.map(function(req){return req.sqft;}));
+      $scope.max_price = Math.max(...$scope.buyreqs.map(function(req){return req.max_price;}));
+      $scope.min_sqft = Math.max(...$scope.buyreqs.map(function(req){return req.min_sqft;}));
     }
 
     var restoreFilterParams = function(){
-      $scope.search.price=$scope.maxPrice;
-      $scope.search.sqft=$scope.maxSqft;
+      $scope.search.max_price=$scope.max_price;
+      $scope.search.min_sqft=$scope.min_sqft;
     }
 
     var getBuyReqs = function(search){
@@ -104,12 +104,12 @@ angular.module('creapp3App')
     //   }
     // });
 
-    var maxprice = function(item){
-      return ($scope.search.price===(0 || undefined) ? true : item.price <= $scope.search.price);
+    var max_price = function(item){
+      return ($scope.search.max_price===(0 || undefined) ? true : item.max_price <= $scope.search.max_price);
     };
 
-    var maxsqft = function(item){
-      return ($scope.search.sqft===(0 || undefined) ? true : item.sqft <= $scope.search.sqft);
+    var min_sqft = function(item){
+      return ($scope.search.min_sqft===(0 || undefined) ? true : item.min_sqft <= $scope.search.min_sqft);
     };
 
     var typematch = function(item){
@@ -120,8 +120,8 @@ angular.module('creapp3App')
        var filtered;
        filtered = $filter('filter')($scope.buyreqs,{_id:$scope.search.reqID});
        filtered = $filter('filter')(filtered, typematch);
-       filtered = $filter('filter')(filtered, maxprice);
-       filtered = $filter('filter')(filtered, maxsqft);
+       filtered = $filter('filter')(filtered, max_price);
+       filtered = $filter('filter')(filtered, min_sqft);
        $scope.filteredReqs = filtered;
        $scope.$emit('filter:update');
     }

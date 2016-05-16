@@ -48,14 +48,31 @@
   </md-input-container>
 
   <div layout="row">
-    <md-input-container>
-      <label>Square Feet</label>
-      <input type="number" ng-model="req.sqft" required>
-    </md-input-container>
-    <md-input-container>
-      <label>Max Price</label>
-      <input type="number" ng-model="req.price" required>
-    </md-input-container>
+    <div flex="70" style="padding-top: 25%;">Square Feet</div>
+    <div layout="column">
+      <md-input-container>
+        <label>Min sqft</label>
+        <input type="number" ng-model="req.min_sqft" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Max sqft</label>
+        <input type="number" ng-model="req.max_sqft" required>
+      </md-input-container>
+    </div>
+  </div>
+
+  <div layout="row">
+    <div flex="70" style="padding-top: 25%;">Price</div>
+    <div layout="column">
+      <md-input-container>
+        <label>Min Price</label>
+        <input type="number" ng-model="req.min_price" required>
+      </md-input-container>
+      <md-input-container>
+        <label>Max Price</label>
+        <input type="number" ng-model="req.max_price" required>
+      </md-input-container>
+    </div>
   </div>
 
   <md-input-container flex layout="column">
@@ -78,8 +95,13 @@
       </md-checkbox>
     </div>
     <div flex>
-      <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="lease">
+      <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="exchange">
         Exchange
+      </md-checkbox>
+    </div>
+    <div flex>
+      <md-checkbox class="md-primary" ng-model="req.lease" aria-label="lease">
+        Lease
       </md-checkbox>
     </div>
   </md-input-container>
