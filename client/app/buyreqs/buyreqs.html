@@ -1,5 +1,5 @@
 
-<md-sidenav ng-if="'userreqs' | isState" class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" style="z-index:2000;">
+<md-sidenav  class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" style="z-index:2000;">
   <md-toolbar class="md-theme-light md-hue-1" layout="row">
     <h1 class="md-toolbar-tools">Your Broker</h1>
     <span flex></span>
@@ -25,7 +25,7 @@
           <md-icon>filter_list</md-icon>
         </md-button>
         <span flex></span>
-        <span>{{buyreqs.length}} reqs filtered from {{filteredReqs.length}}</span>
+        <span> {{filteredReqs.length}} reqs filtered from {{buyreqs.length}} </span>
       </div>
       <div ng-if="search.reqID" class="md-toolbar-tools" layout="row" layout-align="end center">
         <md-button ng-click="toggle(search.reqID)">close</md-button>

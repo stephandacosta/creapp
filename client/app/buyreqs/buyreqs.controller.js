@@ -6,7 +6,7 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia, $state, $stateParams,$mdSidenav) {
+  .controller('BuyreqsCtrl', function (appConstants, $scope, $http, $filter, $mdMedia, $state, $stateParams, $mdComponentRegistry) {
 
     $scope.types= appConstants.creTypes;
 
@@ -120,8 +120,8 @@ angular.module('creapp3App')
        var filtered;
        filtered = $filter('filter')($scope.buyreqs,{_id:$scope.search.reqID});
        filtered = $filter('filter')(filtered, typematch);
-       filtered = $filter('filter')(filtered, max_price);
-       filtered = $filter('filter')(filtered, min_sqft);
+      //  filtered = $filter('filter')(filtered, max_price);
+      //  filtered = $filter('filter')(filtered, min_sqft);
        $scope.filteredReqs = filtered;
        $scope.$emit('filter:update');
     }
@@ -163,11 +163,14 @@ angular.module('creapp3App')
       $scope.showfilter = !$scope.showfilter;
     };
 
-    $scope.toggleProfile = function(){
-      $mdSidenav('left').toggle();
-    };
 
-    $scope.toggleProfile();
+    $scope.toggleProfile = angular.noop;
+    $mdComponentRegistry
+      .when('left')
+      .then( function(sideNav){
+        $scope.toggleProfile = angular.bind(sideNav, sideNav.toggle );
+    });
+
 
     if ($stateParams.brokerId){
       $scope.search.brokerId = $stateParams.brokerId;
