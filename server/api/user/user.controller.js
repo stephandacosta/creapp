@@ -69,9 +69,11 @@ export function show(req, res) {
             license: account.customData.license,
             summary: account.customData.summary,
             loopnet: account.customData.loopnet,
-            linkedin: account.customData.linkedin
+            linkedin: account.customData.linkedin,
+            phone: (account.customData.privatePhone ? 'hidden' : account.customData.phone)
           }
         };
+        // console.log(accountToReturn);
         respondWithResult(res,200)(accountToReturn);
       } else {
         res.status(500).end();
@@ -98,6 +100,8 @@ export function getEmail(user, callback) {
 
 // Updates an existing User in the DB
 export function update(req, res) {
+  req.user.email =  req.body.email;
+  req.user.username =  req.body.email;
   req.user.givenName =  req.body.givenName;
   req.user.surname =  req.body.surname;
   req.user.fullname = req.body.givenName + ' ' + req.body.surname;

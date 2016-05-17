@@ -18,7 +18,8 @@
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">{{user.fullName}}</span>
-          <span class="md-body-1">{{user.email}}</span>
+          <span class="md-body-1" ng-if="user.email">{{user.email}} <span style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
+          <span class="md-body-1">tel: {{user.customData.phone}} <span ng-if="user.customData.privatePhone" style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
           <span class="md-subhead">Loopnet Profile</span>
           <a class="md-body-1" ng-if="user.customData.loopnet">{{user.customData.loopnet}}</a>
           <span class="md-body-1" ng-if="!user.customData.loopnet">not set</span>
