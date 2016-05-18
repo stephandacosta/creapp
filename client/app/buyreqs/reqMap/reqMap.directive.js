@@ -8,7 +8,7 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element, attrs) {
 
-        var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
+        var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
@@ -28,11 +28,12 @@ angular.module('creapp3App')
           polygonsLayer.clearLayers();
           if (scope.filteredReqs) {
             scope.filteredReqs.forEach(function(req){
-              polygonsLayer.addLayer(L.multiPolygon(req.polygons)
-              .on('click', function(e) {
+              polygonsLayer.addLayer(L.polygon(req.polygons)
+              .on('click contextmenu', function(e) {
                   // this does not work, need to fix
                   // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
                   // console.log(e);
+                  console.log('hello');
                   scope.toggle(req);
                   scope.$digest();
               }));
