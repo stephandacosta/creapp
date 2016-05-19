@@ -12,6 +12,16 @@ angular.module('creapp3App')
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
+
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.OpenStreetMap(),
+            position: 'topleft',
+            showMarker: true,
+            retainZoomLevel: true,
+        }).addTo(map);
+
+
+
         var polygonsLayer = L.layerGroup().addTo(map);
 
         scope.$on('zoom:out', function(){

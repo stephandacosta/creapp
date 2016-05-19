@@ -36,6 +36,8 @@ module.exports = function(config) {
       'client/bower_components/concavehull/dist/concavehull.min.js',
       'client/bower_components/evispa-timo-jsclipper/clipper.js',
       'client/bower_components/leaflet.freedraw/dist/leaflet.freedraw.js',
+      'client/bower_components/leaflet-geosearch/src/js/l.control.geosearch.js',
+      'client/bower_components/leaflet-geosearch/src/js/l.geosearch.provider.openstreetmap.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

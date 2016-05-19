@@ -17,6 +17,14 @@ angular.module('creapp3App')
           attribution: scope.map.attribution
         }).addTo(map);
 
+
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.OpenStreetMap(),
+            position: 'topleft',
+            showMarker: true,
+            retainZoomLevel: true,
+        }).addTo(map);
+
         scope.$on('zoom:out', function(){
           event.stopPropagation();
           map.zoomOut();
