@@ -9,7 +9,7 @@ angular.module('creapp3App')
       link: function (scope, element, attrs) {
 
         if ($location.absUrl().indexOf('localhost')===-1){
-          L.Icon.Default.imagePath = 'assets/images';
+          L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
         }
 
         var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);

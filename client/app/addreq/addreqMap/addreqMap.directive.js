@@ -9,7 +9,7 @@ angular.module('creapp3App')
       link: function (scope, element) {
 
         if ($location.absUrl().indexOf('localhost')===-1){
-          L.Icon.Default.imagePath = 'assets/images';
+          L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
         }
 
         // this class is needed for css to work
