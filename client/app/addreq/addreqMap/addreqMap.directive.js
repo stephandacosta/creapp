@@ -1,14 +1,16 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('addreqMap', function ($timeout) {
+  .directive('addreqMap', function ($timeout,$location) {
     return {
       template: '<div></div>',
       restrict: 'EA',
       scope: false,
       link: function (scope, element) {
 
-        // L.Icon.Default.imagePath = 'assets/images';
+        if ($location.absUrl().indexOf('localhost')===-1){
+          L.Icon.Default.imagePath = 'assets/images';
+        }
 
         // this class is needed for css to work
         element.addClass('addreqmap');

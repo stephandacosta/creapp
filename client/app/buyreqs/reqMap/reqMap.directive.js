@@ -1,14 +1,17 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMap', function ($timeout) {
+  .directive('reqMap', function ($timeout,$location) {
     return {
       template: '<div></div>',
       restrict: 'E',
       scope: false,
       link: function (scope, element, attrs) {
 
-        // L.Icon.Default.imagePath = 'assets/images';
+        if ($location.absUrl().indexOf('localhost')===-1){
+          L.Icon.Default.imagePath = 'assets/images';
+        }
+
         var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
