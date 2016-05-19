@@ -366,9 +366,21 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
-            'assets/leaflet_images/*.*', //ugly insertion for leaflet
-            'img/{,*/}*.{webp}', //very ugly insertion for leaflet geosearch
             'index.html'
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.client %>/bower_components/leaflet-geosearch/src',
+          dest: '<%= yeoman.dist %>/<%= yeoman.client %>',
+          src: [
+            'img/*.{png,gif}', //insertion for leaflet geosearch
+          ]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.client %>/bower_components/leaflet/dist/images',
+          dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets/leaflet_images',
+          src: [
+            '*.{png}', //insertion for leaflet images
           ]
         }, {
           expand: true,
