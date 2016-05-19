@@ -366,7 +366,8 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
-            'assets/leaflet_images/*.*',
+            'assets/leaflet_images/*.*', //ugly insertion for leaflet
+            'img/{,*/}*.{webp}', //very ugly insertion for leaflet geosearch
             'index.html'
           ]
         }, {
