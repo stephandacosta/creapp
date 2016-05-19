@@ -17,7 +17,7 @@ angular.module('creapp3App')
     };
 
     $scope.map = {
-      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       initCenter: [37.4259332,-122.3413094],
     };

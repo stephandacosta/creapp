@@ -50,7 +50,7 @@ angular.module('creapp3App')
 
     // map settings
     $scope.map = {
-      tileUrl : 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       initCenter: [37.4259332,-122.3413094],
       MODES: L.FreeDraw.MODES,
