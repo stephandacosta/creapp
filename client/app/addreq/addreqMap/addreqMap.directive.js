@@ -8,6 +8,8 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element) {
 
+        L.Icon.Default.imagePath = 'assets/leaflet_images';
+
         // this class is needed for css to work
         element.addClass('addreqmap');
 
