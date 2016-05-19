@@ -8,7 +8,7 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element, attrs) {
 
-        L.Icon.Default.imagePath = 'assets/leaflet_images';
+        // L.Icon.Default.imagePath = 'assets/images';
         var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
