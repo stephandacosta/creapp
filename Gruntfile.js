@@ -380,7 +380,7 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.client %>/bower_components/leaflet/dist/images',
           dest: '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images',
           src: [
-            '*.{png}', //insertion for leaflet images
+            '*.png', //insertion for leaflet images
           ]
         }, {
           expand: true,
