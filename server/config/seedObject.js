@@ -443,7 +443,7 @@ export default [
     "max_sqft":560,
     "buy": true,
     "exchange": false,
-    "lease":false,
+    "lease":true,
     "active": true,
     "centers": [
       [
@@ -590,7 +590,7 @@ export default [
     "min_sqft": 1000,
     "max_sqft":560,
     "buy": true,
-    "exchange": false,
+    "exchange": true,
     "lease":false,
     "active": true,
     "user": "steph.dacosta@laposte.net",

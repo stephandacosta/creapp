@@ -4,13 +4,13 @@
       <div flex layout="row">
 
         <div class="md-list-item-text">
-          <h3 class="md-title" style="color:#3F51B5">{{buyreq.type}}</h3>
-          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:250px;">{{buyreq.title}}</h3>
-          <p>Price: {{ buyreq.min_price }}$ - {{ buyreq.max_price }}$ </p>
-          <p>Area: {{ buyreq.min_sqft }} sqft - {{ buyreq.max_sqft }} sqft</p>
+          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}}</h3>
+          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
+          <p>Price: {{ buyreq.min_price | currency:"$" : 0 }} - {{ buyreq.max_price | currency:"$" : 0 }} </p>
+          <p>Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft</p>
         </div>
 
-        <span flex></span>
+        <!-- <span flex></span> -->
 
         <div layout="column">
           <md-icon class="md-secondary" >

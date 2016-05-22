@@ -74,6 +74,13 @@ angular.module('creapp3App')
         // update reqs in view
         $scope.buyreqs = response.data;
 
+        $scope.buyreqs.forEach(function(buyreq){
+          var tmp = buyreq.buy ? 'To Buy' : '';
+          tmp = (buyreq.exchange ? (tmp==='' ? 'To Exchange' : tmp + '/Exchange') : tmp );
+          tmp = (buyreq.lease ? (tmp==='' ? 'To Lease' : tmp + '/Lease') : tmp );
+          buyreq.transactionTitle = tmp;
+        });
+
         // to log for seeding
         // $scope.buyreqs.forEach(function(req){
         //   req.centers = req.polygons.map(function(polygon){
