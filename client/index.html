@@ -61,14 +61,16 @@
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
-      // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      // })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      // ga('create', 'UA-XXXXX-X');
-      // ga('send', 'pageview');
+      ga('create', 'UA-78154453-1', 'auto');
+      ga('send', 'pageview');
+
     </script>
+
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -103,6 +105,7 @@
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
       <script src="app/buyreqs/buyreqs.js"></script>
+      <script src="app/addreq/addreq.js"></script>
       <script src="app/addreq/addreqForm/addreqForm.directive.js"></script>
       <script src="app/addreq/addreqMap/addreqMap.directive.js"></script>
       <script src="app/admin/admin.controller.js"></script>
@@ -119,7 +122,7 @@
       <script src="app/auth/verify/verify.controller.js"></script>
       <script src="app/auth/verify/verify.js"></script>
       <script src="app/buyreqs/buyreqs.controller.js"></script>
-      <script src="app/addreq/addreq.js"></script>
+      <script src="app/addreq/addreq.controller.js"></script>
       <script src="app/buyreqs/reqDetails/reqDetails.directive.js"></script>
       <script src="app/buyreqs/reqFilter/reqFilter.directive.js"></script>
       <script src="app/buyreqs/reqList/reqList.directive.js"></script>
@@ -136,7 +139,7 @@
       <script src="components/inputformat/inputformat.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
       <script src="components/navbar/navbar.directive.js"></script>
-      <script src="app/addreq/addreq.controller.js"></script>
+      <script src="app/Legal/legal.js"></script>
       <script src="components/util/util.service.js"></script>
       <!-- endinjector -->
     <!-- endbuild -->

@@ -55,6 +55,7 @@
               Register
             </md-button>
           </md-menu-item>
+
           <!-- <md-menu-item >
             <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
               Admin Console
@@ -86,7 +87,7 @@
       <md-menu>
 
         <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple" ng-click="nav.openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
-          <md-tooltip md-direction="left">
+          <md-tooltip md-direction="bottom">
               Account
             </md-tooltip>
           <i class="material-icons" style="vertical-align: middle;">person</i>
@@ -117,6 +118,42 @@
       </md-menu>
 
     </div>
+
+    <!-- <span flex="5"></span> -->
+
+    <div layout="row" style="margin-left: 15px;">
+
+      <md-menu>
+
+        <a class="md-primary md-ink-ripple" ng-click="nav.openMenu($mdOpenMenu, $event)" type="button" style="cursor: pointer;" aria-label="More">
+          <md-tooltip md-direction="bottom">
+              More
+            </md-tooltip>
+          <md-icon class="material-icons" style="vertical-align: middle;">more_vert</md-icon>
+        </a>
+
+        <md-menu-content class="md-primary" width="4">
+
+          <md-menu-item>
+            <md-menu-item>
+              <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
+                About
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button class="md-primary" ui-sref="help" ui-sref-active="active">
+                Help
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button class="md-primary" ui-sref="legal" ui-sref-active="active">
+                Legal
+              </md-button>
+            </md-menu-item>
+
+        </md-menu-content>
+
+      </md-menu>
 
   </div>
 </md-toolbar>
