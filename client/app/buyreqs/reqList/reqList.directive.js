@@ -6,6 +6,13 @@ angular.module('creapp3App')
       templateUrl: 'app/buyreqs/reqList/reqList.html',
       restrict: 'E',
       link: function (scope, element, attrs) {
+
+        scope.showfilter = false;
+        scope.openfilter = function(){
+          console.log('toggle');
+          scope.showfilter = !scope.showfilter;
+        };
+
       }
     };
   });
