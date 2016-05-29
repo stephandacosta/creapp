@@ -8,8 +8,9 @@ angular.module('creapp3App')
     $scope.main.req = {};
 
     // hide sidenav on smaller screens
+    $scope.main.openedSidenav = true;
     $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
-      $scope.openedSidenav =  big;
+      $scope.main.openedSidenav =  big;
     });
 
   });

@@ -6,11 +6,12 @@ angular.module('creapp3App')
       template: '<div></div>',
       restrict: 'E',
       scope: {
-        req: '=req'
+        req: '=req',
+        openedSidenav: '=openedSidenav'
       },
       link: function (scope, element, attrs) {
 
-        // var state = attrs.state;
+
         var currentState = $state.current.name;
 
         if ($location.absUrl().indexOf('localhost')===-1){
@@ -95,8 +96,7 @@ angular.module('creapp3App')
 
         // when mode change need to update controller scope
         freeDraw.on('mode', function modeReceived(eventData) {
-          console.log(eventData);
-          // do something on mode change
+          // mode change
           if (scope.map.mode !== eventData.mode){
             scope.map.mode = eventData.mode;
             scope.$apply();
@@ -116,7 +116,6 @@ angular.module('creapp3App')
               var center = L.polygon(polygon).getBounds().getCenter();
               return [center.lat, center.lng];
             });
-          console.log('new req', scope.req);
           }
         });
 
@@ -136,21 +135,17 @@ angular.module('creapp3App')
           });
         }
 
+        scope.openSidenav = function(){
+          scope.openedSidenav = !scope.openedSidenav;
+        };
+
         // when sidenav updates, need to recenter map
-        scope.$watch('openedSidenav',function(newvalue,oldvalue){
-          if (oldvalue!==undefined || newvalue !==undefined){
-            var offset = newvalue ? 160 : -160;
-            $timeout(function(){
-              map.panBy([offset, 0], {duration: 0.3});
-            },200);
-          }
-        });
-
-
-        // clear polygons when req polygons have been cleared
-        // scope.$watch('req.polygons.length',function(newValue){
-        //   if (!newValue){
-        //     freeDraw.clearPolygons();
+        // scope.$watch('openedSidenav',function(newvalue,oldvalue){
+        //   if (oldvalue!==undefined || newvalue !==undefined){
+        //     var offset = newvalue ? 160 : -160;
+        //     $timeout(function(){
+        //       map.panBy([offset, 0], {duration: 0.3});
+        //     },200);
         //   }
         // });
 

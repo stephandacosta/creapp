@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('req', {
         url: '/req',
-        template: '<ui-view layout="row"></ui-view>',
+        template: '<ui-view flex layout="row" layout-fill></ui-view>',
         controller: 'reqCtrl',
         sp: {
           authenticate: true
@@ -14,7 +14,7 @@ angular.module('creapp3App')
       .state('req.add', {
         url: '/add',
         templateUrl: 'app/req/req.html',
-        controller: function($scope, $compile, appConstants){
+        controller: function($scope, $compile, $mdMedia, ppConstants){
           $scope.main.req = _.cloneDeep(appConstants.emptyReq);
         },
         sp: {
@@ -31,7 +31,7 @@ angular.module('creapp3App')
           }
         },
         templateUrl: 'app/req/req.html',
-        controller: function($scope,req){
+        controller: function($scope, $mdMedia, req){
           $scope.main.req = req;
         },
         sp: {
