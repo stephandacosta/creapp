@@ -7,11 +7,6 @@ angular.module('creapp3App')
       restrict: 'E',
       scope: {
         req: '=req'
-      },
-      link: function (scope, element, attrs) {
-        scope.editReq = function(req){
-          $state.go('editreq', {edit: {editMode: true, editReq:req}});
-        };
       }
     };
   });
