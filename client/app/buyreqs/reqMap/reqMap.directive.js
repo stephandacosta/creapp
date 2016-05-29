@@ -59,11 +59,7 @@ angular.module('creapp3App')
               baseLayer = polygonsLayer.addLayer(L.polygon(req.polygons)
               .setStyle({color:'#00695C', fillColor: '#009688'})
               .on('click contextmenu', function(e) {
-                  // this does not work, need to fix
-                  // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
-                  // console.log(e);
-                  $state.go('^.detail',{id: req._id });
-                  // scope.$digest();
+                $state.go('^.detail',{id: req._id });
               }));
             });
           }
@@ -80,9 +76,9 @@ angular.module('creapp3App')
 
         var addHighlightedLayer = function(){
           if (highlightedLayer){
-            highlightedLayer.clearLayers();
+            polygonsLayer.removeLayer(highlightedLayer);
           }
-          highlightedLayer = polygonsLayer.addLayer(L.polygon(buyreqs.getSelectedReq().polygons)
+          polygonsLayer.addLayer(highlightedLayer = L.polygon(buyreqs.getSelectedReq().polygons)
           .setStyle({color:'#E040FB', fillColor: '#E040FB'}));
         };
 
