@@ -1,0 +1,14 @@
+.leaflet-bar a, .leaflet-bar a:hover {
+  width: 40px;
+  height: 40px;
+  background-color: #4DB6AC;
+}
+
+.leaflet-control-geosearch form {
+  height: 40px;
+  left: 45px;
+}
+
+.leaflet-control-geosearch form input {
+  font-size: 22px;
+}

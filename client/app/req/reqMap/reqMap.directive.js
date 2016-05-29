@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMapedit', function ($timeout,$location, $compile, buyreqs) {
+  .directive('reqMapedit', function ($timeout,$location,$state, $compile, buyreqs) {
     return {
       template: '<div></div>',
-      restrict: 'EA',
+      restrict: 'E',
       scope: {
-        req: '=req',
-        map: '=map'
+        req: '=req'
       },
-      link: function (scope, element) {
+      link: function (scope, element, attrs) {
+
+        // var state = attrs.state;
+        var currentState = $state.current.name;
 
         if ($location.absUrl().indexOf('localhost')===-1){
           L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
@@ -18,11 +20,41 @@ angular.module('creapp3App')
         // this class is needed for css to work
         element.addClass('reqmap');
 
+        // map settings
+        scope.map = {
+          tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+          initCenter: [37.4259332,-122.3413094],
+          MODES: L.FreeDraw.MODES,
+          mode : L.FreeDraw.MODES.VIEW,
+          setMode : function (mode) {
+            var modemap={
+              edit: (scope.map.MODES.EDIT | scope.map.MODES.DELETE),
+              all: scope.map.MODES.ALL
+            };
+            scope.map.mode = modemap[mode];
+          }
+        };
+
+        // hook for button mode change from controller
+        scope.$watch('map.mode',function(){
+          freeDraw.setMode(scope.map.mode);
+        });
+
         //create map
         var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
+
+        // add geosearch plugin
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.OpenStreetMap(),
+            position: 'topleft',
+            showMarker: true,
+            retainZoomLevel: true,
+        }).addTo(map);
+
 
         var mapEditControls = L.Control.extend({
           options: {
@@ -43,22 +75,14 @@ angular.module('creapp3App')
         scope.zoomOut = function(){
           map.zoomOut();
         };
+        // clear polygons for button click
+        scope.clearPolygons = function(){
+          scope.req.polygons = [];
+          scope.req.centers = [];
+          freeDraw.clearPolygons();
+        };
 
-        new L.Control.GeoSearch({
-            provider: new L.GeoSearch.Provider.OpenStreetMap(),
-            position: 'topleft',
-            showMarker: true,
-            retainZoomLevel: true,
-        }).addTo(map);
-        //
-        // var geocodeProvider = new L.GeoSearch.Provider.OpenStreetMap();
-        //   // addressText = 'Amsterdam';
-        //   console.log(geocodeProvider);
-        //
-        // geocodeProvider.GetLocations( '95121', function ( data ) {
-        //   // in data are your results with x, y, label and bounds (currently availabel for google maps provider only)
-        //   console.log(data);
-        // });
+
 
         //create freedraw object
         var freeDraw = new L.FreeDraw();
@@ -122,17 +146,13 @@ angular.module('creapp3App')
           }
         });
 
-        // hook for button mode change from controller
-        scope.$watch('map.mode',function(){
-          freeDraw.setMode(scope.map.mode);
-        });
 
         // clear polygons when req polygons have been cleared
-        scope.$watch('req.polygons.length',function(newValue){
-          if (!newValue){
-            freeDraw.clearPolygons();
-          }
-        });
+        // scope.$watch('req.polygons.length',function(newValue){
+        //   if (!newValue){
+        //     freeDraw.clearPolygons();
+        //   }
+        // });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material
         $timeout(function(){map.invalidateSize(); },200);

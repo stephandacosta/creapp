@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMap', function ($compile, $timeout,$location,buyreqs) {
+  .directive('reqMap', function ($state, $compile, $timeout, $location, buyreqs) {
     return {
       template: '<div></div>',
       restrict: 'E',
@@ -19,6 +19,13 @@ angular.module('creapp3App')
           attribution: scope.map.attribution
         }).addTo(map);
 
+        new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.OpenStreetMap(),
+            position: 'topleft',
+            showMarker: true,
+            retainZoomLevel: true,
+        }).addTo(map);
+
         var mapControls = L.Control.extend({
           options: {
             //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
@@ -32,27 +39,17 @@ angular.module('creapp3App')
         });
         map.addControl(new mapControls());
 
-
-        new L.Control.GeoSearch({
-            provider: new L.GeoSearch.Provider.OpenStreetMap(),
-            position: 'topleft',
-            showMarker: true,
-            retainZoomLevel: true,
-        }).addTo(map);
-
+        scope.zoomIn = function(){
+          map.zoomIn();
+        };
+        scope.zoomOut = function(){
+          map.zoomOut();
+        };
 
 
         var polygonsLayer = L.layerGroup().addTo(map);
         var baseLayer, highlightedLayer;
 
-        scope.$on('zoom:out', function(){
-          event.stopPropagation();
-          map.zoomOut();
-        });
-        scope.$on('zoom:in', function(){
-          event.stopPropagation();
-          map.zoomIn();
-        });
 
         scope.$on('filter:update', function(event){
           event.stopPropagation();
@@ -65,8 +62,8 @@ angular.module('creapp3App')
                   // this does not work, need to fix
                   // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
                   // console.log(e);
-                  scope.toggle(req);
-                  scope.$digest();
+                  $state.go('^.detail',{id: req._id });
+                  // scope.$digest();
               }));
             });
           }
@@ -82,6 +79,9 @@ angular.module('creapp3App')
         });
 
         var addHighlightedLayer = function(){
+          if (highlightedLayer){
+            highlightedLayer.clearLayers();
+          }
           highlightedLayer = polygonsLayer.addLayer(L.polygon(buyreqs.getSelectedReq().polygons)
           .setStyle({color:'#E040FB', fillColor: '#E040FB'}));
         };
