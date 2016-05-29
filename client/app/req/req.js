@@ -14,7 +14,7 @@ angular.module('creapp3App')
       .state('req.add', {
         url: '/add',
         templateUrl: 'app/req/req.html',
-        controller: function($scope, $compile, $mdMedia, ppConstants){
+        controller: function($scope, $compile, $mdMedia, appConstants){
           $scope.main.req = _.cloneDeep(appConstants.emptyReq);
         },
         sp: {
