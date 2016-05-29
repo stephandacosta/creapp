@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMap', function ($timeout,$location) {
+  .directive('reqMap', function ($compile, $timeout,$location,buyreqs) {
     return {
       template: '<div></div>',
       restrict: 'E',
       scope: false,
       link: function (scope, element, attrs) {
+
+
 
         if ($location.absUrl().indexOf('localhost')===-1){
           L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
@@ -16,6 +18,20 @@ angular.module('creapp3App')
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
+
+        var mapControls = L.Control.extend({
+          options: {
+            //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+            position: 'topleft'
+          },
+          onAdd: function (map) {
+            var container = L.DomUtil.create('div', 'mapcontrols');
+            angular.element(container).append($compile('<req-map-controls></req-map-controls>')(scope));
+            return container;
+          }
+        });
+        map.addControl(new mapControls());
+
 
         new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.OpenStreetMap(),
@@ -27,6 +43,7 @@ angular.module('creapp3App')
 
 
         var polygonsLayer = L.layerGroup().addTo(map);
+        var baseLayer, highlightedLayer;
 
         scope.$on('zoom:out', function(){
           event.stopPropagation();
@@ -42,18 +59,33 @@ angular.module('creapp3App')
           polygonsLayer.clearLayers();
           if (scope.filteredReqs) {
             scope.filteredReqs.forEach(function(req){
-              polygonsLayer.addLayer(L.polygon(req.polygons)
+              baseLayer = polygonsLayer.addLayer(L.polygon(req.polygons)
+              .setStyle({color:'#00695C', fillColor: '#009688'})
               .on('click contextmenu', function(e) {
                   // this does not work, need to fix
                   // e.target.setStyle({color:'#E91E63', fillColor: '#E91E63'});
                   // console.log(e);
-                  console.log('hello');
                   scope.toggle(req);
                   scope.$digest();
               }));
             });
           }
+          if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
+            addHighlightedLayer();
+          }
         });
+
+        scope.$on('selectedReq:update',function(){
+          if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
+            addHighlightedLayer();
+          }
+        });
+
+        var addHighlightedLayer = function(){
+          highlightedLayer = polygonsLayer.addLayer(L.polygon(buyreqs.getSelectedReq().polygons)
+          .setStyle({color:'#E040FB', fillColor: '#E040FB'}));
+        };
+
 
         var contained = function(container,containee){
           var sw=0, ne=1, x = 0, y = 1;
@@ -65,11 +97,10 @@ angular.module('creapp3App')
 
         map.on('moveend', function(e) {
           var bounds = map.getBounds();
-          scope.map.bounds = [
+          buyreqs.updateBounds ([
             [bounds._southWest.lat, bounds._southWest.lng],
             [bounds._northEast.lat, bounds._northEast.lng]
-          ];
-          scope.$emit('map:moved');
+          ]);
         });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material

@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/myreqs', ExpressStormpath.loginRequired, controller.index);
+router.get('/brokerreqs/:brokerid', controller.index);
 router.get('/:id', controller.show);
 router.get('/user/:id', controller.getUser);
 router.post('/', ExpressStormpath.loginRequired, controller.create);

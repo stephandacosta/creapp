@@ -1,31 +1,19 @@
-<md-content layout-margin>
-  <div flex layout="row" layout-align="end end">
-    <md-button ng-if="'myreqs' | isState" class="md-primary md-raised"  ng-click="editReq(req)">edit</md-button>
-  </div>
-  <md-tabs md-dynamic-height>
-    <md-tab label="Summary">
-      <div>
-        <h3>Headline</h3>
-        <p>{{req.title}}</p>
-      </div>
-      <div>
-        <h3>Description</h3>
-        <p>{{ req.info}}</p>
-      </div>
-      <div>
-        <h3>Details</h3>
-        <p>Type: {{req.type}} </p>
-        <p>Price: {{ req.min_price | currency:"$" : 0}} - {{ req.max_price | currency:"$" : 0}}</p>
-        <p>Area:  {{ req.min_sqft | number:0 }}sqft - {{ req.max_sqft | number:0 }}sqft</p>
-        <p ng-if="req.buy">Buy {{ req.buy | checkmark }}</p>
-        <p ng-if="req.exchange">Exchange {{ req.exchange | checkmark }}</p>
-        <p ng-if="req.lease">Lease {{ req.lease | checkmark }}</p>
-        <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
-        <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
-      </div>
-    </md-tab>
-    <md-tab label="Contact">
-      <profile user="user" buyreq="req"></profile>
-    </md-tab>
-  </md-tabs>
-</md-content>
+<div>
+  <h3>Headline</h3>
+  <p>{{req.title}}</p>
+</div>
+<div>
+  <h3>Description</h3>
+  <p>{{ req.info}}</p>
+</div>
+<div>
+  <h3>Details</h3>
+  <p>Type: {{req.type}} </p>
+  <p>Price: {{ req.min_price | currency:"$" : 0}} - {{ req.max_price | currency:"$" : 0}}</p>
+  <p>Area:  {{ req.min_sqft | number:0 }}sqft - {{ req.max_sqft | number:0 }}sqft</p>
+  <p ng-if="req.buy">Buy {{ req.buy | checkmark }}</p>
+  <p ng-if="req.exchange">Exchange {{ req.exchange | checkmark }}</p>
+  <p ng-if="req.lease">Lease {{ req.lease | checkmark }}</p>
+  <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
+  <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
+</div>

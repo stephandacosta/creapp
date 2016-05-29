@@ -83,6 +83,11 @@ export function index(req, res) {
     var userquery = { user: userId };
     query = { $and: [userquery, query]};
   }
+  // for buyreqs/brokerreqs need to return reqs from broker
+  if (req.params.brokerid){
+    var userquery = { user: req.params.brokerid };
+    query = { $and: [userquery, query]};
+  }
   Buyreq.findAsync(query)
     .then(respondWithResult(res))
     .catch(handleError(res));

@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('addreqMap', function ($timeout,$location) {
+  .directive('reqMapedit', function ($timeout,$location, $compile, buyreqs) {
     return {
       template: '<div></div>',
       restrict: 'EA',
-      scope: false,
+      scope: {
+        req: '=req',
+        map: '=map'
+      },
       link: function (scope, element) {
 
         if ($location.absUrl().indexOf('localhost')===-1){
@@ -13,7 +16,7 @@ angular.module('creapp3App')
         }
 
         // this class is needed for css to work
-        element.addClass('addreqmap');
+        element.addClass('reqmap');
 
         //create map
         var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
@@ -21,6 +24,25 @@ angular.module('creapp3App')
           attribution: scope.map.attribution
         }).addTo(map);
 
+        var mapEditControls = L.Control.extend({
+          options: {
+            //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
+            position: 'topleft'
+          },
+          onAdd: function (map) {
+            var container = L.DomUtil.create('div', 'mapcontrols');
+            angular.element(container).append($compile('<req-map-edit-controls></req-map-edit-controls>')(scope));
+            return container;
+          }
+        });
+        map.addControl(new mapEditControls());
+
+        scope.zoomIn = function(){
+          map.zoomIn();
+        };
+        scope.zoomOut = function(){
+          map.zoomOut();
+        };
 
         new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.OpenStreetMap(),
@@ -28,15 +50,15 @@ angular.module('creapp3App')
             showMarker: true,
             retainZoomLevel: true,
         }).addTo(map);
-
-        scope.$on('zoom:out', function(){
-          event.stopPropagation();
-          map.zoomOut();
-        });
-        scope.$on('zoom:in', function(){
-          event.stopPropagation();
-          map.zoomIn();
-        });
+        //
+        // var geocodeProvider = new L.GeoSearch.Provider.OpenStreetMap();
+        //   // addressText = 'Amsterdam';
+        //   console.log(geocodeProvider);
+        //
+        // geocodeProvider.GetLocations( '95121', function ( data ) {
+        //   // in data are your results with x, y, label and bounds (currently availabel for google maps provider only)
+        //   console.log(data);
+        // });
 
         //create freedraw object
         var freeDraw = new L.FreeDraw();
@@ -49,6 +71,7 @@ angular.module('creapp3App')
 
         // when mode change need to update controller scope
         freeDraw.on('mode', function modeReceived(eventData) {
+          console.log(eventData);
           // do something on mode change
           if (scope.map.mode !== eventData.mode){
             scope.map.mode = eventData.mode;
@@ -69,6 +92,7 @@ angular.module('creapp3App')
               var center = L.polygon(polygon).getBounds().getCenter();
               return [center.lat, center.lng];
             });
+          console.log('new req', scope.req);
           }
         });
 
@@ -76,9 +100,9 @@ angular.module('creapp3App')
         map.addLayer(freeDraw);
 
         // on edit mode set predefined polygons
-        if (!scope.addmode) {
-          // there is some bug here where polygons are joined together
-          // need fix
+        // there is some bug here where polygons are joined together
+        // need fix
+        if (scope.req) {
           scope.req.polygons.forEach(function(polygon){
             var latLngs = [];
             polygon.forEach(function(point){
@@ -88,7 +112,7 @@ angular.module('creapp3App')
           });
         }
 
-        // then sidenav updates, need to recenter map
+        // when sidenav updates, need to recenter map
         scope.$watch('openedSidenav',function(newvalue,oldvalue){
           if (oldvalue!==undefined || newvalue !==undefined){
             var offset = newvalue ? 160 : -160;
@@ -103,6 +127,7 @@ angular.module('creapp3App')
           freeDraw.setMode(scope.map.mode);
         });
 
+        // clear polygons when req polygons have been cleared
         scope.$watch('req.polygons.length',function(newValue){
           if (!newValue){
             freeDraw.clearPolygons();

@@ -1,9 +1,9 @@
 /*styles for FreeDraw*/
-.addreqmap.mode-create {
+.reqmap.mode-create {
     cursor: crosshair !important;
 }
 
-.addreqmap g path {
+.reqmap g path {
     transition: all 0.25s;
     stroke-width: 4px;
     stroke-opacity: 1;
@@ -15,15 +15,15 @@
     -webkit-filter: none;
 }
 
-.addreqmap.mode-delete path {
+.reqmap.mode-delete path {
     cursor: no-drop !important;
 }
 
-.addreqmap.mode-delete path:hover {
+.reqmap.mode-delete path:hover {
     fill: #4d4d4d !important;
 }
 
-.addreqmap div.polygon-elbow {
+.reqmap div.polygon-elbow {
     -webkit-transition: opacity .25s;
     box-shadow: 0 0 0 2px white, 0 0 10px rgba(0, 0, 0, .35);
     border: 5px solid #D7217E;
@@ -37,18 +37,18 @@
     height: 0 !important;
 }
 
-.addreqmap div.polygon-elbow.non-polygon {
+.reqmap div.polygon-elbow.non-polygon {
     opacity: 0 !important;
     pointer-events: none !important;
     border: 5px solid darkgray;
 }
 
-.addreqmap.mode-edit div.polygon-elbow {
+.reqmap.mode-edit div.polygon-elbow {
     opacity: 1;
     pointer-events: all;
 }
 
-.addreqmap svg.tracer {
+.reqmap svg.tracer {
     position: absolute;
     top: 0;
     left: 0;

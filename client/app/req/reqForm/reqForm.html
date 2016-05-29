@@ -1,6 +1,6 @@
 
 
-<md-toolbar layout="row" ng-if="addmode" class="md-primary md-hue-2">
+<md-toolbar layout="row" ng-if="'req.add' | isState" class="md-primary md-hue-2">
   <md-button flex="30" class="md-raised md-primary md-hue-1 md-ink-ripple" ng-click="addReq()">
     Publish
   </md-button>
@@ -9,7 +9,7 @@
   </md-button>
 </md-toolbar>
 
-<md-toolbar layout="row" ng-if="!addmode" class="md-primary md-hue-2">
+<md-toolbar layout="row" ng-if="'req.edit' | isState" class="md-primary md-hue-2">
   <md-button flex="30" class="md-raised md-primary md-hue-2 md-ink-ripple" ng-click="saveEdit()" >
     Save
   </md-button>

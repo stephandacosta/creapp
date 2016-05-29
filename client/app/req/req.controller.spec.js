@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: AddreqCtrl', function () {
+describe('Controller: reqCtrl', function () {
 
   // load the controller's module
   beforeEach(module('creapp3App'));
 
-  var AddreqCtrl, scope;
+  var reqCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    AddreqCtrl = $controller('AddreqCtrl', {
+    reqCtrl = $controller('reqCtrl', {
       $scope: scope
     });
   }));

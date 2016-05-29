@@ -1,0 +1,18 @@
+<md-content flex layout="row" layout-margin class="md-whiteframe-2dp">
+  <md-tabs flex class="md-primary md-hue-2">
+    <md-tab label="Summary">
+      <div layout="row">
+        <md-button flex ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">edit</md-button>
+      </div>
+      <req-details req=main.selectedReq></req-details>
+    </md-tab>
+    <md-tab label="Contact">
+      <profile user="main.selectedReq.broker"></profile>
+    </md-tab>
+  </md-tabs>
+
+  <md-button  ui-sref="^.list" class="md-fab md-accent md-fab-top-right">
+      <md-icon>close</md-icon>
+  </md-button>
+
+</md-content>

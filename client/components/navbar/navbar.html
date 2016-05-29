@@ -8,15 +8,19 @@
     </div>
 
     <div hide-xs flex layout="row">
-      <md-button class="md-primary md-ink-ripple navtitle" ui-sref="buyreqs" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" ui-sref="buyreqs.list" ui-sref-active="active">
         Find
       </md-button>
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="addreq" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add" ui-sref-active="active">
         Add
       </md-button>
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs.list" ui-sref-active="active">
         My Reqs
       </md-button>
+      <!-- <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
+        <md-tooltip md-direction="right">your broker</md-tooltip>
+        <md-icon>face</md-icon>
+      </md-button> -->
     </div>
 
     <span flex></span>
@@ -31,17 +35,17 @@
         </md-button>
         <md-menu-content width="4" class="md-primary">
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="buyreqs" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="buyreqs.list" ui-sref-active="active">
               Find
             </md-button>
           </md-menu-item>
           <md-menu-item if-user>
-            <md-button class="md-primary" ui-sref="addreq" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="req.add" ui-sref-active="active">
               Add
             </md-button>
           </md-menu-item>
           <md-menu-item if-user >
-            <md-button class="md-primary" ui-sref="myreqs" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="myreqs.list" ui-sref-active="active">
               My Reqs
             </md-button>
           </md-menu-item>

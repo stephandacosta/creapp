@@ -1,24 +1,38 @@
+<md-toolbar class="md-primary md-hue-2" layout="row" md-scroll-shrink>
+  <div class="md-toolbar-tools">
+    <md-button aria-label="filter" class="md-fab md-accent  md-mini md-ink-ripple" ng-click="openfilter()">
+      <md-tooltip md-direction="right">Filter</md-tooltip>
+      <md-icon>filter_list</md-icon>
+    </md-button>
+    <span flex></span>
+    <span> {{filteredReqs.length}} reqs filtered from {{main.buyreqs.length}} </span>
+  </div>
+</md-toolbar>
 
-<md-list ng-hide="search.reqID">
-  <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs" ng-click="toggle(buyreq)">
-      <div flex layout="row">
+<req-filter hide-gt-xs flex="80" ng-show="showfilter"></req-filter>
 
-        <div class="md-list-item-text">
-          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}}</h3>
-          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
-          <p>Price: {{ buyreq.min_price | currency:"$" : 0 }} - {{ buyreq.max_price | currency:"$" : 0 }} </p>
-          <p>Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft</p>
+<md-content flex layout="column">
+  <md-list ng-hide="search.reqID">
+    <md-list-item class="md-3-line md-offset" ng-repeat="buyreq in filteredReqs" ui-sref="^.detail({id: buyreq._id})">
+        <div flex layout="row">
+
+          <div class="md-list-item-text">
+            <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}}</h3>
+            <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
+            <p>Price: {{ buyreq.min_price | currency:"$" : 0 }} - {{ buyreq.max_price | currency:"$" : 0 }} </p>
+            <p>Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft</p>
+          </div>
+
+          <!-- <span flex></span> -->
+
+          <div layout="column">
+            <md-icon class="md-secondary" >
+              <i class="material-icons" style="font-size:32px;">chevron_right</i>
+            </md-icon>
+          </div>
+
         </div>
-
-        <!-- <span flex></span> -->
-
-        <div layout="column">
-          <md-icon class="md-secondary" >
-            <i class="material-icons" style="font-size:32px;">chevron_right</i>
-          </md-icon>
-        </div>
-
-      </div>
-    <md-divider></md-divider>
-  </md-list-item>
-</md-list>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+<md-content>

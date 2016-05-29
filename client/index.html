@@ -21,9 +21,6 @@
     <!-- build:css({.tmp,client}) app/app.css -->
       <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
-      <link rel="stylesheet" href="app/addreq/addreq.css">
-      <link rel="stylesheet" href="app/addreq/addreqForm/addreqForm.css">
-      <link rel="stylesheet" href="app/addreq/addreqMap/addreqMap.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/auth/forgot/forgot.css">
@@ -40,6 +37,9 @@
       <link rel="stylesheet" href="app/mailbox/mailbox.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/profile/profile.css">
+      <link rel="stylesheet" href="app/req/req.css">
+      <link rel="stylesheet" href="app/req/reqForm/reqForm.css">
+      <link rel="stylesheet" href="app/req/reqMap/reqMap.css">
       <link rel="stylesheet" href="components/footer/footer.css">
       <link rel="stylesheet" href="components/navbar/navbar.css">
       <!-- endinjector -->
@@ -104,11 +104,7 @@
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/buyreqs/buyreqs.js"></script>
-      <script src="app/addreq/addreq.js"></script>
-      <script src="app/addreq/addreqForm/addreqForm.directive.js"></script>
-      <script src="app/addreq/addreqMap/addreqMap.directive.js"></script>
-      <script src="app/admin/admin.controller.js"></script>
+      <script src="app/buyreqs/reqMap/reqMap.directive.js"></script>
       <script src="app/admin/admin.js"></script>
       <script src="app/app.constant.js"></script>
       <script src="app/auth/forgot/forgot.controller.js"></script>
@@ -122,11 +118,13 @@
       <script src="app/auth/verify/verify.controller.js"></script>
       <script src="app/auth/verify/verify.js"></script>
       <script src="app/buyreqs/buyreqs.controller.js"></script>
-      <script src="app/addreq/addreq.controller.js"></script>
+      <script src="app/buyreqs/buyreqs.js"></script>
+      <script src="app/buyreqs/buyreqs.service.js"></script>
       <script src="app/buyreqs/reqDetails/reqDetails.directive.js"></script>
       <script src="app/buyreqs/reqFilter/reqFilter.directive.js"></script>
       <script src="app/buyreqs/reqList/reqList.directive.js"></script>
-      <script src="app/buyreqs/reqMap/reqMap.directive.js"></script>
+      <script src="app/admin/admin.controller.js"></script>
+      <script src="app/buyreqs/reqMap/reqMapControls.directive.js"></script>
       <script src="app/mailForm/mailForm.controller.js"></script>
       <script src="app/mailbox/mailbox.controller.js"></script>
       <script src="app/mailbox/mailbox.js"></script>
@@ -135,6 +133,11 @@
       <script src="app/profile/profile.controller.js"></script>
       <script src="app/profile/profile.directive.js"></script>
       <script src="app/profile/profile.js"></script>
+      <script src="app/req/req.controller.js"></script>
+      <script src="app/req/req.js"></script>
+      <script src="app/req/reqForm/reqForm.directive.js"></script>
+      <script src="app/req/reqMap/reqMap.directive.js"></script>
+      <script src="app/req/reqMap/reqMapControls.directive.js"></script>
       <script src="components/footer/footer.directive.js"></script>
       <script src="components/inputformat/inputformat.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
