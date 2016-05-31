@@ -13,16 +13,15 @@
 </md-sidenav>
 
 
-<div flex layout="row" layout-xs="column" style="height:90vh;" >
+<!-- <div flex layout="row" layout-xs="column"> -->
+<div flex layout="row" layout-xs="column">
 
   <!-- list of buyreqs or buyreq details -->
-  <div flex-gt-sm="40" flex layout="column">
-      <ui-view flex layout="column"></ui-view>
-  </div>
-
+  <!-- height: 90vh hack due md-scroll-shrink to *https://github.com/angular/material/issues/1089 -->
+  <div ui-view flex flex-gt-sm="40" layout="column" ng-style="$mdMedia('gt-sm') ? {'height':'85vh'} : {'max-height':'55vh'}"></div>
 
   <!-- map -->
-  <div flex flex-xs="45" layout="row">
+  <div flex layout="row">
     <req-map flex></req-map>
   </div>
 

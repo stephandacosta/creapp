@@ -6,7 +6,10 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $scope, $filter, $mdComponentRegistry, buyreqs) {
+  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $scope, $filter, $mdComponentRegistry, $mdMedia, buyreqs) {
+
+    //add mdMedia service for use in template via ngStyle
+    $scope.$mdMedia = $mdMedia;
 
     $scope.types= appConstants.creTypes;
 
