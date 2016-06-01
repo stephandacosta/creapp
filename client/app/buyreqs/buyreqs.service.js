@@ -22,7 +22,6 @@ angular.module('creapp3App')
         }
       };
 
-      console.log('url', url);
       $http.get(url, {params: { query }}).then(response => {
         // update buyreqs list
         buyreqs = response.data;
@@ -58,25 +57,21 @@ angular.module('creapp3App')
 
 
     var updateSelectedReq = function(id){
-      console.log('updating selected req');
       if (!id){
         selectedReq = {};
       } else {
         selectedReq = _.find(buyreqs, { '_id': id });
         if (selectedReq) {
           $rootScope.$broadcast('selectedReq:update');
-          console.log('should broadcast');
           updateBroker(selectedReq);
         } else {
           $http.get('/api/buyreqs/'+ id).then(response => {
             selectedReq = response.data;
             $rootScope.$broadcast('selectedReq:update');
-            console.log('should broadcast');
             updateBroker(selectedReq);
           });
         }
       }
-      console.log('selectedReq',selectedReq);
     };
 
     var updateBounds = function(boundsArray){
