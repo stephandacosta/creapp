@@ -91,7 +91,7 @@ angular.module('creapp3App')
           (container[ne][y] >= containee[ne][y]);
         };
 
-        map.on('moveend', function(e) {
+        map.on('load moveend', function(e) {
           var bounds = map.getBounds();
           buyreqs.updateBounds ([
             [bounds._southWest.lat, bounds._southWest.lng],
