@@ -39,6 +39,7 @@ angular.module('creapp3App')
         });
         map.addControl(new mapControls());
 
+
         scope.zoomIn = function(){
           map.zoomIn();
         };
@@ -64,24 +65,31 @@ angular.module('creapp3App')
             });
           }
           if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
-            addHighlightedLayer();
+            addHighlightedLayer(buyreqs.getSelectedReq());
           }
         });
 
         scope.$on('selectedReq:update',function(){
           if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
-            addHighlightedLayer();
+            addHighlightedLayer(buyreqs.getSelectedReq());
           }
         });
 
-        var addHighlightedLayer = function(){
+        var addHighlightedLayer = function(req){
           if (highlightedLayer){
             polygonsLayer.removeLayer(highlightedLayer);
           }
-          polygonsLayer.addLayer(highlightedLayer = L.polygon(buyreqs.getSelectedReq().polygons)
+          polygonsLayer.addLayer(highlightedLayer = L.polygon(req.polygons)
           .setStyle({color:'#E040FB', fillColor: '#E040FB'}));
         };
 
+        scope.$watch(function(){
+          return buyreqs.getHighlightedReq()._id;
+        }, function(newID){
+          if (newID){
+            addHighlightedLayer(buyreqs.getHighlightedReq());
+          }
+        });
 
         var contained = function(container,containee){
           var sw=0, ne=1, x = 0, y = 1;

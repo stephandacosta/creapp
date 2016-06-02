@@ -6,6 +6,7 @@ angular.module('creapp3App')
     var buyreqs = [];
     var bounds = [];
     var selectedReq = {};
+    var highlightedReq = {};
     var url;
 
     var updateBuyReqs = function(search){
@@ -74,6 +75,14 @@ angular.module('creapp3App')
       }
     };
 
+    var highlightReq = function(req){
+      highlightedReq = req;
+    };
+
+    var unhighlightReq = function(){
+      highlightedReq = {};
+    }
+
     var updateBounds = function(boundsArray){
       bounds = boundsArray;
       updateBuyReqs();
@@ -91,6 +100,9 @@ angular.module('creapp3App')
       getBounds: function(){return bounds;},
       updateSelectedReq: updateSelectedReq,
       getSelectedReq: function(){return selectedReq || {} ;},
+      highlightReq: highlightReq,
+      unhighlightReq: unhighlightReq,
+      getHighlightedReq: function(){return highlightedReq;},
       updateUrl: function(newUrl){url=newUrl;}
       // updateSelf: function(newSelf){self=newSelf;}
     };

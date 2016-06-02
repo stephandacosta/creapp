@@ -58,6 +58,15 @@ angular.module('creapp3App')
       $scope.main.selectedReq = buyreqs.getSelectedReq();
     });
 
+    $scope.highlightReq = function(req){
+      buyreqs.highlightReq(req);
+      req.hover = true;
+    };
+
+    $scope.unhighlightReq = function(req){
+      buyreqs.unhighlightReq();
+      req.hover = false;
+    };
 
     $scope.toggleProfile = angular.noop;
     $mdComponentRegistry
