@@ -5,7 +5,7 @@ angular.module('creapp3App')
     $stateProvider
       .state('req', {
         url: '/req',
-        template: '<ui-view flex layout="row" layout-fill></ui-view>',
+        template: '<div ui-view flex layout="row"></div>',
         controller: 'reqCtrl',
         sp: {
           authenticate: true

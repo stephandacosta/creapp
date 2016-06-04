@@ -22,32 +22,37 @@
 </md-toolbar>
 
 
-<div flex layout="column" layout-padding layout-margin>
 
+<md-content flex layout="column" layout-padding>
   <h4> {{req.polygons.length}} areas selected</h4>
 
-  <md-input-container>
-    <label>Type</label>
-    <md-select ng-model="req.type">
-      <md-option ng-repeat="type in types" value="{{type}}">
-        {{type}}
-      </md-option>
-    </md-select>
-  </md-input-container>
+  <div style="display: block;">
+    <md-input-container>
+      <label>Type</label>
+      <md-select ng-model="req.type">
+        <md-option ng-repeat="type in types" value="{{type}}">
+          {{type}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    </div>
+    <!-- <span flex></span> -->
+    <div style="display: block;">
+    <md-input-container layout-padding>
+      <label>Title</label>
+      <input type="text" md-maxlength="36" ng-model="req.title" required>
+    </md-input-container>
+  </div>
 
-  <span flex></span>
+  <div style="display: block;">
+    <md-input-container>
+      <label>Description</label>
+      <textarea ng-model="req.info" md-maxlength="500" required></textarea>
+    </md-input-container>
+  </div>
 
-  <md-input-container layout-padding>
-    <label>Title</label>
-    <input type="text" md-maxlength="36" ng-model="req.title" required>
-  </md-input-container>
 
-  <md-input-container>
-    <label>Description</label>
-    <textarea ng-model="req.info" md-maxlength="500" required></textarea>
-  </md-input-container>
-
-  <div layout="row">
+  <div layout="row" style="display: block;">
     <div flex="70" style="padding-top: 25%;">Square Feet</div>
     <div layout="column">
       <md-input-container>
@@ -61,7 +66,7 @@
     </div>
   </div>
 
-  <div layout="row">
+  <div layout="row" style="display: block;">
     <div flex="70" style="padding-top: 25%;">Price</div>
     <div layout="column">
       <md-input-container>
@@ -75,35 +80,39 @@
     </div>
   </div>
 
-  <md-input-container flex layout="column">
-    <div flex>
-      <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
-        Land Only
-      </md-checkbox>
-    </div>
-    <div flex>
-      <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
-        Land and Property
-      </md-checkbox>
-    </div>
-  </md-input-container>
+  <div style="display: block;">
+    <md-input-container flex layout="column">
+      <div flex>
+        <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
+          Land Only
+        </md-checkbox>
+      </div>
+      <div flex>
+        <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
+          Land and Property
+        </md-checkbox>
+      </div>
+    </md-input-container>
+  </div>
 
-  <md-input-container layout="column" >
-    <div flex>
-      <md-checkbox class="md-primary" ng-model="req.buy" aria-label="buy">
-        Buy
-      </md-checkbox>
-    </div>
-    <div flex>
-      <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="exchange">
-        Exchange
-      </md-checkbox>
-    </div>
-    <div flex>
-      <md-checkbox class="md-primary" ng-model="req.lease" aria-label="lease">
-        Lease
-      </md-checkbox>
-    </div>
-  </md-input-container>
+  <div style="display: block;">
+    <md-input-container layout="column" >
+      <div flex>
+        <md-checkbox class="md-primary" ng-model="req.buy" aria-label="buy">
+          Buy
+        </md-checkbox>
+      </div>
+      <div flex>
+        <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="exchange">
+          Exchange
+        </md-checkbox>
+      </div>
+      <div flex>
+        <md-checkbox class="md-primary" ng-model="req.lease" aria-label="lease">
+          Lease
+        </md-checkbox>
+      </div>
+    </md-input-container>
+  </div>
 
-</div>
+</md-content>

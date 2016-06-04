@@ -4,7 +4,7 @@ angular.module('creapp3App')
   .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia) {
     return {
       templateUrl: 'app/req/reqForm/reqForm.html',
-      restrict: 'E',
+      restrict: 'AE',
       scope: {
         req: '=req',
         openedSidenav: '=openedSidenav'

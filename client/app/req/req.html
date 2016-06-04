@@ -1,13 +1,10 @@
 
-  <div flex layout="row">
-
-    <!-- sidenav for input form -->
-    <md-sidenav md-is-locked-open="main.openedSidenav" md-component-id="left" class="md-sidenav-left">
-      <req-form req="main.req" ng-cloak></req-form>
-    </md-sidenav>
+<!-- sidenav for input form -->
+<md-sidenav md-is-locked-open="main.openedSidenav" md-component-id="left" class="md-sidenav-left" >
+  <div req-form req="main.req" ng-cloak></div>
+</md-sidenav>
 
     <!-- map container -->
-    <req-mapedit req="main.req" map="map" opened-sidenav="main.openedSidenav" flex ng-cloak></req-mapedit>
-
-
-  </div>
+<div flex layout="row">
+  <req-mapedit req="main.req" map="map" opened-sidenav="main.openedSidenav" flex ng-cloak></req-mapedit>
+</div>
