@@ -1,32 +1,31 @@
 
     <!-- side toolbar -->
-    <div layout="column" class="sidetoolbar" >
-      <md-button class="md-fab md-mini md-accent" ng-click="zoomIn()">
+    <div layout="column" >
+      <md-button class="md-fab md-mini md-accent" ng-click="zoomIn()" style="margin-left:0;">
         <md-tooltip md-direction="right">zoom in</md-tooltip>
         <md-icon>zoom_in</md-icon>
       </md-button>
-      <md-button class="md-fab md-mini md-accent" ng-click="zoomOut()">
+      <md-button class="md-fab md-mini md-accent" ng-click="zoomOut()" style="margin-left:0;">
         <md-tooltip md-direction="right">zoom out</md-tooltip>
         <md-icon>zoom_out</md-icon>
       </md-button>
       <br>
-      <md-button class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="map.setMode('edit')">
+      <md-button ng-if="draw.readMode()==='drawing'" class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="draw.setMode('edit')" style="margin-left:0;">
         <md-tooltip md-direction="right" style="z-index:1000;">edit or delete area</md-tooltip>
-        <i class="material-icons"  style="vertical-align:middle;">timeline</i>
+        <i class="material-icons"  style="vertical-align:middle;">touch_app</i>
       </md-button>
-      <br>
-      <md-button class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="map.setMode('all')">
-        <md-tooltip md-direction="right">draw new area</md-tooltip>
+      <md-button ng-if="draw.readMode()==='editing'" class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-click="draw.setMode('all')" style="margin-left:0;">
+        <md-tooltip md-direction="right" style="z-index:1000;">draw new area</md-tooltip>
         <i class="material-icons"  style="vertical-align:middle;">edit</i>
       </md-button>
       <br>
-      <md-button class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" hide-gt-xs ng-click="openSidenav()">
-        <md-tooltip md-direction="right">edit requirement</md-tooltip>
-        <i class="material-icons"  style="vertical-align:middle;">comment</i>
+      <md-button class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" hide-gt-xs ng-click="openSidenav()" style="margin-left:0;">
+        <md-tooltip md-direction="right" style="z-index:1000;">edit requirement</md-tooltip>
+        <i class="material-icons"  style="vertical-align:middle;">rate_review</i>
       </md-button>
       <br>
-      <md-button class="md-fab md-warn md-mini md-ink-ripple" ng-click="clearPolygons()">
-        <md-tooltip md-direction="right">clear all areas</md-tooltip>
+      <md-button class="md-fab md-warn md-mini md-ink-ripple" ng-click="clearPolygons()" style="margin-left:0;">
+        <md-tooltip md-direction="right" style="z-index:1000;">clear all areas</md-tooltip>
         <i class="material-icons"  style="vertical-align:middle;">delete</i>
       </md-button>
     </div>

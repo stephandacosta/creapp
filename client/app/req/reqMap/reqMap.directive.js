@@ -13,6 +13,7 @@ angular.module('creapp3App')
 
 
         var currentState = $state.current.name;
+        var initialize;
 
         if ($location.absUrl().indexOf('localhost')===-1){
           L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
@@ -25,22 +26,24 @@ angular.module('creapp3App')
         scope.map = {
           tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          initCenter: [37.4259332,-122.3413094],
-          MODES: L.FreeDraw.MODES,
-          mode : L.FreeDraw.MODES.VIEW,
-          setMode : function (mode) {
-            var modemap={
-              edit: (scope.map.MODES.EDIT | scope.map.MODES.DELETE),
-              all: scope.map.MODES.ALL
-            };
-            scope.map.mode = modemap[mode];
-          }
+          initCenter: [37.4259332,-122.3413094]
         };
 
-        // hook for button mode change from controller
-        scope.$watch('map.mode',function(){
-          freeDraw.setMode(scope.map.mode);
-        });
+        // draw holds the freedraw mode that needs to be shared between controll buttons and map
+        scope.draw = {
+          MODES: L.FreeDraw.MODES,
+          setMode : function (mode) {
+            var modemap={
+              edit: (scope.draw.MODES.EDIT | scope.draw.MODES.DELETE),
+              all: scope.draw.MODES.ALL
+            };
+            scope.draw.mode = modemap[mode];
+          },
+          readMode : function(){
+            if (scope.draw.mode === (scope.draw.MODES.EDIT | scope.draw.MODES.DELETE)) {return 'editing';}
+            if (scope.draw.mode === scope.draw.MODES.ALL) {return 'drawing';}
+          }
+        };
 
         //create map
         var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
@@ -78,8 +81,8 @@ angular.module('creapp3App')
         };
         // clear polygons for button click
         scope.clearPolygons = function(){
-          scope.req.polygons = [];
-          scope.req.centers = [];
+          _.remove(scope.req.polygons);
+          _.remove(scope.req.centers);
           freeDraw.clearPolygons();
         };
 
@@ -94,28 +97,47 @@ angular.module('creapp3App')
         //freeDraw.options.destroyPreviousPolygon(true);
         //freeDraw.options.exitModeAfterCreate(false);
 
+        // hook for button mode change from controller
+        scope.$watch('draw.mode',function(newMode,oldMode){
+          freeDraw.setMode(newMode);
+        });
+
         // when mode change need to update controller scope
         freeDraw.on('mode', function modeReceived(eventData) {
           // mode change
-          if (scope.map.mode !== eventData.mode){
-            scope.map.mode = eventData.mode;
-            scope.$apply();
-          };
+          if (eventData.mode === 1){
+            freeDraw.setMode(31);
+            $timeout(function(){scope.$digest();},0);
+          } else if (eventData.mode === 29) {
+            freeDraw.setMode(12);
+            $timeout(function(){scope.$digest();},0);
+          } else {
+            // mode change
+            if (scope.draw.mode !== eventData.mode){
+              scope.draw.mode = eventData.mode;
+              // scope.$digest();
+            };
+          }
         });
 
         // when there is a new polygon, add it to scope
         // this fires on zoom as well
         freeDraw.on('markers', function getMarkers(eventData) {
-          if (eventData.latLngs.length) {
-            scope.req.polygons = eventData.latLngs.map(function(polygon){
-              return polygon.map(function(point){
+          if (eventData.latLngs.length && !initialize) {
+            _.remove(scope.req.polygons);
+            eventData.latLngs.forEach(function(polygon){
+              scope.req.polygons.push(polygon.map(function(point){
                 return [point.lat, point.lng];
-              });
+              }));
             });
-            scope.req.centers = scope.req.polygons.map(function(polygon){
+            _.remove(scope.req.centers);
+            scope.req.polygons.forEach(function(polygon){
               var center = L.polygon(polygon).getBounds().getCenter();
-              return [center.lat, center.lng];
+              scope.req.centers.push([center.lat, center.lng]);
             });
+          }
+          if (eventData.latLngs.length === 0  && initialize) {
+            initialize = false;
           }
         });
 
@@ -123,9 +145,8 @@ angular.module('creapp3App')
         map.addLayer(freeDraw);
 
         // on edit mode set predefined polygons
-        // there is some bug here where polygons are joined together
-        // need fix
-        if (scope.req) {
+        if (currentState === 'req.edit' &&  scope.req) {
+          initialize=true;
           scope.req.polygons.forEach(function(polygon){
             var latLngs = [];
             polygon.forEach(function(point){

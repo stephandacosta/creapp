@@ -66,17 +66,6 @@ angular.module('creapp3App')
 
 
 
-        // open sidenav for button click
-        scope.openSidenav = function(){
-          scope.openedSidenav = !scope.openedSidenav;
-        };
-
-        // clear polygons for button click
-        scope.clearPolygons = function(){
-          scope.req.polygons = [];
-          scope.req.centers = [];
-        };
-
 
 
 
