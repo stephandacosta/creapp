@@ -5,10 +5,12 @@
 }
 
 .leaflet-control-geosearch form {
-  height: 40px;
+  height: 35px;
   left: 45px;
+  width: 300px;
 }
 
 .leaflet-control-geosearch form input {
-  font-size: 22px;
+  font-size: 18px;
+  width:100%
 }
