@@ -52,12 +52,30 @@ angular.module('creapp3App')
         }).addTo(map);
 
         // add geosearch plugin
-        new L.Control.GeoSearch({
+        var geosearch = new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.OpenStreetMap(),
             position: 'topleft',
             showMarker: true,
             retainZoomLevel: true,
         }).addTo(map);
+
+        // suffix United States
+        geosearch._searchbox.oninput = function(){
+          if (this.value === ', United States'){
+            this.value = '';
+          }
+          if (this.value.length===1) {
+            this.value = this.value + ', United States';
+            if (this.createTextRange) {
+              var part = this.createTextRange();
+              part.move("character", 1);
+              part.select();
+            } else if (this.setSelectionRange){
+              this.setSelectionRange(1, 1);
+            }
+              this.focus();
+          }
+        }
 
 
         var mapEditControls = L.Control.extend({
