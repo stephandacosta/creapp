@@ -6,7 +6,10 @@ angular.module('creapp3App')
       .state('buyreqs', {
         url: '/buyreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
-        controller: 'BuyreqsCtrl'
+        controller: 'BuyreqsCtrl',
+        onExit: function(buyreqs){
+          buyreqs.resetBuyreqs();
+        }
       })
       .state('buyreqs.list', {
         url: '/list',
@@ -29,6 +32,9 @@ angular.module('creapp3App')
         url: '/myreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
+        onExit: function(buyreqs){
+          buyreqs.resetBuyreqs();
+        },
         sp: {
           authenticate: true
         }
@@ -60,6 +66,9 @@ angular.module('creapp3App')
         url: '/broker/{brokerId}',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
+        onExit: function(buyreqs){
+          buyreqs.resetBuyreqs();
+        }
       })
       .state('brokerreqs.list', {
         url: '/list',

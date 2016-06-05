@@ -9,6 +9,15 @@ angular.module('creapp3App')
     var highlightedReq = {};
     var url;
 
+    var resetBuyreqs = function(){
+      buyreqs = [];
+      bounds = [];
+      selectedReq = {};
+      highlightedReq = {};
+      url='';
+    };
+
+
     var updateBuyReqs = function(search){
 
       if (bounds.length === 0){ return;}
@@ -96,6 +105,7 @@ angular.module('creapp3App')
     return {
       updateBuyReqs: updateBuyReqs,
       getBuyReqs: function(){return buyreqs;},
+      resetBuyreqs: resetBuyreqs,
       updateBounds: updateBounds,
       getBounds: function(){return bounds;},
       updateSelectedReq: updateSelectedReq,
