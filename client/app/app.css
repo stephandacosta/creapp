@@ -26,10 +26,6 @@ md-card-title-text > span {
   padding:0;
 }
 
-.sidetoolbar{
-  background-color: #009688;
-}
-
 req-map, req-mapedit {
   border: solid #009688;
 }
