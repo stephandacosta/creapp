@@ -23,7 +23,8 @@ angular.module('creapp3App')
       .state('buyreqs.detail', {
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        controller: function($stateParams, buyreqs){
+        controller: function($scope, $location, $stateParams, buyreqs){
+          $scope.main.shareLink = $location.absUrl();
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         }
@@ -54,7 +55,8 @@ angular.module('creapp3App')
       .state('myreqs.detail', {
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        controller: function($stateParams, buyreqs){
+        controller: function($scope, $location, $stateParams, buyreqs){
+          $scope.main.shareLink = $location.absUrl();
           buyreqs.updateUrl('/api/buyreqs/myreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         },

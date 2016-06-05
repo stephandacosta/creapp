@@ -6,7 +6,7 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $scope, $filter, $mdComponentRegistry, $mdMedia, buyreqs) {
+  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyreqs) {
 
     //add mdMedia service for use in template via ngStyle
     $scope.$mdMedia = $mdMedia;
@@ -74,5 +74,17 @@ angular.module('creapp3App')
       .then( function(sideNav){
         $scope.toggleProfile = angular.bind(sideNav, sideNav.toggle );
     });
+
+    var clipboard = new Clipboard('#sharebutton');
+    clipboard.on('success', function(e) {
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('link has been copied to your clipboard, paste it anywhere')
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
+    });
+
 
   });
