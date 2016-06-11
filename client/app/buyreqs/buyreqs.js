@@ -4,7 +4,6 @@ angular.module('creapp3App')
   .config(function ($stateProvider) {
     $stateProvider
       .state('buyreqs', {
-        url: '/buyreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
         onExit: function(buyreqs){
@@ -12,7 +11,7 @@ angular.module('creapp3App')
         }
       })
       .state('buyreqs.list', {
-        url: '/list',
+        url: '/',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
         onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs');
