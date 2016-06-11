@@ -8,8 +8,6 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element, attrs) {
 
-
-
         if ($location.absUrl().indexOf('localhost')===-1){
           L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
         }
@@ -69,6 +67,7 @@ angular.module('creapp3App')
 
         var polygonsLayer = L.layerGroup().addTo(map);
         var baseLayer, highlightedLayer;
+
 
 
         scope.$on('filter:update', function(event){

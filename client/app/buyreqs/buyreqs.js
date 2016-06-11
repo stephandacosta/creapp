@@ -14,7 +14,7 @@ angular.module('creapp3App')
       .state('buyreqs.list', {
         url: '/list',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        controller: function(buyreqs){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
@@ -23,7 +23,7 @@ angular.module('creapp3App')
       .state('buyreqs.detail', {
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        controller: function($scope, $location, $stateParams, buyreqs){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         }
@@ -42,7 +42,7 @@ angular.module('creapp3App')
       .state('myreqs.list', {
         url: '/list',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        controller: function(buyreqs){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs/myreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
@@ -54,7 +54,7 @@ angular.module('creapp3App')
       .state('myreqs.detail', {
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        controller: function($scope, $location, $stateParams, buyreqs){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs/myreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         },
@@ -73,7 +73,7 @@ angular.module('creapp3App')
       .state('brokerreqs.list', {
         url: '/list',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        controller: function(buyreqs, $state, $stateParams){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs/brokerreqs/' + $stateParams.brokerId);
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
@@ -82,7 +82,7 @@ angular.module('creapp3App')
       .state('brokerreqs.detail', {
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        controller: function($stateParams, buyreqs){
+        onEnter: function(buyreqs,$stateParams){
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         }

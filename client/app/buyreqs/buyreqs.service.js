@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('buyreqs', function ($rootScope, $http) {
+  .factory('buyreqs', function ($rootScope, $http, $state) {
 
     var buyreqs = [];
     var bounds = [];
@@ -11,7 +11,7 @@ angular.module('creapp3App')
 
     var resetBuyreqs = function(){
       buyreqs = [];
-      bounds = [];
+      // bounds = [];
       selectedReq = {};
       highlightedReq = {};
       url='';
@@ -19,7 +19,6 @@ angular.module('creapp3App')
 
 
     var updateBuyReqs = function(search){
-
       if (bounds.length === 0){ return;}
       // update mongo query object map bounds
       var query = {};
@@ -95,12 +94,13 @@ angular.module('creapp3App')
 
     var updateBounds = function(boundsArray){
       bounds = boundsArray;
-      updateBuyReqs();
+      if ($state.current.name.indexOf('detail') === -1) {
+        updateBuyReqs();
+      }
     };
 
     var updateUrl = function(newUrl){
       url = newUrl;
-      // updateBuyReqs();
     };
 
     return {
@@ -115,6 +115,5 @@ angular.module('creapp3App')
       unhighlightReq: unhighlightReq,
       getHighlightedReq: function(){return highlightedReq;},
       updateUrl: function(newUrl){url=newUrl;}
-      // updateSelf: function(newSelf){self=newSelf;}
     };
   });
