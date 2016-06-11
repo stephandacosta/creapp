@@ -24,7 +24,6 @@ angular.module('creapp3App')
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
         controller: function($scope, $location, $stateParams, buyreqs){
-          $scope.main.shareLink = $location.absUrl();
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         }
@@ -56,7 +55,6 @@ angular.module('creapp3App')
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
         controller: function($scope, $location, $stateParams, buyreqs){
-          $scope.main.shareLink = $location.absUrl();
           buyreqs.updateUrl('/api/buyreqs/myreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         },
@@ -85,6 +83,7 @@ angular.module('creapp3App')
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
         controller: function($stateParams, buyreqs){
+          buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateSelectedReq($stateParams.id);
         }
       });

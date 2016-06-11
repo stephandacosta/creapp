@@ -60,6 +60,7 @@ angular.module('creapp3App')
       if (selectedReq && selectedReq.user){
         $http.get('/api/users/' + selectedReq.user).then(response => {
           selectedReq.broker = response.data;
+          selectedReq.shareLink = location.host + '/broker/' + selectedReq.broker.userId + '/detail/' + selectedReq._id;
         })
         .catch(err => {console.log(err);});
       }

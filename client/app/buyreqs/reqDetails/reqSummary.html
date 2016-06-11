@@ -2,7 +2,7 @@
   <md-tabs flex class="md-primary md-hue-2">
     <md-tab label="Summary">
       <div layout="row" >
-        <md-button id="sharebutton" flex class="md-button md-primary md-raised" data-clipboard-text="{{main.shareLink}}">share</md-button>
+        <md-button id="sharebutton" flex class="md-button md-primary md-raised" data-clipboard-text="{{main.selectedReq.shareLink}}">share</md-button>
       </div>
       <div layout="row">
         <md-button flex ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">edit</md-button>
