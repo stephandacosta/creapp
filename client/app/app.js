@@ -43,11 +43,20 @@ angular.module('creapp3App', [
       landOnly: false,
       landWithProperty: false,
 
-      price: undefined,
-      sqft: undefined,
+      min_sqft: undefined,
+      max_sqft: undefined,
 
       buy: false,
+      buy_min_price: undefined,
+      buy_max_price: undefined,
+
       exchange: false,
+      exchange_min_price: undefined,
+      exchange_max_price: undefined,
+
+      lease: false,
+      lease_min_price: undefined,
+      lease_max_price: undefined,
 
       polygons: [],
       centers: [],

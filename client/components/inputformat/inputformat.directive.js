@@ -19,4 +19,37 @@ angular.module('creapp3App')
         });
       }
     };
-  }]);
+  }])
+  .directive('dollars', ['$filter',function ($filter) {
+    return {
+      require: '?ngModel',
+      link: function (scope, elem, attrs, ctrl) {
+        if (!ctrl) return;
+        ctrl.$formatters.unshift(function (a) {
+          return $filter('currency')(ctrl.$modelValue, '$', 0)
+        });
+        ctrl.$parsers.unshift(function (viewValue) {
+          var plainNumber = viewValue.replace(/[^\d]/g, '');
+          elem.val($filter('currency')(plainNumber, '$', 0));
+          return plainNumber;
+        });
+      }
+    };
+  }])
+  .directive('dollarspersqft', ['$filter',function ($filter) {
+    return {
+      require: '?ngModel',
+      link: function (scope, elem, attrs, ctrl) {
+        if (!ctrl) return;
+        ctrl.$formatters.unshift(function (a) {
+          return '$/sqft ' + (ctrl.$modelValue===undefined ? '' : ctrl.$modelValue);
+        });
+        ctrl.$parsers.unshift(function (viewValue) {
+          var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+          elem.val('$/sqft ' + (plainNumber===undefined ? '' : plainNumber));
+          plainNumber = plainNumber.replace(/\.$/g, '');
+          return plainNumber;
+        });
+      }
+    };
+  }]);;

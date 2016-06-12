@@ -25,7 +25,9 @@
         <div class="md-list-item-text">
           <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}}</h3>
           <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
-          <p>Price: {{ buyreq.min_price | currency:"$" : 0 }} - {{ buyreq.max_price | currency:"$" : 0 }} </p>
+          <p ng-if="buyreq.buy">Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }} </p>
+          <p ng-if="buyreq.exchange">Exchange Price: {{ buyreq.exchange_min_price | currency:"$" : 0 }} - {{ buyreq.exchange_max_price | currency:"$" : 0 }} </p>
+          <p ng-if="buyreq.lease">Lease Price: {{ buyreq.lease_min_price | currency:"$/sqft " : 2 }} - {{ buyreq.lease_max_price | currency:"$/sqft " : 2 }} </p>
           <p>Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft</p>
         </div>
 

@@ -9,11 +9,10 @@
 <div>
   <h3>Details</h3>
   <p>Type: {{req.type}} </p>
-  <p>Price: {{ req.min_price | currency:"$" : 0}} - {{ req.max_price | currency:"$" : 0}}</p>
   <p>Area:  {{ req.min_sqft | number:0 }}sqft - {{ req.max_sqft | number:0 }}sqft</p>
-  <p ng-if="req.buy">Buy {{ req.buy | checkmark }}</p>
-  <p ng-if="req.exchange">Exchange {{ req.exchange | checkmark }}</p>
-  <p ng-if="req.lease">Lease {{ req.lease | checkmark }}</p>
   <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
   <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
+  <p ng-if="req.buy">Buy Price: {{ req.buy_min_price | currency:"$" : 0}} - {{ req.buy_max_price | currency:"$" : 0}}</p>
+  <p ng-if="req.exchange">Exchange Price {{ req.exchange_min_price | currency:"$" : 0}} - {{ req.exchange_max_price | currency:"$" : 0}}</p>
+  <p ng-if="req.lease">Lease Price {{ req.lease_min_price | currency:"$" : 0}} - {{ req.lease_max_price | currency:"$" : 0}}</p>
 </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia) {
+  .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia, $timeout) {
     return {
       templateUrl: 'app/req/reqForm/reqForm.html',
       restrict: 'AE',
@@ -64,6 +64,11 @@ angular.module('creapp3App')
           });
         };
 
+        scope.scrollDown = function(){
+          $timeout(function() {
+           document.getElementById('sidenav').scrollTop = document.getElementById('sidenav').scrollHeight;
+         },100);
+        }
 
 
 
