@@ -3,8 +3,12 @@
 
   <div flex class="md-toolbar-tools" layout="row">
 
-    <div flex="20">
-      <h1><span> CREapp.us </span></h1>
+    <img ui-sref="buyreqs.list" class="logo" src="../../assets/images/logo.svg"></img>
+    <div flex="30" layout="row">
+      <a ui-sref="buyreqs.list" flex class="logo">
+        <span>CREapp.us</span>
+      </a>
+      <!-- <h1><span> CREapp.us </span></h1> -->
     </div>
 
     <div hide-xs flex layout="row">
@@ -71,7 +75,7 @@
     </div>
 
 
-    <!-- <span flex></span> -->
+    <span flex></span>
 
     <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 

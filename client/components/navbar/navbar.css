@@ -6,3 +6,26 @@
 .navtitle:hover {
   border: solid 1px white;
 }
+
+
+@media (max-width: 460px) {
+  img.logo {
+    width: 15%;
+    cursor: pointer;
+  }
+  .logo span {
+    color: #ebc1f3;
+    font-size: x-large;
+  }
+}
+
+@media (min-width: 460px) {
+  img.logo {
+    width: 6%;
+    cursor: pointer;
+  }
+  .logo span {
+    color: #ebc1f3;
+    font-size: x-large;
+  }
+}
