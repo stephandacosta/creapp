@@ -12,9 +12,6 @@
     </div>
 
     <div hide-xs flex layout="row">
-      <md-button class="md-primary md-ink-ripple navtitle" ui-sref="buyreqs.list" ui-sref-active="active">
-        Find
-      </md-button>
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add" ui-sref-active="active">
         Add
       </md-button>
@@ -116,7 +113,7 @@
           </md-menu-item>
 
           <md-menu-item >
-            <md-button class="md-primary" ui-sref="main" sp-logout>
+            <md-button class="md-primary" ui-sref="buyreqs.list" sp-logout>
               Logout
             </md-button>
           </md-menu-item>

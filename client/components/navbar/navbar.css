@@ -10,7 +10,7 @@
 
 @media (max-width: 460px) {
   img.logo {
-    width: 15%;
+    width: 45px;
     cursor: pointer;
   }
   .logo span {
@@ -23,7 +23,7 @@
 
 @media (min-width: 460px) {
   img.logo {
-    width: 6%;
+    width: 45px;
     cursor: pointer;
   }
   .logo span {
