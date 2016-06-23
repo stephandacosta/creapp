@@ -27,9 +27,10 @@ angular.module('creapp3App', [
   .run(function($stormpath){
     $stormpath.uiRouter({
       loginState: 'login',
-      defaultPostLoginState: 'main'
+      defaultPostLoginState: 'buyreqs.list'
     });
   })
+
 
   .constant('appConstants', {
     creTypes:['Any','Retail','Office','Leisure','Multifamily','Hotel','Senior Housing','Industrial','Health Care','Land','Agricultural', 'Other'],
