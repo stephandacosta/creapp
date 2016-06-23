@@ -1,0 +1,11 @@
+<md-content class="tourPanel">
+  <span class="md-toast-text" flex>Help {{tourPanel.index}} / {{tourPanel.steps}} </span>
+  <br>
+  <p> {{tourPanel.msg}} </p>
+  <md-button class="md-highlight" ng-click="tourPanel.nextPanel()">
+    Next
+  </md-button>
+  <md-button ng-click="tourPanel.closePanel()">
+    Close
+  </md-button>
+</md-content>

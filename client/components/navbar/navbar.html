@@ -30,7 +30,7 @@
 
       <md-menu hide-gt-xs>
         <md-button>
-          <md-icon ng-click="nav.openMenu($mdOpenMenu, $event)">
+          <md-icon ng-click="openMenu($mdOpenMenu, $event)">
             menu
           </md-icon>
         </md-button>
@@ -73,6 +73,7 @@
 
 
     <span flex></span>
+    <div class="brokerTour3 brokerTour4 brokerTour5"></div>
 
     <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 
@@ -91,7 +92,7 @@
 
       <md-menu>
 
-        <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple" ng-click="nav.openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
+        <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple" ng-click="openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
           <md-tooltip md-direction="bottom">
               Account
             </md-tooltip>
@@ -130,7 +131,7 @@
 
       <md-menu>
 
-        <a class="md-primary md-ink-ripple" ng-click="nav.openMenu($mdOpenMenu, $event)" type="button" style="cursor: pointer;" aria-label="More">
+        <a  id="account" class="md-primary md-ink-ripple" ng-click="openMenu($mdOpenMenu, $event)" type="button" style="cursor: pointer;" aria-label="More">
           <md-tooltip md-direction="bottom">
               More
             </md-tooltip>
@@ -146,7 +147,7 @@
               </md-button>
             </md-menu-item>
             <md-menu-item>
-              <md-button class="md-primary" ui-sref="help" ui-sref-active="active">
+              <md-button class="md-primary" ng-click="startTour()">
                 Help
               </md-button>
             </md-menu-item>

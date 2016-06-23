@@ -13,10 +13,14 @@ angular.module('creapp3App')
       .state('buyreqs.list', {
         url: '/',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams){
+        onEnter: function(buyreqs,$stateParams, $user, introService){
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
+          $user.get()
+            .catch(function (error) {
+              introService.showIntroPanel();
+            });
         }
       })
       .state('buyreqs.detail', {
