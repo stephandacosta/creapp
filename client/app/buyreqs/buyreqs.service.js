@@ -19,17 +19,17 @@ angular.module('creapp3App')
 
 
     var updateBuyReqs = function(search){
-      if (bounds.length === 0){ return;}
+      // if (bounds.length === 0){ return;}
       // update mongo query object map bounds
       var query = {};
-      query.centers = {
-        $geoWithin: {
-          $box: [
-            bounds[0],
-            bounds[1]
-          ]
-        }
-      };
+      // query.centers = {
+      //   $geoWithin: {
+      //     $box: [
+      //       bounds[0],
+      //       bounds[1]
+      //     ]
+      //   }
+      // };
 
       $http.get(url, {params: { query }}).then(response => {
         // update buyreqs list

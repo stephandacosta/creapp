@@ -1,13 +1,14 @@
-<div flex layout="row" layout-xs="column" style="background: #F3E5F5;">
-
-    <div flex-gt-xs layout-padding>
-      <label>Type</label>
-      <md-select ng-model="search.type" style="padding:0;margin:0;" aria-label="type">
-        <md-option ng-repeat="type in types" value="{{type}}">
-          {{type}}
-        </md-option>
-      </md-select>
-    </div>
+<div flex layout="column">
+  <div layout="row" flex layout-padding>
+    <span flex></span>
+    <label style="font-weight: bolder;">Type</label>
+    <span flex></span>
+    <md-select  flex="60" ng-model="search.type" style="padding:0;margin:0;" aria-label="type">
+      <md-option ng-repeat="type in types" value="{{type}}">
+        {{type}}
+      </md-option>
+    </md-select>
+  </div>
 
     <!-- <div flex-gt-xs layout-padding>
       <label>Max Price: {{search.max_price}}$/sqft (out of {{maxPrice}})</label>

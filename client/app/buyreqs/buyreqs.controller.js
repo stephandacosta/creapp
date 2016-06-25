@@ -14,8 +14,11 @@ angular.module('creapp3App')
     $scope.types= appConstants.creTypes;
 
     $scope.search = {
-      type: 'Any'
+      type: 'Any',
+      mapfilter: false
     };
+
+
 
     $scope.map = {
       tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -28,13 +31,38 @@ angular.module('creapp3App')
       selectedReq: buyreqs.getSelectedReq()
     };
 
+
+    //filters
     var typematch = function(item){
       return (($scope.search.type==='Any') ? true : angular.equals(item.type,$scope.search.type) );
     };
 
+
+    var createTestReqInBounds = function(bounds){
+      return function(req){
+        var _bounds = bounds;
+        return req.polygons.some(function(polygon){
+          return polygon.some(function(point){
+            return (point[0] >= _bounds[0][0] && point[0] <= _bounds[1][0]
+            && point[1] >= _bounds[0][1] && point[1] <= _bounds[1][1]);
+          });
+        });
+      };
+    };
+
+    var createMapFilter = function(bounds){
+      var testReqInBounds = createTestReqInBounds(bounds);
+      var mapfilter = function(item){
+        return (!($scope.search.mapfilter) ? true : testReqInBounds(item));
+      };
+      return mapfilter;
+    }
+
     var applyFilters = function(){
+      var mapfilter = createMapFilter(buyreqs.getBounds());
       var filtered = $scope.main.buyreqs;
       filtered = $filter('filter')(filtered, typematch);
+      filtered = $filter('filter')(filtered, mapfilter);
       $scope.filteredReqs = filtered;
       $scope.$emit('filter:update');
     }
@@ -42,6 +70,10 @@ angular.module('creapp3App')
     $scope.$watchCollection('search', function() {
       applyFilters();
     });
+
+    $scope.toggleMapFilter = function(){
+      $scope.search.mapfilter = !$scope.search.mapfilter;
+    }
 
     $scope.showfilter = false;
     $scope.openfilter = function(){
