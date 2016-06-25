@@ -14,5 +14,5 @@
   <p ng-if="req.landAndProperty">Land and Property {{ req.landAndProperty | checkmark }}</p>
   <p ng-if="req.buy">Buy Price: {{ req.buy_min_price | currency:"$" : 0}} - {{ req.buy_max_price | currency:"$" : 0}}</p>
   <p ng-if="req.exchange">Exchange Price {{ req.exchange_min_price | currency:"$" : 0}} - {{ req.exchange_max_price | currency:"$" : 0}}</p>
-  <p ng-if="req.lease">Lease Price {{ req.lease_min_price | currency:"$" : 0}} - {{ req.lease_max_price | currency:"$" : 0}}</p>
+  <p ng-if="req.lease">Lease Price {{ req.lease_min_price | currency:"$" : 2}} - {{ req.lease_max_price | currency:"$" : 2}} /sqft</p>
 </div>
