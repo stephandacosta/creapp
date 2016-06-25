@@ -85,7 +85,6 @@ angular.module('creapp3App')
       ]
     }
 
-      var alreadySeen = false;
       var index = 0
 
       var nextTooltip = function(){
@@ -132,13 +131,9 @@ angular.module('creapp3App')
 
       return {
         showTour : function(tourType) {
-          if (alreadySeen) {
-            return;
-          } else {
-            alreadySeen=false;
-            tooltipList = tooltipLists[tourType];
-            showCustomPanel();
-          }
+          alreadySeen=false;
+          tooltipList = tooltipLists[tourType];
+          showCustomPanel();
         },
         nextPanel : nextTooltip,
         resetTour : function(){index=0;}

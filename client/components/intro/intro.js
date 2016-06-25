@@ -2,31 +2,36 @@ angular.module('creapp3App')
   .factory('introService', function($mdToast, $mdPanel, $timeout, tourService){
 
     var panelRef;
+    var alreadySeen = false;
     var showIntroPanel = function () {
-      var panelPosition = $mdPanel.newPanelPosition()
+      if (!alreadySeen){
+        var panelPosition = $mdPanel.newPanelPosition()
         .absolute()
         .top('20%')
         .left('5%');
-      var config = {
-        // attachTo: toolTipList[index].parent,
-        controller: 'introCtrl',
-        controllerAs: 'introPanel',
-        position: panelPosition,
-        templateUrl: 'components/intro/intro.html',
-        clickOutsideToClose: true,
-        escapeToClose: true,
-        focusOnOpen: true
+        var config = {
+          // attachTo: toolTipList[index].parent,
+          controller: 'introCtrl',
+          controllerAs: 'introPanel',
+          position: panelPosition,
+          templateUrl: 'components/intro/intro.html',
+          clickOutsideToClose: true,
+          escapeToClose: true,
+          focusOnOpen: true
+        }
+        panelRef = $mdPanel.create(config);
+        panelRef.open()
+        .finally(function() {
+          document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
+          panelRef = undefined;
+          alreadySeen = true;
+        });
       }
-      panelRef = $mdPanel.create(config);
-      panelRef.open()
-          .finally(function() {
-            document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
-            panelRef = undefined;
-          });
     }
 
     return {
       showIntroPanel : showIntroPanel,
+      resetAlreadySeen : function(){alreadySeen=false;}
     };
 
 
