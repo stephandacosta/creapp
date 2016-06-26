@@ -1,0 +1,18 @@
+  <md-content ng-if="main.selected._id" layout="column" md-whiteframe="4" layout-padding layout-margin>
+
+    <h3 class="md-title">Sender</h3>
+    <h4 class="md-subhead"> Name: {{main.selected.from_givenName}} {{main.selected.from_surname}} </h4>
+    <h4 class="md-subhead"> Email: {{main.selected.from_email}}</h4>
+    <md-divider></md-divider>
+    <h3 class="md-title">Buy Req:</h3>
+    <p class="md-body-1">{{main.selected.buyreqTitle}}</p>
+    <md-divider></md-divider>
+    <h3 class="md-title">Message:</h3>
+    <p> {{main.selected.message}}</p>
+    <br>
+    <div layout="row">
+      <span flex></span>
+
+    </div>
+
+  </md-content>
