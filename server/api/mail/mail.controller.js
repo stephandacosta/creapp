@@ -23,6 +23,9 @@ var transporter = nodemailer.createTransport({
       pass: process.env.CREAPP_MAILPASS
   }
 });
+var path = require('path');
+var templateDir = path.join(__dirname, 'templates', 'messageNotification');
+var EmailTemplate = require('email-templates').EmailTemplate;
 
 
 
@@ -92,29 +95,64 @@ export function show(req, res) {
 }
 
 // Creates a new Mail in the DB
+// export function create(req, res) {
+//   var addition = req.body;
+//   addition.read = false;
+//   console.log('addition',addition);
+//   require('../user/user.controller').getEmail(addition.user, function(account){
+//     var mailOptions = {
+//         from: '"CREAapp notification" <notification@creapp.us>', // sender address
+//         to: account.email, // list of receivers
+//         subject: 'interest in your buy requirement', // Subject line
+//         text: 'Dear ' + account.fullName + ', ' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement headlined "' + addition.buyreqTitle + '" this is his message: ' + addition.message, // plaintext body
+//         html: '<p>Dear ' + account.fullName + ',</p><p>' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement</p><p> buyer requirement: "' + addition.buyreqTitle + '"</p><p> this is his message: </p><p>' + addition.message +'</p>' // html body
+//     };
+//     transporter.sendMail(mailOptions, function(error, info){
+//       if(error){
+//         console.log('emailing error',error);
+//       }
+//       console.log('email sent to ',mailOptions.to,' info:',info);
+//     });
+//   });
+//   return Mail.create(addition)
+//     .then(respondWithResult(res, 201))
+//     .catch(handleError(res));
+// }
+
+function createMail(addition, res) {
+  return function(prom) {
+    console.log(prom);
+    return Mail.create(addition)
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+  };
+}
+
 export function create(req, res) {
   var addition = req.body;
   addition.read = false;
   console.log('addition',addition);
   require('../user/user.controller').getEmail(addition.user, function(account){
-    var mailOptions = {
-        from: '"CREAapp notification" <notification@creapp.us>', // sender address
-        to: account.email, // list of receivers
-        subject: 'interest in your buy requirement', // Subject line
-        text: 'Dear ' + account.fullName + ', ' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement headlined "' + addition.buyreqTitle + '" this is his message: ' + addition.message, // plaintext body
-        html: '<p>Dear ' + account.fullName + ',</p><p>' + addition.from_surname + ' ' + addition.from_givenName + '( ' + addition.from_email + ' ) is interested in your buyer requirement</p><p> buyer requirement: "' + addition.buyreqTitle + '"</p><p> this is his message: </p><p>' + addition.message +'</p>' // html body
-    };
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log('emailing error',error);
-      }
-      console.log('email sent to ',mailOptions.to,' info:',info);
+    var sendNotification = transporter.templateSender(new EmailTemplate(templateDir), {
+      from: '"CREapp notification" <notification@creapp.us>'
     });
-  });
-  return Mail.create(addition)
-    .then(respondWithResult(res, 201))
+    return sendNotification({
+      to: account.email,
+      // EmailTemplate renders html and text but no subject so we need to
+      // set it manually either here or in the defaults section of templateSender()
+      subject: 'Interest in your buy requirement'
+    },
+    {
+      brokerName: account.givenName,
+      senderName: addition.from_givenName + ' ' + addition.from_surname,
+      email: addition.from_email,
+      message: addition.message
+    })
+    .then(createMail(addition,res))
     .catch(handleError(res));
+  });
 }
+
 
 // Updates an existing Mail in the DB
 export function update(req, res) {
