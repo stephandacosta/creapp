@@ -1,6 +1,6 @@
 
 angular.module('creapp3App')
-    .factory('tourService', function($mdToast, $mdPanel){
+    .factory('tourService', function($mdToast, $mdPanel, $mdMedia){
 
       // MdPanelPosition.xPosition = {
       //   CENTER: 'center',
@@ -23,64 +23,44 @@ angular.module('creapp3App')
           {
             msg: 'this is the list of buyer requirements available',
             parentClass: 'sellerTour1',
-            xPosition: 'center',
-            yPosition: 'center'
           },
           {
             msg: 'clicking on an item will open more details including contacts',
             parentClass: 'sellerTour2',
-            xPosition: 'center',
-            yPosition: 'below'
           },
           {
             msg: 'moving the map will filter the list',
             parentClass: 'sellerTour3',
-            xPosition: 'offset-end',
-            yPosition: 'below'
           },
           {
             msg: 'some other filters are available through this button',
             parentClass: 'sellerTour4',
-            xPosition: 'offset-end',
-            yPosition: 'center'
           }
       ],
       broker : [
         {
           msg: 'this is the list of buyer requirements available',
           parentClass: 'brokerTour1',
-          xPosition: 'center',
-          yPosition: 'center'
         },
         {
           msg: 'clicking on an item will open more details including contacts',
           parentClass: 'brokerTour2',
-          xPosition: 'center',
-          yPosition: 'center'
         },
         {
           msg: 'you will first need to register by providing your RE#',
           parentClass: 'brokerTour3',
-          xPosition: 'center',
-          yPosition: 'center'
         },
         {
           msg: 'once logged in clicking on add button will open buyer requirement form',
           parentClass: 'brokerTour4',
-          xPosition: 'center',
-          yPosition: 'center'
         },
         {
           msg: 'also fill in your profile details so that sellers can contact you',
           parentClass: 'brokerTour5',
-          xPosition: 'center',
-          yPosition: 'below'
         },
         {
           msg: 'feel free to contact us if you have any question',
           parentClass: 'brokerTour6',
-          xPosition: 'center',
-          yPosition: 'below'
         },
       ]
     }
@@ -97,51 +77,92 @@ angular.module('creapp3App')
 
 
       var panelRef;
+
+      var detachHotzones = function(){
+        var hotzone = document.getElementsByClassName('hotzone');
+        angular.element(hotzone).detach();
+      };
+
+      var attachHotzone = function(hotElement){
+        var parentRect = hotElement.getBoundingClientRect();
+        var xCoord = (parentRect.left + parentRect.right)/2;
+        var yCoord = (parentRect.top + parentRect.bottom)/2;
+
+        var hotzone = angular.element('<div class="hotzone"></div>');
+        hotzone.css({
+          'left': xCoord + 'px',
+          'top': yCoord + 'px',
+        });
+
+        var body = document.getElementsByTagName('body')[0];
+        angular.element(body).append(hotzone);
+        // $compile(hotzone)($scope);
+        return hotzone;
+      }
+
       var showCustomPanel = function () {
         tooltipList[index].index = index+1;
         tooltipList[index].steps = tooltipList.length;
-        var panelPosition = $mdPanel.newPanelPosition()
-            .relativeTo(document.getElementsByClassName(tooltipList[index].parentClass)[0])
-            .addPanelPosition(tooltipList[index].xPosition,tooltipList[index].yPosition);
-        // var panelAnimation = $mdPanelAnimation
-        //     .targetEvent($event)
-        //     .defaultAnimation('md-panel-animate-fly')
-        //     .closeTo('.show-button');
+
+        var parent = document.getElementsByClassName(tooltipList[index].parentClass)[0];
+        var hotzone = attachHotzone(parent);
+        var xCoord = parseFloat(hotzone.css('left'));
+        var yCoord = parseFloat(hotzone.css('top'));
+
+        if ($mdMedia('xs')) {
+          // mobile
+          var yPosition = yCoord >= window.innerHeight/2 ? (yCoord-230)+'px' : (yCoord+60)+'px';
+          var panelPosition = $mdPanel.newPanelPosition()
+              .absolute()
+              .left('15px')
+              .top(yPosition);
+        } else {
+          // tablets or desktop
+          var xPosition = xCoord <= window.innerWidth/2 ? 'offset-end' : 'offset-start';
+          var yPosition = yCoord >= window.innerHeight/2 ? 'above' : 'below';
+          var panelPosition = $mdPanel.newPanelPosition()
+              .relativeTo(document.getElementsByClassName('hotzone')[0])
+              .addPanelPosition(xPosition,yPosition);
+        }
+
         var config = {
-          // attachTo: toolTipList[index].parent,
           controller: panelCtrl,
           controllerAs: 'tourPanel',
           locals : tooltipList[index],
           position: panelPosition,
-          // animation: panelAnimation,
-          // targetEvent: $event,
+          zIndex: 1000,
+          panelClass : ($mdMedia('xs')? 'tourPanel-small' : 'tourPanel-large'),
           templateUrl: 'components/tour/tour.html',
           clickOutsideToClose: true,
           escapeToClose: true,
           focusOnOpen: true,
-          hasBackdrop: false
+          hasBackdrop: false,
+          onDomRemoved: detachHotzones
         }
         panelRef = $mdPanel.create(config);
         panelRef.open()
             .finally(function() {
-              document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
+              var outerWrapper = document.getElementsByClassName('md-panel-outer-wrapper')[0];
+              outerWrapper.className += " tourPanelWrapper";
               panelRef = undefined;
             });
       }
 
       return {
         showTour : function(tourType) {
-          alreadySeen=false;
+          // alreadySeen=false;
           tooltipList = tooltipLists[tourType];
           showCustomPanel();
         },
         nextPanel : nextTooltip,
-        resetTour : function(){index=0;}
+        resetTour : function(){index=0;},
+        detachHotzones : detachHotzones
       };
 
 
     })
   .controller('panelCtrl', panelCtrl);
+
     var panelCtrl = function(mdPanelRef, tourService){
       this._mdPanelRef = mdPanelRef;
       // $scope.msg = locals.msg;
@@ -150,6 +171,8 @@ angular.module('creapp3App')
       };
       this.nextPanel = function(){
         // tourService.nextPanel();
+        var hotzone = document.getElementsByClassName('hotzone');
+        angular.element(hotzone).detach();
         this._mdPanelRef.close()
           .finally(function(){
             tourService.nextPanel();
