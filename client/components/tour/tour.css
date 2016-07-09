@@ -20,19 +20,20 @@
 }
 
 .hotzone {
-   z-index: 1000;
+  z-index: 1000;
   border-radius: 50%;
   position:absolute;
   height: 50px;
   width: 50px;
-  background-color:#e040fb;
+  background-color:transparent;
 }
 
+/* this is used to create the pulse animation */
 .hotzone::before {
-  /* this is used to create the pulse animation */
   content: '';
   position: absolute;
-  background-color: #435856;
+  border: solid 2px #e040fb;
+  background-color: transparent;
   border-radius: 50%;
   width: 60%;
   height: 60%;
@@ -45,7 +46,7 @@
   /* this is used to create the pulse animation */
   content: '';
   position: absolute;
-  /*background-color: #e040fb;*/
+  border: solid 2px #e040fb;
   border-radius: 50%;
   width: 100%;
   height: 100%;

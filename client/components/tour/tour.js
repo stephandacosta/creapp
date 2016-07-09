@@ -36,33 +36,33 @@ angular.module('creapp3App')
             msg: 'some other filters are available through this button',
             parentClass: 'sellerTour4',
           }
-      ],
-      broker : [
-        {
-          msg: 'this is the list of buyer requirements available',
-          parentClass: 'brokerTour1',
-        },
-        {
-          msg: 'clicking on an item will open more details including contacts',
-          parentClass: 'brokerTour2',
-        },
-        {
-          msg: 'you will first need to register by providing your RE#',
-          parentClass: 'brokerTour3',
-        },
-        {
-          msg: 'once logged in clicking on add button will open buyer requirement form',
-          parentClass: 'brokerTour4',
-        },
-        {
-          msg: 'also fill in your profile details so that sellers can contact you',
-          parentClass: 'brokerTour5',
-        },
-        {
-          msg: 'feel free to contact us if you have any question',
-          parentClass: 'brokerTour6',
-        },
-      ]
+        ],
+        broker : [
+          {
+            msg: 'this is the list of buyer requirements available',
+            parentClass: 'brokerTour1',
+          },
+          {
+            msg: 'clicking on an item will open more details including contacts',
+            parentClass: 'brokerTour2',
+          },
+          {
+            msg: 'you will first need to register by providing your RE#',
+            parentClass: 'brokerTour3',
+          },
+          {
+            msg: 'once logged in clicking on add button will open buyer requirement form',
+            parentClass: 'brokerTour4',
+          },
+          {
+            msg: 'also fill in your profile details so that sellers can contact you',
+            parentClass: 'brokerTour5',
+          },
+          {
+            msg: 'feel free to contact us if you have any question',
+            parentClass: 'brokerTour6',
+          },
+        ]
     }
 
       var index = 0
@@ -85,8 +85,8 @@ angular.module('creapp3App')
 
       var attachHotzone = function(hotElement){
         var parentRect = hotElement.getBoundingClientRect();
-        var xCoord = (parentRect.left + parentRect.right)/2;
-        var yCoord = (parentRect.top + parentRect.bottom)/2;
+        var xCoord = (parentRect.left + parentRect.right)/2-25;
+        var yCoord = (parentRect.top + parentRect.bottom)/2-25;
 
         var hotzone = angular.element('<div class="hotzone"></div>');
         hotzone.css({

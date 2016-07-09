@@ -1,0 +1,25 @@
+<md-card flex>
+  <md-card-header>
+    Buyers
+  </md-card-header>
+  <md-card-content>
+    CREapp only accepts qualified buy requirements from brokers
+    <br>
+    <br>
+    We invite you to contact your broker or enter your email adress so we can suggest some of our members
+  </md-card-content>
+  <md-card-actions>
+    <md-input-container flex class="md-block">
+      <label class="md-headline">Email</label>
+      <input type="email" ng-model="buyer.email"></input>
+    </md-input-container>
+    <md-button class="md-primary md-raised">
+      Send
+    </md-button>
+    <md-button class="md-primary" ng-click="introPanel.closePanel()">
+      Skip
+    </md-button>
+  </md-card-actions>
+
+
+</md-card>

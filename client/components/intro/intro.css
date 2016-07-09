@@ -1,14 +1,24 @@
-#intro {
+/*#intro {
   width: 90%;
-  /*z-index: 1000;*/
-}
+  z-index: 1000;
+}*/
 
 .md-panel-outer-wrapper {
-  background-color: rgba(29, 51, 49, 0.65);
+  background-color: rgba(29, 51, 49, 0.22);
 }
 
-#intro md-card-header {
+.introPanel-large {
+    /*width: 25%;*/
+}
+
+
+
+.introCard-large md-card-header, .introCard-small md-card-header {
   background-color: #00695c;
   color: white;
   border: solid 3px white;
 }
+
+/*.introCard {
+  width:100%;
+}*/
