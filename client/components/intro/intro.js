@@ -3,6 +3,8 @@ angular.module('creapp3App')
 
     var panelRef;
     var alreadySeen = false;
+
+    // General Intro Panel to select type of user
     var showIntroPanel = function () {
       if (!alreadySeen){
         var panelPosition = $mdPanel.newPanelPosition()
@@ -25,13 +27,13 @@ angular.module('creapp3App')
         panelRef.open()
         .finally(function() {
           document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
-          document.getElementsByClassName('md-panel-outer-wrapper')[0].style.backgroundColor='rgba(29, 51, 49, 0.22)';
           panelRef = undefined;
           alreadySeen = true;
         });
       }
     };
 
+    // Specific Intro Card for selected type of user
     var showIntroCard= function (type) {
       var panelPosition = $mdPanel.newPanelPosition()
       .absolute()
@@ -53,7 +55,36 @@ angular.module('creapp3App')
       panelRef.open()
       .finally(function() {
         document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
-        // document.getElementsByClassName('md-panel-outer-wrapper')[0].style.backgroundColor='rgba(29, 51, 49, 0.22)';
+        panelRef = undefined;
+      });
+    };
+
+    // Specific Intro Card for selected type of user
+    var showBrokerPanel= function (broker) {
+      var panelPosition = $mdPanel.newPanelPosition()
+      .absolute()
+      .center();
+      var config = {
+        attachTo: angular.element(document.body),
+        controller: 'introCtrl',
+        controllerAs: 'introPanel',
+        position: panelPosition,
+        templateUrl: 'components/intro/brokerPage.html',
+        locals: {
+          broker : broker
+        },
+        clickOutsideToClose: true,
+        escapeToClose: true,
+        focusOnOpen: true,
+        panelClass : ($mdMedia('xs')? 'brokerPanel-small' : 'brokerPanel-large'),
+        // hasBackdrop: true,
+        fullscreen: true,
+        zIndex: 1000
+      }
+      panelRef = $mdPanel.create(config);
+      panelRef.open()
+      .finally(function() {
+        document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
         panelRef = undefined;
       });
     };
@@ -61,12 +92,14 @@ angular.module('creapp3App')
     return {
       showIntroPanel : showIntroPanel,
       showIntroCard : showIntroCard,
+      showBrokerPanel : showBrokerPanel,
       resetAlreadySeen : function(){alreadySeen=false;}
     };
 
 
   })
-  .controller('introCtrl', function(mdPanelRef, introService, tourService, $http, $mdToast){
+  .controller('introCtrl', function(mdPanelRef, introService, tourService, $http, $mdToast, broker){
+    this.broker = broker;
     var showToast = function(msg){
       $mdToast.show(
         $mdToast.simple()

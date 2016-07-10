@@ -13,12 +13,16 @@
 
 
 
-.introCard-large md-card-header, .introCard-small md-card-header {
+.introCard-large md-card-header, .introCard-small md-card-header, .brokerPanel-large md-card-header, .brokerPanel-small md-card-header {
   background-color: #00695c;
   color: white;
   border: solid 3px white;
 }
 
+.brokerPanel-small {
+  position: absolute;
+  height: 100%;
+}
 /*.introCard {
   width:100%;
 }*/

@@ -1,0 +1,54 @@
+<md-content flex layout="column">
+
+  <md-card md-whiteframe-3dp>
+    <md-card-content>
+      <p>
+        Dear Visitor,
+      </p>
+      <p>
+        Thanks for visiting my page on CREapp.us.
+        <br>
+        You will find here a list of buyer requirements that I manage.
+        <br>
+        Please don't hesitate to contact me should you find any interest in these items.
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <md-button class="md-primary md-raised" ng-click="introPanel.startTour('seller')">
+        Show me the list
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+  <md-divider></md-divider>
+
+  <md-card md-whiteframe-3dp>
+    <md-card-header>
+      Your Broker
+    </md-card-header>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{introPanel.broker.fullName}}</span>
+        <span ng-if="user.customData.function" class="md-subtitle">{{introPanel.broker.customData.function}}</span>
+        <span class="md-subhead">RE License #{{introPanel.broker.customData.license}}</span>
+        <span class="md-body-1">tel: {{introPanel.broker.customData.phone}} <span ng-if="introPanel.broker.customData.privatePhone" style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
+        <span class="md-body-1" ng-if="introPanel.broker.email">{{introPanel.broker.email}} <span style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
+        <span class="md-subhead">Loopnet Profile</span>
+        <a class="md-body-1" ng-if="introPanel.broker.customData.loopnet">{{introPanel.broker.customData.loopnet}}</a>
+        <span class="md-body-1" ng-if="!introPanel.broker.customData.loopnet">not set</span>
+        <span class="md-subhead">Linkedin Profile</span>
+        <a class="md-body-1">{{introPanel.broker.customData.linkedin}}</a>
+        <span class="md-body-1" ng-if="!introPanel.broker.customData.linkedin">not set</span>
+        <br>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout-align="end end">
+      <md-button class="md-accent md-hue-2 md-ink-ripple" style="border:solid;" ng-click="showMailForm($event)">
+        <i class="material-icons" style="font-size:32px;vertical-align:middle;">email</i>
+        Send Message
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+
+</md-content>

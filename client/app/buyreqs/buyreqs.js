@@ -69,6 +69,16 @@ angular.module('creapp3App')
         url: '/broker/{brokerId}',
         templateUrl: 'app/buyreqs/buyreqs.html',
         controller: 'BuyreqsCtrl',
+        resolve: {
+          broker : function($http, $stateParams){
+            return $http.get('/api/users/' + $stateParams.brokerId).then (function (response) {
+              return response.data;
+            });
+          }
+        },
+        onEnter: function(introService,broker){
+          introService.showBrokerPanel(broker);
+        },
         onExit: function(buyreqs){
           buyreqs.resetBuyreqs();
         }
