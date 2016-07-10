@@ -6,14 +6,18 @@
     CREapp only accepts qualified buy requirements from brokers
     <br>
     <br>
-    We invite you to contact your broker or enter your email adress so we can suggest some of our members
+    We invite you to contact your broker or send us your email contact so we can suggest some of our members
   </md-card-content>
   <md-card-actions>
     <md-input-container flex class="md-block">
       <label class="md-headline">Email</label>
-      <input type="email" ng-model="buyer.email"></input>
+      <input type="email" ng-model="introPanel.buyer.email"></input>
     </md-input-container>
-    <md-button class="md-primary md-raised">
+    <md-input-container flex class="md-block">
+      <label class="md-headline">Message</label>
+      <textarea ng-model="introPanel.buyer.message" md-maxlength="500" required></textarea>
+    </md-input-container>
+    <md-button class="md-primary md-raised" ng-click="introPanel.sendBuyerInfo()">
       Send
     </md-button>
     <md-button class="md-primary" ng-click="introPanel.closePanel()">

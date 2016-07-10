@@ -66,7 +66,16 @@ angular.module('creapp3App')
 
 
   })
-  .controller('introCtrl', function(mdPanelRef, introService, tourService){
+  .controller('introCtrl', function(mdPanelRef, introService, tourService, $http, $mdToast){
+    var showToast = function(msg){
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent(msg)
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
+    };
     this._mdPanelRef = mdPanelRef;
     // $scope.msg = locals.msg;
     this.closePanel = function(){
@@ -83,5 +92,29 @@ angular.module('creapp3App')
       .finally(function(){
         introService.showIntroCard(introType);
       });
-    }
+    };
+    this.buyer = {
+      email: '',
+      message: ''
+    };
+    this.sendBuyerInfo = function(){
+      var panel = this._mdPanelRef
+      var success = function(){
+        panel.close()
+        .finally(function(){
+          showToast('Thanks. Your message was sent');
+        });
+      };
+      var fail = function(){
+        panel.close()
+        .finally(function(){
+          showToast('There was an issue sending your message');
+        });
+      };
+      $http.post('/api/leads', {
+        email: this.buyer.email,
+        message: this.buyer.message
+      }).then(success, fail);
+    };
+
   });
