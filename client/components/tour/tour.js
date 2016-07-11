@@ -25,12 +25,16 @@ angular.module('creapp3App')
             parentClass: 'sellerTour1',
           },
           {
-            msg: 'clicking on an item will open more details including contacts',
+            msg: 'clicking on an item will open more details',
             parentClass: 'sellerTour2',
           },
           {
+            msg: 'clicking the map filter will allow to filter with the map',
+            parentClass: 'sellerTour3a',
+          },
+          {
             msg: 'moving the map will filter the list',
-            parentClass: 'sellerTour3',
+            parentClass: 'sellerTour3b',
           },
           {
             msg: 'some other filters are available through this button',
@@ -60,7 +64,6 @@ angular.module('creapp3App')
           },
           {
             msg: 'feel free to contact us if you have any question',
-            parentClass: 'brokerTour6',
           },
         ]
     }
@@ -104,10 +107,15 @@ angular.module('creapp3App')
         tooltipList[index].index = index+1;
         tooltipList[index].steps = tooltipList.length;
 
-        var parent = document.getElementsByClassName(tooltipList[index].parentClass)[0];
-        var hotzone = attachHotzone(parent);
-        var xCoord = parseFloat(hotzone.css('left'));
-        var yCoord = parseFloat(hotzone.css('top'));
+        if (tooltipList[index].parentClass){
+          var parent = document.getElementsByClassName(tooltipList[index].parentClass)[0];
+          var hotzone = attachHotzone(parent);
+          var xCoord = parseFloat(hotzone.css('left'));
+          var yCoord = parseFloat(hotzone.css('top'));
+        } else {
+          var xCoord = window.innerWidth/2;
+          var yCoord = window.innerHeight/2;
+        }
 
         if ($mdMedia('xs')) {
           // mobile
