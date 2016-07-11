@@ -216,7 +216,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "someotherdude",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "title": "a restaurant",
     "info": "I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa",
     "landOnly": false,
@@ -267,7 +267,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "someotherdude",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "title": "a restaurant",
     "info": "I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa",
     "landOnly": false,
@@ -356,7 +356,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "someotherdude",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "title": "a restaurant",
     "info": "I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa",
     "landOnly": false,
@@ -488,7 +488,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "someotherdude2",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Industrial",
     "title": "an industrial facility in Oakland",
     "info": "this is some test description",
@@ -585,7 +585,7 @@ export default [
     "created": "2016-03-27T14:10:16.549Z"
   },
   {
-    "user": "someotherdude2",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Land",
     "title": "farming land in Texas",
     "info": "this is a text dscription",
@@ -649,7 +649,7 @@ export default [
     "created": "2016-03-27T14:10:16.549Z"
   },
   {
-    "user": "someotherdude2",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Mulitfamily",
     "title": "home by the beach",
     "info": "this is a test description",
@@ -739,7 +739,7 @@ export default [
     "created": "2016-03-27T14:10:16.549Z"
   },
   {
-    "user": "someotherdude3",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Retail",
     "title": "shopping space in Fort Lauderdale",
     "info": "this is a test description",
@@ -881,7 +881,7 @@ export default [
     "created": "2016-03-27T14:10:16.549Z"
   },
   {
-    "user": "someotherdude3",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Office",
     "info": "this is a test description",
     "landOnly": false,
@@ -955,7 +955,7 @@ export default [
     "created": "2016-03-27T14:20:15.742Z"
   },
   {
-    "user": "someotherdude2",
+    "user": "5d9rQBLuegNquRs2yeXZqA",
     "type": "Leisure",
     "title": "Retirement Home in Long Beach, CA",
     "info": "this is a test description",
