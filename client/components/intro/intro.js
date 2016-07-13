@@ -15,6 +15,9 @@ angular.module('creapp3App')
           // attachTo: toolTipList[index].parent,
           controller: 'introCtrl',
           controllerAs: 'introPanel',
+          locals: {
+            broker : undefined
+          },
           position: panelPosition,
           templateUrl: 'components/intro/intro.html',
           clickOutsideToClose: true,
@@ -45,6 +48,9 @@ angular.module('creapp3App')
         controllerAs: 'introPanel',
         position: panelPosition,
         templateUrl: 'components/intro/intro'+type+'.html',
+        locals: {
+          broker : undefined
+        },
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
@@ -70,9 +76,9 @@ angular.module('creapp3App')
         controllerAs: 'introPanel',
         position: panelPosition,
         templateUrl: 'components/intro/brokerPage.html',
-        locals: {
-          broker : broker
-        },
+        // locals: {
+        //   broker : broker
+        // },
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
@@ -99,7 +105,9 @@ angular.module('creapp3App')
 
   })
   .controller('introCtrl', function(mdPanelRef, introService, tourService, $http, $mdToast, broker){
-    this.broker = broker;
+    if(broker){
+      this.broker = broker;
+    }
     var showToast = function(msg){
       $mdToast.show(
         $mdToast.simple()
