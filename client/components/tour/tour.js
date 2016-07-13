@@ -124,13 +124,19 @@ angular.module('creapp3App')
               .absolute()
               .left('15px')
               .top(yPosition);
-        } else {
+        } else if (tooltipList[index].parentClass){
           // tablets or desktop
           var xPosition = xCoord <= window.innerWidth/2 ? 'offset-end' : 'offset-start';
           var yPosition = yCoord >= window.innerHeight/2 ? 'above' : 'below';
           var panelPosition = $mdPanel.newPanelPosition()
               .relativeTo(document.getElementsByClassName('hotzone')[0])
               .addPanelPosition(xPosition,yPosition);
+        } else {
+          var yPosition = yCoord >= window.innerHeight/2 ? (yCoord-230)+'px' : (yCoord+60)+'px';
+          var panelPosition = $mdPanel.newPanelPosition()
+              .absolute()
+              .left((xCoord-100) + 'px')
+              .top(yPosition);
         }
 
         var config = {
