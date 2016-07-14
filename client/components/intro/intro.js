@@ -76,9 +76,9 @@ angular.module('creapp3App')
         controllerAs: 'introPanel',
         position: panelPosition,
         templateUrl: 'components/intro/brokerPage.html',
-        // locals: {
-        //   broker : broker
-        // },
+        locals: {
+          broker : broker
+        },
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
