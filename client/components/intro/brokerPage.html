@@ -1,4 +1,4 @@
-<md-content flex layout="column">
+<md-content flex layout="column" style="background-color: rgba(29, 51, 49, 0.22);height:100%;">
 
   <md-card md-whiteframe-3dp>
     <md-card-content>
@@ -19,8 +19,6 @@
       </md-button>
     </md-card-actions>
   </md-card>
-
-  <md-divider></md-divider>
 
   <md-card md-whiteframe-3dp>
     <md-card-header>
@@ -43,10 +41,7 @@
       </md-card-title-text>
     </md-card-title>
     <md-card-actions layout-align="end end">
-      <md-button class="md-accent md-hue-2 md-ink-ripple" style="border:solid;" ng-click="showMailForm($event)">
-        <i class="material-icons" style="font-size:32px;vertical-align:middle;">email</i>
-        Send Message
-      </md-button>
+      <mailbutton broker="introPanel.broker"></mailbutton>
     </md-card-actions>
   </md-card>
 
