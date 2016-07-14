@@ -1,11 +1,10 @@
-<div layout="row" layout-margin>
+<div layout="row" layout-margin style="margin-bottom:20px;">
   <md-button class="md-raised md-primary" ui-sref="profile.view">View Profile</md-button>
   <md-button class="md-raised md-primary" ng-click="saveUserEdits()">Save</md-button>
 </div>
 
-
-<div flex layout="column" layout-gt-sm="row" md-whiteframe="3" layout-padding layout-margin>
-  <div flex="10" layout="column" layout-margin>
+<!-- <div layout="column" style="border: solid 2px green;"> -->
+  <div class="profileEdit" layout-margin layout-padding md-whiteframe="3" style="overflow:scroll;">
     <!-- <span flex></span> -->
     <div flex layout="row">
       <md-input-container flex class="md-block">
@@ -48,24 +47,26 @@
     </div>
     <div flex>
       <md-input-container class="md-block">
-        <label class="md-subhead">Loopnet Profile</label>
+        <label class="md-title">Loopnet Profile</label>
         <input type="text" ng-model="userEdit.customData.loopnet"></input>
       </md-input-container>
     </div>
     <div flex>
       <md-input-container class="md-block">
-        <label class="md-subhead">Linkedin Profile</label>
+        <label class="md-title">Linkedin Profile</label>
         <input type="text" ng-model="userEdit.customData.linkedin"></input>
         <div class="md-caption">your picture will appear if you sign in with linkedin</div>
       </md-input-container>
     </div>
+    <br>
+    <div flex>
+      <md-input-container class="md-block">
+        <label class="md-headline">Summary</label>
+        <textarea rows="3" ng-model="userEdit.customData.summary"></textarea>
+      </md-input-container>
+    </div>
+
   </div>
 
-  <div flex layout="column" layout-padding>
-    <md-input-container layout="column" class="md-block">
-      <label class="md-headline">Summary</label>
-      <textarea ng-model="userEdit.customData.summary"></textarea>
-    </md-input-container>
-  </div>
 
-</div>
+<!-- </div> -->

@@ -32,6 +32,19 @@ angular.module('creapp3App')
       });
     };
 
+    $scope.profileLink = location.host + '/broker/' + $scope.user.href.substr($scope.user.href.lastIndexOf('/') + 1) + '/list';
+
+    var clipboard = new Clipboard('#shareProfile');
+    clipboard.on('success', function(e) {
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('link has been copied to your clipboard, paste it anywhere')
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
+    });
+
 
 
   });
