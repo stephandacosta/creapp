@@ -125,13 +125,14 @@ angular.module('creapp3App')
               .left('15px')
               .top(yPosition);
         } else if (tooltipList[index].parentClass){
-          // tablets or desktop
+          // tablets or desktop with hotzone
           var xPosition = xCoord <= window.innerWidth/2 ? 'offset-end' : 'offset-start';
           var yPosition = yCoord >= window.innerHeight/2 ? 'above' : 'below';
           var panelPosition = $mdPanel.newPanelPosition()
               .relativeTo(document.getElementsByClassName('hotzone')[0])
               .addPanelPosition(xPosition,yPosition);
         } else {
+          // tablets or desktop without hotzone
           var yPosition = yCoord >= window.innerHeight/2 ? (yCoord-230)+'px' : (yCoord+60)+'px';
           var panelPosition = $mdPanel.newPanelPosition()
               .absolute()
