@@ -11,38 +11,57 @@
       <!-- <h1><span> CREapp.us </span></h1> -->
     </div>
 
-    <div hide-xs flex layout="row">
+    <!-- <div hide-xs flex layout="row">
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add" ui-sref-active="active">
         Add
       </md-button>
       <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs.list" ui-sref-active="active">
         My Reqs
       </md-button>
-      <!-- <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
+      <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
         <md-tooltip md-direction="right">your broker</md-tooltip>
         <md-icon>face</md-icon>
-      </md-button> -->
-    </div>
+      </md-button>
+    </div> -->
 
     <span flex></span>
 
-    <div flex>
+    <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 
-      <md-menu hide-gt-xs>
-        <md-button>
-          <md-icon ng-click="openMenu($mdOpenMenu, $event)">
+      <md-button class="navtitle" ui-sref="login" ui-sref-active="active">
+        Login
+      </md-button>
+
+      <md-button class="navtitle" ui-sref="register" ui-sref-active="active" class="brokerTour3 brokerTour4 brokerTour5">
+        Register
+      </md-button>
+
+    </div>
+
+
+
+
+      <md-menu class="navtitle" md-offset="0 50">
+        <md-button ng-click="openMenu($mdOpenMenu, $event)">
+          <md-icon>
             menu
           </md-icon>
         </md-button>
         <md-menu-content width="4" class="md-primary">
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="buyreqs.list" ui-sref-active="active">
-              Find
+          <md-menu-item  hide-gt-xs if-not-user >
+            <md-button class="md-primary" ui-sref="login" ui-sref-active="active">
+              Login
             </md-button>
           </md-menu-item>
-          <md-menu-item if-user>
-            <md-button class="md-primary" ui-sref="req.add" ui-sref-active="active">
-              Add
+          <md-menu-item hide-gt-xs if-not-user >
+            <md-button class="md-primary" ui-sref="register" ui-sref-active="active">
+              Register
+            </md-button>
+          </md-menu-item>
+          <md-divider hide-gt-xs></md-divider>
+          <md-menu-item>
+            <md-button class="md-primary" ui-sref="buyreqs.list" ui-sref-active="active">
+              All Reqs
             </md-button>
           </md-menu-item>
           <md-menu-item if-user >
@@ -50,16 +69,17 @@
               My Reqs
             </md-button>
           </md-menu-item>
-          <md-menu-item  if-not-user >
-            <md-button class="md-primary" ui-sref="login" ui-sref-active="active">
-              Login
+          <md-menu-item if-user>
+            <md-button class="md-primary" ui-sref="req.add" ui-sref-active="active">
+              Create Req
             </md-button>
           </md-menu-item>
-          <md-menu-item  if-not-user >
-            <md-button class="md-primary" ui-sref="register" ui-sref-active="active">
-              Register
+          <md-divider></md-divider>
+          <!-- <md-menu-item>
+            <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
+              Your Broker
             </md-button>
-          </md-menu-item>
+          </md-menu-item> -->
           <md-menu-item>
             <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
               About
@@ -75,7 +95,6 @@
               Legal
             </md-button>
           </md-menu-item>
-
           <!-- <md-menu-item >
             <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
               Admin Console
@@ -84,28 +103,10 @@
         </md-menu-content>
       </md-menu>
 
-    </div>
-
-
-    <span flex></span>
-    <div></div>
-
-    <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
-
-      <md-button ui-sref="login" ui-sref-active="active">
-        Login
-      </md-button>
-
-      <md-button ui-sref="register" ui-sref-active="active" class="brokerTour3 brokerTour4 brokerTour5">
-        Register
-      </md-button>
-
-    </div>
-
 
     <div if-user layout="row">
 
-      <md-menu>
+      <md-menu  md-offset="0 50">
 
         <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple" ng-click="openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
           <md-tooltip md-direction="bottom">
@@ -139,42 +140,6 @@
       </md-menu>
 
     </div>
-
-    <!-- <span flex="5"></span> -->
-
-    <div hide-xs layout="row" style="margin-left: 15px;">
-
-      <md-menu>
-
-        <a  id="account" class="md-primary md-ink-ripple" ng-click="openMenu($mdOpenMenu, $event)" type="button" style="cursor: pointer;" aria-label="More">
-          <md-tooltip md-direction="bottom">
-              More
-            </md-tooltip>
-          <md-icon class="material-icons" style="vertical-align: middle;">more_vert</md-icon>
-        </a>
-
-        <md-menu-content class="md-primary" width="4">
-
-          <md-menu-item>
-            <md-menu-item>
-              <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
-                About
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button class="md-primary" ng-click="startTour()">
-                Help
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button class="md-primary" ui-sref="legal" ui-sref-active="active">
-                Legal
-              </md-button>
-            </md-menu-item>
-
-        </md-menu-content>
-
-      </md-menu>
 
   </div>
 </md-toolbar>
