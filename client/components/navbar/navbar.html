@@ -12,10 +12,10 @@
     </div>
 
     <!-- <div hide-xs flex layout="row">
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add">
         Add
       </md-button>
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs.list" ui-sref-active="active">
+      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs.list">
         My Reqs
       </md-button>
       <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
@@ -28,11 +28,11 @@
 
     <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
 
-      <md-button class="navtitle" ui-sref="login" ui-sref-active="active">
+      <md-button class="navtitle" ui-sref="login">
         Login
       </md-button>
 
-      <md-button class="navtitle" ui-sref="register" ui-sref-active="active" class="brokerTour3 brokerTour4 brokerTour5">
+      <md-button class="navtitle" ui-sref="register" class="brokerTour3 brokerTour4 brokerTour5">
         Register
       </md-button>
 
@@ -49,39 +49,39 @@
         </md-button>
         <md-menu-content width="4" class="md-primary">
           <md-menu-item  hide-gt-xs if-not-user >
-            <md-button class="md-primary" ui-sref="login" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="login">
               Login
             </md-button>
           </md-menu-item>
           <md-menu-item hide-gt-xs if-not-user >
-            <md-button class="md-primary" ui-sref="register" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="register">
               Register
             </md-button>
           </md-menu-item>
           <md-divider hide-gt-xs></md-divider>
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="buyreqs.list" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="buyreqs.list">
               All Reqs
             </md-button>
           </md-menu-item>
           <md-menu-item if-user >
-            <md-button class="md-primary" ui-sref="myreqs.list" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="myreqs.list">
               My Reqs
             </md-button>
           </md-menu-item>
           <md-menu-item if-user>
-            <md-button class="md-primary" ui-sref="req.add" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="req.add">
               Create Req
             </md-button>
           </md-menu-item>
           <md-divider></md-divider>
           <!-- <md-menu-item>
-            <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="about">
               Your Broker
             </md-button>
           </md-menu-item> -->
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="about" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="about">
               About
             </md-button>
           </md-menu-item>
@@ -91,12 +91,12 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="legal" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="legal">
               Legal
             </md-button>
           </md-menu-item>
           <!-- <md-menu-item >
-            <md-button if-user-in-group="admins" ui-sref="admins" ui-sref-active="active">
+            <md-button if-user-in-group="admins" ui-sref="admins">
               Admin Console
             </md-button>
           </md-menu-item > -->
@@ -118,13 +118,13 @@
         <md-menu-content class="md-primary" width="4">
 
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="mailbox.views" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="mailbox.views">
               Messages
             </md-button>
           </md-menu-item>
 
           <md-menu-item>
-            <md-button class="md-primary" ui-sref="profile.view" ui-sref-active="active">
+            <md-button class="md-primary" ui-sref="profile.view">
               Profile
             </md-button>
           </md-menu-item>
