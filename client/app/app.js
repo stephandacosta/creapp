@@ -5,6 +5,7 @@ angular.module('creapp3App', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngTouch',
   'ngMaterial',
   'ui.router',
   'stormpath',
