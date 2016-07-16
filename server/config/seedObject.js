@@ -599,7 +599,6 @@ export default [
     "exchange": true,
     "lease":false,
     "active": true,
-    "user": "steph.dacosta@laposte.net",
     "centers": [
       [
         32.372573924375686,
@@ -663,7 +662,6 @@ export default [
     "exchange": true,
     "lease":false,
     "active": true,
-    "user": "steph.dacosta@laposte.net",
     "centers": [
       [
         39.82097650885375,
@@ -753,7 +751,6 @@ export default [
     "exchange": false,
     "lease":false,
     "active": true,
-    "user": "steph.dacosta@laposte.net",
     "centers": [
       [
         26.150481758754736,
@@ -969,7 +966,6 @@ export default [
     "exchange": false,
     "lease":false,
     "active": true,
-    "user": "steph.dacosta@laposte.net",
     "centers": [
       [
         33.75295897213988,
