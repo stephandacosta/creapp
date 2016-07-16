@@ -4,6 +4,10 @@ angular.module('creapp3App')
   .directive('profile', function ($mdDialog) {
     return {
       templateUrl: 'app/profile/profileView.html',
-      restrict: 'E'
+      restrict: 'E',
+      scope: {
+        user: '=user',
+        buyreq: '=buyreq'
+      }
     };
   });
