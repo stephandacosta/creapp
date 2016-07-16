@@ -3,7 +3,6 @@
 angular.module('creapp3App')
   .directive('reqMap', function ($state, $compile, $timeout, $location, buyreqs) {
     return {
-      template: '<div></div>',
       restrict: 'E',
       scope: false,
       link: function (scope, element, attrs) {
