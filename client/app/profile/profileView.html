@@ -5,25 +5,25 @@
     <md-card >
       <md-card-header>
         <md-card-header-text>
-        <span ng-if="user.customData.function" class="md-subtitle">{{user.customData.function}}</span>
-        <span class="md-subhead">RE License #{{user.customData.license}}</span>
+        <span ng-if="broker.customData.function" class="md-subtitle">{{broker.customData.function}}</span>
+        <span class="md-subhead">RE License #{{broker.customData.license}}</span>
         </md-card-header-text>
       </md-card-header>
       <md-card-actions layout="row" layout-align="start center">
-        <mailbutton broker="user"></mailbutton>
+        <mailbutton broker="broker"></mailbutton>
       </md-card-actions>
       <md-divider></md-divider>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">{{user.fullName}}</span>
-          <span class="md-body-1" ng-if="user.email">{{user.email}} <span style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
-          <span class="md-body-1">tel: {{user.customData.phone}} <span ng-if="user.customData.privatePhone" style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
+          <span class="md-headline">{{broker.fullName}}</span>
+          <span class="md-body-1" ng-if="broker.email">{{broker.email}} <span style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
+          <span class="md-body-1">tel: {{broker.customData.phone}} <span ng-if="broker.customData.privatePhone" style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
           <span class="md-subhead">Loopnet Profile</span>
-          <a class="md-body-1" ng-if="user.customData.loopnet">{{user.customData.loopnet}}</a>
-          <span class="md-body-1" ng-if="!user.customData.loopnet">not set</span>
+          <a class="md-body-1" ng-if="broker.customData.loopnet">{{broker.customData.loopnet}}</a>
+          <span class="md-body-1" ng-if="!broker.customData.loopnet">not set</span>
           <span class="md-subhead">Linkedin Profile</span>
-          <a class="md-body-1">{{user.customData.linkedin}}</a>
-          <span class="md-body-1" ng-if="!user.customData.linkedin">not set</span>
+          <a class="md-body-1">{{broker.customData.linkedin}}</a>
+          <span class="md-body-1" ng-if="!broker.customData.linkedin">not set</span>
           <br>
         </md-card-title-text>
         <md-card-title-media>
@@ -32,7 +32,7 @@
       </md-card-title>
       <md-card-content>
         <span class="md-subtitle"><h4>Summary</h4></span>
-        <span class="md-body-1">{{user.customData.summary}}</span>
+        <span class="md-body-1">{{broker.customData.summary}}</span>
       </md-card-content>
     </md-card>
 

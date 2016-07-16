@@ -6,7 +6,7 @@ angular.module('creapp3App')
       templateUrl: 'app/profile/profileView.html',
       restrict: 'E',
       scope: {
-        user: '=user',
+        broker: '=user',
         buyreq: '=buyreq'
       }
     };
