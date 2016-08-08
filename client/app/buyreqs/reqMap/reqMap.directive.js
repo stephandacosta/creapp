@@ -1,73 +1,49 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMap', function ($state, $compile, $timeout, $location, buyreqs) {
+  .directive('reqMap', function ($state, $compile, $timeout, $location, buyreqs, geosearchService) {
     return {
       restrict: 'E',
       scope: false,
       link: function (scope, element, attrs) {
-
-        if ($location.absUrl().indexOf('localhost')===-1){
-          L.Icon.Default.imagePath = 'bower_components/leaflet/dist/images';
-        }
 
         var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
 
-        // add geosearch plugin
-        var geosearch = new L.Control.GeoSearch({
-            provider: new L.GeoSearch.Provider.OpenStreetMap(),
-            position: 'topleft',
-            showMarker: true,
-            retainZoomLevel: true,
-        }).addTo(map);
-
-        // suffix United States
-        geosearch._searchbox.oninput = function(){
-          if (this.value === ', United States'){
-            this.value = '';
-          }
-          if (this.value.length===1) {
-            this.value = this.value + ', United States';
-            if (this.createTextRange) {
-              var part = this.createTextRange();
-              part.move("character", 1);
-              part.select();
-            } else if (this.setSelectionRange){
-              this.setSelectionRange(1, 1);
+        var searchLayer = L.layerGroup().addTo(map);
+        var processSearchResults = function(obj){
+            if (obj[0].geojson.coordinates[0][0].length>=3){
+              map.panTo([obj[0].lat, obj[0].lon]);
+              var searchedGeoJson = obj[0].geojson.coordinates;
+              searchedGeoJson.forEach(function(geoarray){
+                var latlngs = geoarray[0].map(function(lnglat){
+                  return [lnglat[1],lnglat[0]];
+                });
+                searchLayer.addLayer(L.polygon(latlngs, {className:'searchresult'})
+                .setStyle({color:'#e91e63', fillColor: '#e91e63'}));
+                // .on('click', function(e) {
+                //   searchLayer.clearLayers();
+                // .on('click contextmenu', function(e) {
+                //   $state.go('^.detail',{id: req._id });
+                // }));
+                // map.fitBounds( obj[0].boundingbox<LatLngBounds> bounds, <fitBounds options> options? )
+              });
+            } else {
+              map.panTo([obj[0].lat, obj[0].lon]);
+              L.marker([obj[0].lat, obj[0].lon]).bindPopup('<div>marker popoup</div>').openPopup().addTo(map);
+              // marker.bindPopup(popupContent).openPopup();
             }
-              this.focus();
-          }
-        }
-
-        var mapControls = L.Control.extend({
-          options: {
-            //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-            position: 'topleft'
-          },
-          onAdd: function (map) {
-            var container = L.DomUtil.create('div', 'mapcontrols');
-            angular.element(container).append($compile('<req-map-controls></req-map-controls>')(scope));
-            return container;
-          }
-        });
-        map.addControl(new mapControls());
-
-
-        scope.zoomIn = function(){
-          map.zoomIn();
         };
-        scope.zoomOut = function(){
-          map.zoomOut();
+        var processSearchError = function(obj){
+          console.log(obj);
         };
+        // geosearchService.getLocation('san+francisco,+united+states', processSearchResults, processSearchError);
 
 
         var polygonsLayer = L.layerGroup().addTo(map);
-        var baseLayer, highlightedLayer;
-
-
+        var baseLayer, highlightedLayer, searchLayer;
 
         scope.$on('filter:update', function(event){
           event.stopPropagation();

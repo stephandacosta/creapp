@@ -107,6 +107,22 @@ angular.module('creapp3App')
         $scope.toggleProfile = angular.bind(sideNav, sideNav.toggle );
     });
 
+    $scope.smallSmallMap = !$mdMedia('xs');
+    if ($scope.smallSmallMap){
+      $scope.mapSizeIcon = "zoom_out_map";
+    } else {
+      $scope.mapSizeIcon =   "picture_in_picture_alt";
+    }
+    $scope.toggleSmallSmallMap = function(){
+      $scope.smallSmallMap = !$scope.smallSmallMap;
+      if ($scope.smallSmallMap){
+        $scope.mapSizeIcon = "zoom_out_map";
+      } else {
+        $scope.mapSizeIcon =   "picture_in_picture_alt";
+      }
+    };
+
+
     var clipboard = new Clipboard('#sharebutton');
     clipboard.on('success', function(e) {
       $mdToast.show(

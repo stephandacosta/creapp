@@ -26,9 +26,7 @@ md-card-title-text > span {
   padding:0;
 }
 
-req-map, req-mapedit {
-  border: solid #009688;
-}
+
 
 .md-open-menu-container {
   z-index:1000;

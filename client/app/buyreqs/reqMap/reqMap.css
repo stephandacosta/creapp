@@ -1,16 +1,48 @@
-.leaflet-bar a, .leaflet-bar a:hover {
-  width: 40px;
-  height: 40px;
-  background-color: #4DB6AC;
+req-map, req-mapedit {
+  border: solid 1px rgba(0, 150, 136, 0.42);
+  margin: 5px;
 }
 
-.leaflet-control-geosearch form {
-  height: 35px;
-  left: 45px;
-  width: 300px;
+#mapresize {
+  position: absolute;
+  z-index:500;
+  margin-top: 7px;
+  min-width: 1%;
 }
 
-.leaflet-control-geosearch form input {
-  font-size: 18px;
-  width:100%
+.bigmap {
+  position:relative;
+}
+
+.smallmap {
+  /*position:fixed;*/
+  position: absolute;
+  bottom:0;
+  right:0;
+}
+
+.smallmap.smallSmallMap {
+  width:150px;
+  height:140px;
+}
+
+.smallmap.largeSmallMap {
+  width:100%;
+  height:50vh;
+}
+
+.smallSmallMap #mapresize {
+  top:-40px;
+  right: 0px;
+}
+
+.largeSmallMap #mapresize {
+  margin-top: 7px;
+  min-width: 1%;
+  right: 2px;
+}
+
+
+.smallSmallMap .leaflet-control-attribution {
+  display: none;
 }

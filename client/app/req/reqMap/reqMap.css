@@ -1,6 +1,6 @@
 /*styles for FreeDraw*/
 .reqmap.mode-create {
-    cursor: crosshair !important;
+    cursor: url(client/assets/images/pencil.png)!important;
 }
 
 .reqmap g path {

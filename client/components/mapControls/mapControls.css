@@ -1,0 +1,30 @@
+#mapcontrols{
+  position: absolute;
+  margin-left: 5px;
+  /*margin-top:5px;*/
+}
+
+.largemap #mapcontrols {
+  top: 5px;
+}
+
+.smallSmallMap #mapcontrols {
+  display:none;
+}
+
+.largeSmallMap #mapcontrols {
+  bottom: 5px;
+}
+
+
+/*#mapcontrols.small {
+  top: 5px;
+}
+
+#mapcontrols.big {
+  top: 5px;
+}*/
+
+ /*.smallmap #mapcontrols {
+   display: none;
+ }*/

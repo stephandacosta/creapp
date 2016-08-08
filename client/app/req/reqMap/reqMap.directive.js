@@ -51,52 +51,7 @@ angular.module('creapp3App')
           attribution: scope.map.attribution
         }).addTo(map);
 
-        // add geosearch plugin
-        var geosearch = new L.Control.GeoSearch({
-            provider: new L.GeoSearch.Provider.OpenStreetMap(),
-            position: 'topleft',
-            showMarker: true,
-            retainZoomLevel: true,
-        }).addTo(map);
-
-        // suffix United States
-        geosearch._searchbox.oninput = function(){
-          if (this.value === ', United States'){
-            this.value = '';
-          }
-          if (this.value.length===1) {
-            this.value = this.value + ', United States';
-            if (this.createTextRange) {
-              var part = this.createTextRange();
-              part.move("character", 1);
-              part.select();
-            } else if (this.setSelectionRange){
-              this.setSelectionRange(1, 1);
-            }
-              this.focus();
-          }
-        }
-
-
-        var mapEditControls = L.Control.extend({
-          options: {
-            //control position - allowed: 'topleft', 'topright', 'bottomleft', 'bottomright'
-            position: 'topleft'
-          },
-          onAdd: function (map) {
-            var container = L.DomUtil.create('div', 'mapcontrols');
-            angular.element(container).append($compile('<req-map-edit-controls></req-map-edit-controls>')(scope));
-            return container;
-          }
-        });
-        map.addControl(new mapEditControls());
-
-        scope.zoomIn = function(){
-          map.zoomIn();
-        };
-        scope.zoomOut = function(){
-          map.zoomOut();
-        };
+  
         // clear polygons for button click
         scope.clearPolygons = function(){
           _.remove(scope.req.polygons);

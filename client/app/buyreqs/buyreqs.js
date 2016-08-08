@@ -17,10 +17,10 @@ angular.module('creapp3App')
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
-          $user.get()
-            .catch(function (error) {
-              introService.showIntroPanel();
-            });
+          // $user.get()
+          //   .catch(function (error) {
+          //     introService.showIntroPanel();
+          //   });
         }
       })
       .state('buyreqs.detail', {

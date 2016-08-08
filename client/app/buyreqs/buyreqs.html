@@ -2,11 +2,18 @@
 
   <!-- list of buyreqs or buyreq details -->
   <!-- height: 90vh hack due md-scroll-shrink to *https://github.com/angular/material/issues/1089 -->
-  <div ui-view flex flex-gt-xs="40" layout="column" ng-style="$mdMedia('gt-xs') ? {'height':'85vh'} : {'max-height':'55vh'}"></div>
+  <div ui-view flex layout="column" ng-style="$mdMedia('gt-xs') ? {'height':'85vh'} : {'max-height':'100vh'}"></div>
 
-  <!-- map -->
-  <div flex layout="row"  class="sellerTour3b brokerTour6">
-    <req-map flex></req-map>
+  <!-- map large -->
+  <div flex layout="row"  ng-class="{smallmap:$mdMedia('xs'),largemap:$mdMedia('gt-xs'), smallSmallMap: $mdMedia('xs') && smallSmallMap, largeSmallMap: $mdMedia('xs') && !smallSmallMap }" class="sellerTour3b brokerTour6">
+    <md-button hide-gt-xs id="mapresize" class="md-raised md-primary" ng-click="toggleSmallSmallMap()">
+      <md-icon>
+        {{mapSizeIcon}}
+      </md-icon>
+    </md-button>
+    <map-controls></map-controls>
+    <req-map flex md-whiteframe="8d"></req-map>
   </div>
+
 
 </div>
