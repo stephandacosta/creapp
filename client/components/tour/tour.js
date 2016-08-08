@@ -101,7 +101,7 @@ angular.module('creapp3App')
         angular.element(body).append(hotzone);
         // $compile(hotzone)($scope);
         return hotzone;
-      }
+      };
 
       var showCustomPanel = function () {
         tooltipList[index].index = index+1;
@@ -161,7 +161,7 @@ angular.module('creapp3App')
               outerWrapper.className += " tourPanelWrapper";
               panelRef = undefined;
             });
-      }
+      };
 
       return {
         showTour : function(tourType) {
