@@ -12,8 +12,11 @@ angular.module('creapp3App')
           attribution: scope.map.attribution
         }).addTo(map);
 
+
+
         var searchLayer = L.layerGroup().addTo(map);
         var processSearchResults = function(obj){
+            console.log(obj);
             if (obj[0].geojson.coordinates[0][0].length>=3){
               map.panTo([obj[0].lat, obj[0].lon]);
               var searchedGeoJson = obj[0].geojson.coordinates;
@@ -39,6 +42,7 @@ angular.module('creapp3App')
         var processSearchError = function(obj){
           console.log(obj);
         };
+        geosearchService.registerMapSearchProcessor(processSearchResults);
         // geosearchService.getLocation('san+francisco,+united+states', processSearchResults, processSearchError);
 
 

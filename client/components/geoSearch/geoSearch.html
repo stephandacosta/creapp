@@ -1,0 +1,18 @@
+<md-card id="geosearch" class="md-primary">
+  <md-card-header>
+    <md-card-header-text>
+      Location Search
+    </md-card-header-text>
+  </md-card-header>
+  <md-card-content>
+    <md-input-container>
+      <label>Location Search</label>
+      <input type="text" ng-model="geoInputCtrl.geoinput">
+    </md-input-container>
+  </md-card-content>
+  <md-card-actions>
+    <md-button class="md-primary md-raised" ng-click="geoInputCtrl.geosearch(geoInputCtrl.geoinput)">
+      Search
+    </md-button>
+  </md-card-actions>
+</md-card>
