@@ -72,6 +72,14 @@ angular.module('creapp3App')
           }
         });
 
+        scope.$on('zoom:in', function(){
+          map.zoomIn();
+        });
+
+        scope.$on('zoom:out', function(){
+          map.zoomOut();
+        });
+
         var addHighlightedLayer = function(req){
           if (highlightedLayer){
             polygonsLayer.removeLayer(highlightedLayer);

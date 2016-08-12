@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('mapControls', function (geosearchService) {
+  .directive('mapControls', function ($rootScope, geosearchService) {
     return {
       templateUrl: 'components/mapControls/mapControls.html',
       restrict: 'E',
@@ -15,12 +15,10 @@ angular.module('creapp3App')
         };
 
         scope.zoomIn = function(){
-          console.log('zoom');
-          // map.zoomIn();
+          $rootScope.$broadcast('zoom:in');
         };
         scope.zoomOut = function(){
-          console.log('zoom');
-          // map.zoomOut();
+          $rootScope.$broadcast('zoom:out');
         };
       }
     };
