@@ -1,13 +1,23 @@
-<md-card id="geosearch" class="md-primary">
-  <md-card-header>
+<md-card id="geosearch">
+  <md-card-header style="background-color:#00695c;color:white;font-size: larger;">
     <md-card-header-text>
       Location Search
     </md-card-header-text>
+    <md-icon ng-click="geoInputCtrl.closePanel()" style="cursor:pointer;color:white;">
+      close
+    </md-icon>
   </md-card-header>
-  <md-card-content>
+  <md-card-content layout="column">
     <md-input-container>
-      <label>Location Search</label>
-      <input type="text" ng-model="geoInputCtrl.geoinput">
+      <label>Street / City / Zippcode</label>
+      <!-- <input id="geoinput" type="text" ng-model="geoInputCtrl.geoinput" ng-change="geoInputCtrl.adapt()"> -->
+      <input id="geoinput" type="text" ng-model="geoInputCtrl.geoinput">
+    </md-input-container>
+    <md-input-container>
+      <label>State</label>
+      <md-select ng-model="geoInputCtrl.selectedState" md-container-class="stateselection">
+        <md-option ng-value="state" ng-repeat="state in geoInputCtrl.states">{{ state }}</md-option>
+      </md-select>
     </md-input-container>
   </md-card-content>
   <md-card-actions>

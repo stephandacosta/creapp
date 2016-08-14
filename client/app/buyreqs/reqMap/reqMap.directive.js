@@ -43,7 +43,6 @@ angular.module('creapp3App')
           console.log(obj);
         };
         geosearchService.registerMapSearchProcessor(processSearchResults);
-        // geosearchService.getLocation('san+francisco,+united+states', processSearchResults, processSearchError);
 
 
         var polygonsLayer = L.layerGroup().addTo(map);

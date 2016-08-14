@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('geosearchService', function ($rootScope, $http, $mdPanel) {
+  .factory('geosearchService', function ($rootScope, $http, $mdPanel, $mdMedia) {
 
     var mapSearchProcessor;
     var getLocation = function(query, callback, errorcallback){
@@ -22,8 +22,8 @@ angular.module('creapp3App')
 
       var panelPosition = $mdPanel.newPanelPosition()
         .absolute()
-        .left(window.innerWidth/2 + 'px')
-        .top(window.innerHeight/2 + 'px');
+        .left((window.innerWidth/2 - 150) + 'px')
+        .top((window.innerHeight/2 - 150) + 'px');
 
       var config = {
         controller: geoInputPanelCtrl,
@@ -36,7 +36,8 @@ angular.module('creapp3App')
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
-        hasBackdrop: false
+        hasBackdrop: false,
+        fullscreen: $mdMedia('xs')
         // onDomRemoved: detachHotzones
       };
 
@@ -49,24 +50,6 @@ angular.module('creapp3App')
           });
     };
 
-    // suffix United States
-    // geosearch._searchbox.oninput = function(){
-    //   if (this.value === ', United States'){
-    //     this.value = '';
-    //   }
-    //   if (this.value.length===1) {
-    //     this.value = this.value + ', United States';
-    //     if (this.createTextRange) {
-    //       var part = this.createTextRange();
-    //       part.move("character", 1);
-    //       part.select();
-    //     } else if (this.setSelectionRange){
-    //       this.setSelectionRange(1, 1);
-    //     }
-    //       this.focus();
-    //   }
-    // }
-
 
     return {
       getLocation: getLocation,
@@ -76,23 +59,3 @@ angular.module('creapp3App')
       }
     };
   })
-
-
-  .controller('geoInputPanelCtrl', geoInputPanelCtrl);
-
-  var geoInputPanelCtrl = function(mdPanelRef, geosearchService){
-    this._mdPanelRef = mdPanelRef;
-    this.geoinput = '';
-    this.closePanel = function(){
-      this._mdPanelRef.close();
-    };
-    var getLocation = function(){
-      geosearchService.getLocation(this.geoinput);
-    };
-    var getLocationBounded = getLocation.bind(this);
-
-    this.geosearch = function(location){
-      this._mdPanelRef.close()
-      .finally(getLocationBounded);
-    };
-  };
