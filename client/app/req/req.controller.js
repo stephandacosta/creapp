@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('reqCtrl', function ( appConstants, $scope, $mdMedia) {
+  .controller('reqCtrl', function ( appConstants, $scope, $mdMedia, $rootScope) {
 
     // main will be shared in child scopes
     $scope.main = {};
@@ -15,5 +15,18 @@ angular.module('creapp3App')
     $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
       $scope.main.openedSidenav =  big;
     });
+
+    // state of freedraw broadcasted from map and shared to mapcontrols via scope inheritance
+    $scope.drawmode = '';
+    $rootScope.$on('mode:31', function(){
+      $scope.drawmode = 'drawing';
+    });
+    $rootScope.$on('mode:12', function(){
+      $scope.drawmode = 'editing';
+    });
+
+
+
+
 
   });

@@ -1,7 +1,13 @@
 #mapcontrols{
   position: absolute;
   margin-left: 10px;
+  z-index: 1000;
   /*margin-top:5px;*/
+}
+
+#mapcontrols .drawcontrols.inactive {
+  background-color: rgba(63, 125, 111, 0.51);
+  color: grey;
 }
 
 .largemap #mapcontrols {

@@ -1,9 +1,14 @@
 /*styles for FreeDraw*/
 .reqmap.mode-create {
-    cursor: url(client/assets/images/pencil.png)!important;
+    cursor: url("pencil.png") 0 30, crosshair!important;
+    /*cursor: crosshair!important;*/
 }
 
-.reqmap g path {
+.reqmap.mode-create .searchresult {
+    cursor: url("pencil.png") 0 30, crosshair!important;
+}
+
+.reqmap g path:not(.searchresult){
     transition: all 0.25s;
     stroke-width: 4px;
     stroke-opacity: 1;
@@ -15,11 +20,17 @@
     -webkit-filter: none;
 }
 
-.reqmap.mode-delete path {
+
+.reqmap.mode-delete .leaflet-clickable.searchresult {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.reqmap.mode-delete path:not(.searchresult) {
     cursor: no-drop !important;
 }
 
-.reqmap.mode-delete path:hover {
+.reqmap.mode-delete path:hover:not(.searchresult) {
     fill: #4d4d4d !important;
 }
 

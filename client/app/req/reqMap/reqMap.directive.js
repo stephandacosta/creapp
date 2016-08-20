@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMapedit', function ($timeout,$location,$state, $compile, buyreqs) {
+  .directive('reqMapedit', function ($timeout,$location,$state, $compile, buyreqs, $rootScope, geosearchService) {
     return {
       template: '<div></div>',
       restrict: 'E',
@@ -45,13 +45,60 @@ angular.module('creapp3App')
           }
         };
 
+        $rootScope.$on('manualmode:all', function(){
+          scope.draw.setMode('all');
+        });
+
+        $rootScope.$on('manualmode:edit', function(){
+          scope.draw.setMode('edit');
+        });
+
+        $rootScope.$on('zoom:in', function(){
+          map.zoomIn();
+        });
+
+        $rootScope.$on('zoom:out', function(){
+          map.zoomOut();
+        });
+
         //create map
         var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
 
-  
+        var searchLayer = L.layerGroup().addTo(map);
+        var processSearchResults = function(obj){
+            console.log(obj);
+            if (obj[0].geojson.coordinates[0][0].length>=3){
+              map.panTo([obj[0].lat, obj[0].lon]);
+              var searchedGeoJson = obj[0].geojson.coordinates;
+              searchedGeoJson.forEach(function(geoarray){
+                var latlngs = geoarray[0].map(function(lnglat){
+                  return [lnglat[1],lnglat[0]];
+                });
+                searchLayer.addLayer(L.polygon(latlngs, {className:'searchresult'})
+                .setStyle({color:'rgba(0, 150, 136, 0.78)', fillColor: 'rgba(0, 150, 136, 0.78)'}));
+                // .on('click', function(e) {
+                //   searchLayer.clearLayers();
+                // .on('click contextmenu', function(e) {
+                //   $state.go('^.detail',{id: req._id });
+                // }));
+                // map.fitBounds( obj[0].boundingbox<LatLngBounds> bounds, <fitBounds options> options? )
+              });
+            } else {
+              map.panTo([obj[0].lat, obj[0].lon]);
+              L.marker([obj[0].lat, obj[0].lon]).bindPopup('<div>marker popoup</div>').openPopup().addTo(map);
+              // marker.bindPopup(popupContent).openPopup();
+            }
+        };
+        var processSearchError = function(obj){
+          console.log(obj);
+        };
+        geosearchService.registerMapSearchProcessor(processSearchResults);
+
+
+
         // clear polygons for button click
         scope.clearPolygons = function(){
           _.remove(scope.req.polygons);
@@ -91,6 +138,7 @@ angular.module('creapp3App')
               // scope.$digest();
             };
           }
+          $rootScope.$broadcast('mode:'+scope.draw.mode);
         });
 
         // when there is a new polygon, add it to scope

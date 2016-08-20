@@ -18,6 +18,28 @@
     <md-tooltip md-direction="right">zoom out</md-tooltip>
     <md-icon>remove_circle_outline</md-icon>
   </md-button>
+
+  <div ng-if="state==='req.add' || state==='req.edit'  " layout="column">
+    <br>
+    <md-content >{{drawmode}}</md-content>
+    <md-button class="drawcontrols md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-class="{inactive: (drawmode==='editing')}" ng-click="setMode('edit')" style="margin-left:0;">
+      <md-tooltip md-direction="right" style="z-index:1000;">edit or delete area</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">touch_app</i>
+    </md-button>
+    <md-button class="drawcontrols md-fab md-primary md-hue-3 md-mini md-ink-ripple" ng-class="{inactive: (drawmode==='drawing')}" ng-click="setMode('all')" style="margin-left:0;">
+      <md-tooltip md-direction="right" style="z-index:1000;">draw new area</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">edit</i>
+    </md-button>
+    <br>
+    <md-button class="md-fab md-primary md-hue-3 md-mini md-ink-ripple" hide-gt-xs ng-click="openSidenav()" style="margin-left:0;">
+      <md-tooltip md-direction="right" style="z-index:1000;">edit requirement</md-tooltip>
+      <i class="material-icons"  style="vertical-align:middle;">rate_review</i>
+    </md-button>
+    <br>
+  </div>
+
+
+
   <!-- </md-fab-actions>
   </md-fab-speed-dial> -->
 
