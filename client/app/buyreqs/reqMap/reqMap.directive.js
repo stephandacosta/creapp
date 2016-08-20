@@ -67,6 +67,8 @@ angular.module('creapp3App')
 
         scope.$on('selectedReq:update',function(){
           if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
+            var req = buyreqs.getSelectedReq()
+            map.panTo([req.centers[0][0], req.centers[0][1]]);
             addHighlightedLayer(buyreqs.getSelectedReq());
           }
         });
