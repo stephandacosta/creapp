@@ -7,7 +7,8 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element, attrs) {
 
-        var map = new L.Map(element[0], {zoomControl:false, tap:false}).setView(scope.map.initCenter, 10);
+        var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
+        // map.locate({setView:true});
         L.tileLayer(scope.map.tileUrl, {
           attribution: scope.map.attribution
         }).addTo(map);
