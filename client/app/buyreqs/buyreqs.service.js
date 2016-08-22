@@ -15,6 +15,7 @@ angular.module('creapp3App')
       selectedReq = {};
       highlightedReq = {};
       url='';
+      $rootScope.$broadcast('selectedReq:update');
     };
 
 
@@ -69,6 +70,7 @@ angular.module('creapp3App')
     var updateSelectedReq = function(id){
       if (!id){
         selectedReq = {};
+        $rootScope.$broadcast('selectedReq:update');
       } else {
         selectedReq = _.find(buyreqs, { '_id': id });
         if (selectedReq) {

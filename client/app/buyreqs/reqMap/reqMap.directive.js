@@ -66,11 +66,34 @@ angular.module('creapp3App')
           }
         });
 
+        var polygonsBounds = function(polygons){
+          var south,north,east,west;
+          polygons.forEach(function(polygon){
+            polygon.forEach(function(point){
+              if (!south || point[0] < south ){
+                south = point[0];
+              }
+              if (!north || point[0] > north ){
+                north = point[0];
+              }
+              if (!east || point[1] < east ){
+                east = point[1];
+              }
+              if (!west || point[1] > west ){
+                west = point[1];
+              }
+            });
+          });
+          return [[south, west],[north, east]];
+        };
+
         scope.$on('selectedReq:update',function(){
           if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
-            var req = buyreqs.getSelectedReq()
-            map.panTo([req.centers[0][0], req.centers[0][1]]);
+            var req = buyreqs.getSelectedReq();
+            map.fitBounds(polygonsBounds(buyreqs.getSelectedReq().polygons));
             addHighlightedLayer(buyreqs.getSelectedReq());
+          } else {
+            map.fitBounds(lastBounds);
           }
         });
 
@@ -106,12 +129,17 @@ angular.module('creapp3App')
           (container[ne][y] >= containee[ne][y]);
         };
 
+        var lastBounds;
         map.on('load moveend', function(e) {
           var bounds = map.getBounds();
-          buyreqs.updateBounds ([
+          var boundsArray = [
             [bounds._southWest.lat, bounds._southWest.lng],
             [bounds._northEast.lat, bounds._northEast.lng]
-          ]);
+          ];
+          if (!lastBounds || Object.keys(buyreqs.getSelectedReq()).length === 0) {
+            lastBounds =  boundsArray.slice();
+          }
+          buyreqs.updateBounds (boundsArray);
         });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material
