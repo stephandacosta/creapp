@@ -23,7 +23,7 @@
     <div flex layout="row">
       <span flex></span>
       <span flex="80" class="md-warn">
-        Your account has been created.  
+        Your account has been created.
       </span>
       <span flex></span>
     </div>
@@ -50,10 +50,17 @@
           <input name="{{field.name}}" id="sp-{{field.name}}" type="{{field.type}}" ng-model="formModel[field.name]" ng-disabled="creating" ng-required="field.required">
       </md-input-container>
 
+      <md-input-container class="md-block" flex-gt-sm layout="row">
+        <md-checkbox ng-model="tc_check" aria-label="Terms and Conditions check">
+        </md-checkbox>
+        I have read the <a ng-click="showtcs()" style="cursor:pointer;color:grey;font-style:italic;text-decoration:underline;">terms and conditions
+        </a>
+      </md-input-container>
+
       <p class="md-button md-warn" ng-show="error" ng-bind="error"></p>
 
       <div layout="row">
-        <md-button type="submit" class="md-raised md-primary" ng-disabled="creating">
+        <md-button type="submit" class="md-raised md-primary" ng-disabled="creating || !tc_check">
           Register
         </md-button>
         <a class="md-primary md-button md-ink-ripple" aria-label="Go to Login" href="/login">
@@ -74,4 +81,3 @@
   </div>
 
 </md-card>
-
