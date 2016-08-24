@@ -20,40 +20,45 @@ angular.module('creapp3App')
 
 
     var updateBuyReqs = function(search){
-      // if (bounds.length === 0){ return;}
-      // update mongo query object map bounds
-      var query = {};
-      // query.centers = {
-      //   $geoWithin: {
-      //     $box: [
-      //       bounds[0],
-      //       bounds[1]
-      //     ]
-      //   }
-      // };
+      if (url==='') {
+        console.log('url problem');
+      } else {
+        // if (bounds.length === 0){ return;}
+        // update mongo query object map bounds
+        var query = {};
+        // query.centers = {
+        //   $geoWithin: {
+        //     $box: [
+        //       bounds[0],
+        //       bounds[1]
+        //     ]
+        //   }
+        // };
 
-      $http.get(url, {params: { query }}).then(response => {
-        // update buyreqs list
-        buyreqs = response.data;
-        // prefix type to the title
-        buyreqs.forEach(function(buyreq){
-          var tmp = buyreq.buy ? 'To Buy' : '';
-          tmp = (buyreq.exchange ? (tmp==='' ? 'To Exchange' : tmp + '/Exchange') : tmp );
-          tmp = (buyreq.lease ? (tmp==='' ? 'To Lease' : tmp + '/Lease') : tmp );
-          buyreq.transactionTitle = tmp;
+        $http.get(url, {params: { query }}).then(response => {
+          // update buyreqs list
+          buyreqs = response.data;
+          // prefix type to the title
+          buyreqs.forEach(function(buyreq){
+            var tmp = buyreq.buy ? 'To Buy' : '';
+            tmp = (buyreq.exchange ? (tmp==='' ? 'To Exchange' : tmp + '/Exchange') : tmp );
+            tmp = (buyreq.lease ? (tmp==='' ? 'To Lease' : tmp + '/Lease') : tmp );
+            buyreq.transactionTitle = tmp;
+          });
+
+          $rootScope.$broadcast('buyreqs:update');
+
+          // to log for seeding
+          // $scope.buyreqs.forEach(function(req){
+          //   req.centers = req.polygons.map(function(polygon){
+          //     var center = L.polygon(polygon).getBounds().getCenter();
+          //     return [center.lat, center.lng];
+          //   });
+          // });
+          // console.log($scope.buyreqs);
         });
+      }
 
-        $rootScope.$broadcast('buyreqs:update');
-
-        // to log for seeding
-        // $scope.buyreqs.forEach(function(req){
-        //   req.centers = req.polygons.map(function(polygon){
-        //     var center = L.polygon(polygon).getBounds().getCenter();
-        //     return [center.lat, center.lng];
-        //   });
-        // });
-        // console.log($scope.buyreqs);
-      });
     };
 
     var updateBroker = function(selectedReq){
