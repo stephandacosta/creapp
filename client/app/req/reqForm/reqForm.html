@@ -68,7 +68,11 @@
       </md-input-container>
     </div>
     <md-input-container flex layout="column">
-      <div flex>
+        <md-radio-group ng-model="landandprop">
+          <md-radio-button value="landAndProperty" class="md-primary">Land and Property</md-radio-button>
+          <md-radio-button value="landOnly" class="md-primary"> Land Only </md-radio-button>
+        </md-radio-group>
+      <!-- <div flex>
         <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
           Land Only
         </md-checkbox>
@@ -77,7 +81,7 @@
         <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
           Land and Property
         </md-checkbox>
-      </div>
+      </div> -->
     </md-input-container>
   </fieldset>
   </div>

@@ -13,6 +13,17 @@ angular.module('creapp3App')
 
         scope.types = appConstants.creTypes;
 
+        scope.$watch('landandprop',function(newValue){
+          console.log(newValue);
+          if (newValue === 'landOnly') {
+            scope.req.landOnly = true;
+            scope.req.landWithProperty = false;
+          } else {
+            scope.req.landOnly = false;
+            scope.req.landWithProperty = true;
+          }
+        });
+
         var showToast = function(msg){
           $mdToast.show(
             $mdToast.simple()
