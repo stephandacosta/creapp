@@ -8,6 +8,9 @@ angular.module('creapp3App')
       scope: {
         broker: '=user',
         buyreq: '=buyreq'
+      },
+      link: function(scope,el,attrs){
+        scope.myprofile = attrs.myprofile;
       }
     };
   });

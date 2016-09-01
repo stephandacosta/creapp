@@ -3,7 +3,7 @@
 angular.module('creapp3App')
   .controller('ProfileCtrl', function ($scope, $http, $mdToast, $user) {
 
-    $scope.userEdit = _.cloneDeep($scope.broker);
+    $scope.userEdit = _.cloneDeep($user.currentUser);
 
     //funciton to show toasts
     var showToast = function(msg){
@@ -32,7 +32,8 @@ angular.module('creapp3App')
       });
     };
 
-    $scope.profileLink = location.host + '/broker/' + $scope.broker.href.substr($scope.broker.href.lastIndexOf('/') + 1) + '/list';
+
+    $scope.profileLink = location.host + '/broker/' + $user.currentUser.href.substr($user.currentUser.href.lastIndexOf('/') + 1) + '/list';
 
     var clipboard = new Clipboard('#shareProfile');
     clipboard.on('success', function(e) {

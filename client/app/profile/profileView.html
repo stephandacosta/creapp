@@ -16,19 +16,35 @@
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">{{broker.fullName}}</span>
-          <span class="md-body-1" ng-if="broker.email">{{broker.email}} <span style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
-          <span class="md-body-1">tel: {{broker.customData.phone}} <span ng-if="broker.customData.privatePhone" style="font-weight:lighter;font-style: italic;">(hidden to public)</span></span>
-          <span class="md-subhead">Loopnet Profile</span>
-          <a class="md-body-1" ng-if="broker.customData.loopnet">{{broker.customData.loopnet}}</a>
-          <span class="md-body-1" ng-if="!broker.customData.loopnet">not set</span>
-          <span class="md-subhead">Linkedin Profile</span>
-          <a class="md-body-1">{{broker.customData.linkedin}}</a>
-          <span class="md-body-1" ng-if="!broker.customData.linkedin">not set</span>
+
+          <span class="md-body-1" ng-if="broker.email">
+            {{broker.email}}
+            <span style="font-style: italic;color:red;">
+              (hidden to public)
+            </span>
+          </span>
+
+          <span class="md-body-1" ng-if="broker.customData.phone!=='hidden'">
+            tel: {{broker.customData.phone}}
+            <span ng-if="broker.customData.privatePhone && myprofile" style="font-style: italic;color:red;">
+              (hidden to public)
+            </span>
+            <span ng-if="!(broker.customData.privatePhone) && myprofile" style="font-style: italic;color:red;">
+              (shown to everybody)
+            </span>
+          </span>
+
+          <!-- <span class="md-subhead" ng-if="!(broker.customData.loopnet)">Loopnet Profile Not Set</span> -->
+          <a class="md-subhead" ng-if="broker.customData.loopnet" href="{{broker.customData.loopnet}}">Loopnet Profile</a>
+
+          <!-- <span class="md-subhead" ng-if="!broker.customData.linkedin">Linkedin Profile Not Set</span> -->
+          <a class="md-subhead" ng-if="broker.customData.linkedin" href="{{broker.customData.linkedin}}">Linkedin Profile</a>
+
           <br>
         </md-card-title-text>
-        <md-card-title-media>
+        <!-- <md-card-title-media>
           <img ng-src="assets/images/user-default.png" class="md-media-sm card-media"></img>
-        </md-card-title-media>
+        </md-card-title-media> -->
       </md-card-title>
       <md-card-content>
         <span class="md-subtitle"><h4>Summary</h4></span>
