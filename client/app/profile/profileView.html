@@ -5,13 +5,11 @@
     <md-card >
       <md-card-header>
         <md-card-header-text>
-        <span ng-if="broker.customData.function" class="md-subtitle">{{broker.customData.function}}</span>
+        <span ng-if="broker.customData.function" class="md-title">{{broker.customData.function}}</span>
         <span class="md-subhead">RE License #{{broker.customData.license}}</span>
+        <span ng-if="broker.customData.company" class="md-subtitle">company: {{broker.customData.company}}</span>
         </md-card-header-text>
       </md-card-header>
-      <md-card-actions layout="row" layout-align="start center">
-        <mailbutton broker="broker"></mailbutton>
-      </md-card-actions>
       <md-divider></md-divider>
       <md-card-title>
         <md-card-title-text>
@@ -46,6 +44,9 @@
           <img ng-src="assets/images/user-default.png" class="md-media-sm card-media"></img>
         </md-card-title-media> -->
       </md-card-title>
+      <md-card-actions layout="row" layout-align="start center">
+        <mailbutton broker="broker"></mailbutton>
+      </md-card-actions>
       <md-card-content>
         <span class="md-subtitle"><h4>Summary</h4></span>
         <span class="md-body-1">{{broker.customData.summary}}</span>

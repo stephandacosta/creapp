@@ -68,6 +68,7 @@ export function show(req, res) {
             function: account.customData.function,
             license: account.customData.license,
             summary: account.customData.summary,
+            company: account.customData.company,
             loopnet: account.customData.loopnet,
             linkedin: account.customData.linkedin,
             phone: (account.customData.privatePhone ? 'hidden' : account.customData.phone)

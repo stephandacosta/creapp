@@ -11,6 +11,7 @@ angular.module('creapp3App')
       },
       link: function(scope,el,attrs){
         scope.myprofile = attrs.myprofile;
+        console.log('scope', scope);
       }
     };
   });
