@@ -2,38 +2,41 @@ angular.module('creapp3App')
   .factory('introService', function($mdToast, $mdPanel, $timeout, $mdMedia, tourService){
 
     var panelRef;
-    var alreadySeen = false;
 
     // General Intro Panel to select type of user
     var showIntroPanel = function () {
-      if (!alreadySeen){
+      if ($mdMedia('gt-sm')){
         var panelPosition = $mdPanel.newPanelPosition()
         .absolute()
         .right('25%')
         .top('10%');
-        var config = {
-          // attachTo: toolTipList[index].parent,
-          controller: 'introCtrl',
-          controllerAs: 'introPanel',
-          locals: {
-            broker : undefined
-          },
-          position: panelPosition,
-          templateUrl: 'components/intro/intro.html',
-          clickOutsideToClose: true,
-          escapeToClose: true,
-          focusOnOpen: true,
-          panelClass : ($mdMedia('xs')? 'introPanel-small' : 'introPanel-large')
-          // fullscreen: true
-        }
-        panelRef = $mdPanel.create(config);
-        panelRef.open()
-        .finally(function() {
-          document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
-          panelRef = undefined;
-          alreadySeen = true;
-        });
+      } else {
+          var panelPosition = $mdPanel.newPanelPosition()
+          .absolute()
+          .left('10px')
+          .top('10%');
       }
+      var config = {
+        // attachTo: toolTipList[index].parent,
+        controller: 'introCtrl',
+        controllerAs: 'introPanel',
+        locals: {
+          broker : undefined
+        },
+        position: panelPosition,
+        templateUrl: 'components/intro/intro.html',
+        clickOutsideToClose: true,
+        escapeToClose: true,
+        focusOnOpen: true,
+        panelClass : ($mdMedia('xs')? 'introPanel-small' : 'introPanel-large')
+        // fullscreen: true
+      }
+      panelRef = $mdPanel.create(config);
+      panelRef.open()
+      .finally(function() {
+        document.getElementsByClassName('md-panel-outer-wrapper')[0].style.zIndex=1000;
+        panelRef = undefined;
+      });
     };
 
     // Specific Intro Card for selected type of user
@@ -54,8 +57,8 @@ angular.module('creapp3App')
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
-        panelClass : ($mdMedia('xs')? 'introCard-small' : 'introCard-large')
-        // fullscreen: true
+        panelClass : ($mdMedia('xs')? 'introCard-small' : 'introCard-large'),
+        fullscreen: true
       }
       panelRef = $mdPanel.create(config);
       panelRef.open()
@@ -99,7 +102,6 @@ angular.module('creapp3App')
       showIntroPanel : showIntroPanel,
       showIntroCard : showIntroCard,
       showBrokerPanel : showBrokerPanel,
-      resetAlreadySeen : function(){alreadySeen=false;}
     };
 
 

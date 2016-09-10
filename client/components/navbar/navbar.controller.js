@@ -8,7 +8,6 @@ angular.module('creapp3App')
     };
     $scope.startTour = function(){
       console.log('tour in nave');
-      introService.resetAlreadySeen();
       introService.showIntroPanel();
       // tourService.showCurrentToast();
     };

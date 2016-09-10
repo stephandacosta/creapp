@@ -21,7 +21,7 @@ angular.module('creapp3App')
       var tooltipLists = {
         seller : [
           {
-            msg: 'this is the list of buyer requirements available',
+            msg: 'this is the list of buy/lease requirements available',
             parentClass: 'sellerTour1',
           },
           {
@@ -43,7 +43,7 @@ angular.module('creapp3App')
         ],
         broker : [
           {
-            msg: 'this is the list of buyer requirements available',
+            msg: 'this is the list of buy/lease requirements available',
             parentClass: 'brokerTour1',
           },
           {
@@ -68,7 +68,7 @@ angular.module('creapp3App')
         ]
     }
 
-      var index = 0
+      var index = 0;
 
       var nextTooltip = function(){
         if (++index < tooltipList.length ){
@@ -182,7 +182,10 @@ angular.module('creapp3App')
       this._mdPanelRef = mdPanelRef;
       // $scope.msg = locals.msg;
       this.closePanel = function(){
-        this._mdPanelRef.close();
+        this._mdPanelRef.close()
+        .finally(function(){
+          tourService.resetTour();
+        });
       };
       this.nextPanel = function(){
         // tourService.nextPanel();
