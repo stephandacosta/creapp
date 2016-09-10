@@ -23,7 +23,7 @@ angular.module('creapp3App')
               userId: scope.broker.userId || scope.broker.href.substr(scope.broker.href.lastIndexOf('/') + 1),
               brokerName: scope.broker.fullName,
               buyreqId: selectedReq._id || '',
-              buyreqTitle: selectedReq.title || 'no specific buy requirement'
+              buyreqTitle: selectedReq.title || 'no specific buy/lease requirement'
             },
             controller: 'mailFormCtrl'
           });
