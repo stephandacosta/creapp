@@ -47,10 +47,10 @@ angular.module('creapp3App')
 
 
         var polygonsLayer = L.layerGroup().addTo(map);
-        var baseLayer, highlightedLayer, searchLayer;
+        var baseLayer, highlightedLayer;
 
         scope.$on('filter:update', function(event){
-          event.stopPropagation();
+          // event.stopPropagation();
           polygonsLayer.clearLayers();
           if (scope.filteredReqs) {
             scope.filteredReqs.forEach(function(req){

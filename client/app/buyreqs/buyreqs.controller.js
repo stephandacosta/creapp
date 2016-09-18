@@ -64,7 +64,7 @@ angular.module('creapp3App')
       filtered = $filter('filter')(filtered, typematch);
       filtered = $filter('filter')(filtered, mapfilter);
       $scope.filteredReqs = filtered;
-      $scope.$emit('filter:update');
+      $scope.$broadcast('filter:update');
     }
 
     $scope.$watchCollection('search', function() {
