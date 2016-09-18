@@ -122,6 +122,14 @@ angular.module('creapp3App')
       }
     };
 
+    $scope.closedMap = false;
+
+    $scope.toggleCloseMap = function(){
+      $scope.closedMap = !$scope.closedMap;
+      $scope.smallSmallMap = false;
+      $scope.mapSizeIcon =   "picture_in_picture_alt";
+    };
+
 
     var clipboard = new Clipboard('#sharebutton');
     clipboard.on('success', function(e) {

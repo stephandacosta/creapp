@@ -3,7 +3,7 @@ req-map, req-mapedit {
   margin: 5px;
 }
 
-#mapresize {
+#mapresize,#mapclose {
   position: absolute;
   z-index:500;
   margin-top: 7px;
@@ -26,6 +26,10 @@ req-map, req-mapedit {
   height:140px;
 }
 
+/*.smallmap.smallSmallMap {
+  display:none;
+}*/
+
 .smallmap.largeSmallMap {
   width:100%;
   height:50vh;
@@ -33,13 +37,23 @@ req-map, req-mapedit {
 
 .smallSmallMap #mapresize {
   top:-40px;
+  right: 40px;
+}
+
+.smallSmallMap #mapclose {
+  top:-40px;
   right: 0px;
 }
+
 
 .largeSmallMap #mapresize {
   margin-top: 7px;
   min-width: 1%;
   right: 2px;
+}
+
+.largeSmallMap #mapclose {
+  display: none;
 }
 
 
