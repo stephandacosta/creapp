@@ -8,7 +8,9 @@ angular.module('creapp3App', [
   'ngMaterial',
   'ui.router',
   'stormpath',
-  'stormpath.templates'
+  'stormpath.templates',
+  'ngImgCrop',
+  'flow'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

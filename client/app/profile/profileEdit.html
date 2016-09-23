@@ -5,7 +5,23 @@
 
 <!-- <div layout="column" style="border: solid 2px green;"> -->
   <div class="profileEdit" layout-margin layout-padding md-whiteframe="3" style="overflow:scroll;">
-    <!-- <span flex></span> -->
+
+    <div flow-init flow-files-added="cropit( $files, $event, $flow )">
+      <input type="file" flow-btn/>
+      <img id="image" flow-img="$flow.files[0]" style="display:none;" />
+    </div>
+
+    <div class="cropArea" style="background: #E4E4E4;
+                                  overflow: hidden;
+                                  width:500px;
+                                  height:350px;">
+      <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+    </div>
+    <div>Cropped Image:</div>
+    <div><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
+
+    <md-button ng-click="getSignature()" class="md-primary md-raised"> Upload</md-button>
+
     <div flex layout="row">
       <md-input-container flex class="md-block">
         <label class="md-headline">Email (always hidden)</label>

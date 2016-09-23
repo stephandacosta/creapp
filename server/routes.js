@@ -11,6 +11,7 @@ var ExpressStormpath = require('express-stormpath');
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/pictures', require('./api/picture'));
   app.use('/api/leads', require('./api/lead'));
   app.use('/api/mails', require('./api/mail'));
   app.use('/api/users', require('./api/user'));

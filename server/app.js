@@ -29,6 +29,7 @@ if (config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
+app.enable("jsonp callback");
 // stormpath init on server
 app.use(ExpressStormpath.init(app,{
   website: true,
