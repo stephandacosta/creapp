@@ -2,15 +2,9 @@
 
 var express = require('express');
 var controller = require('./picture.controller');
-
+var ExpressStormpath = require('express-stormpath');
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/getsignature', controller.signature);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+router.get('/getsignature', ExpressStormpath.loginRequired, controller.signature);
 
 module.exports = router;

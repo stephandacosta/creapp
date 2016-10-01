@@ -6,21 +6,6 @@
 <!-- <div layout="column" style="border: solid 2px green;"> -->
   <div class="profileEdit" layout-margin layout-padding md-whiteframe="3" style="overflow:scroll;">
 
-    <div flow-init flow-files-added="cropit( $files, $event, $flow )">
-      <input type="file" flow-btn/>
-      <img id="image" flow-img="$flow.files[0]" style="display:none;" />
-    </div>
-
-    <div class="cropArea" style="background: #E4E4E4;
-                                  overflow: hidden;
-                                  width:500px;
-                                  height:350px;">
-      <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
-    </div>
-    <div>Cropped Image:</div>
-    <div><img id="croppedImage" ng-src="{{myCroppedImage}}" /></div>
-
-    <md-button ng-click="getSignature()" class="md-primary md-raised"> Upload</md-button>
 
     <div flex layout="row">
       <md-input-container flex class="md-block">
@@ -67,6 +52,22 @@
         </md-checkbox>
       </md-input-container>
     </div>
+
+
+    <div flex layout="row" class="brokerpicture">
+      <div layout="column">
+        <label flex="nogrow" for="fileToUpload" class="md-button md-raised md-primary">
+          <md-icon>add_a_photo</md-icon>
+          Picture
+        </label>
+        <input id="fileToUpload" type="file" onchange="angular.element(this).scope().upload(this.files)" class="ng-hide">
+        <md-button ng-if="canDeletePic" class="md-warn" ng-click="deletePic()">Delete</md-button>
+      </div>
+
+      <img id="brokerpic" ng-src="{{brokerpic}}" class="md-media-sm card-media" onerror="angular.element(this).scope().getDefaultPic(this)"></img>
+    </div>
+
+
     <div flex>
       <md-input-container class="md-block">
         <label class="md-title">Loopnet Profile</label>

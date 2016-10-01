@@ -1,0 +1,9 @@
+#geosearch {
+  position: absolute;
+  z-index:500;
+  width:300px;
+}
+
+.md-select-menu-container {
+  z-index: 1000;
+}

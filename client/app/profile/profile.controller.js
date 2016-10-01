@@ -1,11 +1,16 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('ProfileCtrl', function ($scope, $http, $mdToast, $user) {
+  .controller('ProfileCtrl', function ($scope, $rootScope, $http, $mdToast, $user, $timeout, pictureuploadService) {
 
     $scope.userEdit = _.cloneDeep($user.currentUser);
+    var userId = $user.currentUser.href.substr($user.currentUser.href.lastIndexOf('/') + 1);
 
-    //funciton to show toasts
+    $scope.brokerpic = pictureuploadService.getBrokerPicLink(userId);
+    $scope.canDeletePic = true;
+
+
+    //function to show toasts
     var showToast = function(msg){
       $mdToast.show(
         $mdToast.simple()
@@ -16,78 +21,42 @@ angular.module('creapp3App')
       );
     };
 
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+    $scope.getDefaultPic = function(img){
+      //avoid infinite loop
+      img.onerror=null;
+      // set default image
+      $scope.brokerpic = '../../assets/images/user-default.png';
+      $scope.canDeletePic = false;
+    };
 
-    $scope.cropit = function(files, event, flow){
-
-      // after upload with flow.js update crop variable using url generated (used filereader in flow-ig directive)
-      var picture = angular.element(document.getElementById('image'));
-      var scope = picture.scope();
-      scope.$watch(function(){
-          return picture.attr('src');
-      }, function(newVal){
-        if (newVal!==undefined){
-            $scope.myImage=newVal;
-        }
+    $scope.deletePic = function(){
+      pictureuploadService.deleteImageFromStorage();
+      $rootScope.$on("deletePicture:success", function(){
+        // var img = document.getElementById('brokerpic');
+        $scope.brokerpic = '../../assets/images/user-default.png';
+        $scope.canDeletePic = false;
+        $timeout(function(){
+          $scope.$apply();
+        }, 20);
       });
-
     };
 
-    var bloburl;
-    $scope.getSignature = function(){
-      // console.log($scope.myCroppedImage);
-      var cropped = angular.element(document.getElementById('croppedImage'));
-      var imgurl = cropped.attr('src');
-      var encoded = imgurl.replace(/^data:image\/[a-z]+;base64,/, '');
-      // console.log(imgurl);
-      var byteCharacters = atob(encoded);
-      var byteNumbers = new Array(byteCharacters.length);
-      for (var i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
+    $scope.upload = function(files){
+      var file = files[0];
+      if (!file.type.match(/image.*/)) {
+        // this file is not an image.
+        console.log('not an image')
+      } else {
+        var img = document.createElement("img");
+        img.src = window.URL.createObjectURL(file);
+        pictureuploadService.showPictureUpload(img.src);
       }
-      var byteArray = new Uint8Array(byteNumbers);
-      var blob = new Blob([byteArray], {type: 'image/png'});
-
-      console.log(blob);
-
-
-
-
-      $http.jsonp("/api/pictures/getsignature?callback=JSON_CALLBACK")
-        .success(function(result){
-          bloburl = result.url;
-          console.log(bloburl);
-          // add loading bar
-          // https://github.com/chieffancypants/angular-loading-bar
-          $http.put('https://creapp.blob.core.windows.net/brokerpics/testblobpic2?'+bloburl,
-          // $http.put('https://blob.creapp.us/brokerpics/testblobpic2?'+bloburl,
-            blob,
-            {
-              headers: {'x-ms-blob-type': 'BlockBlob'}
-            }
-          ).then(function(result){
-            console.log(result);
-          });
-        });
-
-
     };
-
-
-    // $scope.uploadtest = function(){
-      // console.log('sould upload');
-      // $http.get('/api/pictures').then(function(res){
-      //   console.log(res);
-      // });
-      // var c = new Croppie(document.getElementById('pic'));
-      // c.bind({
-      //   url:"https://creapp.blob.core.windows.net/brokerpics/testblobpic"
-      // });
-    // };
-
 
     $scope.saveUserEdits = function(){
+      if ($scope.canDeletePic){
+        pictureuploadService.uploadImageToStorage();
+      }
       $http.put('/api/users/', $scope.userEdit).then(function(res){
         $user.get()
         .then(function (user) {
@@ -103,8 +72,12 @@ angular.module('creapp3App')
       });
     };
 
+    $rootScope.$on('croppedImage:change', function(){
+      $scope.brokerpic = pictureuploadService.getCroppedImage();
+      $scope.canDeletePic = true;
+    });
 
-    $scope.profileLink = location.host + '/broker/' + $user.currentUser.href.substr($user.currentUser.href.lastIndexOf('/') + 1) + '/list';
+    $scope.profileLink = location.host + '/broker/' + userId + '/list';
 
     var clipboard = new Clipboard('#shareProfile');
     clipboard.on('success', function(e) {

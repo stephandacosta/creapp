@@ -1,3 +1,8 @@
 .profileEdit input, .profileEdit textarea {
       background-color: rgba(0, 150, 136, 0.08);
 }
+
+.profileEdit #brokerpic {
+  height: 100px;
+  width: 100px;
+}

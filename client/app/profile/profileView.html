@@ -1,11 +1,13 @@
 <md-content layout="row">
   <!-- <span flex></span> -->
-  <div flex layout="column">
+  <div flex-gt-sm="60" flex-sm flex-xs  layout="column">
 
-    <md-card >
+    <md-card>
       <md-card-header>
         <md-card-header-text>
-        <span ng-if="broker.customData.function" class="md-title">{{broker.customData.function}}</span>
+        <span ng-if="broker.customData.function" class="md-title">
+          {{broker.customData.function}}
+        </span>
         <span class="md-subhead">RE License #{{broker.customData.license}}</span>
         <span ng-if="broker.customData.company" class="md-subtitle">company: {{broker.customData.company}}</span>
         </md-card-header-text>
@@ -24,10 +26,10 @@
 
           <span class="md-body-1" ng-if="broker.customData.phone!=='hidden'">
             tel: {{broker.customData.phone}}
-            <span ng-if="broker.customData.privatePhone && myprofile" style="font-style: italic;color:red;">
+            <span ng-if="broker.customData.privatePhone && edit" style="font-style: italic;color:red;">
               (hidden to public)
             </span>
-            <span ng-if="!(broker.customData.privatePhone) && myprofile" style="font-style: italic;color:red;">
+            <span ng-if="!(broker.customData.privatePhone) && edit" style="font-style: italic;color:red;">
               (shown to everybody)
             </span>
           </span>
@@ -41,7 +43,7 @@
           <br>
         </md-card-title-text>
         <md-card-title-media>
-          <img src="https://creapp.blob.core.windows.net/brokerpics/testblobpic2" class="md-media-sm card-media"></img>
+          <img ng-src="{{brokerpic}}" class="md-media-sm card-media" onerror="angular.element(this).scope().getDefaultPic(this)"></img>
         </md-card-title-media>
       </md-card-title>
       <md-card-actions layout="row" layout-align="start center">

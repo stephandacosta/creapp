@@ -1,0 +1,18 @@
+<md-content flex layout="column">
+
+  <div ng-if="images.bigImage">
+    <div  class="cropArea" style="background: black;
+                                  overflow: hidden;
+                                  width:500px;
+                                  height:350px;">
+      <img-crop image="images.bigImage" result-image="images.croppedImage"></img-crop>
+    </div>
+    <div>Final Picture:</div>
+    <div><img id="croppedImage" ng-src="{{images.croppedImage}}" /></div>
+  </div>
+
+  <div layout="row">
+    <md-button ng-click="closePanel()" class="md-primary md-raised"> OK</md-button>
+  </div>
+
+</md-content>
