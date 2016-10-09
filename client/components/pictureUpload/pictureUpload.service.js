@@ -3,12 +3,22 @@
 angular.module('creapp3App')
   .factory('pictureuploadService', function ($rootScope, $http, $mdPanel, $mdMedia) {
 
-    var showPictureUpload = function (imagesrc) {
+    var uploadPicture = function(files){
+      var file = files[0];
+      if (!file.type.match(/image.*/)) {
+        // this file is not an image.
+        console.log('not an image')
+      } else {
+        var img = document.createElement("img");
+        img.src = window.URL.createObjectURL(file);
+        showPictureUpload(img.src);
+      }
+    };
 
-      // var panelPosition = $mdPanel.newPanelPosition()
-      //   .absolute()
-      //   .left((window.innerWidth/2 - 150) + 'px')
-      //   .top((window.innerHeight/2 - 150) + 'px');
+
+
+
+    var showPictureUpload = function (imagesrc) {
 
       var config = {
         controller: pictureUploadCtrl,
@@ -29,8 +39,6 @@ angular.module('creapp3App')
       var panelRef = $mdPanel.create(config);
       panelRef.open()
           .finally(function() {
-            // var outerWrapper = document.getElementsByClassName('md-panel-outer-wrapper')[0];
-            // outerWrapper.className += " tourPanelWrapper";
             panelRef = undefined;
           });
     };
@@ -39,10 +47,6 @@ angular.module('creapp3App')
 
     // convert image url to blob
     var getBlob = function(){
-      //get image url
-      // var cropped = angular.element(document.getElementById('croppedImage'));
-      // var imgurl = cropped.attr('src');
-      //convert to blob
       var encoded = croppedImage.replace(/^data:image\/[a-z]+;base64,/, '');
       var byteCharacters = atob(encoded);
       var byteNumbers = new Array(byteCharacters.length);
@@ -99,8 +103,13 @@ angular.module('creapp3App')
       });
     };
 
+    var getBrokerPictureLink = function(userId){
+      return 'https://creapp.blob.core.windows.net/brokerpics/'+userId;
+    };
+
 
     return {
+      uploadPicture : uploadPicture,
       showPictureUpload : showPictureUpload,
       updateCroppedImage : function(picture){
         croppedImage = picture;
@@ -109,9 +118,7 @@ angular.module('creapp3App')
       getCroppedImage : function(){
         return croppedImage;
       },
-      getBrokerPicLink : function(userId){
-        return 'https://creapp.blob.core.windows.net/brokerpics/'+userId ;
-      },
+      getBrokerPictureLink : getBrokerPictureLink,
       uploadImageToStorage : uploadImageToStorage,
       deleteImageFromStorage : deleteImageFromStorage
     };

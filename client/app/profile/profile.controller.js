@@ -3,61 +3,52 @@
 angular.module('creapp3App')
   .controller('ProfileCtrl', function ($scope, $rootScope, $http, $mdToast, $user, $timeout, pictureuploadService) {
 
-    $scope.userEdit = _.cloneDeep($user.currentUser);
-    var userId = $user.currentUser.href.substr($user.currentUser.href.lastIndexOf('/') + 1);
+    $scope.broker = $user.currentUser;
+    var userId;
 
-    $scope.brokerpic = pictureuploadService.getBrokerPicLink(userId);
-    $scope.canDeletePic = true;
-
-
-    //function to show toasts
-    var showToast = function(msg){
-      $mdToast.show(
-        $mdToast.simple()
-        .textContent(msg)
-        .position('top left')
-        .parent(document.getElementById('toasts'))
-        .hideDelay(3000)
-      );
+    var getUserId = function(){
+      return $scope.broker.href.substr($scope.broker.href.lastIndexOf('/') + 1);
     };
 
-    $scope.getDefaultPic = function(img){
-      //avoid infinite loop
-      img.onerror=null;
-      // set default image
-      $scope.brokerpic = '../../assets/images/user-default.png';
-      $scope.canDeletePic = false;
+    var resetEdits = function(){
+      $scope.edit = {
+        mode: false,
+        broker : _.cloneDeep($user.currentUser),
+        hasPicStaged : true,
+        hasPicCommitted : true
+      };
+      userId = getUserId();
     };
 
-    $scope.deletePic = function(){
-      pictureuploadService.deleteImageFromStorage();
-      $rootScope.$on("deletePicture:success", function(){
-        // var img = document.getElementById('brokerpic');
-        $scope.brokerpic = '../../assets/images/user-default.png';
-        $scope.canDeletePic = false;
-        $timeout(function(){
-          $scope.$apply();
-        }, 20);
-      });
+    resetEdits();
+
+
+    // var getBrokerPictureLink = function(){
+    //   $scope.brokerpic = pictureuploadService.getBrokerPicLink(getUserId());
+    // };
+
+    $scope.editProfile = function(){
+      $scope.edit.mode = true;
+      $scope.broker = $scope.edit.broker;
+      userId = getUserId();
     };
 
-    $scope.upload = function(files){
-      var file = files[0];
-      if (!file.type.match(/image.*/)) {
-        // this file is not an image.
-        console.log('not an image')
-      } else {
-        var img = document.createElement("img");
-        img.src = window.URL.createObjectURL(file);
-        pictureuploadService.showPictureUpload(img.src);
-      }
+    $scope.viewProfile = function(){
+      $scope.edit.mode = false;
+      $scope.broker = $user.currentUser;
+      userId = getUserId();
+    };
+
+    $scope.cancelEdits = function(){
+      resetEdits();
+      $scope.viewProfile();
     };
 
     $scope.saveUserEdits = function(){
-      if ($scope.canDeletePic){
+      if ($scope.edit.hasPicStaged){
         pictureuploadService.uploadImageToStorage();
       }
-      $http.put('/api/users/', $scope.userEdit).then(function(res){
+      $http.put('/api/users/', $scope.broker).then(function(res){
         $user.get()
         .then(function (user) {
           showToast('user profile successfully updated');
@@ -72,13 +63,19 @@ angular.module('creapp3App')
       });
     };
 
-    $rootScope.$on('croppedImage:change', function(){
-      $scope.brokerpic = pictureuploadService.getCroppedImage();
-      $scope.canDeletePic = true;
-    });
+    //function to show toasts
+    var showToast = function(msg){
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent(msg)
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
+    };
+
 
     $scope.profileLink = location.host + '/broker/' + userId + '/list';
-
     var clipboard = new Clipboard('#shareProfile');
     clipboard.on('success', function(e) {
       $mdToast.show(

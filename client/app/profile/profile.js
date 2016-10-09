@@ -10,19 +10,5 @@ angular.module('creapp3App')
         sp: {
           authenticate: true
         }
-      })
-      .state('profile.view', {
-        url: '/view',
-        templateUrl: 'app/profile/myProfile.html',
-        sp: {
-          authenticate: true
-        }
-      })
-      .state('profile.edit', {
-        url: '/edit',
-        templateUrl: 'app/profile/profileEdit.html',
-        sp: {
-          authenticate: true
-        }
       });
   });

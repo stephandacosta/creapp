@@ -1,2 +1,10 @@
-
-<div flex layout="column" ui-view=""></div>
+<div flex layout="column">
+  <div layout="row" layout-margin>
+    <md-button ng-if="!edit.mode" class="md-raised md-primary" ng-click="editProfile()">Edit Profile</md-button>
+    <md-button ng-if="edit.mode" class="md-raised md-primary" ng-click="viewProfile()">View Profile</md-button>
+    <md-button ng-if="edit.mode" class="md-raised md-warn" ng-click="saveUserEdits()">Save Changes</md-button>
+    <md-button ng-if="edit.mode" class="md-raised" ng-click="cancelEdits()">Cancel</md-button>
+    <md-button id="shareProfile" class="md-raised md-primary" data-clipboard-text="{{profileLink}}">Share Your List</md-button>
+  </div>
+  <profile-edit user="broker" edit="edit"></profile-edit>
+</div>

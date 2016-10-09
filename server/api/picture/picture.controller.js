@@ -36,7 +36,7 @@ function generateServiceProperties() {
       CorsRule: [
         {
           AllowedOrigins: ['http://www.creapp.us', 'http://localhost:9000'],
-          AllowedMethods: ['GET', 'PUT', 'OPTIONS', 'DELETE'],
+          AllowedMethods: ['GET', 'PUT', 'HEADER', 'OPTIONS', 'DELETE'],
           AllowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-ms-blob-type', 'x-ms-delete-snapshots'],
           ExposedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-ms-blob-type', 'x-ms-delete-snapshots'],
           MaxAgeInSeconds: 120
@@ -62,9 +62,9 @@ function generateServiceProperties() {
 // };
 
 
-var getDate = function (){
+var getDate = function (minutes){
 	var date = new Date();
-	date.setHours((date).getHours() + 1);
+	date.setMinutes((date).getMinutes() + minutes);
 	return date;
 };
 
@@ -76,7 +76,20 @@ export function signature(req, res){
   var url = blobService.generateSharedAccessSignature('brokerpics', userId, {
 	AccessPolicy : {
 		Permissions : "rwdl",
-		Expiry : getDate()
+		Expiry : getDate(10)
+	}});
+	res.jsonp({url: url, userId: userId});
+}
+
+export function readsignature(req, res){
+  if (req.user){
+    var userHref = req.user.href;
+    var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
+  }
+  var url = blobService.generateSharedAccessSignature('brokerpics', userId, {
+	AccessPolicy : {
+		Permissions : "r",
+		Expiry : getDate(10)
 	}});
 	res.jsonp({url: url, userId: userId});
 }

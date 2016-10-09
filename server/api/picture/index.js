@@ -6,5 +6,6 @@ var ExpressStormpath = require('express-stormpath');
 var router = express.Router();
 
 router.get('/getsignature', ExpressStormpath.loginRequired, controller.signature);
+router.get('/getreadsignature', controller.readsignature);
 
 module.exports = router;

@@ -1,42 +1,44 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('profile', function ($mdDialog, pictureuploadService) {
+  .directive('profileView', function ($rootScope, pictureuploadService) {
     return {
-      templateUrl: 'app/profile/profileView.html',
+      templateUrl: 'app/profile/profileCard.html',
       restrict: 'E',
       scope: {
         broker: '=user',
         buyreq: '=buyreq'
       },
       link: function(scope,el,attrs){
-        scope.myprofile = attrs.myprofile;
 
-        if (attrs.edit!==undefined){
-          scope.edit=true;
-        } else {
-          scope.edit=false;
-        }
+        var userId;
 
         scope.$watch(function(){
           return scope.broker===undefined;
         }, function(isUndef){
           if (!isUndef){
             if (scope.broker.userId){
-              var userId = scope.broker.userId
+              userId = scope.broker.userId
             } else {
-              var userId = scope.broker.href.substr(scope.broker.href.lastIndexOf('/') + 1);
+              userId = scope.broker.href.substr(scope.broker.href.lastIndexOf('/') + 1);
             }
-            scope.brokerpic = pictureuploadService.getBrokerPicLink(userId);
+            scope.brokerpic = pictureuploadService.getBrokerPictureLink(userId);
           }
         });
 
         scope.getDefaultPic = function(img){
+          console.log('default pic');
           //avoid infinite loop
-          img.onerror=null;
+          if (arguments.length>0){
+            img.onerror=null;
+          }
           // set default image
           scope.brokerpic = '../../assets/images/user-default.png';
+          scope.edit.hasPicStaged = false;
+          scope.edit.hasPicCommitted = false;
+          scope.$apply();
         };
+
       }
     };
   });
