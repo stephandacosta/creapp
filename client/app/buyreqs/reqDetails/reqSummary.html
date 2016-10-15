@@ -12,8 +12,7 @@
       </div>
       <req-details req=main.selectedReq></req-details>
     </md-tab>
-    <md-tab label="Contact">
-      <profile-view user="main.selectedReq.broker" buyreq="main.selectedReq"></profile-view>
+    <md-tab ng-if="$mdmedia('gt-xs')" label="Map">
     </md-tab>
   </md-tabs>
 

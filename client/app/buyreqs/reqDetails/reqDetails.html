@@ -16,3 +16,7 @@
   <p ng-if="req.landOnly">Land Only {{ req.landOnly | checkmark }}</p>
   <p ng-if="req.landWithProperty">Land and Property {{ req.landWithProperty | checkmark }}</p>
 </div>
+<div>
+  <h3>Contact</h3>
+  <profile-view user="req.broker" buyreq="req"></profile-view>
+</div>
