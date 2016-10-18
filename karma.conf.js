@@ -39,6 +39,8 @@ module.exports = function(config) {
       'client/bower_components/leaflet-geosearch/src/js/l.control.geosearch.js',
       'client/bower_components/leaflet-geosearch/src/js/l.geosearch.provider.openstreetmap.js',
       'client/bower_components/clipboard/dist/clipboard.js',
+      'client/bower_components/ng-img-crop/compile/minified/ng-img-crop.js',
+      'client/bower_components/angular-editable-text/dist/angular-editable-text.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

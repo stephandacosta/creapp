@@ -1,11 +1,10 @@
-<div layout="column" id="mapcontrols" ng-class="{small:$mdMedia('xs'), big:$mdMedia('gt-xs')}">
-    <!-- <md-fab-speed-dial id="mapcontrols" ng-class="{small:$mdMedia('xs'), big:$mdMedia('gt-xs')}" md-direction="right" class="md-fling">
-    <md-fab-trigger>
-    <md-button aria-label="menu" class="md-fab md-primary">
-    <md-icon>menu</md-icon>
+<div layout="column" id="mapcontrols" style="margin-top:5px;">
+
+  <md-button  class="md-accent md-raised md-ink-ripple sellerTour3a" ng-click="toggleMapFilter()">
+    <md-icon ng-if="!search.mapfilter">settings_overscan</md-icon>
+    <md-icon ng-if="search.mapfilter">check_circle</md-icon>
+    Map Filter
   </md-button>
-  </md-fab-trigger>
-  <md-fab-actions> -->
   <md-button class="md-fab md-mini md-accent" ng-click="geoSearch()" style="margin-left:0;">
     <md-tooltip md-direction="right">search</md-tooltip>
     <md-icon>search</md-icon>

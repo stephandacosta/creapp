@@ -7,6 +7,7 @@ angular.module('creapp3App')
       scope: false,
       link: function (scope, element, attrs) {
 
+console.log('creating map');
         var map = new L.Map(element[0], {zoomControl:false}).setView(scope.map.initCenter, 10);
         // map.locate({setView:true});
         L.tileLayer(scope.map.tileUrl, {

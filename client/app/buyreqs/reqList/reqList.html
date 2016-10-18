@@ -1,28 +1,50 @@
 <md-toolbar class="md-primary md-hue-2" md-scroll-shrink>
-  <div class="md-toolbar-tools" style="height:25px;">
-    <span flex></span>
-    <span style="font-size:smaller"> {{filteredReqs.length}} reqs filtered from {{main.buyreqs.length}} </span>
-  </div>
-  <div class="md-toolbar-tools" flex layout="row" layout-padding style="height:33px;">
-    <!-- <span flex> {{filteredReqs.length}} of {{main.buyreqs.length}}</span> -->
-    <label> Filters:</label>
-    <div layout="row">
-      <md-button  class="md-accent md-ink-ripple sellerTour3a" ng-click="toggleMapFilter()">
-        <md-icon ng-if="!search.mapfilter">settings_overscan</md-icon>
-        <md-icon ng-if="search.mapfilter">check_circle</md-icon>
-        Map
-      </md-button>
-      <span flex></span>
-      <md-button aria-label="filter" class="md-accent md-ink-ripple sellerTour4" ng-click="openfilter()">
+  <div layout="row">
+
+    <div layout="column">
+
+      <div class="md-toolbar-tools" style="height:25px;">
+        <span flex></span>
+        <span style="font-size:smaller"> {{filteredReqs.length}} reqs filtered from {{main.buyreqs.length}} </span>
+      </div>
+
+      <div hide-xs class="md-toolbar-tools" flex layout="row" layout-padding style="height:33px;">
+        <label> Filters:</label>
+        <div layout="row">
+          <md-button  class="md-accent md-ink-ripple sellerTour3a" ng-click="toggleMapFilter()">
+            <md-icon ng-if="!search.mapfilter">settings_overscan</md-icon>
+            <md-icon ng-if="search.mapfilter">check_circle</md-icon>
+            Map
+          </md-button>
+          <span flex></span>
+          <md-button aria-label="filter" class="md-accent md-ink-ripple sellerTour4" ng-click="openfilter()">
+            <md-icon>filter_list</md-icon>
+            Other
+          </md-button>
+        </div>
+      </div>
+
+      <md-button hide-gt-xs flex="nogrow" aria-label="filter" class="md-accent md-ink-ripple sellerTour4" ng-click="openfilter()">
         <md-icon>filter_list</md-icon>
-        Other
+        Filters
       </md-button>
+
+    </div>
+
+    <span hide-gt-xs flex></span>
+
+    <md-button hide-gt-xs ng-click="toggleMap()" class="md-accent md-raised" style="width:40px;min-width: 0;padding: 0 6px 10px 0px;">
+      <md-icon style="font-size:32px">language</md-icon>
+    </md-button>
+
+  </div>
+
+    <div layout="row" class="md-toolbar-tools"  ng-show="showfilter" style="background-color: #ebc1f3;
+      color: black;">
+      <req-filter flex layout="row"></req-filter>
     </div>
   </div>
-  <div layout="row" class="md-toolbar-tools"  ng-show="showfilter" style="background-color: #ebc1f3;
-    color: black;">
-    <req-filter flex layout="row"></req-filter>
-  </div>
+
 </md-toolbar>
 
 

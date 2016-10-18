@@ -8,7 +8,7 @@ angular.module('creapp3App')
     $scope.main.selectMsg = function(msg){
       $scope.main.selected = msg;
       if (!$scope.main.bigScreen){
-        $mdSidenav('mailList').toggle();
+        $scope.main.openedMailList = false;
       }
     };
 

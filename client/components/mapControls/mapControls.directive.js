@@ -7,8 +7,6 @@ angular.module('creapp3App')
       restrict: 'E',
       link: function(scope, attrs, elem){
 
-        // scope.direction = $mdMedia('xs') ? 'up' : 'down';
-        // scope.isOpen = false;
         scope.state=$state.current.name;
 
         scope.geoSearch = function(){

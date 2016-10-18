@@ -3,26 +3,6 @@
   <!-- list of buyreqs or buyreq details -->
   <!-- height: 90vh hack due md-scroll-shrink to *https://github.com/angular/material/issues/1089 -->
   <div ui-view flex layout="column" ng-style="$mdMedia('gt-xs') ? {'height':'85vh'} : {'max-height':'100vh'}"></div>
-
-  <button ng-if="closedMap" ng-click="toggleCloseMap()" class="md-fab md-button md-primary md-fab-bottom-right">
-    <md-icon>
-      map
-    </md-icon>
-  </button>
-  <div ng-if="!(closedMap)" flex layout="row"  ng-class="{smallmap:$mdMedia('xs'),largemap:$mdMedia('gt-xs'), smallSmallMap: $mdMedia('xs') && smallSmallMap, largeSmallMap: $mdMedia('xs') && !smallSmallMap }" class="sellerTour3b brokerTour6">
-    <md-button hide-gt-xs id="mapresize" class="md-raised md-primary" ng-click="toggleSmallSmallMap()">
-      <md-icon>
-        {{mapSizeIcon}}
-      </md-icon>
-    </md-button>
-    <md-button hide-gt-xs id="mapclose" class="md-raised md-primary" ng-click="toggleCloseMap()">
-      <md-icon>
-        close
-      </md-icon>
-    </md-button>
-    <map-controls></map-controls>
-    <req-map flex md-whiteframe="8d"></req-map>
-  </div>
-
-
+  <map-controls ng-show="($mdMedia('gt-xs') || mapIsVisible) && !('buyreqs.detail' | isState)"></map-controls>
+  <req-map flex ng-show="($mdMedia('gt-xs') || mapIsVisible) && !('buyreqs.detail' | isState)" md-whiteframe="8d"></req-map>
 </div>

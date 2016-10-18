@@ -12,7 +12,11 @@
       </div>
       <req-details req=main.selectedReq></req-details>
     </md-tab>
-    <md-tab ng-if="$mdmedia('gt-xs')" label="Map">
+    <md-tab label="Map">
+      <md-tab-content flex layout="row">
+        <map-controls></map-controls>
+        <req-map flex md-whiteframe="8d"></req-map>
+    </md-tab-content>
     </md-tab>
   </md-tabs>
 

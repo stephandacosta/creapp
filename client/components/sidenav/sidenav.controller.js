@@ -2,16 +2,15 @@
 
 
 angular.module('creapp3App')
-  .controller('NavbarController', function($scope, tourService, introService, $mdSidenav){
-    $scope.openMenu = function($mdOpenMenu, ev) {
-      $mdOpenMenu(ev);
-    };
+  .controller('SidenavController', function($scope, tourService, introService, $mdSidenav){
+
     $scope.startTour = function(){
       console.log('tour in nave');
       introService.showIntroPanel();
       // tourService.showCurrentToast();
     };
-    $scope.openSidenav=function(){
+    $scope.closeSidenav=function(){
       $mdSidenav('left').toggle();
     };
+
   });

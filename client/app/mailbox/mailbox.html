@@ -1,14 +1,11 @@
-<!-- <div flex layout="row"> -->
-  <md-sidenav ng-if="main.bigScreen" md-is-locked-open="true"  ui-view="list" ></md-sidenav>
-  <md-sidenav ng-if="!main.bigScreen" md-is-open="main.openedMailList" md-component-id="mailList" ui-view="list" ></md-sidenav>
-  <div flex style="background-color:#b9c3c2">
-    <div layout="row">
-      <md-button ng-if="!main.bigScreen" class="md-fab md-accent" ng-click="main.openMailList()">
-        <md-icon>list</md-icon>
-      </md-button>
-      <span flex></span>
-      <md-button class="md-raised md-warn md-ink-ripple" ng-click="main.deleteMsg()">Delete</md-button>
-    </div>
-    <div flex ui-view="detail" style="background-color:#b9c3c2"></div>
+<md-content id="mailList" ng-if="main.bigScreen  || (!main.bigScreen && main.openedMailList)"  ui-view="list"></md-content>
+<md-content flex ng-if="main.bigScreen  || (!main.bigScreen && !main.openedMailList)" style="background-color:#b9c3c2">
+  <div layout="row">
+    <md-button ng-if="!main.bigScreen" class="md-fab md-accent" ng-click="main.openMailList()">
+      <md-icon>list</md-icon>
+    </md-button>
+    <span flex></span>
+    <md-button class="md-raised md-warn md-ink-ripple" ng-click="main.deleteMsg()">Delete</md-button>
   </div>
-<!-- </div> -->
+  <div flex ui-view="detail" style="background-color:#b9c3c2"></div>
+</md-content>

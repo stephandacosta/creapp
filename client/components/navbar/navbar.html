@@ -3,143 +3,17 @@
 
   <div flex class="md-toolbar-tools" layout="row">
 
+    <md-button ng-click="openSidenav()">
+      <md-icon>menu</md-icon>
+    </md-button>
+
     <img ui-sref="buyreqs.list" class="logo" src="../../assets/images/logo.svg"></img>
     <div flex="30" layout="row">
       <a ui-sref="buyreqs.list" flex class="logo">
         <span>CREapp.us</span>
       </a>
-      <!-- <h1><span> CREapp.us </span></h1> -->
-    </div>
-
-    <!-- <div hide-xs flex layout="row">
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="req.add">
-        Add
-      </md-button>
-      <md-button class="md-primary md-ink-ripple navtitle" if-user ui-sref="myreqs.list">
-        My Reqs
-      </md-button>
-      <md-button class="md-fab md-mini md-accent" ng-click="toggleProfile()" ng-if="'userreqs' | isState">
-        <md-tooltip md-direction="right">your broker</md-tooltip>
-        <md-icon>face</md-icon>
-      </md-button>
-    </div> -->
-
-    <span flex></span>
-
-    <div if-not-user hide-xs flex  layout-align="end center" class="md-toolbar-tools" layout="row">
-
-      <md-button class="navtitle" ui-sref="login">
-        Login
-      </md-button>
-
-      <md-button class="navtitle" ui-sref="register" class="brokerTour3 brokerTour4 brokerTour5">
-        Register
-      </md-button>
-
-    </div>
-
-
-
-
-      <md-menu class="navtitle brokerTour3 brokerTour4 brokerTour5" md-offset="0 50">
-        <md-button ng-click="openMenu($mdOpenMenu, $event)">
-          <md-icon>
-            menu
-          </md-icon>
-        </md-button>
-        <md-menu-content width="4" class="md-primary">
-          <md-menu-item  hide-gt-xs if-not-user >
-            <md-button class="md-primary" ui-sref="login">
-              Login
-            </md-button>
-          </md-menu-item>
-          <md-menu-item hide-gt-xs if-not-user >
-            <md-button class="md-primary" ui-sref="register">
-              Register
-            </md-button>
-          </md-menu-item>
-          <md-divider hide-gt-xs></md-divider>
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="buyreqs.list">
-              All Reqs
-            </md-button>
-          </md-menu-item>
-          <md-menu-item if-user >
-            <md-button class="md-primary" ui-sref="myreqs.list">
-              My Reqs
-            </md-button>
-          </md-menu-item>
-          <md-menu-item if-user>
-            <md-button class="md-primary" ui-sref="req.add">
-              Create Req
-            </md-button>
-          </md-menu-item>
-          <md-divider></md-divider>
-          <!-- <md-menu-item>
-            <md-button class="md-primary" ui-sref="about">
-              Your Broker
-            </md-button>
-          </md-menu-item> -->
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="about">
-              About
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button class="md-primary" ng-click="startTour()">
-              Help
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="legal">
-              Legal
-            </md-button>
-          </md-menu-item>
-          <!-- <md-menu-item >
-            <md-button if-user-in-group="admins" ui-sref="admins">
-              Admin Console
-            </md-button>
-          </md-menu-item > -->
-        </md-menu-content>
-      </md-menu>
-
-
-    <div if-user layout="row">
-
-      <md-menu  md-offset="0 50">
-
-        <button class="md-fab md-primary md-hue-1 md-button md-mini md-ink-ripple brokerTour3 brokerTour5" ng-click="openMenu($mdOpenMenu, $event)" type="button" aria-label="Profile">
-          <md-tooltip md-direction="bottom">
-              Account
-            </md-tooltip>
-          <i class="material-icons" style="vertical-align: middle;">person</i>
-        </button>
-
-        <md-menu-content class="md-primary" width="4">
-
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="mailbox.views">
-              Messages
-            </md-button>
-          </md-menu-item>
-
-          <md-menu-item>
-            <md-button class="md-primary" ui-sref="profile">
-              Profile
-            </md-button>
-          </md-menu-item>
-
-          <md-menu-item >
-            <md-button class="md-primary" ui-sref="buyreqs.list" sp-logout>
-              Logout
-            </md-button>
-          </md-menu-item>
-
-        </md-menu-content>
-
-      </md-menu>
-
     </div>
 
   </div>
+
 </md-toolbar>

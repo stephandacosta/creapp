@@ -71,13 +71,19 @@ angular.module('creapp3App')
       applyFilters();
     });
 
-    $scope.toggleMapFilter = function(){
-      $scope.search.mapfilter = !$scope.search.mapfilter;
-    }
 
     $scope.showfilter = false;
     $scope.openfilter = function(){
       $scope.showfilter = !$scope.showfilter;
+    };
+
+    $scope.toggleMapFilter = function(){
+      $scope.search.mapfilter = !$scope.search.mapfilter;
+    }
+
+    $scope.mapIsVisible = false;
+    $scope.toggleMap = function(){
+      $scope.mapIsVisible = !$scope.mapIsVisible;
     };
 
 
