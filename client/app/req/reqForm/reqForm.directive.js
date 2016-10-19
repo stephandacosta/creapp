@@ -7,7 +7,7 @@ angular.module('creapp3App')
       restrict: 'AE',
       scope: {
         req: '=req',
-        openedSidenav: '=openedSidenav'
+        openedEditForm: '=openedEditForm'
       },
       link: function(scope){
 
@@ -23,6 +23,10 @@ angular.module('creapp3App')
             scope.req.landWithProperty = true;
           }
         });
+
+        scope.toggleEditForm = function(){
+          scope.openedEditForm=!scope.openedEditForm;
+        };
 
         var showToast = function(msg){
           $mdToast.show(

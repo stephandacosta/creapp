@@ -7,6 +7,10 @@
   <md-button flex="30" class="md-ink-ripple" ng-click="cancel()">
     Cancel
   </md-button>
+  <span hide-gt-xs flex></span>
+  <md-button hide-gt-xs ng-click="toggleEditForm()" class="md-accent md-raised" style="width:40px;min-width: 0;padding: 0 6px 10px 0px;">
+    <md-icon style="font-size:32px">language</md-icon>
+  </md-button>
 </md-toolbar>
 
 <md-toolbar layout="row" ng-if="'req.edit' | isState" class="md-primary md-hue-2">

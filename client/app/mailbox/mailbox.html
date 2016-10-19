@@ -1,4 +1,4 @@
-<md-content id="mailList" ng-if="main.bigScreen  || (!main.bigScreen && main.openedMailList)"  ui-view="list"></md-content>
+<md-content id="mailList" flex-xs flex-gt-xs="40" ng-if="main.bigScreen  || (!main.bigScreen && main.openedMailList)"  ui-view="list"></md-content>
 <md-content flex ng-if="main.bigScreen  || (!main.bigScreen && !main.openedMailList)" style="background-color:#b9c3c2">
   <div layout="row">
     <md-button ng-if="!main.bigScreen" class="md-fab md-accent" ng-click="main.openMailList()">
