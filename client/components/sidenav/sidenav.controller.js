@@ -6,6 +6,7 @@ angular.module('creapp3App')
 
     $scope.startTour = function(){
       console.log('tour in nave');
+      $mdSidenav('left').toggle();
       introService.showIntroPanel();
       // tourService.showCurrentToast();
     };

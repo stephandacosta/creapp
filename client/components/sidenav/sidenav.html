@@ -6,30 +6,32 @@
   <md-toolbar layout="row" class="md-theme-indigo">
     <h1 class="md-toolbar-tools">Menu</h1>
     <span flex></span>
-    <md-icon>close</md-icon>
+    <md-button ng-click="closeSidenav()" style="min-width:0;">
+      <md-icon style="font-size:30px;">close</md-icon>
+    </md-button>
   </md-toolbar>
 
   <md-content style="background-color: #1a1f1e;" layout="column">
 
-    <md-button if-not-user class="navtitle" ui-sref="login">
+    <md-button if-not-user class="navtitle" ui-sref="login" ng-click="closeSidenav()">
       Login
     </md-button>
 
-    <md-button if-not-user class="navtitle" ui-sref="register" class="brokerTour3 brokerTour4 brokerTour5">
+    <md-button if-not-user class="navtitle" ui-sref="register" ng-click="closeSidenav()" class="brokerTour3 brokerTour4 brokerTour5">
       Register
     </md-button>
 
     <md-divider></md-divider>
 
-    <md-button class="md-primary" ui-sref="buyreqs.list">
+    <md-button class="md-primary" ui-sref="buyreqs.list" ng-click="closeSidenav()">
       All Reqs
     </md-button>
 
-    <md-button if-user class="md-primary" ui-sref="myreqs.list">
+    <md-button if-user class="md-primary" ui-sref="myreqs.list" ng-click="closeSidenav()">
       My Reqs
     </md-button>
 
-    <md-button if-user class="md-primary" ui-sref="req.add">
+    <md-button if-user class="md-primary" ui-sref="req.add" ng-click="closeSidenav()">
       Create Req
     </md-button>
 
@@ -37,30 +39,32 @@
     <md-divider></md-divider>
 
     <md-toolbar layout="row">
-      <md-icon>person</md-icon>
-      <h1 class="md-toolbar-tools">Account</h1>
+      <!-- <md-icon>person</md-icon> -->
+      <h1 class="md-toolbar-tools">
+      Account
+      </h1>
     </md-toolbar>
 
-    <md-button class="md-primary" ui-sref="mailbox.views">
+    <md-button class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
       Messages
     </md-button>
 
-    <md-button class="md-primary" ui-sref="profile">
+    <md-button class="md-primary" ui-sref="profile" ng-click="closeSidenav()">
       Profile
     </md-button>
 
-    <md-button class="md-primary" ui-sref="buyreqs.list" sp-logout>
+    <md-button class="md-primary" ui-sref="buyreqs.list" ng-click="closeSidenav()" sp-logout>
       Logout
     </md-button>
 
     <md-divider></md-divider>
 
-    <md-toolbar layout="row" class="md-theme-indigo">
-      <md-icon>info</md-icon>
+    <md-toolbar layout="row">
+      <!-- <md-icon>info</md-icon> -->
       <h1 class="md-toolbar-tools">Info</h1>
     </md-toolbar>
 
-    <md-button class="md-primary" ui-sref="about">
+    <md-button class="md-primary" ui-sref="about" ng-click="closeSidenav()">
       About
     </md-button>
 
@@ -68,7 +72,7 @@
       Help
     </md-button>
 
-    <md-button class="md-primary" ui-sref="legal">
+    <md-button class="md-primary" ui-sref="legal" ng-click="closeSidenav()">
       Legal
     </md-button>
   </md-content>
