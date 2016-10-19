@@ -13,6 +13,10 @@ angular.module('creapp3App')
           geosearchService.showInput();
         };
 
+        scope.toggleEditForm = function(){
+          scope.main.openedEditForm=!scope.main.openedEditForm;
+        };
+
         scope.zoomIn = function(){
           $rootScope.$broadcast('zoom:in');
         };

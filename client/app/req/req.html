@@ -1,11 +1,12 @@
 
 <!-- sidenav for input form -->
-<md-sidenav md-is-locked-open="main.openedSidenav" md-component-id="left" class="md-sidenav-left" id="sidenav">
+<md-content flex-xs flex="40" ng-show="main.bigScreen || main.openedEditForm" id="sidenav">
   <div req-form req="main.req" ng-cloak></div>
-</md-sidenav>
+</md-content>
+
 
     <!-- map container -->
-<div flex layout="row">
+<div flex layout="row" ng-if="main.bigScreen || !main.openedEditForm" >
   <map-controls drawmode="drawmode"></map-controls>
-  <req-mapedit req="main.req" opened-sidenav="main.openedSidenav" flex ng-cloak></req-mapedit>
+  <req-mapedit req="main.req" flex ng-cloak></req-mapedit>
 </div>

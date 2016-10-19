@@ -11,9 +11,9 @@ angular.module('creapp3App')
 
 
     // hide sidenav on smaller screens
-    $scope.main.openedSidenav = true;
+    $scope.main.openedEditForm = true;
     $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
-      $scope.main.openedSidenav =  big;
+      $scope.main.bigScreen =  big;
     });
 
     // state of freedraw broadcasted from map and shared to mapcontrols via scope inheritance
