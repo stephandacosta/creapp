@@ -26,7 +26,6 @@
 </md-toolbar>
 
 <md-content flex layout="column" layout-padding>
-  <h4> {{req.polygons.length}} areas selected</h4>
 
   <div flex layout="column" style="display: block;">
     <md-input-container flex layout-margin>
@@ -44,6 +43,21 @@
       <label>Title</label>
       <input type="text" md-maxlength="36" ng-model="req.title" required>
     </md-input-container>
+  </div>
+
+  <h4> {{req.polygons.length}} areas selected</h4>
+  <md-button ng-click="updateLocation()">update locations</md-button>
+  <div ng-if="req.radius" style="display: block;">
+    <fieldset layout="column">
+      <legend> Location </legend>
+      <span flex editable-text="req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
+      <span flex editable-text="req.road" placeholder="road" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
+      <span flex ng-if="req.city" editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
+      <span flex ng-if="req.town" editable-text="req.town" placeholder="city" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.county" placeholder="county" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.state" placeholder="state" on-change="validate(value, 'string')"></span>
+    </fieldset>
   </div>
 
   <div style="display: block;">

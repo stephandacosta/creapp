@@ -60,8 +60,9 @@
       <div flex layout="row" class="sellerTour2">
 
         <div class="md-list-item-text">
-          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}}</h3>
+          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}} in {{buyreq.state}}</h3>
           <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
+          <p class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.radius}}miles from {{buyreq.road}} in {{buyreq.city}}</p>
           <p ng-if="buyreq.buy">Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }} </p>
           <p ng-if="buyreq.exchange">Exchange Price: {{ buyreq.exchange_min_price | currency:"$" : 0 }} - {{ buyreq.exchange_max_price | currency:"$" : 0 }} </p>
           <p ng-if="buyreq.lease">Lease Price: {{ buyreq.lease_min_price | currency:"$" : 2 }} - {{ buyreq.lease_max_price | currency:"$" : 2 }} /sqft</p>

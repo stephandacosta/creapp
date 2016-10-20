@@ -32,6 +32,15 @@ var BuyreqSchema = new mongoose.Schema({
 
   polygons: [],
   centers: [],
+
+  town: String,
+  city: String,
+  country_code: String,
+  county: String,
+  postcode: String,
+  road: String,
+  state: String,
+
   active: Boolean
 });
 

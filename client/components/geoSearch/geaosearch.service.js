@@ -18,6 +18,18 @@ angular.module('creapp3App')
         });
     };
 
+    var getReverseGeoSearch = function(lat, lon, callback){
+      var url = 'https'+'://nominatim.openstreetmap.org/reverse?format=json&email=tech@creapp.us&lat='+lat+'&lon='+lon+'&json_callback=JSON_CALLBACK';
+      $http.jsonp(url)
+        .success(function(data){
+          callback(data);
+        })
+        .error(function(error){
+          console.log(error);
+          // errorcallback(error);
+        });
+    };
+
     var showInput = function () {
 
       var panelPosition = $mdPanel.newPanelPosition()
@@ -56,6 +68,8 @@ angular.module('creapp3App')
       showInput : showInput,
       registerMapSearchProcessor: function(fun){
         mapSearchProcessor = fun;
-      }
+      },
+      getReverseGeoSearch: getReverseGeoSearch
     };
+
   })

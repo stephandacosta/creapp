@@ -6,8 +6,7 @@ angular.module('creapp3App')
       template: '<div></div>',
       restrict: 'E',
       scope: {
-        req: '=req',
-        openedSidenav: '=openedSidenav'
+        req: '=req'
       },
       link: function (scope, element, attrs) {
 
@@ -97,6 +96,33 @@ angular.module('creapp3App')
         };
         geosearchService.registerMapSearchProcessor(processSearchResults);
 
+        var setLocationDetails = function(lat,lon){
+          geosearchService.getReverseGeoSearch(lat, lon, function(results){
+            scope.req.town = results.address.town;
+            scope.req.city = results.address.city;
+            scope.req.country_code = results.address.country_code.toUpperCase();
+            scope.req.county = results.address.county;
+            scope.req.postcode = results.address.postcode;
+            scope.req.road = results.address.road;
+            scope.req.state = results.address.state;
+            // console.log(scope.req);
+            // scope.$apply();
+          });
+        };
+
+        var resetLocationDetails = function(){
+          console.log('delete');
+          delete scope.req.radius;
+          delete scope.req.town;
+          delete scope.req.city;
+          delete scope.req.country_code;
+          delete scope.req.county;
+          delete scope.req.postcode;
+          delete scope.req.road;
+          delete scope.req.state;
+          scope.$apply();
+        };
+
 
 
         // clear polygons for button click
@@ -154,11 +180,19 @@ angular.module('creapp3App')
             _.remove(scope.req.centers);
             scope.req.polygons.forEach(function(polygon){
               var center = L.polygon(polygon).getBounds().getCenter();
+              // need to handle multiple polygons
               scope.req.centers.push([center.lat, center.lng]);
             });
+            var firstBounds = L.polygon(scope.req.polygons[0]).getBounds();
+            var firstCenter = firstBounds.getCenter();
+            scope.req.radius = Math.round(firstCenter.distanceTo(firstBounds.getNorthEast())/1000*0.621371*10)/10;
+            setLocationDetails(firstCenter.lat, firstCenter.lng);
           }
           if (eventData.latLngs.length === 0  && initialize) {
             initialize = false;
+          }
+          if (eventData.latLngs.length === 0) {
+            resetLocationDetails();
           }
         });
 
@@ -176,20 +210,6 @@ angular.module('creapp3App')
             freeDraw.predefinedPolygon(latLngs);
           });
         }
-
-        scope.openSidenav = function(){
-          scope.openedSidenav = !scope.openedSidenav;
-        };
-
-        // when sidenav updates, need to recenter map
-        // scope.$watch('openedSidenav',function(newvalue,oldvalue){
-        //   if (oldvalue!==undefined || newvalue !==undefined){
-        //     var offset = newvalue ? 160 : -160;
-        //     $timeout(function(){
-        //       map.panBy([offset, 0], {duration: 0.3});
-        //     },200);
-        //   }
-        // });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material
         $timeout(function(){map.invalidateSize(); },200);
