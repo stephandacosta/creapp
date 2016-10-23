@@ -15,52 +15,6 @@ var azure = require('azure-storage');
 
 var blobService = azure.createBlobService();
 
-var serviceProperties = generateServiceProperties();
-
-blobService.getServiceProperties(function(error, result, response) {
-  if (!error) {
-    console.log(result.Cors.CorsRule);
-    blobService.setServiceProperties(serviceProperties, function(error, result, response) {
-      if (!error) {
-        // properties are set
-        console.log(result);
-      }
-    });
-  }
-});
-
-//http://azure.github.io/azure-storage-node/#toc0
-function generateServiceProperties() {
-  return serviceProperties = {
-    Cors: {
-      CorsRule: [
-        {
-          AllowedOrigins: ['http://www.creapp.us', 'http://localhost:9000'],
-          AllowedMethods: ['GET', 'PUT', 'HEADER', 'OPTIONS', 'DELETE'],
-          AllowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-ms-blob-type', 'x-ms-delete-snapshots'],
-          ExposedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'x-ms-blob-type', 'x-ms-delete-snapshots'],
-          MaxAgeInSeconds: 120
-        }
-      ]
-    }
-  };
-}
-
-// var blobSvc = azure.createBlobService();
-//
-// var uploadFile = function(req, res){
-//   console.log('uploading server side');
-//   blobSvc.createAppendBlobFromLocalFile('brokerpics', 'testblobpic', require('path').dirname(require.main.filename) + '/test.png', function(error, result, response){
-//     if(error){
-//       console.log(error);
-//     }
-//     if(!error){
-//       console.log('test is uploaded');
-//       res.status(200).json(result);
-//     }
-//   });
-// };
-
 
 var getDate = function (minutes){
 	var date = new Date();
