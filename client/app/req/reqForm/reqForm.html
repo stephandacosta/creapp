@@ -25,10 +25,10 @@
   </md-button>
 </md-toolbar>
 
-<md-content flex layout="column" layout-padding>
+<md-content class="editForm" flex layout="column" layout-padding>
 
   <div flex layout="column" style="display: block;">
-    <md-input-container flex layout-margin>
+    <md-input-container flex layout-fill>
       <label>Type</label>
       <md-select ng-model="req.type">
         <md-option ng-repeat="type in types" value="{{type}}">
@@ -39,7 +39,7 @@
     </div>
     <!-- <span flex></span> -->
     <div style="display: block;">
-    <md-input-container layout-margin>
+    <md-input-container layout-fill>
       <label>Title</label>
       <input type="text" md-maxlength="36" ng-model="req.title" required>
     </md-input-container>
@@ -127,18 +127,15 @@
               Buy
             </md-checkbox>
           </legend>
-          <div ng-if="req.buy" layout="row">
-            <!-- <div flex="70" style="padding-top: 25%;">Price</div> -->
-            <div layout="column">
-              <md-input-container>
-                <label>Min Buy Price $</label>
-                <input type="text" ng-model="req.buy_min_price" dollars required></input>
-              </md-input-container>
-              <md-input-container>
-                <label>Max Buy Price $</label>
-                <input type="text" ng-model="req.buy_max_price" dollars required>
-              </md-input-container>
-            </div>
+          <div ng-if="req.buy" layout-gt-sm="row" layout="column">
+            <md-input-container>
+              <label>Min Buy Price $</label>
+              <input type="text" ng-model="req.buy_min_price" dollars required></input>
+            </md-input-container>
+            <md-input-container>
+              <label>Max Buy Price $</label>
+              <input type="text" ng-model="req.buy_max_price" dollars required>
+            </md-input-container>
           </div>
         </fieldset>
       </div>
@@ -153,18 +150,15 @@
               Exchange
             </md-checkbox>
           </legend>
-          <div ng-if="req.exchange" layout="row">
-            <!-- <div flex="70" style="padding-top: 25%;">Price</div> -->
-            <div layout="column">
-              <md-input-container>
-                <label>Min Exchange Price $</label>
-                <input type="text" ng-model="req.exchange_min_price" dollars required></input>
-              </md-input-container>
-              <md-input-container>
-                <label>Max Exchange Price $</label>
-                <input type="text" ng-model="req.exchange_max_price" dollars required>
-              </md-input-container>
-            </div>
+          <div ng-if="req.exchange" layout-gt-sm="row" layout="column">
+            <md-input-container>
+              <label>Min Exchange Price $</label>
+              <input type="text" ng-model="req.exchange_min_price" dollars required></input>
+            </md-input-container>
+            <md-input-container>
+              <label>Max Exchange Price $</label>
+              <input type="text" ng-model="req.exchange_max_price" dollars required>
+            </md-input-container>
           </div>
         </fieldset>
       </div>
@@ -179,9 +173,7 @@
               Lease
             </md-checkbox>
           </legend>
-          <div ng-if="req.lease" layout="row" style="display: block;">
-            <!-- <div flex="70" style="padding-top: 25%;">Price</div> -->
-            <div layout="column">
+          <div ng-if="req.lease" layout-gt-sm="row" layout="column">
               <md-input-container>
                 <label>Min Lease Price $/sqft</label>
                 <input type="text" ng-model="req.lease_min_price" dollarspersqft required></input>
@@ -190,7 +182,6 @@
                 <label>Max Lease Price $/sqft</label>
                 <input type="text" ng-model="req.lease_max_price" dollarspersqft required>
               </md-input-container>
-            </div>
           </div>
         </fieldset>
       </div>

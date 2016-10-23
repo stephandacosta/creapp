@@ -3,3 +3,15 @@ fieldset {
   border-width: 1px;
   background-color: #F0F9F8;
 }
+
+.editForm input, .editForm md-select {
+  background-color: #F0F9F8;
+}
+
+.editForm md-input-container {
+  margin-top:25px;
+}
+
+.md-errors-spacer {
+  background-color: white;
+}
