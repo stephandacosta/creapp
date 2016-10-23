@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('profileEdit', function ($rootScope, $timeout, pictureuploadService) {
+  .directive('profileEdit', function ($rootScope, $timeout, pictureuploadService, fieldValidation) {
     return {
       templateUrl: 'app/profile/profileCard.html',
       restrict: 'E',
@@ -28,12 +28,9 @@ angular.module('creapp3App')
           }
         });
 
-        var dirty = false;
-        scope.validate = function(value, field){
-          console.log(value, field);
-          dirty = true;
-          return value;
-        };
+        scope.validate = function(value, fieldtype){
+          return fieldValidation.validate(value, fieldtype);
+        }
 
         scope.getDefaultPic = function(img){
           //avoid infinite loop

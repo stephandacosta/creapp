@@ -45,28 +45,35 @@
     </md-input-container>
   </div>
 
-  <h4> {{req.polygons.length}} areas selected</h4>
-  <md-button ng-click="updateLocation()">update locations</md-button>
-  <div ng-if="req.radius" style="display: block;">
+  <div style="display: block;">
     <fieldset layout="column">
       <legend> Location </legend>
+      <h4> {{req.polygons.length}} areas selected</h4>
+      <md-button class="md-raised" ng-click="updateLocation()">
+        <md-icon>loop</md-icon>
+        get from map
+      </md-button>
       <span flex editable-text="req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
       <span flex editable-text="req.road" placeholder="road" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
-      <span flex ng-if="req.city" editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
-      <span flex ng-if="req.town" editable-text="req.town" placeholder="city" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.town" placeholder="town" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.county" placeholder="county" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.state" placeholder="state" on-change="validate(value, 'string')"></span>
+      <md-select ng-model="req.stateCode" ng-change="validate(req.stateCode,'stateCode')">
+        <md-option ng-repeat="state in states track by state.iso" value="{{state.iso}}">
+          {{state.name}}
+        </md-option>
+      </md-select>
     </fieldset>
   </div>
 
-  <div style="display: block;">
-    <fieldset>
+  <div layout="row" style="display: block;">
+    <fieldset flex layout="column">
       <legend> Description </legend>
-    <md-input-container>
-      <!-- <label>Description</label> -->
-      <textarea ng-model="req.info" md-maxlength="500" required></textarea>
-    </md-input-container>
+      <md-input-container flex layout-fill>
+        <!-- <label>Description</label> -->
+        <textarea ng-model="req.info" md-maxlength="500" required></textarea>
+      </md-input-container>
     </fieldset>
   </div>
 

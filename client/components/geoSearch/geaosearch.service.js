@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('geosearchService', function ($rootScope, $http, $mdPanel, $mdMedia) {
+  .factory('geosearchService', function ($rootScope, $http, $mdPanel, $mdMedia, appConstants) {
 
     var mapSearchProcessor;
     var getLocation = function(query, callback, errorcallback){
@@ -18,10 +18,23 @@ angular.module('creapp3App')
         });
     };
 
+    var getStateCode = function(stateName){
+      var stateObj = appConstants.states.filter(function(obj){
+        return (obj.name === stateName.toUpperCase());
+      });
+      if (stateObj.length){
+        return stateObj[0].iso;
+      } else {
+        return 'unknown';
+      }
+    }
+
+
     var getReverseGeoSearch = function(lat, lon, callback){
       var url = 'https'+'://nominatim.openstreetmap.org/reverse?format=json&email=tech@creapp.us&lat='+lat+'&lon='+lon+'&json_callback=JSON_CALLBACK';
       $http.jsonp(url)
         .success(function(data){
+          data.address.stateCode = getStateCode(data.address.state);
           callback(data);
         })
         .error(function(error){

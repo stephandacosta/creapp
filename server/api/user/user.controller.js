@@ -98,6 +98,17 @@ export function getEmail(user, callback) {
 };
 
 
+var validate = function(value,field){
+  if (field==='loopnet'){
+    var regex = /http\:\/\/www\.loopnet\.com\/profile\/\d*\/[a-zA-Z-]*\/?/g;
+    return regex.exec(value)[0];
+  }
+  if (field==='linkedin'){
+    var regex = /https\:\/\/www\.linkedin\.com\/[0-9a-zA-Z-\/]*\/?/g;
+    return regex.exec(value)[0];
+  }
+  return value;
+}
 
 // Updates an existing User in the DB
 export function update(req, res) {
@@ -111,6 +122,8 @@ export function update(req, res) {
       res.status(400).end(err.userMessage);
     } else {
       _.merge(req.user.customData, req.body.customData);
+      req.user.customData.loopnet = validate(req.user.customData.loopnet, 'loopnet');
+      req.user.customData.linkedin = validate(req.user.customData.loopnet, 'linkedin');
       req.user.customData.save(function (err) {
         if (err) {
           res.status(400).end(err.userMessage);

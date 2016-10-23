@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia, $timeout, geosearchService) {
+  .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia, $timeout, geosearchService, fieldValidation) {
     return {
       templateUrl: 'app/req/reqForm/reqForm.html',
       restrict: 'AE',
@@ -12,6 +12,7 @@ angular.module('creapp3App')
       link: function(scope){
 
         scope.types = appConstants.creTypes;
+        scope.states = appConstants.states;
 
         scope.$watch('landandprop',function(newValue){
           console.log(newValue);
@@ -27,6 +28,16 @@ angular.module('creapp3App')
         scope.toggleEditForm = function(){
           scope.openedEditForm=!scope.openedEditForm;
         };
+
+        scope.validate = function(value, fieldtype){
+          if (fieldtype==='stateCode'){
+            var stateCode = fieldValidation.validate(value, 'stateCode');
+            console.log(stateCode);
+            scope.req.state = fieldValidation.getStateName(stateCode);
+            return stateCode;
+          }
+          return fieldValidation.validate(value, fieldtype);
+        }
 
         var showToast = function(msg){
           $mdToast.show(
@@ -61,19 +72,12 @@ angular.module('creapp3App')
         scope.saveEdit = function(){
           // put req to server then drop toast
           var api = '/api/buyreqs/';
-          // code if different end point for admin
-          // currently admin check performed server side
-          // $user.currentUser.groups.items.forEach(function(group){
-          //   if (group.name=='admins'){
-          //     api = '/api/buyreqs/admin/';
-          //   }
-          // });
           $http.put(api + scope.req._id, scope.req).then(function(){
             showToast('Your requirement edits were saved !');
             scope.req = _.cloneDeep(appConstants.emptyReq);
             $state.go('myreqs.list');
           }, function(){
-            // showToast('There was an issue in saving your edits');
+            showToast('There was an issue in saving your edits');
           });
         };
 
@@ -105,8 +109,7 @@ angular.module('creapp3App')
             scope.req.postcode = results.address.postcode;
             scope.req.road = results.address.road;
             scope.req.state = results.address.state;
-            console.log(scope.req);
-            // scope.$apply();
+            scope.req.stateCode = results.address.stateCode;
           });
         };
 
