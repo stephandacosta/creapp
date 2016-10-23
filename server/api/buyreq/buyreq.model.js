@@ -32,6 +32,7 @@ var BuyreqSchema = new mongoose.Schema({
 
   polygons: [],
   centers: [],
+  radius: Number,
 
   town: String,
   city: String,

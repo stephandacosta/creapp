@@ -67,6 +67,41 @@ function handleEntityNotFound(res) {
   };
 }
 
+
+function checkUserInGroup(res, user, groupName){
+  //http://stackoverflow.com/questions/31101983/getting-group-name-from-account-in-stormpath-express
+  return function(entity){
+    var isAdmin=false;
+    return new Promise(function(resolve, reject){
+      user.getGroups(function(err, groups) {
+        if (err) {
+          reject;
+        }
+        groups.items.forEach(function(group) {
+          console.log('group.name', group.name, 'groupName', groupName);
+          if (group.name === groupName){
+            resolve(entity);
+          }
+        });
+        reject;
+      });
+    });
+  };
+}
+
+function checkUserRights(req, res) {
+  return function(entity) {
+    console.log(entity);
+    var userHref = req.user.href;
+    var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
+    console.log('buyreq user:', entity.user, 'requesting user:', userId);
+    if (entity.user !== userId ) {
+      checkUserInGroup(res, req.user, 'admins')(entity);
+    }
+    return entity;
+  };
+}
+
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
@@ -146,6 +181,18 @@ export function create(req, res) {
 
 // Updates an existing Buyreq in the DB
 export function update(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Buyreq.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(checkUserRights(req, res))
+    .then(saveUpdates(req.body))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+export function adminUpdate(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }

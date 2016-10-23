@@ -9,6 +9,7 @@
       </div>
       <div layout="row">
         <md-button flex ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">edit</md-button>
+        <md-button flex if-user-in-group="admins" ng-if="!('myreqs.detail' | isState)" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">admin edit</md-button>
       </div>
       <req-details req=main.selectedReq></req-details>
     </md-tab>

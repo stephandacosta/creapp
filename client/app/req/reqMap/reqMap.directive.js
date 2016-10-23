@@ -191,7 +191,7 @@ angular.module('creapp3App')
           if (eventData.latLngs.length === 0  && initialize) {
             initialize = false;
           }
-          if (eventData.latLngs.length === 0) {
+          if (scope.req.centers.length === 0) {
             resetLocationDetails();
           }
         });

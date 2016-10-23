@@ -44,7 +44,8 @@ app.use(ExpressStormpath.init(app,{
     spaRoot: path.join(__dirname, '..','client','index.html'),
     me: {
       expand: {
-        customData: true
+        customData: true,
+        groups: true
       }
     },
     register: {
