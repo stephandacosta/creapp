@@ -734,7 +734,7 @@ export default [
   },
   {
     "user": "5d9rQBLuegNquRs2yeXZqA",
-    "type": "Mulitfamily",
+    "type": "Multifamily",
     "title": "home by the beach",
     "info": "this is a test description",
     "landOnly": false,
