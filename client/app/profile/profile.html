@@ -6,5 +6,7 @@
     <md-button ng-if="edit.mode" class="md-raised" ng-click="cancelEdits()">Cancel</md-button>
     <md-button id="shareProfile" class="md-raised md-primary" data-clipboard-text="{{profileLink}}">Share Your List</md-button>
   </div>
-  <profile-edit user="broker" edit="edit"></profile-edit>
+  <div layout="row" layout-margin>
+    <profile-edit user="broker" edit="edit" flex="60" flex-sm="60" flex-xs="60" ></profile-edit>
+  </div>
 </div>
