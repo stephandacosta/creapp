@@ -1,11 +1,10 @@
 /*styles for FreeDraw*/
 .reqmap.mode-create {
-    cursor: url("pencil.png") 0 30, crosshair!important;
-    /*cursor: crosshair!important;*/
+    cursor: url("/assets/images/pencil.png") 0 30, crosshair!important;
 }
 
 .reqmap.mode-create .searchresult {
-    cursor: url("pencil.png") 0 30, crosshair!important;
+    cursor: url("/assets/images/pencil.png") 0 30, crosshair!important;
 }
 
 .reqmap g path:not(.searchresult){
