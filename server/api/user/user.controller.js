@@ -100,12 +100,24 @@ export function getEmail(user, callback) {
 
 var validate = function(value,field){
   if (field==='loopnet'){
-    var regex = /http\:\/\/www\.loopnet\.com\/profile\/\d*\/[a-zA-Z-]*\/?/g;
-    return regex.exec(value)[0];
+    // var regex = /http\:\/\/www\.loopnet\.com\/profile\/\d*\/[a-zA-Z-]*\/?/g;
+    var regex = /[a-zA-Z-/]*\/?/g;
+    var match = regex.exec(value);
+    if (match){
+      return match[0];
+    } else {
+      return '';
+    }
   }
   if (field==='linkedin'){
-    var regex = /https\:\/\/www\.linkedin\.com\/[0-9a-zA-Z-\/]*\/?/g;
-    return regex.exec(value)[0];
+    // var regex = /https\:\/\/www\.linkedin\.com\/[0-9a-zA-Z-\/]*\/?/g;
+    var regex = /[a-zA-Z-/]*\/?/g;
+    var match = regex.exec(value);
+    if (match){
+      return match[0];
+    } else {
+      return '';
+    }
   }
   return value;
 }

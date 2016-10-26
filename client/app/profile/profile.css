@@ -17,10 +17,18 @@
   border-style: solid;
 }
 
-
-span[editable-text]:after{
+.gg-editable-text:after{
    content: 'mode_edit';
    font-family: Material Icons;
    font-size: 12px;
    color:#009688;
+}
+
+.gg-editable-text.editing:after {
+  content: '';
+}
+
+.gg-editable-text .is-placeholder {
+  color: #009688;
+  background-color: rgba(0, 150, 136, 0.15);
 }
