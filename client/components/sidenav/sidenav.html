@@ -45,13 +45,19 @@
       </h1>
     </md-toolbar>
 
-    <md-button class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
-      Messages
-    </md-button>
 
     <md-button class="md-primary" ui-sref="profile" ng-click="closeSidenav()">
       Profile
     </md-button>
+
+    <md-button id="shareProfile" data-clipboard-text="{{profileLink}}" class="md-primary">
+      Share List
+    </md-button>
+
+    <md-button class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
+      Messages
+    </md-button>
+
 
     <md-button class="md-warn" ui-sref="buyreqs.list" ng-click="closeSidenav()" sp-logout>
       Logout
