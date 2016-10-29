@@ -5,11 +5,8 @@ var controller = require('./user.controller');
 var ExpressStormpath = require('express-stormpath');
 var router = express.Router();
 
-// router.get('/', controller.index);
 router.get('/:id', controller.show);
-// router.post('/', controller.create);
 router.put('/', ExpressStormpath.loginRequired, controller.update);
-// router.patch('/:id', controller.update);
-// router.delete('/:id', controller.destroy);
+router.delete('/', ExpressStormpath.loginRequired, controller.destroy);
 
 module.exports = router;

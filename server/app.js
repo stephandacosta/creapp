@@ -38,6 +38,8 @@ app.use(ExpressStormpath.init(app,{
     account.customData.save(function (err) {
       if (err) { console.log('there was an error setting email to prvate:',err.userMessage);}
     });
+    var userId = account.href.substr(account.href.lastIndexOf('/') + 1)
+    require('./api/picture/picture.controller').addDefaultPicture(userId);
     next();
   },
   web: {

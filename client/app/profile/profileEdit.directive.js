@@ -12,13 +12,15 @@ angular.module('creapp3App')
       link: function(scope,el,attrs){
 
         var userId;
-        scope.edit.hasPicStaged = true;
-        scope.edit.hasPicCommitted = true;
+        scope.edit.hasPicStaged = false;
+        scope.edit.deletePicture = false;
+
 
         scope.$watch(function(){
           return scope.broker===undefined;
         }, function(isUndef){
           if (!isUndef){
+            console.log(scope.broker);
             if (scope.broker.userId){
               userId = scope.broker.userId
             } else {
@@ -40,39 +42,30 @@ angular.module('creapp3App')
           // set default image
           scope.brokerpic = '../../assets/images/user-default.png';
           scope.edit.hasPicStaged = false;
-          scope.edit.hasPicCommitted = false;
           $timeout(function(){
             scope.$apply();
           }, 20);
         };
 
         scope.deletePic = function(){
-          if (scope.edit.hasPicCommitted){
-            // delete picture from blob storage
-            pictureuploadService.deleteImageFromStorage();
-            $rootScope.$on("deletePicture:success", function(){
-              // var img = document.getElementById('brokerpic');
-              scope.brokerpic = '../../assets/images/user-default.png';
-              scope.edit.hasPicStaged = false;
-              scope.edit.hasPicCommitted = false;
-              $timeout(function(){
-                scope.$apply();
-              }, 20);
-            });
-          }
+          scope.brokerpic = '../../assets/images/user-default.png';
+          scope.edit.deletePicture = true;
+          scope.edit.hasPicStaged = false;
         };
 
         scope.cancelPic = function(){
           if (scope.edit.hasPicStaged) {
-            // reference picture back to default
-            scope.getDefaultPic();
+            // reference picture back
+            scope.brokerpic = pictureuploadService.getBrokerPictureLink(userId);
+            scope.edit.hasPicStaged = false;
+            scope.edit.deletePicture = false;
             document.getElementById('fileToUpload').value='';
             // check if previous picture has been garbage collected
           }
         };
 
-        scope.upload = function(files){
-          pictureuploadService.uploadPicture(files);
+        scope.cropForm = function(files){
+          pictureuploadService.loadPictureForm(files);
           // need to clear te input to allow on change event to occur
           document.getElementById('fileToUpload').value='';
         };
@@ -80,7 +73,6 @@ angular.module('creapp3App')
         $rootScope.$on('croppedImage:change', function(){
           scope.brokerpic = pictureuploadService.getCroppedImage();
           scope.edit.hasPicStaged = true;
-          scope.edit.hasPicCommitted = false;
         });
 
       }

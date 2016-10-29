@@ -1,11 +1,14 @@
-<div flex layout="column">
-  <div layout="row" layout-margin>
+<div flex >
+  <div layout="row" >
     <md-button ng-if="!edit.mode" class="md-raised md-primary" ng-click="editProfile()">Edit Profile</md-button>
     <md-button ng-if="edit.mode" class="md-raised md-primary" ng-click="viewProfile()">View Profile</md-button>
-    <md-button ng-if="edit.mode" class="md-raised md-warn" ng-click="saveUserEdits()">Save Changes</md-button>
+    <md-button ng-if="edit.mode" class="md-raised md-accent" ng-click="saveUserEdits()">Save Changes</md-button>
     <md-button ng-if="edit.mode" class="md-raised" ng-click="cancelEdits()">Cancel</md-button>
   </div>
-  <div layout="row" layout-margin>
+  <div layout="row">
     <profile-edit user="broker" edit="edit" flex-gt-lg="50" flex-gt-sm="66" flex-sm="75" flex-xs="100" ></profile-edit>
+  </div>
+  <div layout="row">
+    <md-button ng-if="edit.mode" class="md-warn md-raised" ng-click="deleteAccount()">Delete Account</md-button>
   </div>
 </div>

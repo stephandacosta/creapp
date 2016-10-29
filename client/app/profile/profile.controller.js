@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('ProfileCtrl', function ($scope, $rootScope, $http, $mdToast, $user, $timeout, pictureuploadService) {
+  .controller('ProfileCtrl', function ($scope, $rootScope, $state, $http, $mdToast, $user, $auth, $timeout, pictureuploadService) {
 
     $scope.broker = $user.currentUser;
     var userId;
@@ -14,18 +14,13 @@ angular.module('creapp3App')
       $scope.edit = {
         mode: false,
         broker : _.cloneDeep($user.currentUser),
-        hasPicStaged : true,
-        hasPicCommitted : true
+        hasPicStaged : false,
+        deletePicture : false
       };
       userId = getUserId();
     };
 
     resetEdits();
-
-
-    // var getBrokerPictureLink = function(){
-    //   $scope.brokerpic = pictureuploadService.getBrokerPicLink(getUserId());
-    // };
 
     $scope.editProfile = function(){
       $scope.edit.mode = true;
@@ -44,24 +39,98 @@ angular.module('creapp3App')
       $scope.viewProfile();
     };
 
-    $scope.saveUserEdits = function(){
+
+
+    var updatePicture = function () {
       if ($scope.edit.hasPicStaged){
-        pictureuploadService.uploadImageToStorage();
-      }
-      $http.put('/api/users/', $scope.broker).then(function(res){
-        $user.get()
-        .then(function (user) {
-          showToast('user profile successfully updated');
-          // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
-          location.reload();
-        })
-        .catch(function (error) {
-          showToast('user profile successfully but problem retrieving from server');
+        // case when a picture is staged and need to be updated on server
+        pictureuploadService.uploadImageToStorage(function(success){
+          if (success){
+            console.log('picture resolved');
+            $scope.broker.customData.hasPicture = true;
+            saveUserEdits(true);
+          } else {
+            console.log('picture loading problem');
+            // no change in customData.hasPicture property
+            saveUserEdits(false);
+          }
         });
-      }, function(err){
-        showToast('there was a problem updating the profile');
-      });
+      } else if ($scope.edit.deletePicture) {
+        // case when a picture needs to be deleted on server
+        pictureuploadService.deleteImageFromStorage(function(success){
+          if (success){
+            console.log('picture resolved');
+            $scope.broker.customData.hasPicture = false;
+            saveUserEdits(true);
+          } else {
+            console.log('picture loading problem');
+            // no change in customData.hasPicture property
+            saveUserEdits(false);
+          }
+        });
+      } else {
+        saveUserEdits(true);
+      }
     };
+
+    var saveUserEdits = function(pictureUploadSuccess){
+      console.log('updating user', $scope.broker.customData);
+      $http.put('/api/users/', $scope.broker)
+        .then(function(res){
+          $user.get()
+          .then(function(user){
+            if (pictureUploadSuccess){
+              console.log('user profile saved and picture resolved');
+              showToast('user profile successfully updated');
+              // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
+            } else {
+              console.log('user profile saved but picture unresolved');
+              showToast('user profile successfully updated but problem uploading picture');
+            }
+            // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
+            location.reload();
+
+          })
+          .catch(function (error) {
+            if (pictureUploadSuccess){
+              console.log('user profile saved and picture resolved and could not retrieve user from server');
+              showToast('user profile successfully but problem retrieving from server');
+            } else {
+              console.log('user profile saved but picture unresolved and could not retrieve user from server');
+              showToast('user profile successfully updated but problem uploading picture');
+            }
+            // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
+            location.reload();
+
+          });
+        })
+        .catch(function(err){
+          showToast('there was a problem updating the profile');
+        });
+    };
+
+    $scope.saveUserEdits = function(){
+      updatePicture($scope.broker);
+    };
+
+    $scope.deleteAccount = function(){
+      $http.delete('/api/users').then(function(res){
+          // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
+        $auth.endSession()
+          .then(function(){
+            showToast('user profile successfully deleted');
+            $state.go('buyreqs.list');
+          })
+          .catch(function(error){
+            showToast('account was deleted but could not log out. please close tab');
+            console.log(error);
+            $state.go('buyreqs.list');
+          });
+      }, function(err){
+        showToast('there was a problem deleting the account');
+        $state.go('buyreqs.list');
+      });
+    }
 
     //function to show toasts
     var showToast = function(msg){
@@ -73,5 +142,7 @@ angular.module('creapp3App')
         .hideDelay(3000)
       );
     };
+
+
 
   });

@@ -14,9 +14,8 @@
           <span ng-if="!edit.mode && broker.customData.license" class="md-subhead">{{broker.customData.license}}</span>
           </div>
         <div layout="row">
-          <span class="md-subtitle">company: </span>
           <span ng-if="edit.mode" class="md-subtitle" editable-text="broker.customData.company" placeholder="company name"></span>
-          <span ng-if="!edit.mode && broker.customData.company" class="md-subtitle">{{broker.customData.company}}</span>
+          <span ng-if="!edit.mode && broker.customData.company" class="md-subtitle">company: {{broker.customData.company}}</span>
           </div>
         </md-card-header-text>
       </md-card-header>
@@ -34,14 +33,14 @@
               <span style="font-style: italic;color:red;">(hidden to public)</span>
           </div>
 
-          <span class="md-body-1" ng-if="!edit.mode && broker.customData.phone!=='hidden'">
+          <span class="md-body-1" ng-if="!edit.mode && broker.customData.phone && broker.customData.phone!=='hidden'">
             tel: {{broker.customData.phone}}
           </span>
           <div layout="row" ng-if="edit.mode">
             <span class="md-body-1">
               tel:
             </span>
-            <span class="md-body-1 edit" editable-text="broker.customData.phone"></span>
+            <span class="md-body-1 edit" editable-text="broker.customData.phone" placeholder="(000)0000 000"></span>
             <span ng-if="broker.customData.privatePhone" style="font-style: italic;color:red;">
               (hidden to public)
             </span>
@@ -80,9 +79,9 @@
                 <md-icon>add_a_photo</md-icon>
                 Picture
               </label>
-              <input id="fileToUpload" type="file" accept="image/*" onchange="angular.element(this).scope().upload(this.files)" class="ng-hide">
-              <md-button ng-if="edit.hasPicCommitted" class="md-warn" ng-click="deletePic()">Delete</md-button>
-              <md-button ng-if="!edit.hasPicCommitted && edit.hasPicStaged" class="" ng-click="cancelPic()">Cancel</md-button>
+              <input id="fileToUpload" type="file" accept="image/*" onchange="angular.element(this).scope().cropForm(this.files)" class="ng-hide">
+              <md-button ng-if="broker.customData.hasPicture" class="md-warn" ng-click="deletePic()">Delete</md-button>
+              <!-- <md-button ng-if="!edit.hasPicCommitted && edit.hasPicStaged" class="" ng-click="cancelPic()">Cancel</md-button> -->
             </div>
           </div>
         </md-card-title-media>
@@ -93,8 +92,8 @@
         <mailbutton broker="broker"></mailbutton>
       </md-card-actions>
       <md-card-content flex layout="column">
-        <span class="md-subtitle"><h4>Summary</h4></span>
-        <span ng-if="!edit.mode" class="md-body-1">{{broker.customData.summary}}</span>
+        <span ng-if="!edit.mode && broker.customData.summary" class="md-subtitle"><h4>Summary</h4></span>
+        <span ng-if="!edit.mode && broker.customData.summary" class="md-body-1">{{broker.customData.summary}}</span>
         <textarea flex ng-if="edit.mode" rows="4" ng-model="broker.customData.summary" class="md-body-1"></textarea>
       </md-card-content>
     </md-card>

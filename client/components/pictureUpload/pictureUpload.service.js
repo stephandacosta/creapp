@@ -3,7 +3,7 @@
 angular.module('creapp3App')
   .factory('pictureuploadService', function ($rootScope, $http, $mdPanel, $mdMedia) {
 
-    var uploadPicture = function(files){
+    var loadPictureForm = function(files){
       var file = files[0];
       if (!file.type.match(/image.*/)) {
         // this file is not an image.
@@ -61,7 +61,7 @@ angular.module('creapp3App')
 
     // add loading bar
     // https://github.com/chieffancypants/angular-loading-bar
-    var uploadImageToStorage = function(){
+    var uploadImageToStorage = function(callback){
       var blob = getBlob();
       // get signature
       $http.jsonp("/api/pictures/getsignature?callback=JSON_CALLBACK")
@@ -72,35 +72,30 @@ angular.module('creapp3App')
         {headers: {'x-ms-blob-type': 'BlockBlob'}}
         ).then(function(result){
             console.log(result);
-            $rootScope.$broadcast("uploadPicture:success");
+            callback(true);
           },function(error){
             console.log('failed to upload');
             console.log(error);
+            callback(false);
           });
       }, function(error){
         console.log('failed to get signature');
         console.log(error);
+        callback(false);
       });
     };
 
-    var deleteImageFromStorage = function(){
-      // get signature
-      $http.jsonp("/api/pictures/getsignature?callback=JSON_CALLBACK")
-      .then(function(result){
-        // upload blob
-        $http.delete('https://creapp.blob.core.windows.net/brokerpics/'+result.data.userId+'?'+result.data.url,
-        {headers: {'x-ms-delete-snapshots': 'include'}}
-        ).then(function(result){
-            console.log(result);
-            $rootScope.$broadcast("deletePicture:success");
-          },function(error){
-            console.log('failed to delete');
-            console.log(error);
-          });
-      }, function(error){
-        console.log('failed to get signature');
-        console.log(error);
-      });
+    var deleteImageFromStorage = function(callback){
+      // server to restore default image
+      $http.delete('api/pictures')
+        .then(function(result){
+          console.log(result);
+          callback(true);
+        },function(error){
+          console.log('failed to delete');
+          console.log(error);
+          callback(false);
+        });
     };
 
     var getBrokerPictureLink = function(userId){
@@ -109,7 +104,7 @@ angular.module('creapp3App')
 
 
     return {
-      uploadPicture : uploadPicture,
+      loadPictureForm : loadPictureForm,
       showPictureUpload : showPictureUpload,
       updateCroppedImage : function(picture){
         croppedImage = picture;

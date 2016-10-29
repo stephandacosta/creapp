@@ -146,3 +146,26 @@ export function update(req, res) {
     }
   });
 }
+
+
+export function destroy(req, res){
+  console.log('deleting account',req.user.href);
+  //also need to delete the picture blob
+  client.getAccount(req.user.href, function(err, account) {
+      if (err) {
+        console.log('error in getting user', err);
+        res.status(500).send(err);
+      }
+      if (account) {
+        account.delete(function(err){
+          if (err){
+            res.status(500).send(err);
+          } else {
+            res.status(200).end();
+          }
+        });
+      } else {
+        res.status(404).end();
+      }
+  });
+}
