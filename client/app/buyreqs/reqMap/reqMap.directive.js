@@ -14,37 +14,7 @@ console.log('creating map');
           attribution: scope.map.attribution
         }).addTo(map);
 
-
-
-        var searchLayer = L.layerGroup().addTo(map);
-        var processSearchResults = function(obj){
-            console.log(obj);
-            if (obj[0].geojson.coordinates[0][0].length>=3){
-              map.panTo([obj[0].lat, obj[0].lon]);
-              var searchedGeoJson = obj[0].geojson.coordinates;
-              searchedGeoJson.forEach(function(geoarray){
-                var latlngs = geoarray[0].map(function(lnglat){
-                  return [lnglat[1],lnglat[0]];
-                });
-                searchLayer.addLayer(L.polygon(latlngs, {className:'searchresult'})
-                .setStyle({color:'#e91e63', fillColor: '#e91e63'}));
-                // .on('click', function(e) {
-                //   searchLayer.clearLayers();
-                // .on('click contextmenu', function(e) {
-                //   $state.go('^.detail',{id: req._id });
-                // }));
-                // map.fitBounds( obj[0].boundingbox<LatLngBounds> bounds, <fitBounds options> options? )
-              });
-            } else {
-              map.panTo([obj[0].lat, obj[0].lon]);
-              L.marker([obj[0].lat, obj[0].lon]).bindPopup('<div>marker popoup</div>').openPopup().addTo(map);
-              // marker.bindPopup(popupContent).openPopup();
-            }
-        };
-        var processSearchError = function(obj){
-          console.log(obj);
-        };
-        geosearchService.registerMapSearchProcessor(processSearchResults);
+        geosearchService.registerMap(map);
 
 
         var polygonsLayer = L.layerGroup().addTo(map);
