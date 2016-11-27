@@ -47,6 +47,21 @@
 
   <div style="display: block;">
     <fieldset layout="column">
+      <legend> Location Input </legend>
+      <md-button class="md-raised md-primary" layout-fill ng-click="activateDrawing()">
+        Draw On Map
+      </md-button>
+
+      <md-button class="md-raised md-primary" layout-fill ng-click="showCircleInput()">
+        Input Radius
+      </md-button>
+
+    </fieldset>
+  </div>
+
+
+  <div style="display: block;">
+    <fieldset layout="column">
       <legend> Location </legend>
       <h4> {{req.polygons.length}} areas selected</h4>
       <md-button class="md-raised" ng-click="updateLocation()">

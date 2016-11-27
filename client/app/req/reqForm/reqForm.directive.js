@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqForm', function (appConstants, $http, $state, $mdToast, $mdMedia, $timeout, geosearchService, fieldValidation) {
+  .directive('reqForm', function ($rootScope, appConstants, $http, $state, $mdToast, $mdMedia, $timeout, geosearchService, fieldValidation) {
     return {
       templateUrl: 'app/req/reqForm/reqForm.html',
       restrict: 'AE',
@@ -37,7 +37,7 @@ angular.module('creapp3App')
             return stateCode;
           }
           return fieldValidation.validate(value, fieldtype);
-        }
+        };
 
         var showToast = function(msg){
           $mdToast.show(
@@ -95,7 +95,7 @@ angular.module('creapp3App')
           $timeout(function() {
            document.getElementById('sidenav').scrollTop = document.getElementById('sidenav').scrollHeight;
          },100);
-        }
+        };
 
         scope.updateLocation = function(){
           var firstBounds = L.polygon(scope.req.polygons[0]).getBounds();
@@ -112,6 +112,15 @@ angular.module('creapp3App')
             scope.req.stateCode = results.address.stateCode;
           });
         };
+
+        scope.showCircleInput = function(){
+          geosearchService.drawCircleInput();
+        };
+
+        scope.drawMap = function(){
+          $rootScope.$broadcast('manualmode:drawing');
+        };
+
 
       }
     };

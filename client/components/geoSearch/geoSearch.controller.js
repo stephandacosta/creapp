@@ -1,42 +1,49 @@
+'use strict';
+
 angular.module('creapp3App')
-.controller('geoInputPanelCtrl', geoInputPanelCtrl);
+.controller('geoInputPanelCtrl', geoInputPanelCtrl)
+.controller('drawCircleCtrl', geoDrawCircleCtrl);
 
 var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
+  console.log('geo search  controller');
   this._mdPanelRef = mdPanelRef;
-  this.geoinput = '';
+  this.states = appConstants.states.map(function(state){
+    return state.iso;
+  });
   this.selectedState = 'CA';
   this.closePanel = function(){
     this._mdPanelRef.close();
   };
-  var getLocation = function(){
-    geosearchService.getLocation(this.geoinput + ', ' + this.selectedState + ' United States');
+  this.searchLocation = function(){
+    geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
+    .then(function(results){
+      geosearchService.mapDrawSearchResults(results);
+    });
+    this._mdPanelRef.close();
   };
-  var getLocationBounded = getLocation.bind(this);
+};
 
-  this.geosearch = function(location){
-    this._mdPanelRef.close()
-    .finally(getLocationBounded);
-  };
-
+var geoDrawCircleCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
+  console.log('draw circle controller');
+  this._mdPanelRef = mdPanelRef;
+  // this.geoinput = '';
+  // this.radius
   this.states = appConstants.states.map(function(state){
     return state.iso;
   });
-};
+  this.selectedState = 'CA';
 
-//   geoinput.oninput = function(){
-//     console.log('this',this);
-//     if (this.value === ', United States'){
-//       this.value = '';
-//     }
-//     if (this.value.length===1) {
-//       this.value = this.value + ', United States';
-//       if (this.createTextRange) {
-//         var part = this.createTextRange();
-//         part.move("character", 1);
-//         part.select();
-//       } else if (this.setSelectionRange){
-//         this.setSelectionRange(1, 1);
-//       }
-//         this.focus();
-//     }
-//   }
+  this.closePanel = function(){
+    this._mdPanelRef.close();
+  };
+
+  this.drawCircle = function(){
+    geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
+    // geosearchService.getLocation('Palo Alto, California, United States')
+      .then(function(results){
+        geosearchService.mapDrawCircle(results, 1000);
+      });
+    this._mdPanelRef.close();
+  };
+
+};

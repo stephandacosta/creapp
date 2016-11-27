@@ -10,7 +10,7 @@ angular.module('creapp3App')
         scope.state=$state.current.name;
 
         scope.geoSearch = function(){
-          geosearchService.showInput();
+          geosearchService.geoSearchInput();
         };
 
         scope.toggleEditForm = function(){
