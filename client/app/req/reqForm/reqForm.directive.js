@@ -118,10 +118,13 @@ angular.module('creapp3App')
           reverseGeoCode(firstCenter.lat, firstCenter.lng);
         };
 
-
         $scope.setMode = function(mode){
           $rootScope.$broadcast('manualmode:' + mode);
         };
+
+        $scope.$watch('input.type', function(){
+          $scope.setMode('edit');
+        });
 
         $scope.circleDraw = {};
         $scope.circleDraw.states = appConstants.states.map(function(state){
