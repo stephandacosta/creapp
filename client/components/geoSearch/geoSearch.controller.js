@@ -2,10 +2,9 @@
 
 angular.module('creapp3App')
 .controller('geoInputPanelCtrl', geoInputPanelCtrl)
-.controller('drawCircleCtrl', geoDrawCircleCtrl);
+// .controller('drawCircleCtrl', geoDrawCircleCtrl);
 
 var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
-  console.log('geo search  controller');
   this._mdPanelRef = mdPanelRef;
   this.states = appConstants.states.map(function(state){
     return state.iso;
@@ -23,27 +22,26 @@ var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, appConsta
   };
 };
 
-var geoDrawCircleCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
-  console.log('draw circle controller');
-  this._mdPanelRef = mdPanelRef;
-  // this.geoinput = '';
-  // this.radius
-  this.states = appConstants.states.map(function(state){
-    return state.iso;
-  });
-  this.selectedState = 'CA';
-
-  this.closePanel = function(){
-    this._mdPanelRef.close();
-  };
-
-  this.drawCircle = function(){
-    geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
-    // geosearchService.getLocation('Palo Alto, California, United States')
-      .then(function(results){
-        geosearchService.mapDrawCircle(results, 1000);
-      });
-    this._mdPanelRef.close();
-  };
-
-};
+// var geoDrawCircleCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
+//   this._mdPanelRef = mdPanelRef;
+//   // this.geoinput
+//   // this.radius
+//   this.states = appConstants.states.map(function(state){
+//     return state.iso;
+//   });
+//   this.selectedState = 'CA';
+//
+//   this.closePanel = function(){
+//     this._mdPanelRef.close();
+//   };
+//
+//   this.drawCircle = function(){
+//     geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
+//     // geosearchService.getLocation('Palo Alto, California, United States')
+//       .then(function(results){
+//         geosearchService.mapDrawCircle(results, 1000);
+//       });
+//     this._mdPanelRef.close();
+//   };
+//
+// };

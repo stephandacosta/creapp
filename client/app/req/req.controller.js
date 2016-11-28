@@ -17,12 +17,12 @@ angular.module('creapp3App')
     });
 
     // state of freedraw broadcasted from map and shared to mapcontrols via scope inheritance
-    $scope.drawmode = '';
+    $scope.main.drawmode = 'editing';
     $rootScope.$on('mode:31', function(){
-      $scope.drawmode = 'drawing';
+      $scope.main.drawmode = 'drawing';
     });
     $rootScope.$on('mode:12', function(){
-      $scope.drawmode = 'editing';
+      $scope.main.drawmode = 'editing';
     });
 
 

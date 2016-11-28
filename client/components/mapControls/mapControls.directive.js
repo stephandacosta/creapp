@@ -13,9 +13,9 @@ angular.module('creapp3App')
           geosearchService.geoSearchInput();
         };
 
-        scope.toggleEditForm = function(){
-          scope.main.openedEditForm=!scope.main.openedEditForm;
-        };
+        // scope.toggleEditForm = function(){
+        //   scope.main.openedEditForm=!scope.main.openedEditForm;
+        // };
 
         scope.zoomIn = function(){
           $rootScope.$broadcast('zoom:in');
@@ -24,9 +24,9 @@ angular.module('creapp3App')
           $rootScope.$broadcast('zoom:out');
         };
 
-        scope.setMode = function(mode){
-          $rootScope.$broadcast('manualmode:' + mode);
-        };
+        // scope.setMode = function(mode){
+        //   $rootScope.$broadcast('manualmode:' + mode);
+        // };
 
 
 

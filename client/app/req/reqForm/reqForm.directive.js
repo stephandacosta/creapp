@@ -7,9 +7,12 @@ angular.module('creapp3App')
       restrict: 'AE',
       scope: {
         req: '=req',
-        openedEditForm: '=openedEditForm'
+        openedEditForm: '=openedEditForm',
+        drawmode: '=drawmode'
       },
       link: function(scope){
+
+
 
         scope.types = appConstants.creTypes;
         scope.states = appConstants.states;
@@ -97,11 +100,8 @@ angular.module('creapp3App')
          },100);
         };
 
-        scope.updateLocation = function(){
-          var firstBounds = L.polygon(scope.req.polygons[0]).getBounds();
-          var firstCenter = firstBounds.getCenter();
-          scope.req.radius = Math.round(firstCenter.distanceTo(firstBounds.getNorthEast())/1000*0.621371*10)/10;
-          geosearchService.getReverseGeoSearch(firstCenter.lat, firstCenter.lng, function(results){
+        var reverseGeoCode = function(lat,lng){
+          geosearchService.getReverseGeoSearch(lat,lng, function(results){
             scope.req.town = results.address.town;
             scope.req.city = results.address.city;
             scope.req.country_code = results.address.country_code.toUpperCase();
@@ -113,12 +113,44 @@ angular.module('creapp3App')
           });
         };
 
-        scope.showCircleInput = function(){
-          geosearchService.drawCircleInput();
+        scope.updateLocation = function(){
+          var firstBounds = L.polygon(scope.req.polygons[0]).getBounds();
+          var firstCenter = firstBounds.getCenter();
+          scope.req.radius = Math.round(firstCenter.distanceTo(firstBounds.getNorthEast())/1000*0.621371*10)/10;
+          reverseGeoCode(firstCenter.lat, firstCenter.lng);
         };
 
-        scope.drawMap = function(){
-          $rootScope.$broadcast('manualmode:drawing');
+
+        scope.setMode = function(mode){
+          $rootScope.$broadcast('manualmode:' + mode);
+        };
+
+        scope.circleDraw = {};
+        scope.circleDraw.states = appConstants.states.map(function(state){
+          return state.iso;
+        });
+        scope.circleDraw.selectedState = 'CA';
+        // scope.circleDraw.geoinput='';
+        scope.circleDraw.radius=50;
+        scope.circleDraw.drawCircle = function(){
+          console.log(scope.circleDraw.geoinput + ', ' + scope.circleDraw.selectedState + ' United States');
+          geosearchService.getLocationBing(scope.circleDraw.geoinput + ', ' + scope.circleDraw.selectedState + ' United States')
+          // geosearchService.getLocation('Palo Alto, California, United States')
+            .then(function(results){
+              var radiusMeters = Math.round(scope.circleDraw.radius/1000*0.621371*10)/10;
+              geosearchService.mapDrawCircle(results, radiusMeters);
+              scope.req.radius = scope.circleDraw.radius;
+              scope.req.road = results.address.addressLine;
+              scope.req.formattedAddress = results.address.formattedAddress;
+              scope.req.neighborhood = results.address.neighborhood;
+              scope.req.town = results.address.locality;
+              scope.req.postcode = results.address.postcode;
+              scope.req.landmark  = results.address.landmark;
+              scope.req.state = appConstants.states.filter(function(state){
+                return state.iso===scope.circleDraw.selectedState;
+              }).name;
+              scope.req.stateCode = scope.circleDraw.selectedState;
+            });
         };
 
 

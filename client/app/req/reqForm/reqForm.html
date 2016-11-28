@@ -48,16 +48,58 @@
   <div style="display: block;">
     <fieldset layout="column">
       <legend> Location Input </legend>
-      <md-button class="md-raised md-primary" layout-fill ng-click="activateDrawing()">
-        Draw On Map
-      </md-button>
 
-      <md-button class="md-raised md-primary" layout-fill ng-click="showCircleInput()">
-        Input Radius
-      </md-button>
+      <md-radio-group ng-model="input.type">
+        <md-radio-button value="draw" class="md-primary" aria-label="draw">
+               Draw on map
+        </md-radio-button>
+        <md-radio-button value="circle" class="md-primary" aria-label="circle">
+               Input Location
+        </md-radio-button>
+      </md-radio-group>
+
+      <div class="drawcontrols" ng-if="input.type==='draw'" layout="column">
+        <br>
+        <md-content >{{drawmode}}</md-content>
+        <md-button class="md-primary md-raised" ng-class="{inactive: (drawmode==='editing')}" ng-click="setMode('edit')" ng-disabled="drawmode==='editing'" style="margin-left:0;">
+          <i class="material-icons"  style="vertical-align:middle;">touch_app</i>
+          edit or delete area
+        </md-button>
+        <md-button class="md-primary md-raised" ng-class="{inactive: (drawmode==='drawing')}" ng-click="setMode('all')" ng-disabled="drawmode==='drawing'" style="margin-left:0;">
+          <i class="material-icons"  style="vertical-align:middle;">edit</i>
+          draw new area
+        </md-button>
+        <br>
+        <md-button class="md-primary md-raised" hide-gt-xs ng-click="toggleEditForm()" style="margin-left:0;">
+          <md-tooltip md-direction="right" style="z-index:1000;">edit requirement</md-tooltip>
+          <i class="material-icons"  style="vertical-align:middle;">rate_review</i>
+        </md-button>
+        <br>
+      </div>
+
+      <div layout="column" ng-if="input.type==='circle'">
+        <md-input-container>
+          <label>Radius (miles)</label>
+          <input type="number" ng-model="circleDraw.radius">
+        </md-input-container>
+        <md-input-container>
+          <label>Street / City / Zippcode</label>
+          <input id="geoinput" type="text" ng-model="circleDraw.geoinput">
+        </md-input-container>
+        <md-input-container>
+          <label>State</label>
+          <md-select ng-model="circleDraw.selectedState" md-container-class="stateselection" aria-label="state selection">
+            <md-option ng-value="state" ng-repeat="state in circleDraw.states">{{ state }}</md-option>
+          </md-select>
+        </md-input-container>
+        <md-button class="md-raised md-primary" layout-fill ng-click="circleDraw.drawCircle()">
+          Draw
+        </md-button>
+      </div>
 
     </fieldset>
   </div>
+
 
 
   <div style="display: block;">
@@ -69,14 +111,12 @@
         get from map
       </md-button>
       <span flex editable-text="req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
-      <span flex editable-text="req.road" placeholder="road" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="req.road" placeholder="address" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.intersection1" placeholder="intersection road" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.intersection2" placeholder="intersection road" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.town" placeholder="town" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.county" placeholder="county" on-change="validate(value, 'string')"></span>
-      <md-select ng-model="req.stateCode" ng-change="validate(req.stateCode,'stateCode')">
+      <md-select ng-model="req.stateCode" ng-change="validate(req.stateCode,'stateCode')" aria-label="state selection">
         <md-option ng-repeat="state in states track by state.iso" value="{{state.iso}}">
           {{state.name}}
         </md-option>
@@ -89,7 +129,7 @@
       <legend> Description </legend>
       <md-input-container flex layout-fill>
         <!-- <label>Description</label> -->
-        <textarea ng-model="req.info" md-maxlength="500" required></textarea>
+        <textarea ng-model="req.info" md-maxlength="500" required aria-label="description"></textarea>
       </md-input-container>
     </fieldset>
   </div>

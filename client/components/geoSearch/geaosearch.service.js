@@ -24,7 +24,6 @@ angular.module('creapp3App')
     };
 
     var mapDrawSearchResults = function(obj){
-      console.log('mapdrawsearch',obj);
       map.panTo(obj.point);
       // map.fitBounds(obj.bbox);
       // searchLayer.addLayer(L.polygon(latlngs, {className:'searchresult'})
@@ -50,7 +49,6 @@ angular.module('creapp3App')
 
       $http.jsonp(url)
         .success(function(data){
-          console.log('getLocation result',data);
           if (data.length > 0){
             var parsedResults = {};
             if (data[0].geojson.coordinates[0][0].length>=3){
@@ -62,7 +60,6 @@ angular.module('creapp3App')
             }
             parsedResults.point = [data[0].lat, data[0].lon];
             parsedResults.bbox = data[0].boundingbox;
-            // mapSearchProcessor(parsedResults);
             deferred.resolve(parsedResults);
           } else {
             deferred.reject('no result');
@@ -84,7 +81,6 @@ angular.module('creapp3App')
       // console.log('sending');
       $http.jsonp(url)
         .success(function(data){
-          console.log('getLocation result',data);
             var parsedResults = {
               point : data.resourceSets[0].resources[0].geocodePoints[0].coordinates,
               bbox : [
@@ -94,12 +90,12 @@ angular.module('creapp3App')
               address : {
                 formattedAddress : data.resourceSets[0].resources[0].address.formattedAddress || '',
                 state : data.resourceSets[0].resources[0].address.adminDistrict || '',
-                country : data.resourceSets[0].resources[0].address.CountryRegionIso2 || '',
-                addressLine : data.resourceSets[0].resources[0].address.AddressLine || '',
-                neighborhood : data.resourceSets[0].resources[0].address.Neighborhood || '',
-                locality : data.resourceSets[0].resources[0].address.Locality || '',
-                city : data.resourceSets[0].resources[0].address.AdminDistrict2 || '',
-                postcode : data.resourceSets[0].resources[0].address.PostalCode || '',
+                country : data.resourceSets[0].resources[0].address.countryRegionIso2 || '',
+                addressLine : data.resourceSets[0].resources[0].address.addressLine || '',
+                neighborhood : data.resourceSets[0].resources[0].address.neighborhood || '',
+                locality : data.resourceSets[0].resources[0].address.locality || '',
+                city : data.resourceSets[0].resources[0].address.adminDistrict2 || '',
+                postcode : data.resourceSets[0].resources[0].address.postalCode || '',
                 landmark : data.resourceSets[0].resources[0].address.landmark || ''
               },
               type: data.resourceSets[0].resources[0].entityType || ''

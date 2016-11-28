@@ -115,6 +115,7 @@ angular.module('creapp3App')
         //freeDraw.options.exitModeAfterCreate(false);
 
         // hook for button mode change from controller
+        freeDraw.setMode('edit');
         scope.$watch('draw.mode',function(newMode,oldMode){
           freeDraw.setMode(newMode);
         });
