@@ -61,11 +61,11 @@
       <div class="drawcontrols" ng-if="input.type==='draw'" layout="column">
         <br>
         <md-content >{{drawmode}}</md-content>
-        <md-button class="md-primary md-raised" ng-class="{inactive: (drawmode==='editing')}" ng-click="setMode('edit')" ng-disabled="drawmode==='editing'" style="margin-left:0;">
+        <md-button class="md-primary md-raised" ng-click="setMode('edit')" ng-disabled="drawmode==='edit'" style="margin-left:0;">
           <i class="material-icons"  style="vertical-align:middle;">touch_app</i>
           edit or delete area
         </md-button>
-        <md-button class="md-primary md-raised" ng-class="{inactive: (drawmode==='drawing')}" ng-click="setMode('all')" ng-disabled="drawmode==='drawing'" style="margin-left:0;">
+        <md-button class="md-primary md-raised" ng-click="setMode('all')" ng-disabled="drawmode==='all'" style="margin-left:0;">
           <i class="material-icons"  style="vertical-align:middle;">edit</i>
           draw new area
         </md-button>
@@ -102,14 +102,9 @@
 
 
 
-  <div style="display: block;">
+  <div style="display: block;" ng-if="req.center.length>0">
     <fieldset layout="column">
       <legend> Location </legend>
-      <h4> {{req.polygons.length}} areas selected</h4>
-      <md-button class="md-raised" ng-click="updateLocation()">
-        <md-icon>loop</md-icon>
-        get from map
-      </md-button>
       <span flex editable-text="req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
       <span flex editable-text="req.road" placeholder="address" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
@@ -121,6 +116,10 @@
           {{state.name}}
         </md-option>
       </md-select>
+      <md-button class="md-raised" ng-click="updateLocation()">
+        <md-icon>loop</md-icon>
+        get from map
+      </md-button>
     </fieldset>
   </div>
 

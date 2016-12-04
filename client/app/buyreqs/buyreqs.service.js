@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('buyreqs', function ($rootScope, $http, $state) {
+  .factory('buyreqs', function ($rootScope, $http, $state, mapService) {
 
     var buyreqs = [];
-    var bounds = [];
+    // var bounds = [];
     var selectedReq = {};
     var highlightedReq = {};
     var url;
@@ -23,6 +23,7 @@ angular.module('creapp3App')
       if (url==='') {
         console.log('url problem');
       } else {
+        // bounds=mapService.getSearchBounds();
         // if (bounds.length === 0){ return;}
         // update mongo query object map bounds
         var query = {};
@@ -75,15 +76,18 @@ angular.module('creapp3App')
     var updateSelectedReq = function(id){
       if (!id){
         selectedReq = {};
+        mapService.resetBounds();
         $rootScope.$broadcast('selectedReq:update');
       } else {
         selectedReq = _.find(buyreqs, { '_id': id });
         if (selectedReq) {
+          mapService.fitToReq(selectedReq);
           $rootScope.$broadcast('selectedReq:update');
           updateBroker(selectedReq);
         } else {
           $http.get('/api/buyreqs/'+ id).then(response => {
             selectedReq = response.data;
+            mapService.fitToReq(selectedReq);
             $rootScope.$broadcast('selectedReq:update');
             updateBroker(selectedReq);
           });
@@ -91,35 +95,13 @@ angular.module('creapp3App')
       }
     };
 
-    var highlightReq = function(req){
-      highlightedReq = req;
-    };
-
-    var unhighlightReq = function(){
-      highlightedReq = {};
-    }
-
-    var updateBounds = function(boundsArray){
-      bounds = boundsArray;
-      if ($state.current.name.indexOf('detail') === -1) {
-        updateBuyReqs();
-      }
-    };
-
-    var updateUrl = function(newUrl){
-      url = newUrl;
-    };
 
     return {
       updateBuyReqs: updateBuyReqs,
       getBuyReqs: function(){return buyreqs;},
       resetBuyreqs: resetBuyreqs,
-      updateBounds: updateBounds,
-      getBounds: function(){return bounds;},
       updateSelectedReq: updateSelectedReq,
       getSelectedReq: function(){return selectedReq || {} ;},
-      highlightReq: highlightReq,
-      unhighlightReq: unhighlightReq,
       getHighlightedReq: function(){return highlightedReq;},
       updateUrl: function(newUrl){url=newUrl;}
     };

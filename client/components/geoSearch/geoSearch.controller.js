@@ -4,7 +4,7 @@ angular.module('creapp3App')
 .controller('geoInputPanelCtrl', geoInputPanelCtrl)
 // .controller('drawCircleCtrl', geoDrawCircleCtrl);
 
-var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, appConstants){
+var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, mapService, appConstants){
   this._mdPanelRef = mdPanelRef;
   this.states = appConstants.states.map(function(state){
     return state.iso;
@@ -16,7 +16,7 @@ var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, appConsta
   this.searchLocation = function(){
     geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
     .then(function(results){
-      geosearchService.mapDrawSearchResults(results);
+      mapService.drawSearchResults(results);
     });
     this._mdPanelRef.close();
   };

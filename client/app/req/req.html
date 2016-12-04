@@ -1,12 +1,12 @@
 
 <!-- sidenav for input form -->
 <md-content flex-xs flex-gt-xs="40" ng-show="main.bigScreen || main.openedEditForm" id="sidenav">
-  <div req-form req="main.req" opened-edit-form="main.openedEditForm" drawmode="main.drawmode" ng-cloak></div>
+  <div req-form req="main.req" opened-edit-form="main.openedEditForm" ng-cloak></div>
 </md-content>
 
 
     <!-- map container -->
 <div flex layout="row" ng-if="main.bigScreen || !main.openedEditForm" >
-  <map-controls drawmode="main.drawmode"></map-controls>
+  <map-controls></map-controls>
   <req-mapedit req="main.req" flex ng-cloak></req-mapedit>
 </div>

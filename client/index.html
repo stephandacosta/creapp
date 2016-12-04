@@ -15,7 +15,6 @@
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
       <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-      <link rel="stylesheet" href="bower_components/leaflet-geosearch/src/css/l.geosearch.css" />
       <link rel="stylesheet" href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css" />
       <link rel="stylesheet" href="bower_components/angular-editable-text/dist/angular-editable-text.css" />
       <!-- endbower -->
@@ -95,23 +94,18 @@
       <script src="bower_components/angular-messages/angular-messages.js"></script>
       <script src="bower_components/angular-material/angular-material.js"></script>
       <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-      <script src="bower_components/d3/d3.js"></script>
-      <script src="bower_components/graham_scan/graham_scan.min.js"></script>
-      <script src="bower_components/concavehull/dist/concavehull.min.js"></script>
-      <script src="bower_components/evispa-timo-jsclipper/clipper.js"></script>
-      <script src="bower_components/leaflet.freedraw/dist/leaflet.freedraw.js"></script>
-      <script src="bower_components/leaflet-geosearch/src/js/l.control.geosearch.js"></script>
-      <script src="bower_components/leaflet-geosearch/src/js/l.geosearch.provider.openstreetmap.js"></script>
       <script src="bower_components/clipboard/dist/clipboard.js"></script>
+      <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
       <script src="bower_components/angular-editable-text/dist/angular-editable-text.js"></script>
+      <script src="bower_components/leaflet.freedraw/dist/leaflet-freedraw.web.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js(.tmp) app/app.js -->
       <script src="app/app.js"></script>
       <!-- injector:js -->
       <script src="components/util/util.module.js"></script>
-      <script src="app/main/main.js"></script>
+      <script src="app/profile/profile.controller.js"></script>
       <script src="app/admin/admin.controller.js"></script>
       <script src="app/admin/admin.js"></script>
       <script src="app/app.constant.js"></script>
@@ -136,8 +130,8 @@
       <script src="app/mailbox/mailbox.controller.js"></script>
       <script src="app/mailbox/mailbox.js"></script>
       <script src="app/main/main.controller.js"></script>
+      <script src="app/main/main.js"></script>
       <script src="app/about/about.js"></script>
-      <script src="app/profile/profile.controller.js"></script>
       <script src="app/profile/profile.js"></script>
       <script src="app/profile/profileEdit.directive.js"></script>
       <script src="app/profile/profileView.directive.js"></script>
@@ -152,6 +146,8 @@
       <script src="components/inputformat/inputformat.directive.js"></script>
       <script src="components/intro/intro.js"></script>
       <script src="components/mailbutton/mailbutton.directive.js"></script>
+      <script src="components/map/freeDraw.service.js"></script>
+      <script src="components/map/map.service.js"></script>
       <script src="components/mapControls/mapControls.directive.js"></script>
       <script src="components/navbar/navbar.controller.js"></script>
       <script src="components/navbar/navbar.directive.js"></script>

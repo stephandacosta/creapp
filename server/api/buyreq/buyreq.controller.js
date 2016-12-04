@@ -32,13 +32,13 @@ function respondWithResult(res, statusCode) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    _.remove(entity.centers);
-    _.remove(entity.polygons);
+    _.remove(entity.center);
+    _.remove(entity.polygon);
     var updated = _.merge(entity, updates);
     // need to tell mongoose that arrays changed
     // possibly create custom schema type to not need this http://mongoosejs.com/docs/customschematypes.html
-    updated.markModified('centers');
-    updated.markModified('polygons');
+    updated.markModified('center');
+    updated.markModified('polygon');
     return updated.saveAsync()
       .then(updated => {
         return updated;

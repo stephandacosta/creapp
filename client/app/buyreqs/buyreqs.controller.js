@@ -6,7 +6,7 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyreqs) {
+  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyreqs, mapService) {
 
     //add mdMedia service for use in template via ngStyle
     $scope.$mdMedia = $mdMedia;
@@ -18,13 +18,6 @@ angular.module('creapp3App')
       mapfilter: false
     };
 
-
-
-    $scope.map = {
-      tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      initCenter: [37.4259332,-122.3413094],
-    };
 
     $scope.main = {
       buyreqs: buyreqs.getBuyReqs(),
@@ -41,11 +34,9 @@ angular.module('creapp3App')
     var createTestReqInBounds = function(bounds){
       return function(req){
         var _bounds = bounds;
-        return req.polygons.some(function(polygon){
-          return polygon.some(function(point){
-            return (point[0] >= _bounds[0][0] && point[0] <= _bounds[1][0]
-            && point[1] >= _bounds[0][1] && point[1] <= _bounds[1][1]);
-          });
+        return req.polygon.some(function(point){
+          return (point[0] >= _bounds[0][0] && point[0] <= _bounds[1][0]
+          && point[1] >= _bounds[0][1] && point[1] <= _bounds[1][1]);
         });
       };
     };
@@ -59,7 +50,7 @@ angular.module('creapp3App')
     }
 
     var applyFilters = function(){
-      var mapfilter = createMapFilter(buyreqs.getBounds());
+      var mapfilter = createMapFilter(mapService.getSearchBounds());
       var filtered = $scope.main.buyreqs;
       filtered = $filter('filter')(filtered, typematch);
       filtered = $filter('filter')(filtered, mapfilter);
@@ -84,6 +75,9 @@ angular.module('creapp3App')
     $scope.mapIsVisible = false;
     $scope.toggleMap = function(){
       $scope.mapIsVisible = !$scope.mapIsVisible;
+      if ($scope.mapIsVisible){
+        $timeout(function(){mapService.invalidateSize(); },200);
+      }
     };
 
 
@@ -97,12 +91,12 @@ angular.module('creapp3App')
     });
 
     $scope.highlightReq = function(req){
-      buyreqs.highlightReq(req);
+      mapService.addHighlightedLayer(req);
       req.hover = true;
     };
 
     $scope.unhighlightReq = function(req){
-      buyreqs.unhighlightReq();
+      mapService.removeHighlightedLayer();
       req.hover = false;
     };
 
@@ -119,6 +113,7 @@ angular.module('creapp3App')
     } else {
       $scope.mapSizeIcon =   "picture_in_picture_alt";
     }
+
     $scope.toggleSmallSmallMap = function(){
       $scope.smallSmallMap = !$scope.smallSmallMap;
       if ($scope.smallSmallMap){

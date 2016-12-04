@@ -122,8 +122,18 @@ angular.module('creapp3App', [
       lease_min_price: undefined,
       lease_max_price: undefined,
 
-      polygons: [],
-      centers: [],
+      polygon: [],
+      center: [],
+      radius: 0,
+
+      town: undefined,
+      city: undefined,
+      country_code: undefined,
+      county: undefined,
+      postcode: undefined,
+      road: undefined,
+      state: undefined,
+      stateCode: undefined
       // active: true
     }
   });

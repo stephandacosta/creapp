@@ -3,44 +3,6 @@
 angular.module('creapp3App')
   .factory('geosearchService', function ($rootScope, $http, $q, $mdPanel, $mdMedia, appConstants) {
 
-    var map;
-
-    // var myIcon = L.icon({
-    // iconUrl: '../../assets/images/mapIcon.png',
-    // iconRetinaUrl: 'my-icon@2x.png',
-    // iconSize: [38, 95],
-    // iconAnchor: [22, 94],
-    // popupAnchor: [-3, -76],
-    // shadowUrl: 'my-icon-shadow.png',
-    // shadowRetinaUrl: 'my-icon-shadow@2x.png',
-    // shadowSize: [68, 95],
-    // shadowAnchor: [22, 94]
-    // });
-
-    var mapDrawCircle = function(obj,radius){
-      console.log('obj',obj, ' radius ', radius);
-      map.panTo(obj.point);
-      L.circle(obj.point, radius,{color:'rgba(0, 150, 136, 0.78)', fillColor: 'rgba(0, 150, 136, 0.78)'}).addTo(map);
-    };
-
-    var mapDrawSearchResults = function(obj){
-      map.panTo(obj.point);
-      // map.fitBounds(obj.bbox);
-      // searchLayer.addLayer(L.polygon(latlngs, {className:'searchresult'})
-      // .setStyle({color:'rgba(0, 150, 136, 0.78)', fillColor: 'rgba(0, 150, 136, 0.78)'}));
-      // .on('click', function(e) {
-      //   searchLayer.clearLayers();
-      //  });
-      // .on('click contextmenu', function(e) {
-      //   $state.go('^.detail',{id: req._id });
-      // }));
-      // map.fitBounds( obj[0].boundingbox<LatLngBounds> bounds, <fitBounds options> options? )
-      // L.marker(obj.point, {icon: myIcon}).bindPopup('<div>marker popoup</div>').openPopup().addTo(map);
-      L.marker(obj.point).bindPopup('<div>marker popoup</div>').openPopup().addTo(map);
-      // marker.bindPopup(popupContent).openPopup();
-    };
-
-
     var getLocationNominatim = function(query){
 
       var deferred = $q.defer();
@@ -185,16 +147,7 @@ angular.module('creapp3App')
       geoSearchInput : function(){
         showPanel('geoSearch');
       },
-      drawCircleInput: function(){
-        showPanel('drawCircle');
-      },
-      registerMap : function(mapinput){
-        map=mapinput;
-        console.log('registering map');
-      },
-      getReverseGeoSearch: getReverseGeoSearch,
-      mapDrawSearchResults: mapDrawSearchResults,
-      mapDrawCircle: mapDrawCircle
+      getReverseGeoSearch: getReverseGeoSearch
     };
 
   });

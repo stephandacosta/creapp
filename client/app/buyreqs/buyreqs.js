@@ -13,7 +13,7 @@ angular.module('creapp3App')
       .state('buyreqs.list', {
         url: '/',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams, $user, introService){
+        onEnter: function(buyreqs,$stateParams, $user, introService, mapService){
           buyreqs.updateUrl('/api/buyreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
@@ -45,7 +45,7 @@ angular.module('creapp3App')
       .state('myreqs.list', {
         url: '/list',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams){
+        onEnter: function(buyreqs,$stateParams, mapService){
           buyreqs.updateUrl('/api/buyreqs/myreqs');
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
@@ -86,7 +86,7 @@ angular.module('creapp3App')
       .state('brokerreqs.list', {
         url: '/list',
         templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams){
+        onEnter: function(buyreqs,$stateParams, mapService){
           buyreqs.updateUrl('/api/buyreqs/brokerreqs/' + $stateParams.brokerId);
           buyreqs.updateBuyReqs();
           buyreqs.updateSelectedReq();
