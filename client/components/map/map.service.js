@@ -3,7 +3,7 @@
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
 angular.module('creapp3App')
-  .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw, geosearchService) {
+  .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw) {
 
    var map;
    var tilesLoaded =  false;
@@ -188,6 +188,21 @@ angular.module('creapp3App')
         }).on('load', function(){ tilesLoaded = true;}).addTo(map);
         state = 'search';
         map.on('load moveend', updateSearchBounds);
+      },
+      addDetailMap : function(element, req){
+        //create map
+        console.log('creating detail map');
+        map = new L.Map(element, {zoomControl:false});
+        L.tileLayer(mapSettings.tileUrl, {
+          attribution: mapSettings.attribution
+        }).on('load', function(){ tilesLoaded = true;}).addTo(map);
+        state = 'req';
+        if (req.polygon.length > 0){
+          highlightedLayer = L.polygon(req.polygon);
+        } else {
+          highlightedLayer = L.circle(req.center,req.radius*1000/0.621371);
+        }
+        highlightedLayer.setStyle({color:'#E040FB', fillColor: '#E040FB'}).addTo(map);
       },
       addFreeDraw : function(){
         freeDraw.addToMap(map);

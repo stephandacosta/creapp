@@ -5,13 +5,12 @@ angular.module('creapp3App')
     return {
       restrict: 'E',
       scope: false,
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
 
         mapService.addMaptoElement(element[0], true);
         mapService.addPolygonsLayer();
 
-
-        scope.$on('filter:update', function(event){
+        scope.$on('filter:update', function(){
           // event.stopPropagation();
           mapService.clearLayers();
           if (scope.filteredReqs) {
