@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('creapp3App')
   .factory('introService', function($mdToast, $mdPanel, $timeout, $mdMedia, tourService){
 

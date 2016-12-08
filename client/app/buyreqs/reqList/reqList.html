@@ -11,20 +11,20 @@
       <div hide-xs class="md-toolbar-tools" flex layout="row" layout-padding style="height:33px;">
         <label> Filters:</label>
         <div layout="row">
-          <md-button  class="md-accent md-ink-ripple sellerTour3a" ng-click="toggleMapFilter()">
+          <md-button  class="md-accent md-ink-ripple" ng-click="toggleMapFilter()">
             <md-icon ng-if="!search.mapfilter">settings_overscan</md-icon>
             <md-icon ng-if="search.mapfilter">check_circle</md-icon>
             Map
           </md-button>
           <span flex></span>
-          <md-button aria-label="filter" class="md-accent md-ink-ripple sellerTour4" ng-click="openfilter()">
+          <md-button aria-label="filter" class="md-accent md-ink-ripple tour-filter-desk" ng-click="openfilter()">
             <md-icon>filter_list</md-icon>
             Other
           </md-button>
         </div>
       </div>
 
-      <md-button hide-gt-xs flex="nogrow" aria-label="filter" class="md-accent md-ink-ripple sellerTour4" ng-click="openfilter()">
+      <md-button hide-gt-xs flex="nogrow" aria-label="filter" class="md-accent md-ink-ripple tour-filter-mob" ng-click="openfilter()">
         <md-icon>filter_list</md-icon>
         Filters
       </md-button>
@@ -33,7 +33,7 @@
 
     <span hide-gt-xs flex></span>
 
-    <md-button hide-gt-xs ng-click="toggleMap()" class="md-accent md-raised" style="width:40px;min-width: 0;padding: 0 6px 10px 0px;">
+    <md-button hide-gt-xs ng-click="toggleMap()" class="md-accent md-raised tour-map-mob" style="width:40px;min-width: 0;padding: 0 6px 10px 0px;">
       <md-icon style="font-size:32px">language</md-icon>
     </md-button>
 
@@ -48,7 +48,7 @@
 </md-toolbar>
 
 
-<md-content flex layout="column" class="sellerTour1 brokerTour1 brokerTour2">
+<md-content flex layout="column" class="tour-list">
   <md-list ng-hide="search.reqID">
     <md-list-item
       class="md-3-line md-offset md-warn"
@@ -57,7 +57,7 @@
       ng-mouseenter="highlightReq(buyreq)"
       ng-mouseleave="unhighlightReq(buyreq)"
       ng-style="{'background-color': buyreq.hover ? 'rgba(224, 64, 251, 0.27)' : null}">
-      <div flex layout="row" class="sellerTour2">
+      <div flex layout="row">
 
         <div class="md-list-item-text">
           <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}} in {{buyreq.state}}</h3>

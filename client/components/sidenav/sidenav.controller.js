@@ -2,17 +2,17 @@
 
 
 angular.module('creapp3App')
-  .controller('SidenavController', function($scope, tourService, introService, $mdSidenav, $mdToast, $user){
+  .controller('SidenavController', function($scope, $state, tourService, introService, $mdSidenav, $mdToast, $user){
 
-    $scope.startTour = function(){
-      console.log('tour in nave');
-      $mdSidenav('left').toggle();
-      introService.showIntroPanel();
-      // tourService.showCurrentToast();
-    };
 
     $scope.closeSidenav=function(){
       $mdSidenav('left').toggle();
+    };
+
+    $scope.startTour = function(){
+      $scope.closeSidenav();
+      $state.go('buyreqs.list');
+      introService.showIntroPanel();
     };
 
     $user.get()
