@@ -7,7 +7,7 @@ angular.module('creapp3App')
 
    var map;
    var tilesLoaded =  false;
-   var polygonsLayer, baseLayer, highlightedLayer;
+   var polygonsLayer, baseLayer, highlightedLayer, markerGroup;
    var searchBounds;
    var state;
    var editCircle;
@@ -32,10 +32,9 @@ angular.module('creapp3App')
     var mapSettings = {
       tileUrl : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      initCenter: [37.4259332,-122.3413094]
+      initCenter: [40.48038142908172,-97.03125],
+      initZoom: 7
     };
-
-
     $rootScope.$on('zoom:in', function(){
       map.zoomIn();
     });
@@ -87,11 +86,18 @@ angular.module('creapp3App')
     };
 
     var addPolygonsLayer = function(){
-      polygonsLayer = L.layerGroup().addTo(map);
+      polygonsLayer = L.featureGroup();
+      polygonsLayer.addTo(map);
+
+      map.zoomOut(3);
+      markerGroup = L.markerClusterGroup({singleMarkerMode:true});
+      map.addLayer(markerGroup);
+
     };
 
     var addBaseLayer = function(reqs){
       polygonsLayer.clearLayers();
+      markerGroup.clearLayers();
       reqs.forEach(function(req){
         var base;
         if (req.polygon.length > 0){
@@ -103,8 +109,10 @@ angular.module('creapp3App')
         .on('click contextmenu', function() {
           $state.go('^.detail',{id: req._id });
         });
-        baseLayer = polygonsLayer.addLayer(base);
+        polygonsLayer.addLayer(base);
+        markerGroup.addLayer(L.marker(req.center));
       });
+
     };
 
     var addHighlightedLayer = function(req){
@@ -167,7 +175,6 @@ angular.module('creapp3App')
 
     var updateSearchBounds = function() {
       if (state === 'search') {
-        console.log('updating bounds');
         var bounds = map.getBounds();
         var boundsArray = [
           [bounds._southWest.lat, bounds._southWest.lng],
@@ -182,10 +189,12 @@ angular.module('creapp3App')
       addMaptoElement : function(element){
         //create map
         console.log('creating map');
-        map = new L.Map(element, {zoomControl:false}).setView(mapSettings.initCenter, 10);
+        map = new L.Map(element, {zoomControl:false}).setView(mapSettings.initCenter,mapSettings.initZoom);
         L.tileLayer(mapSettings.tileUrl, {
           attribution: mapSettings.attribution
-        }).on('load', function(){ tilesLoaded = true;}).addTo(map);
+        }).on('load', function(){
+          tilesLoaded = true;
+        }).addTo(map);
         state = 'search';
         map.on('load moveend', updateSearchBounds);
       },
