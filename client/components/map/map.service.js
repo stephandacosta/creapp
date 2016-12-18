@@ -110,9 +110,12 @@ angular.module('creapp3App')
           $state.go('^.detail',{id: req._id });
         });
         polygonsLayer.addLayer(base);
-        markerGroup.addLayer(L.marker(req.center));
+        markerGroup.addLayer(L.marker(req.center)
+          .on('click contextmenu', function() {
+            $state.go('^.detail',{id: req._id });
+          })
+        );
       });
-
     };
 
     var addHighlightedLayer = function(req){
