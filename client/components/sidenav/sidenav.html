@@ -13,32 +13,24 @@
 
   <md-content style="background-color: #1a1f1e;" layout="column">
 
-    <md-button if-not-user class="md-primary" ui-sref="login" ng-click="closeSidenav()">
-      Login
-    </md-button>
-
-    <md-button if-not-user class="md-primary tour-register" ui-sref="register" ng-click="closeSidenav()">
-      Register
-    </md-button>
-
-    <md-divider></md-divider>
-
     <md-button class="md-primary tour-create" ui-sref="buyreqs.list" ng-click="closeSidenav()">
-      All Reqs
+      Browse All
     </md-button>
+
+    <md-divider if-user style="border-color: #009688;"></md-divider>
+
 
     <md-button if-user class="md-primary" ui-sref="myreqs.list" ng-click="closeSidenav()">
-      My Reqs
+      My Requirements
     </md-button>
 
     <md-button if-user class="md-primary" ui-sref="req.add" ng-click="closeSidenav()">
-      Create Req
+      Create Requirement
     </md-button>
 
 
     <md-divider></md-divider>
 
-    <div if-user>
 
       <md-toolbar layout="row">
         <!-- <md-icon>person</md-icon> -->
@@ -47,25 +39,31 @@
         </h1>
       </md-toolbar>
 
+      <md-button if-not-user class="md-primary" ui-sref="login" ng-click="closeSidenav()">
+        Login
+      </md-button>
 
-      <md-button class="md-primary tour-profile" ui-sref="profile" ng-click="closeSidenav()">
+      <md-button if-not-user class="md-primary tour-register" ui-sref="register" ng-click="closeSidenav()">
+        Register
+      </md-button>
+
+      <md-button if-user class="md-primary tour-profile" ui-sref="profile" ng-click="closeSidenav()">
         Profile
       </md-button>
 
-      <md-button id="shareProfile" data-clipboard-text="{{profileLink}}" class="md-primary">
-        Share List
+      <md-button if-user id="shareProfile" data-clipboard-text="{{profileLink}}" class="md-primary">
+        Share My List
       </md-button>
 
-      <md-button class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
+      <md-button if-user class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
         Messages
       </md-button>
 
 
-      <md-button class="md-warn" ui-sref="buyreqs.list" ng-click="closeSidenav()" sp-logout>
+      <md-button if-user class="md-warn" ui-sref="buyreqs.list" ng-click="closeSidenav()" sp-logout>
         Logout
       </md-button>
 
-    </div>
 
 
     <md-divider></md-divider>
