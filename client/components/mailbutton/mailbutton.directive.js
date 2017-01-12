@@ -1,5 +1,5 @@
 angular.module('creapp3App')
-  .directive('mailbutton', function ($mdDialog, buyreqs) {
+  .directive('mailbutton', function ($mdDialog) {
     return {
       templateUrl: 'components/mailbutton/mailbutton.html',
       restrict: 'E',
@@ -11,7 +11,8 @@ angular.module('creapp3App')
 
         scope.showMailForm = function(ev){
 
-          var selectedReq = buyreqs.getSelectedReq();
+          // var selectedReq = buyreqs.getSelectedReq();
+          var selectedReq = scope.buyreq;
 
           $mdDialog.show({
             parent: angular.element(document.body),

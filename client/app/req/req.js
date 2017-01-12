@@ -27,6 +27,9 @@ angular.module('creapp3App')
           req: function($http,$stateParams){
             return $http.get('/api/buyreqs/'+ $stateParams.id).then(response => {
               return response.data;
+            })
+            .catch(function(error){
+              console.log(error);
             });
           }
         },

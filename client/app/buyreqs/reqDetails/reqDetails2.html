@@ -1,0 +1,10 @@
+<div>
+  <h3>Details</h3>
+  <p>Type: {{main.selectedReq.type}} </p>
+  <p>Area:  {{ main.selectedReq.min_sqft | number:0 }}sqft - {{ main.selectedReq.max_sqft | number:0 }}sqft</p>
+  <p ng-if="main.selectedReq.buy">Buy Price: {{ main.selectedReq.buy_min_price | currency:"$" : 0}} - {{ main.selectedReq.buy_max_price | currency:"$" : 0}}</p>
+  <p ng-if="main.selectedReq.exchange">Exchange Price {{ main.selectedReq.exchange_min_price | currency:"$" : 0}} - {{ main.selectedReq.exchange_max_price | currency:"$" : 0}}</p>
+  <p ng-if="main.selectedReq.lease">Lease Price {{ main.selectedReq.lease_min_price | currency:"$" : 2}} - {{ main.selectedReq.lease_max_price | currency:"$" : 2}} /sqft</p>
+  <p ng-if="main.selectedReq.landOnly">Land Only {{ main.selectedReq.landOnly | checkmark }}</p>
+  <p ng-if="main.selectedReq.landWithProperty">Land and Property {{ main.selectedReq.landWithProperty | checkmark }}</p>
+</div>

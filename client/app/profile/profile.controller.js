@@ -119,16 +119,16 @@ angular.module('creapp3App')
         $auth.endSession()
           .then(function(){
             showToast('user profile successfully deleted');
-            $state.go('buyreqs.list');
+            $state.go('buyreqs.browse.views');
           })
           .catch(function(error){
             showToast('account was deleted but could not log out. please close tab');
             console.log(error);
-            $state.go('buyreqs.list');
+            $state.go('buyreqs.browse.views');
           });
       }, function(err){
         showToast('there was a problem deleting the account');
-        $state.go('buyreqs.list');
+        $state.go('buyreqs.browse.views');
       });
     }
 

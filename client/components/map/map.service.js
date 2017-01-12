@@ -3,14 +3,16 @@
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
 angular.module('creapp3App')
-  .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw) {
+  .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw, mapBoundsService) {
 
    var map;
    var tilesLoaded =  false;
    var polygonsLayer, baseLayer, highlightedLayer, markerGroup;
-   var searchBounds;
+  //  var searchBounds;
    var state;
    var editCircle;
+
+   var init = false;
 
    // var myIcon = L.icon({
    // iconUrl: '../../assets/images/mapIcon.png',
@@ -35,6 +37,7 @@ angular.module('creapp3App')
       initCenter: [40.48038142908172,-97.03125],
       initZoom: 7
     };
+
     $rootScope.$on('zoom:in', function(){
       map.zoomIn();
     });
@@ -98,24 +101,25 @@ angular.module('creapp3App')
     var addBaseLayer = function(reqs){
       polygonsLayer.clearLayers();
       markerGroup.clearLayers();
-      reqs.forEach(function(req){
-        var base;
-        if (req.polygon.length > 0){
-          base = L.polygon(req.polygon);
-        } else {
-          base = L.circle(req.center,req.radius*1000/0.621371);
-        }
-        base.setStyle({color:'#00695C', fillColor: '#009688'})
-        .on('click contextmenu', function() {
-          $state.go('^.detail',{id: req._id });
-        });
-        polygonsLayer.addLayer(base);
-        markerGroup.addLayer(L.marker(req.center)
+      if(reqs){
+        reqs.forEach(function(req){
+          var base;
+          if (req.polygon.length > 0){
+            base = L.polygon(req.polygon);
+          } else {
+            base = L.circle(req.center,req.radius*1000/0.621371);
+          }
+          base.setStyle({color:'#00695C', fillColor: '#009688'})
           .on('click contextmenu', function() {
-            $state.go('^.detail',{id: req._id });
-          })
-        );
-      });
+            $state.go('buyreqs.details.views',{id: req._id });
+          });
+          polygonsLayer.addLayer(base);
+          markerGroup.addLayer(L.marker(req.center)
+          .on('click contextmenu', function() {
+            $state.go('buyreqs.details.views',{id: req._id });
+          }));
+        });
+      }
     };
 
     var addHighlightedLayer = function(req){
@@ -158,15 +162,16 @@ angular.module('creapp3App')
       });
     };
 
-    var resetBounds = function(){
-      state = 'search';
-      if (!_.isUndefined(searchBounds)){
-        map.fitBounds(searchBounds);
-        // map.flyToBounds(searchBounds);
-      } else if (!_.isUndefined(map)) {
-        map.zoomOut();
-      }
-    };
+    // var resetBounds = function(){
+    //   state = 'search';
+    //   if (!_.isUndefined(searchBounds)){
+    //     map.fitBounds(searchBounds);
+    //     // map.flyToBounds(searchBounds);
+    //   } else if (!_.isUndefined(map)) {
+    //     map.zoomOut();
+    //   }
+    // };
+
 
     // var contained = function(container,containee){
     //   var sw=0, ne=1, x = 0, y = 1;
@@ -176,16 +181,31 @@ angular.module('creapp3App')
     //   (container[ne][y] >= containee[ne][y]);
     // };
 
-    var updateSearchBounds = function() {
-      if (state === 'search') {
+    var resetBounds = function(){
+      map.whenReady(function(){
+        if (init && $state.current.name === 'buyreqs.browse.views'){
+          init = false;
+          var listBounds = mapBoundsService.getListBounds();
+          if (_.isArray(listBounds) && listBounds.length > 0){
+            $timeout(function(){
+              map.fitBounds(listBounds);
+            },200);
+          }
+        }
+      });
+    };
+
+    var updateListBounds = function() {
+      if (!init && $state.current.name === 'buyreqs.browse.views') {
         var bounds = map.getBounds();
         var boundsArray = [
           [bounds._southWest.lat, bounds._southWest.lng],
           [bounds._northEast.lat, bounds._northEast.lng]
         ];
-        searchBounds =  boundsArray.slice();
+        mapBoundsService.updateListBounds(boundsArray.slice());
       }
     };
+
 
 
     return {
@@ -198,24 +218,24 @@ angular.module('creapp3App')
         }).on('load', function(){
           tilesLoaded = true;
         }).addTo(map);
-        state = 'search';
-        map.on('load moveend', updateSearchBounds);
+        init=true;
+        map.on('load moveend', updateListBounds);
       },
-      addDetailMap : function(element, req){
-        //create map
-        console.log('creating detail map');
-        map = new L.Map(element, {zoomControl:false});
-        L.tileLayer(mapSettings.tileUrl, {
-          attribution: mapSettings.attribution
-        }).on('load', function(){ tilesLoaded = true;}).addTo(map);
-        state = 'req';
-        if (req.polygon.length > 0){
-          highlightedLayer = L.polygon(req.polygon);
-        } else {
-          highlightedLayer = L.circle(req.center,req.radius*1000/0.621371);
-        }
-        highlightedLayer.setStyle({color:'#E040FB', fillColor: '#E040FB'}).addTo(map);
-      },
+      // addDetailMap : function(element, req){
+      //   //create map
+      //   console.log('creating detail map');
+      //   map = new L.Map(element, {zoomControl:false});
+      //   L.tileLayer(mapSettings.tileUrl, {
+      //     attribution: mapSettings.attribution
+      //   }).on('load', function(){ tilesLoaded = true;}).addTo(map);
+      //   state = 'req';
+      //   if (req.polygon.length > 0){
+      //     highlightedLayer = L.polygon(req.polygon);
+      //   } else {
+      //     highlightedLayer = L.circle(req.center,req.radius*1000/0.621371);
+      //   }
+      //   highlightedLayer.setStyle({color:'#E040FB', fillColor: '#E040FB'}).addTo(map);
+      // },
       addFreeDraw : function(){
         freeDraw.addToMap(map);
       },
@@ -226,10 +246,14 @@ angular.module('creapp3App')
       removeHighlightedLayer : removeHighlightedLayer,
       addFreeDrawLayer: addFreeDrawLayer,
       fitToReq: fitToReq,
-      resetBounds: resetBounds,
-      getSearchBounds: function(){
-        return searchBounds;
+      panTo: function(center){
+        map.panTo(center);
+        map.setZoom(11);
       },
+      resetBounds: resetBounds,
+      // getSearchBounds: function(){
+      //   return searchBounds;
+      // },
       invalidateSize: function(){
         map.invalidateSize();
       },

@@ -53,7 +53,7 @@ angular.module('creapp3App')
         // clear all for button click
         $scope.cancel = function(){
           showToast('No changes were made');
-          $state.go('myreqs.list');
+          $state.go('buyreqs.browse.views');
         };
 
         // post the req
@@ -211,21 +211,21 @@ angular.module('creapp3App')
             });
         };
 
-        // on edit mode set predefined polygons
-        if (currentState === 'req.edit' &&  $scope.req) {
-          $timeout(function(){
-            if (!_.isUndefined($scope.req.polygon) && $scope.req.polygon.length>0){
-              console.log('should add free draw layer');
-              mapService.addFreeDrawLayer($scope.req);
-            } else if ($scope.req.radius>0){
-              console.log('should add circle');
-              var radiusMeters = $scope.req.radius*1000/0.621371;
-              mapService.drawCircle($scope.req.center, radiusMeters, function(){
-                resetLocationDetails();
-              });
-            }
-          }, 1000);
-        }
+        // // on edit mode set predefined polygons
+        // if (currentState === 'req.edit' &&  $scope.req) {
+        //   $timeout(function(){
+        //     if (!_.isUndefined($scope.req.polygon) && $scope.req.polygon.length>0){
+        //       console.log('should add free draw layer');
+        //       mapService.addFreeDrawLayer($scope.req);
+        //     } else if ($scope.req.radius>0){
+        //       console.log('should add circle');
+        //       var radiusMeters = $scope.req.radius*1000/0.621371;
+        //       mapService.drawCircle($scope.req.center, radiusMeters, function(){
+        //         resetLocationDetails();
+        //       });
+        //     }
+        //   }, 1000);
+        // }
 
 
       }

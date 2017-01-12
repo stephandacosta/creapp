@@ -4,33 +4,78 @@ angular.module('creapp3App')
   .config(function ($stateProvider) {
     $stateProvider
       .state('buyreqs', {
-        templateUrl: 'app/buyreqs/buyreqs.html',
+        abstract: true,
+        template: '<div flex layout="row" ui-view></div>',
         controller: 'BuyreqsCtrl',
-        onExit: function(buyreqs){
-          buyreqs.resetBuyreqs();
+        resolve: {
+          buyReqs: function(buyreqsService){
+            return buyreqsService.getBuyReqs('/api/buyreqs');
+          }
+            // $user.get()
+            //   .catch(function (error) {
+            //     introService.showIntroPanel();
+            //   });
         }
       })
-      .state('buyreqs.list', {
-        url: '/',
-        templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams, $user, introService, mapService){
-          buyreqs.updateUrl('/api/buyreqs');
-          buyreqs.updateBuyReqs();
-          buyreqs.updateSelectedReq();
-          // $user.get()
-          //   .catch(function (error) {
-          //     introService.showIntroPanel();
-          //   });
+      .state('buyreqs.browse', {
+        abstract: true,
+        url: '/browse',
+        templateUrl: 'app/buyreqs/reqList/reqListDesktop.html',
+      })
+      .state('buyreqs.browse.views', {
+        url: '',
+        views: {
+          'list': { templateUrl: 'app/buyreqs/reqList/reqList.html' }
         }
       })
-      .state('buyreqs.detail', {
+
+
+      .state('buyreqs.details', {
+        abstract: true,
         url: '/detail/{id}',
-        templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        onEnter: function(buyreqs,$stateParams){
-          buyreqs.updateUrl('/api/buyreqs');
-          buyreqs.updateSelectedReq($stateParams.id);
+        templateUrl: 'app/buyreqs/reqDetails/reqDetailsDesktop.html',
+        resolve: {
+          selectedReq: function($stateParams, $location, buyReqs, buyreqsService){
+            var getBrokerInfo = function(req){
+              return buyreqsService.getBroker(req.user).then(function(broker){
+                req.broker = broker;
+                req.shareLink = $location.host + '/broker/' + req.broker.userId + '/detail/' + req._id;
+                return req;
+              });
+            };
+
+            var req = _.find(buyReqs, { '_id': $stateParams.id });
+            if (req && req.broker) {
+              return req;
+            } else if (req) {
+              return getBrokerInfo(req);
+            } else {
+              return buyreqsService.getSelectedReq($stateParams.id)
+              .then(function(req){
+                return getBrokerInfo(req);
+              });
+            }
+          }
+        },
+        controller: function($scope, selectedReq){
+          $scope.main.selectedReq = selectedReq;
         }
       })
+      .state('buyreqs.details.views', {
+        url: '',
+        views: {
+          'broker': { templateUrl: 'app/buyreqs/reqDetails/reqBroker.html' },
+          'details1': { templateUrl: 'app/buyreqs/reqDetails/reqDetails1.html' },
+          'details2': { templateUrl: 'app/buyreqs/reqDetails/reqDetails2.html' },
+          'details3': { templateUrl: 'app/buyreqs/reqDetails/reqDetails3.html' }
+        },
+      })
+
+
+
+
+
+
       .state('myreqs', {
         url: '/myreqs',
         templateUrl: 'app/buyreqs/buyreqs.html',

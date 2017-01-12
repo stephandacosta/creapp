@@ -11,7 +11,7 @@ angular.module('creapp3App')
 
     $scope.startTour = function(){
       $scope.closeSidenav();
-      $state.go('buyreqs.list');
+      $state.go('buyreqs.browse.views');
       introService.showIntroPanel();
     };
 

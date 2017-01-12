@@ -1,29 +1,55 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqMap', function ($state, $compile, $timeout, $location, buyreqs, mapService, geosearchService) {
+  .directive('reqMap', function ($state, $compile, $timeout, $location, mapService, geosearchService) {
     return {
       restrict: 'E',
-      scope: false,
+      scope: {
+        filteredReqs : '=',
+        selectedReq : '=',
+        highlightedReq: '='
+      },
       link: function (scope, element) {
 
         mapService.addMaptoElement(element[0], true);
         mapService.addPolygonsLayer();
 
-        scope.$on('filter:update', function(){
-          // event.stopPropagation();
-          mapService.clearLayers();
-          if (scope.filteredReqs) {
-            mapService.addBaseLayer(scope.filteredReqs);
+        var addBaseLayer = function(reqs){
+          if (reqs) {
+            mapService.addBaseLayer(reqs);
           }
-          if (Object.keys(buyreqs.getSelectedReq()).length !== 0) {
-            mapService.addHighlightedLayer(buyreqs.getSelectedReq());
+        };
+
+        var addHighlightedLayer = function(req){
+          if (req && Object.keys(req).length !== 0) {
+            mapService.addHighlightedLayer(req);
           }
+        };
+
+        scope.$watch(function(){
+          if (scope.highlightedReq){
+            return scope.highlightedReq._id;
+          }
+        }, function(){
+          addHighlightedLayer(scope.highlightedReq);
         });
 
+        scope.$watchCollection('filteredReqs', function(reqs){
+          addBaseLayer(reqs);
+        });
 
         // invalidateSize because the map container size was dynamicaly changed by ng-material
-        $timeout(function(){mapService.invalidateSize(); },200);
+        $timeout(function(){
+          mapService.invalidateSize();
+          if ($state.current.name === 'buyreqs.browse.views'){
+            mapService.resetBounds();
+            addBaseLayer(scope.filteredReqs);
+            addHighlightedLayer(scope.highlightedReq);
+          } else if (scope.selectedReq){
+            mapService.fitToReq(scope.selectedReq);
+            mapService.addHighlightedLayer(scope.selectedReq);
+          }
+        },200);
 
       }
     };

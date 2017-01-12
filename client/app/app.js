@@ -14,7 +14,9 @@ angular.module('creapp3App', [
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/');
+    .when('', '/browse')
+    .when('/', 'browse')
+    .otherwise('/browse');
     $locationProvider.html5Mode(true);
   })
 
@@ -29,7 +31,7 @@ angular.module('creapp3App', [
   .run(function($stormpath){
     $stormpath.uiRouter({
       loginState: 'login',
-      defaultPostLoginState: 'buyreqs.list'
+      defaultPostLoginState: 'buyreqs.browse.views'
     });
   })
 

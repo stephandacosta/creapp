@@ -1,0 +1,9 @@
+<div flex layout="row">
+
+  <!-- list of buyreqs or buyreq details -->
+  <!-- height: 90vh hack due md-scroll-shrink to *https://github.com/angular/material/issues/1089 -->
+  <div ui-view="list" flex="40" layout="column">
+  </div>
+  <map-controls></map-controls>
+  <req-map filtered-reqs="main.filteredReqs" highlighted-req="main.highlightedReq" flex md-whiteframe="8d" class="tour-map"></req-map>
+</div>

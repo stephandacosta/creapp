@@ -5,7 +5,7 @@
 
       <div class="md-toolbar-tools" style="height:25px;">
         <span flex></span>
-        <span style="font-size:smaller"> {{filteredReqs.length}} reqs filtered from {{main.buyreqs.length}} </span>
+        <span style="font-size:smaller"> {{main.filteredReqs.length}} reqs filtered from {{main.buyReqs.length}} </span>
       </div>
 
       <div hide-xs class="md-toolbar-tools" flex layout="row" layout-padding style="height:33px;">
@@ -47,13 +47,12 @@
 
 </md-toolbar>
 
-
 <md-content flex layout="column" class="tour-list">
   <md-list ng-hide="search.reqID">
     <md-list-item
       class="md-3-line md-offset md-warn"
-      ng-repeat="buyreq in filteredReqs"
-      ui-sref="^.detail({id: buyreq._id})"
+      ng-repeat="buyreq in main.filteredReqs track by buyreq._id"
+      ui-sref="buyreqs.details.views({id: buyreq._id})"
       ng-mouseenter="highlightReq(buyreq)"
       ng-mouseleave="unhighlightReq(buyreq)"
       ng-style="{'background-color': buyreq.hover ? 'rgba(224, 64, 251, 0.27)' : null}">

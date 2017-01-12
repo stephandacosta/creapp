@@ -3,7 +3,7 @@
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
 angular.module('creapp3App')
-  .directive('reqMapedit', function ($timeout,$location,$state, $compile, buyreqs, $rootScope, geosearchService, freeDraw, mapService) {
+  .directive('reqMapedit', function ($timeout, $state, geosearchService, freeDraw, mapService) {
     return {
       template: '<div></div>',
       restrict: 'E',
@@ -29,8 +29,25 @@ angular.module('creapp3App')
         // };
 
 
+
         // invalidateSize because the map container size was dynamicaly changed by ng-material
-        $timeout(function(){mapService.invalidateSize(); },200);
+        $timeout(function(){
+          mapService.invalidateSize();
+          if (currentState === 'req.edit' &&  scope.req) {
+            mapService.panTo(scope.req.center);
+            // mapService.zoomOut();
+            if (!_.isUndefined(scope.req.polygon) && scope.req.polygon.length>0){
+              console.log('should add free draw layer');
+              mapService.addFreeDrawLayer(scope.req);
+            } else if (scope.req.radius>0){
+              console.log('should add circle');
+              var radiusMeters = scope.req.radius*1000/0.621371;
+              mapService.drawCircle(scope.req.center, radiusMeters, function(){
+                resetLocationDetails();
+              });
+            }
+          }
+        },200);
 
       }
     };
