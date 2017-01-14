@@ -97,18 +97,25 @@ angular.module('creapp3App')
         });
     };
 
-    var showPanel = function (type) {
-
-      var geoSearchPanels = {
-        drawCircle: {
-          template: 'drawCircle.html',
-          controller: geoDrawCircleCtrl
-        },
-        geoSearch: {
-          template: 'geoSearch.html',
-          controller: geoInputPanelCtrl
-        }
+    var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, mapService, appConstants){
+      this._mdPanelRef = mdPanelRef;
+      this.states = appConstants.states.map(function(state){
+        return state.iso;
+      });
+      this.selectedState = 'CA';
+      this.closePanel = function(){
+        this._mdPanelRef.close();
       };
+      this.searchLocation = function(){
+        geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
+        .then(function(results){
+          mapService.drawSearchResults(results);
+        });
+        this._mdPanelRef.close();
+      };
+    };
+
+    var showGeoSearchPanel = function () {
 
       var panelPosition = $mdPanel.newPanelPosition()
         .absolute()
@@ -116,13 +123,13 @@ angular.module('creapp3App')
         .top((window.innerHeight/2 - 150) + 'px');
 
       var config = {
-        controller: geoSearchPanels[type].controller,
+        controller: geoInputPanelCtrl,
         controllerAs: 'geoInputCtrl',
         // locals : tooltipList[index],
         position: panelPosition,
         zIndex: 1000,
         panelClass : 'geoInput',
-        templateUrl: 'components/geoSearch/' + geoSearchPanels[type].template,
+        templateUrl: 'components/geoSearch/geoSearch.html',
         clickOutsideToClose: true,
         escapeToClose: true,
         focusOnOpen: true,
@@ -145,7 +152,7 @@ angular.module('creapp3App')
       getLocationBing: getLocationBing,
       getLocationNominatim: getLocationNominatim,
       geoSearchInput : function(){
-        showPanel('geoSearch');
+        showGeoSearchPanel();
       },
       getReverseGeoSearch: getReverseGeoSearch
     };
