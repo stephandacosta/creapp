@@ -56,7 +56,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "5d9rQBLuegNquRs2yeXZqA",
+    "user": "2YF4AMNNZr880Ak7iDhKKG",
     "title": "a restaurant",
     "info": "I am looking for a cool place but this text is a really long input to show what 500 words can do and blaaaa aaa aaaaaa aaaaaaaaa aaaaaa aaaaaa aaaaaa aaaaaaa aaaaaaaa aaaaaaaa aaaaaaaa aaaaaaaaa aaaaaa aaaaaaaa aaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaa a aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaaa aaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaa a aaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaa aaaaaa aaaaaaa aaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaaa aaaaaa aaaaaaaaaaaaaaaaaaaaaaa",
     "landOnly": false,
@@ -112,7 +112,7 @@ export default [
     "created": "2016-03-27T12:31:27.049Z"
   },
   {
-    "user": "5d9rQBLuegNquRs2yeXZqA",
+    "user": "2YF4AMNNZr880Ak7iDhKKG",
     "type": "Retail",
     "title": "shopping space in Fort Lauderdale",
     "info": "this is a test description",
@@ -196,7 +196,7 @@ export default [
     "created": "2016-03-27T14:10:16.549Z"
   },
   {
-    "user": "5d9rQBLuegNquRs2yeXZqA",
+    "user": "45NnGmrE365lpPI4SAFPz7",
     "type": "Industrial",
     "title": "an industrial facility in Oakland",
     "info": "this is some test description",

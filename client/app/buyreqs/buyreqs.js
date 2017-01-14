@@ -5,11 +5,40 @@ angular.module('creapp3App')
     $stateProvider
       .state('buyreqs', {
         abstract: true,
+        url: '/browse?broker',
         template: '<div flex layout="row" ui-view></div>',
         controller: 'BuyreqsCtrl',
         resolve: {
-          buyReqs: function(buyreqsService){
-            return buyreqsService.getBuyReqs('/api/buyreqs');
+          buyReqs: function(buyreqsService, $stateParams){
+            var api = '/api/buyreqs';
+            console.log('updating reqs');
+            return buyreqsService.getBuyReqs(api);
+          },
+          brokerSet: function(buyreqsService, $stateParams, $user, brokerService){
+            var brokerSettings = {};
+            console.log('updating brokerste');
+            if ($stateParams.broker){
+              // api = '/api/buyreqs/brokerreqs/' + $stateParams.broker;
+              brokerService.broker = 'My Broker';
+              brokerService.brokerId = $stateParams.broker;
+              brokerService.brokerOptions = ['Any', 'My Broker'];
+              return true;
+            } else {
+              $user.get().then(function(currentUser){
+                brokerService.broker = 'Any';
+                brokerService.brokerOptions = ['Any', 'Me'];
+                var href = currentUser.href;
+                brokerService.brokerId = href.substr(href.lastIndexOf('/') + 1);
+                return true;
+              })
+              .catch(function (error) {
+                brokerService.broker = 'Any';
+                brokerService.brokerOptions = ['Any'];
+                brokerService.brokerId = '';
+                return true;
+                console.log(error);
+              });
+            }
           }
             // $user.get()
             //   .catch(function (error) {
@@ -19,7 +48,6 @@ angular.module('creapp3App')
       })
       .state('buyreqs.browse', {
         abstract: true,
-        url: '/browse',
         templateUrl: 'app/buyreqs/reqList/reqListDesktop.html',
       })
       .state('buyreqs.browse.views', {
@@ -35,15 +63,15 @@ angular.module('creapp3App')
         url: '/detail/{id}',
         templateUrl: 'app/buyreqs/reqDetails/reqDetailsDesktop.html',
         resolve: {
-          selectedReq: function($stateParams, $location, buyReqs, buyreqsService){
+          selectedReq: function($stateParams, $location, buyReqs, buyreqsService, pictureuploadService){
             var getBrokerInfo = function(req){
               return buyreqsService.getBroker(req.user).then(function(broker){
                 req.broker = broker;
-                req.shareLink = $location.host + '/broker/' + req.broker.userId + '/detail/' + req._id;
+                req.shareLink = $location.host + '/browse/detail/' + req._id;
+                req.broker.brokerpic = pictureuploadService.getBrokerPictureLink(req.broker.userId);
                 return req;
               });
             };
-
             var req = _.find(buyReqs, { '_id': $stateParams.id });
             if (req && req.broker) {
               return req;

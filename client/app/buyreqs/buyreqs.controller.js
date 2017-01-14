@@ -6,14 +6,17 @@ angular.module('creapp3App')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyReqs, mapService, mapBoundsService) {
+  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyReqs, mapService, mapBoundsService, brokerService) {
     console.log('buyreqscontrol');
     //add mdMedia service for use in template via ngStyle
     $scope.$mdMedia = $mdMedia;
 
-    $scope.types= appConstants.creTypes;
+    $scope.types = appConstants.creTypes;
+
+    $scope.owners = brokerService.brokerOptions;
 
     $scope.search = {
+      owner: brokerService.broker,
       type: 'Any',
       mapfilter: false
     };
@@ -35,14 +38,20 @@ angular.module('creapp3App')
       req.hover = false;
     };
 
-    console.log('no issue');
-
 
     //filters
     var typematch = function(item){
       return (($scope.search.type==='Any') ? true : angular.equals(item.type,$scope.search.type) );
     };
 
+
+    var ownermatch = function(item){
+      if ($scope.search.owner==='Any'){
+        return true;
+      } else {
+        return angular.equals(item.user,brokerService.brokerId);
+      }
+    };
 
     var createTestReqInBounds = function(bounds){
       return function(req){
@@ -64,6 +73,9 @@ angular.module('creapp3App')
 
     var applyFilters = function(){
       var filtered = $scope.main.buyReqs;
+      if($scope.search.owner !=='Any'){
+        filtered = $filter('filter')(filtered, ownermatch);
+      }
       if($scope.search.type !=='Any'){
         filtered = $filter('filter')(filtered, typematch);
       }
@@ -144,18 +156,18 @@ angular.module('creapp3App')
     //   $scope.smallSmallMap = false;
     //   $scope.mapSizeIcon =   "picture_in_picture_alt";
     // };
-    //
-    //
-    // var clipboard = new Clipboard('#sharebutton');
-    // clipboard.on('success', function(e) {
-    //   $mdToast.show(
-    //     $mdToast.simple()
-    //     .textContent('link has been copied to your clipboard, paste it anywhere')
-    //     .position('top left')
-    //     .parent(document.getElementById('toasts'))
-    //     .hideDelay(3000)
-    //   );
-    // });
-    //
+    
+
+    var clipboard = new Clipboard('#sharebutton');
+    clipboard.on('success', function(e) {
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('link has been copied to your clipboard, paste it anywhere')
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
+    });
+
 
   });

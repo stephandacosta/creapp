@@ -19,7 +19,7 @@ angular.module('creapp3App')
         .then(function (user) {
           // console.log('The current user is', user);
           var userId = user.href.substr(user.href.lastIndexOf('/') + 1);
-          $scope.profileLink = location.host + '/broker/' + userId + '/list';
+          $scope.profileLink = location.host + '/browse?broker=' + userId;
           var clipboard = new Clipboard('#shareProfile');
           clipboard.on('success', function(e) {
             $mdSidenav('left').toggle();

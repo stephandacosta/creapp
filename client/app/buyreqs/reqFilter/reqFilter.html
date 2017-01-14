@@ -1,5 +1,15 @@
-<div flex layout="column">
-  <div layout="row" flex layout-padding>
+<div layout="column">
+  <div layout="row" layout-padding ng-if="owners.length>1">
+    <span flex></span>
+    <label style="font-weight: bolder;">Owner</label>
+    <span flex></span>
+    <md-select  flex="60" ng-model="search.owner" style="padding:0;margin:0;" aria-label="type">
+      <md-option ng-repeat="owner in owners" value="{{owner}}">
+        {{owner}}
+      </md-option>
+    </md-select>
+  </div>
+  <div layout="row" layout-padding>
     <span flex></span>
     <label style="font-weight: bolder;">Type</label>
     <span flex></span>

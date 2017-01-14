@@ -39,13 +39,10 @@
 
   </div>
 
-    <div layout="row" class="md-toolbar-tools"  ng-show="showfilter" style="background-color: #ebc1f3;
-      color: black;">
-      <req-filter flex layout="row"></req-filter>
-    </div>
-  </div>
-
 </md-toolbar>
+
+<req-filter flex="20" ng-if="showfilter" style="background-color: #ebc1f3;
+  color: black;"></req-filter>
 
 <md-content flex layout="column" class="tour-list">
   <md-list ng-hide="search.reqID">
