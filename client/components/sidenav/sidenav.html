@@ -14,59 +14,54 @@
   <md-content style="background-color: #1a1f1e;" layout="column">
 
     <md-button class="md-primary tour-create" ui-sref="buyreqs.browse.views" ng-click="closeSidenav()">
-      Browse All
+      <md-icon>view_list</md-icon>
+      Browse
     </md-button>
 
     <md-divider if-user style="border-color: #009688;"></md-divider>
 
 
-    <md-button if-user class="md-primary" ui-sref="myreqs.list" ng-click="closeSidenav()">
-      My Requirements
-    </md-button>
-
     <md-button if-user class="md-primary" ui-sref="req.add" ng-click="closeSidenav()">
-      Create Requirement
+      <md-icon>add_circle</md-icon>
+      Publish
     </md-button>
 
 
-    <md-divider></md-divider>
+    <md-toolbar layout="row">
+      <!-- <md-icon>person</md-icon> -->
+      <h1 class="md-toolbar-tools">
+        Account
+      </h1>
+    </md-toolbar>
 
+    <md-button if-not-user class="md-primary" ui-sref="login" ng-click="closeSidenav()">
+      Login
+    </md-button>
+    <md-divider if-user style="border-color: #009688;"></md-divider>
+    <md-button if-not-user class="md-primary tour-register" ui-sref="register" ng-click="closeSidenav()">
+      Register
+    </md-button>
 
-      <md-toolbar layout="row">
-        <!-- <md-icon>person</md-icon> -->
-        <h1 class="md-toolbar-tools">
-          Account
-        </h1>
-      </md-toolbar>
+    <md-button if-user class="md-primary tour-profile" ui-sref="profile" ng-click="closeSidenav()">
+      <md-icon>account_circle</md-icon>
+      Profile
+    </md-button>
+    <md-divider if-user style="border-color: #009688;"></md-divider>
+    <md-button if-user id="shareProfile" data-clipboard-text="{{profileLink}}" class="md-primary">
+      <md-icon>share</md-icon>
+      Share My List
+    </md-button>
+    <md-divider if-user style="border-color: #009688;"></md-divider>
+    <md-button if-user class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
+      <md-icon>mail_outline</md-icon>
+      Messages
+    </md-button>
+    <md-divider if-user style="border-color: #009688;"></md-divider>
+    <md-button if-user class="md-warn" ui-sref="buyreqs.browse.views" ng-click="closeSidenav()" sp-logout>
+      <md-icon>exit_to_app</md-icon>
+      Logout
+    </md-button>
 
-      <md-button if-not-user class="md-primary" ui-sref="login" ng-click="closeSidenav()">
-        Login
-      </md-button>
-
-      <md-button if-not-user class="md-primary tour-register" ui-sref="register" ng-click="closeSidenav()">
-        Register
-      </md-button>
-
-      <md-button if-user class="md-primary tour-profile" ui-sref="profile" ng-click="closeSidenav()">
-        Profile
-      </md-button>
-
-      <md-button if-user id="shareProfile" data-clipboard-text="{{profileLink}}" class="md-primary">
-        Share My List
-      </md-button>
-
-      <md-button if-user class="md-primary" ui-sref="mailbox.views" ng-click="closeSidenav()">
-        Messages
-      </md-button>
-
-
-      <md-button if-user class="md-warn" ui-sref="buyreqs.browse.views" ng-click="closeSidenav()" sp-logout>
-        Logout
-      </md-button>
-
-
-
-    <md-divider></md-divider>
 
     <md-toolbar layout="row">
       <!-- <md-icon>info</md-icon> -->
@@ -74,14 +69,17 @@
     </md-toolbar>
 
     <md-button class="md-primary tour-about" ui-sref="about" ng-click="closeSidenav()">
+      <md-icon>info</md-icon>
       About
     </md-button>
-
+    <md-divider if-user style="border-color: #009688;"></md-divider>
     <md-button class="md-primary" ng-click="startTour()">
+      <md-icon>help</md-icon>
       Help
     </md-button>
-
+    <md-divider if-user style="border-color: #009688;"></md-divider>
     <md-button class="md-primary" ui-sref="legal" ng-click="closeSidenav()">
+      <md-icon>attachment</md-icon>
       Legal
     </md-button>
   </md-content>
