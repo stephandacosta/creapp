@@ -1,3 +1,4 @@
+
 <div flex layout="row">
 
   <div flex="60" layout="column"  layout-margin>
@@ -11,16 +12,13 @@
       <md-button  ui-sref="buyreqs.browse.views" class="md-fab md-accent md-fab-top-right">
         <md-icon>close</md-icon>
       </md-button>
-      <md-button  ui-sref="buyreqs.browse.views" class="md-fab md-accent md-fab-top-right">
-        <md-icon>close</md-icon>
-      </md-button>
       <div flex ui-view="details1" layout-padding></div>
       <div flex layout="row">
         <div flex="50" ui-view="details2" layout-padding></div>
         <div flex ui-view="details3" layout-padding></div>
       </div>
       <md-button id="sharebutton" flex class="md-fab md-mini md-primary md-fab-bottom-right" data-clipboard-text="{{main.selectedReq.shareLink}}">
-        <md-icon>share</md-icon>
+        <md-icon  style="padding-right:3px;">share</md-icon>
       </md-button>
     </md-content>
   </div>
@@ -29,7 +27,7 @@
     <div flex="30" layout="row">
       <req-map selected-req="main.selectedReq" flex md-whiteframe="6d"></req-map>
     </div>
-    <div ui-view="broker" flex layout="column" layout-fill></div>
+    <div ui-view="broker" flex layout="row" layout-fill layout-padding></div>
   </div>
 
 </div>
