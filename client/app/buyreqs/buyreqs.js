@@ -48,14 +48,23 @@ angular.module('creapp3App')
       })
       .state('buyreqs.browse', {
         abstract: true,
-        templateUrl: 'app/buyreqs/reqList/reqListDesktop.html',
+        templateProvider: function($mdMedia){
+          console.log($mdMedia('xs'));
+          if ($mdMedia('xs')){
+            return '<div flex ng-include="\'app/buyreqs/reqList/reqListMobile.html\'" layout="row"></div>';
+          } else {
+            return '<div flex ng-include="\'app/buyreqs/reqList/reqListDesktop.html\'" layout="row"></div>';
+          }
+        }
       })
       .state('buyreqs.browse.views', {
         url: '',
         views: {
-          'list': { templateUrl: 'app/buyreqs/reqList/reqList.html' }
+          'list': { templateUrl: 'app/buyreqs/reqList/reqList.html' },
+          'map': { templateUrl: 'app/buyreqs/reqList/reqListMap.html' }
         }
       })
+
 
 
       .state('buyreqs.details', {

@@ -3,7 +3,7 @@
 angular.module('creapp3App')
   .directive('reqMap', function ($state, $compile, $timeout, $location, mapService, geosearchService) {
     return {
-      restrict: 'E',
+      restrict: 'AE',
       scope: {
         filteredReqs : '=',
         selectedReq : '=',

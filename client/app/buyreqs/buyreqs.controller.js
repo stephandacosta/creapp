@@ -106,24 +106,13 @@ angular.module('creapp3App')
       $scope.search.mapfilter = !$scope.search.mapfilter;
     };
 
-    // $scope.mapIsVisible = false;
-    // $scope.toggleMap = function(){
-    //   $scope.mapIsVisible = !$scope.mapIsVisible;
-    //   if ($scope.mapIsVisible){
-    //     $timeout(function(){mapService.invalidateSize(); },200);
-    //   }
-    // };
-    //
-    //
-    // // $scope.$on('buyreqs:update', function() {
-    // //   $scope.main.buyreqs = buyreqs.getBuyReqs();
-    // //   applyFilters();
-    // // });
-    //
-    // // $scope.$on('selectedReq:update', function() {
-    // //   $scope.main.selectedReq = buyreqs.getSelectedReq();
-    // // });
-    //
+    $scope.showMap = false;
+    $scope.toggleMap = function(){
+      $scope.showMap = !$scope.showMap;
+      if ($scope.showMap){
+        $timeout(function(){mapService.invalidateSize(); },200);
+      }
+    };
 
     //
     // $scope.toggleProfile = angular.noop;
@@ -133,30 +122,6 @@ angular.module('creapp3App')
     //     $scope.toggleProfile = angular.bind(sideNav, sideNav.toggle );
     // });
     //
-    // $scope.smallSmallMap = !$mdMedia('xs');
-    // if ($scope.smallSmallMap){
-    //   $scope.mapSizeIcon = "zoom_out_map";
-    // } else {
-    //   $scope.mapSizeIcon =   "picture_in_picture_alt";
-    // }
-    //
-    // $scope.toggleSmallSmallMap = function(){
-    //   $scope.smallSmallMap = !$scope.smallSmallMap;
-    //   if ($scope.smallSmallMap){
-    //     $scope.mapSizeIcon = "zoom_out_map";
-    //   } else {
-    //     $scope.mapSizeIcon =   "picture_in_picture_alt";
-    //   }
-    // };
-    //
-    // $scope.closedMap = false;
-    //
-    // $scope.toggleCloseMap = function(){
-    //   $scope.closedMap = !$scope.closedMap;
-    //   $scope.smallSmallMap = false;
-    //   $scope.mapSizeIcon =   "picture_in_picture_alt";
-    // };
-    
 
     var clipboard = new Clipboard('#sharebutton');
     clipboard.on('success', function(e) {
