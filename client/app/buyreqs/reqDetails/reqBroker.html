@@ -30,7 +30,7 @@
           <a class="md-subhead" ng-if="main.selectedReq.broker.customData.loopnet" target="_blank" href="http://www.loopnet.com/profile/{{main.selectedReq.broker.customData.loopnet}}">Loopnet Profile</a>
           <a class="md-subhead" ng-if="main.selectedReq.broker.customData.linkedin" target="_blank" href="http://www.linkedin.com/{{main.selectedReq.broker.customData.linkedin}}">Linkedin Profile</a>
           <md-card-actions layout="row" layout-align="start start">
-            <mailbutton broker="main.selectedReq.broker"></mailbutton>
+            <mailbutton broker="main.selectedReq.broker" buyreq="main.selectedReq"></mailbutton>
           </md-card-actions>
         </md-card-title-text>
         <md-card-title-media>
