@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .directive('reqFilter', function () {
+  .directive('reqFilter', function (filterService) {
     return {
       templateUrl: 'app/buyreqs/reqFilter/reqFilter.html',
       restrict: 'E'
