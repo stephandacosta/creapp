@@ -1,33 +1,28 @@
-
-<div flex layout="row">
-
-  <div flex="60" layout="column"  layout-margin>
-    <md-button ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
-      edit
+<div flex="60" layout="column"  layout-margin>
+  <md-button ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
+    edit
+  </md-button>
+  <md-button if-user-in-group="admins" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
+    admin edit
+  </md-button>
+  <md-content flex md-whiteframe="6d" style="background-color:white;" >
+    <md-button  ui-sref="buyreqs.browse.views" class="md-fab md-accent md-fab-top-right">
+      <md-icon>close</md-icon>
     </md-button>
-    <md-button if-user-in-group="admins" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
-      admin edit
-    </md-button>
-    <md-content flex md-whiteframe="6d" style="background-color:white;" >
-      <md-button  ui-sref="buyreqs.browse.views" class="md-fab md-accent md-fab-top-right">
-        <md-icon>close</md-icon>
-      </md-button>
-      <div flex ui-view="details1" layout-padding></div>
-      <div flex layout="row">
-        <div flex="50" ui-view="details2" layout-padding></div>
-        <div flex ui-view="details3" layout-padding></div>
-      </div>
-      <md-button id="sharebutton" flex class="md-fab md-mini md-primary md-fab-bottom-right" data-clipboard-text="{{main.selectedReq.shareLink}}">
-        <md-icon  style="padding-right:3px;">share</md-icon>
-      </md-button>
-    </md-content>
-  </div>
-
-  <div flex layout="column">
-    <div flex="30" layout="row">
-      <req-map selected-req="main.selectedReq" flex md-whiteframe="6d"></req-map>
+    <div flex ui-view="details1" layout-padding></div>
+    <div flex layout="row">
+      <div flex="50" ui-view="details2" layout-padding></div>
+      <div flex ui-view="details3" layout-padding></div>
     </div>
-    <div ui-view="broker" flex layout="row" layout-fill layout-padding></div>
-  </div>
+    <md-button id="sharebutton" flex class="md-fab md-mini md-primary md-fab-bottom-right" data-clipboard-text="{{main.selectedReq.shareLink}}">
+      <md-icon  style="padding-right:3px;">share</md-icon>
+    </md-button>
+  </md-content>
+</div>
 
+<div flex layout="column">
+  <div flex="30" layout="row">
+    <req-map selected-req="main.selectedReq" flex md-whiteframe="6d"></req-map>
+  </div>
+  <div ui-view="broker" flex layout="row" layout-fill layout-padding></div>
 </div>

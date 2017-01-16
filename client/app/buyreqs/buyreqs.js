@@ -69,8 +69,15 @@ angular.module('creapp3App')
 
       .state('buyreqs.details', {
         abstract: true,
+        templateProvider: function($mdMedia){
+          console.log($mdMedia('xs'));
+          if ($mdMedia('xs')){
+            return '<div flex ng-include="\'app/buyreqs/reqDetails/reqDetailsMobile.html\'" layout="row"></div>';
+          } else {
+            return '<div flex ng-include="\'app/buyreqs/reqDetails/reqDetailsDesktop.html\'" layout="row"></div>';
+          }
+        },
         url: '/detail/{id}',
-        templateUrl: 'app/buyreqs/reqDetails/reqDetailsDesktop.html',
         resolve: {
           selectedReq: function($stateParams, $location, buyReqs, buyreqsService, pictureuploadService){
             var getBrokerInfo = function(req){
@@ -102,6 +109,7 @@ angular.module('creapp3App')
         url: '',
         views: {
           'broker': { templateUrl: 'app/buyreqs/reqDetails/reqBroker.html' },
+          'brokerMobile': { templateUrl: 'app/buyreqs/reqDetails/reqBrokerMobile.html' },
           'details1': { templateUrl: 'app/buyreqs/reqDetails/reqDetails1.html' },
           'details2': { templateUrl: 'app/buyreqs/reqDetails/reqDetails2.html' },
           'details3': { templateUrl: 'app/buyreqs/reqDetails/reqDetails3.html' }
