@@ -1,51 +1,32 @@
 
 
-    <md-card flex md-whiteframe="6d">
-      <md-card-actions layout="row" layout-align="start start">
-        <mailbutton broker="main.selectedReq.broker"></mailbutton>
-      </md-card-actions>
-      <md-card-header>
-        <md-card-header-text>
-          <div layout="row" >
-            <span class="md-display-1" style="color: #009688;">{{main.selectedReq.broker.fullName}}</span>
-            <div>
-            </div>
-          </div>
-          <div layout="row">
-            <span class="md-subhead">RE License #: </span>
-            <span ng-if="main.selectedReq.broker.customData.license" class="md-subhead">{{main.selectedReq.broker.customData.license}}</span>
-          </div>
-          <div class="md-subtitle" layout="row">
-            <span flex ng-if="main.selectedReq.broker.customData.function" >{{main.selectedReq.broker.customData.function}}</span>
-          </div>
-          <div layout="row">
-            <span ng-if="main.selectedReq.broker.customData.company" class="md-subtitle">company: {{main.selectedReq.broker.customData.company}}</span>
-          </div>
-        </md-card-header-text>
-      </md-card-header>
+<div flex layout = "column" md-whiteframe="6d">
+    <mailbutton broker="broker" buyreq="main.selectedReq"></mailbutton>
+    <div layout = "column">
+      <span class="md-display-1" style="color: #009688;">{{main.selectedReq.broker.fullName}}</span>
+      <span class="md-subhead">RE License #: {{main.selectedReq.broker.customData.license}} </span>
+      <span ng-if="main.selectedReq.broker.customData.function" >{{main.selectedReq.broker.customData.function}}</span>
+      <span ng-if="main.selectedReq.broker.customData.company" class="md-subtitle">{{main.selectedReq.broker.customData.company}}</span>
+    </div>
 
-      <md-divider></md-divider>
+  <br>
+  <md-divider></md-divider>
 
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-body-1" ng-if="main.selectedReq.broker.customData.phone && main.selectedReq.broker.customData.phone!=='hidden'">
-            tel: {{main.selectedReq.broker.customData.phone}}
-          </span>
-          <a class="md-subhead" ng-if="main.selectedReq.broker.customData.loopnet" target="_blank" href="http://www.loopnet.com/profile/{{main.selectedReq.broker.customData.loopnet}}">Loopnet Profile</a>
-          <a class="md-subhead" ng-if="main.selectedReq.broker.customData.linkedin" target="_blank" href="http://www.linkedin.com/{{main.selectedReq.broker.customData.linkedin}}">Linkedin Profile</a>
-        </md-card-title-text>
-        <md-card-title-media>
-          <img class="md-media-md" id="brokerpic" ng-src="{{main.selectedReq.broker.brokerpic}}" onerror="angular.element(this).scope().getDefaultPic(this)" class="md-media-sm card-media"></img>
-        </md-card-title-media>
-      </md-card-title>
+  <div layout="column">
+      <span class="md-body-1" ng-if="main.selectedReq.broker.customData.phone && main.selectedReq.broker.customData.phone!=='hidden'">
+        tel: {{main.selectedReq.broker.customData.phone}}
+      </span>
+      <a class="md-subhead" ng-if="main.selectedReq.broker.customData.loopnet" target="_blank" href="http://www.loopnet.com/profile/{{main.selectedReq.broker.customData.loopnet}}">Loopnet Profile</a>
+      <a class="md-subhead" ng-if="main.selectedReq.broker.customData.linkedin" target="_blank" href="http://www.linkedin.com/{{main.selectedReq.broker.customData.linkedin}}">Linkedin Profile</a>
+  </div>
 
+  <div>
+    <img id="brokerpic" ng-src="{{main.selectedReq.broker.brokerpic}}" onerror="angular.element(this).scope().getDefaultPic(this)" class="md-media-sm"></img>
+  </div>
 
-      <md-card-content flex layout="row" layout-align="start start">
-        <md-button  class="md-primary">Show More</md-button>
+  <div ng-if="main.selectedReq.broker.customData.summary" layout-align="start start" >
+    <h4 class="md-subtitle">Summary</h4>
+    <p class="md-body-1">{{main.selectedReq.broker.customData.summary}}</p>
+  </div>
 
-        <!-- <span ng-if="main.selectedReq.broker.customData.summary" class="md-subtitle"><h4>Summary</h4></span>
-        <span ng-if="main.selectedReq.broker.customData.summary" class="md-body-1">{{main.selectedReq.broker.customData.summary}}</span>
-        <textarea flex ng-if="edit.mode" rows="4" ng-model="main.selectedReq.broker.customData.summary" class="md-body-1" style="overflow:scroll;"></textarea> -->
-      </md-card-content>
-
-    </md-card>
+</div>

@@ -128,6 +128,9 @@ angular.module('creapp3App')
         },
         controller: function($scope, broker){
           $scope.broker = broker;
+          $scope.cancel = function(){
+            $mdDialog.cancel();
+          }
         }
       });
     };
