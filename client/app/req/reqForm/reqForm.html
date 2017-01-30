@@ -111,14 +111,9 @@
       <span flex editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.town" placeholder="town" on-change="validate(value, 'string')"></span>
       <span flex editable-text="req.county" placeholder="county" on-change="validate(value, 'string')"></span>
-      <md-select ng-model="req.stateCode" ng-change="validate(req.stateCode,'stateCode')" aria-label="state selection">
-        <md-option ng-repeat="state in states track by state.iso" value="{{state.iso}}">
-          {{state.name}}
-        </md-option>
-      </md-select>
-      <md-button class="md-raised" ng-click="updateLocation()">
+      <span flex >{{req.state}}</span>
+      <md-button class="md-primary md-fab md-mini md-raised" ng-click="updateLocation()">
         <md-icon>loop</md-icon>
-        get from map
       </md-button>
     </fieldset>
   </div>
