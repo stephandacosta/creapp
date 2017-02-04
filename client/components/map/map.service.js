@@ -6,7 +6,6 @@ angular.module('creapp3App')
   .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw, mapBoundsService) {
 
    var map;
-   var tilesLoaded =  false;
    var polygonsLayer, baseLayer, highlightedLayer, markerGroup;
   //  var searchBounds;
    var state;
@@ -183,7 +182,7 @@ angular.module('creapp3App')
 
     var resetBounds = function(){
       map.whenReady(function(){
-        if (init && $state.current.name === 'buyreqs.browse.views'){
+        if (init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add')){
           init = false;
           var listBounds = mapBoundsService.getListBounds();
           if (_.isArray(listBounds) && listBounds.length > 0){
@@ -196,7 +195,7 @@ angular.module('creapp3App')
     };
 
     var updateListBounds = function() {
-      if (!init && $state.current.name === 'buyreqs.browse.views') {
+      if (!init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add')) {
         var bounds = map.getBounds();
         var boundsArray = [
           [bounds._southWest.lat, bounds._southWest.lng],
@@ -215,8 +214,6 @@ angular.module('creapp3App')
         map = new L.Map(element, {zoomControl:false}).setView(mapSettings.initCenter,mapSettings.initZoom);
         L.tileLayer(mapSettings.tileUrl, {
           attribution: mapSettings.attribution
-        }).on('load', function(){
-          tilesLoaded = true;
         }).addTo(map);
         init=true;
         map.on('load moveend', updateListBounds);

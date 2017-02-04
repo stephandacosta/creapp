@@ -29,7 +29,6 @@ angular.module('creapp3App')
         // };
 
 
-
         // invalidateSize because the map container size was dynamicaly changed by ng-material
         $timeout(function(){
           mapService.invalidateSize();
@@ -46,6 +45,8 @@ angular.module('creapp3App')
                 resetLocationDetails();
               });
             }
+          } else {
+            mapService.resetBounds();
           }
         },200);
 
