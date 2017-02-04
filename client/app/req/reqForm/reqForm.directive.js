@@ -12,7 +12,6 @@ angular.module('creapp3App')
       controller: function($scope){
 
         $scope.types = appConstants.creTypes;
-        $scope.states = appConstants.states;
 
         var currentState = $state.current.name;
 
@@ -114,7 +113,7 @@ angular.module('creapp3App')
         };
 
         $scope.updateLocation = function(){
-          var bounds = L.polygon($scope.req.polygons).getBounds();
+          var bounds = L.polygon($scope.req.polygon).getBounds();
           var center = bounds.getCenter();
           $scope.req.radius = Math.round(center.distanceTo(bounds.getNorthEast())/1000*0.621371*10)/10;
           reverseGeoCode(center.lat, center.lng);
@@ -210,6 +209,7 @@ angular.module('creapp3App')
               $scope.req.stateCode = $scope.circleDraw.selectedState;
             });
         };
+
 
         // // on edit mode set predefined polygons
         // if (currentState === 'req.edit' &&  $scope.req) {
