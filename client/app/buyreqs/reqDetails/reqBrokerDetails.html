@@ -25,9 +25,11 @@
         <img class="md-media-md" id="brokerpic" ng-src="{{broker.brokerpic}}" onerror="angular.element(this).scope().getDefaultPic(this)" class="md-media-sm card-media"></img>
     </md-card-title-media>
   </md-card-title>
+
+  <!-- cannot open multiple dialogs
   <md-card-actions layout="row" layout-align="start start">
-    <mailbutton broker="broker" buyreq="main.selectedReq"></mailbutton>
-  </md-card-actions>
+    <mailbutton broker="main.selectedReq.broker" buyreq="main.selectedReq"></mailbutton>
+  </md-card-actions> -->
 
   <md-card-content ng-if="broker.customData.summary" layout-align="start start" >
     <h4 class="md-subtitle">Summary</h4>
