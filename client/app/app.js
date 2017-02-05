@@ -10,7 +10,9 @@ angular.module('creapp3App', [
   'stormpath',
   'stormpath.templates',
   'ngImgCrop',
-  'gg.editableText'
+  'gg.editableText',
+  'angulartics',
+  'angulartics.google.tagmanager'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
