@@ -35,9 +35,10 @@
         </md-card-title-media>
       </md-card-title>
 
-      <md-card-actions layout="row" layout-align="start start">
+      <md-card-actions layout="row" layout-align="start start" flex>
         <mailbutton broker="main.selectedReq.broker" buyreq="main.selectedReq"></mailbutton>
+        <span flex></span>
+        <md-button  class="md-primary" ng-click="showProfile()">Show More</md-button>
       </md-card-actions>
-      <md-button  class="md-primary" ng-click="showProfile()">Show More</md-button>
 
     </md-card>

@@ -1,4 +1,4 @@
-<div flex="60" layout="column"  layout-margin>
+<div flex="60" layout="column" layout-padding style="min-height:675px;">
   <md-button ng-if="'myreqs.detail' | isState" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
     edit
   </md-button>
@@ -20,9 +20,9 @@
   </md-content>
 </div>
 
-<div flex layout="column">
-  <div flex="45" layout="row">
+<div flex layout="column" style="min-height:675px;">
+  <div flex="40" layout="row">
     <req-map selected-req="main.selectedReq" flex md-whiteframe="6d"></req-map>
   </div>
-  <div ui-view="broker" flex layout="row" layout-fill layout-padding></div>
+  <div ui-view="broker" flex layout="row" layout-fill></div>
 </div>
