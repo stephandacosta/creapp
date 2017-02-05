@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('buyreqsService', function ($http) {
+  .factory('buyreqsService', function ($http, appConstants) {
+
+
+    var getStateName = function(stateCode){
+      return appConstants.states.find(function(state){
+        return stateCode === state.iso;
+      }).name;
+    };
 
     var getBuyReqs = function(url){
 
@@ -27,8 +34,10 @@ angular.module('creapp3App')
           tmp = (buyreq.exchange ? (tmp==='' ? 'To Exchange' : tmp + '/Exchange') : tmp );
           tmp = (buyreq.lease ? (tmp==='' ? 'To Lease' : tmp + '/Lease') : tmp );
           buyreq.transactionTitle = tmp;
+          buyreq.stateName = getStateName(buyreq.state);
         });
 
+        console.log(reqs);
         return reqs;
 
         // to log for seeding

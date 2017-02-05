@@ -20,7 +20,7 @@ export default [
     "postcode": "94107",
     "radius": 0.3,
     "road": "Wisconsin Street",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         37.75755129975966,
@@ -76,7 +76,7 @@ export default [
     "postcode": "95815",
     "radius": 0.4,
     "road": "Belden Street",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         38.61968694936576,
@@ -132,7 +132,7 @@ export default [
     "postcode": "33313",
     "radius": 6,
     "road": "Northwest 19th Street",
-    "state": "Florida",
+    "state": "FL",
     "center":
       [
         26.150481758754736,
@@ -216,7 +216,7 @@ export default [
     "postcode": "94612",
     "radius": 0.8,
     "road": "West Street",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         37.81242804658575,
@@ -285,7 +285,7 @@ export default [
     "postcode": "94035-0016",
     "radius": 2.5,
     "road": "Severyns Avenue",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         37.41325194795563,
@@ -343,7 +343,7 @@ export default [
     "county": "Santa Clara County",
     "radius": 2,
     "road": "Calaveras Road",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         37.454145356901165,
@@ -403,7 +403,7 @@ export default [
     "postcode": "94024",
     "radius": 3,
     "road": "Wessex Avenue",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         37.355960540636126,
@@ -461,7 +461,7 @@ export default [
     "county": "Martin County",
     "radius": 29.4,
     "road": "County Road 3601",
-    "state": "Texas",
+    "state": "TX",
     "center":
       [
         32.372573924375686,
@@ -529,7 +529,7 @@ export default [
     "postcode": "08731",
     "radius": 13.2,
     "road": "South Main Street",
-    "state": "New Jersey",
+    "state": "NJ",
     "center":
       [
         39.82097650885375,
@@ -584,7 +584,7 @@ export default [
     "postcode": "90266",
     "radius": 1.9,
     "road": "Manhattan Beach Boulevard",
-    "state": "California",
+    "state": "CA",
     "center":
       [
         33.88715996307873,
@@ -663,7 +663,7 @@ export default [
     "county": "Los Angeles County",
     "postcode": "90803",
     "radius": 2.8,
-    "state": "California",
+    "state": "CA",
     "center":
       [
         33.75295897213988,

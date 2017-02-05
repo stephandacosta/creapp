@@ -47,10 +47,10 @@
       ng-mouseenter="highlightReq(buyreq)"
       ng-mouseleave="unhighlightReq(buyreq)"
       ng-style="{'background-color': buyreq.hover ? 'rgba(224, 64, 251, 0.27)' : null}">
-      <div flex layout="row">
+      <div flex layout="row" layout-align="start start">
 
-        <div class="md-list-item-text">
-          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}} in {{buyreq.state}}</h3>
+        <div class="md-list-item-text" style="max-width:410px;">
+          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}} in {{buyreq.stateName}}</h3>
           <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
           <p class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.radius}}mi. from {{buyreq.road}} in {{(buyreq.town?buyreq.town:buyreq.city)}}</p>
           <p ng-if="buyreq.buy">Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }} </p>

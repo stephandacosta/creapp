@@ -107,8 +107,7 @@ angular.module('creapp3App')
             $scope.req.county = results.address.county;
             $scope.req.postcode = results.address.postcode;
             $scope.req.road = results.address.road;
-            $scope.req.state = results.address.state;
-            $scope.req.stateCode = results.address.stateCode;
+            $scope.req.state = results.address.stateCode;
           });
         };
 
@@ -127,7 +126,7 @@ angular.module('creapp3App')
             $scope.req.county = results.address.county;
             $scope.req.postcode = results.address.postcode;
             $scope.req.road = results.address.road;
-            $scope.req.state = results.address.state;
+            $scope.req.state = results.address.stateCode;
             // console.log($scope.req);
             // $scope.$apply();
           });
@@ -147,7 +146,7 @@ angular.module('creapp3App')
         };
 
         freeDraw.listen('area',function(area){
-          if ( _.isUndefined(area) || area.center.length === 0) {
+          if ( _.isUndefined(area) || _.isUndefined(area.center) || area.center.length === 0) {
             resetLocationDetails();
           } else {
             $scope.req.center = area.center;
@@ -203,10 +202,7 @@ angular.module('creapp3App')
               $scope.req.town = results.address.locality;
               $scope.req.postcode = results.address.postcode;
               $scope.req.landmark  = results.address.landmark;
-              $scope.req.state = appConstants.states.filter(function(state){
-                return state.iso===$scope.circleDraw.selectedState;
-              }).name;
-              $scope.req.stateCode = $scope.circleDraw.selectedState;
+              $scope.req.state = $scope.circleDraw.selectedState;
             });
         };
 
