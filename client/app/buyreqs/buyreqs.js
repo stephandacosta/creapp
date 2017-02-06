@@ -101,8 +101,9 @@ angular.module('creapp3App')
             }
           }
         },
-        controller: function($scope, selectedReq){
+        controller: function($scope, selectedReq, brokerService){
           $scope.main.selectedReq = selectedReq;
+          $scope.isOwner = (selectedReq.broker.userId === brokerService.brokerId);
         }
       })
       .state('buyreqs.details.views', {
