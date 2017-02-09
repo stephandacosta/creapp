@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('geosearchService', function ($rootScope, $http, $q, $mdPanel, $mdMedia, appConstants) {
+  .factory('geosearchService', function ($http, $q, $mdPanel, $mdMedia, appConstants) {
 
     var getLocationNominatim = function(query){
 
@@ -97,23 +97,7 @@ angular.module('creapp3App')
         });
     };
 
-    var geoInputPanelCtrl = function($scope, mdPanelRef, geosearchService, mapService, appConstants){
-      this._mdPanelRef = mdPanelRef;
-      this.states = appConstants.states.map(function(state){
-        return state.iso;
-      });
-      this.selectedState = 'CA';
-      this.closePanel = function(){
-        this._mdPanelRef.close();
-      };
-      this.searchLocation = function(){
-        geosearchService.getLocationNominatim(this.geoinput + ', ' + this.selectedState + ' United States')
-        .then(function(results){
-          mapService.drawSearchResults(results);
-        });
-        this._mdPanelRef.close();
-      };
-    };
+
 
     var showGeoSearchPanel = function () {
 
@@ -123,7 +107,7 @@ angular.module('creapp3App')
         .top((window.innerHeight/2 - 150) + 'px');
 
       var config = {
-        controller: geoInputPanelCtrl,
+        controller: 'geoInputPanelCtrl',
         controllerAs: 'geoInputCtrl',
         // locals : tooltipList[index],
         position: panelPosition,

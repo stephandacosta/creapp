@@ -21,7 +21,7 @@ angular.module('creapp3App')
     var showPictureUpload = function (imagesrc) {
 
       var config = {
-        controller: pictureUploadCtrl,
+        controller: 'pictureUploadCtrl',
         controllerAs: 'pictureUploadCtrl',
         locals : {bigImage: imagesrc},
         // position: panelPosition,

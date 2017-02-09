@@ -300,7 +300,7 @@ angular.module('creapp3App')
         }
 
         var config = {
-          controller: panelCtrl,
+          controller: 'tourPanelCtrl',
           controllerAs: 'tourPanel',
           locals : tooltipList[index],
           position: panelPosition,
@@ -335,25 +335,4 @@ angular.module('creapp3App')
       };
 
 
-    })
-  .controller('panelCtrl', panelCtrl);
-
-    var panelCtrl = function(mdPanelRef, tourService){
-      this._mdPanelRef = mdPanelRef;
-      // $scope.msg = locals.msg;
-      this.closePanel = function(){
-        this._mdPanelRef.close()
-        .finally(function(){
-          tourService.resetTour();
-        });
-      };
-      this.nextPanel = function(){
-        // tourService.nextPanel();
-        var hotzone = document.getElementsByClassName('hotzone');
-        angular.element(hotzone).detach();
-        this._mdPanelRef.close()
-          .finally(function(){
-            tourService.nextPanel();
-          });
-      };
-    };
+    });

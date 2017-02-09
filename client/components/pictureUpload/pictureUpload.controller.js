@@ -1,7 +1,7 @@
-angular.module('creapp3App')
-.controller('pictureUploadCtrl', pictureUploadCtrl);
+'use strict';
 
-var pictureUploadCtrl = function($scope, mdPanelRef, pictureuploadService, bigImage){
+angular.module('creapp3App')
+.controller('pictureUploadCtrl', function($scope, mdPanelRef, pictureuploadService, bigImage){
 
   $scope._mdPanelRef = mdPanelRef;
 
@@ -17,5 +17,4 @@ var pictureUploadCtrl = function($scope, mdPanelRef, pictureuploadService, bigIm
     croppedImage:'nothing'
   };
 
-
-};
+});
