@@ -52,7 +52,7 @@ angular.module('creapp3App')
         // clear all for button click
         $scope.cancel = function(){
           showToast('No changes were made');
-          $state.go('buyreqs.browse.views');
+          $state.go('buyreqs.details.views', {id: $scope.req._id});
         };
 
         // post the req
