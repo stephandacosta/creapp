@@ -7,13 +7,10 @@ angular.module('creapp3App')
     };
   })
   .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyReqs, mapService, mapBoundsService, brokerService, filterService, $mdDialog) {
-    console.log('buyreqscontrol');
     //add mdMedia service for use in template via ngStyle
     $scope.$mdMedia = $mdMedia;
 
     $scope.types = appConstants.creTypes;
-
-    console.log(brokerService);
 
     $scope.owners = brokerService.brokerOptions;
 
@@ -115,8 +112,6 @@ angular.module('creapp3App')
 
     $scope.showProfile = function(ev){
 
-      console.log('show proile');
-
       $mdDialog.show({
         parent: angular.element(document.body),
         targetEvent: ev,
@@ -130,18 +125,10 @@ angular.module('creapp3App')
           $scope.broker = broker;
           $scope.cancel = function(){
             $mdDialog.cancel();
-          }
+          };
         }
       });
     };
-    //
-    // $scope.toggleProfile = angular.noop;
-    // $mdComponentRegistry
-    //   .when('left')
-    //   .then( function(sideNav){
-    //     $scope.toggleProfile = angular.bind(sideNav, sideNav.toggle );
-    // });
-    //
 
     var clipboard = new Clipboard('#sharebutton');
     clipboard.on('success', function(e) {

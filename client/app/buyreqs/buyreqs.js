@@ -11,12 +11,10 @@ angular.module('creapp3App')
         resolve: {
           buyReqs: function(buyreqsService, $stateParams){
             var api = '/api/buyreqs';
-            console.log('updating reqs');
             return buyreqsService.getBuyReqs(api);
           },
           brokerSet: function(buyreqsService, $stateParams, $user, brokerService){
             var brokerSettings = {};
-            console.log('updating brokerste');
             if ($stateParams.broker){
               // api = '/api/buyreqs/brokerreqs/' + $stateParams.broker;
               brokerService.broker = 'My Broker';
@@ -49,7 +47,6 @@ angular.module('creapp3App')
       .state('buyreqs.browse', {
         abstract: true,
         templateProvider: function($mdMedia){
-          console.log($mdMedia('xs'));
           if ($mdMedia('xs')){
             return '<div flex ng-include="\'app/buyreqs/reqList/reqListMobile.html\'" layout="row"></div>';
           } else {
@@ -70,7 +67,6 @@ angular.module('creapp3App')
       .state('buyreqs.details', {
         abstract: true,
         templateProvider: function($mdMedia){
-          console.log($mdMedia('xs'));
           if ($mdMedia('xs')){
             return '<div flex ng-include="\'app/buyreqs/reqDetails/reqDetailsMobile.html\'" layout="row"></div>';
           } else {
@@ -86,6 +82,9 @@ angular.module('creapp3App')
                 req.shareLink = $location.host + '/browse/detail/' + req._id;
                 req.broker.brokerpic = pictureuploadService.getBrokerPictureLink(req.broker.userId);
                 return req;
+              })
+              .catch(function(error){
+                console.log(error);
               });
             };
             var req = _.find(buyReqs, { '_id': $stateParams.id });

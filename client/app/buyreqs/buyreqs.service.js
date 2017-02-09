@@ -37,7 +37,6 @@ angular.module('creapp3App')
           buyreq.stateName = getStateName(buyreq.state);
         });
 
-        console.log(reqs);
         return reqs;
 
         // to log for seeding

@@ -151,7 +151,6 @@ angular.module('creapp3App')
     // *** problem here when starting the app from detail state
     // need to timeout to work (tried using tileload event but does not work)
     var fitToReq = function(req){
-      console.log('fitting to req');
       state = 'req';
       map.whenReady(function(){
         addHighlightedLayer(req);
@@ -210,7 +209,6 @@ angular.module('creapp3App')
     return {
       addMaptoElement : function(element){
         //create map
-        console.log('creating map');
         map = new L.Map(element, {zoomControl:false}).setView(mapSettings.initCenter,mapSettings.initZoom);
         L.tileLayer(mapSettings.tileUrl, {
           attribution: mapSettings.attribution
