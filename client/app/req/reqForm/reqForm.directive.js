@@ -62,8 +62,7 @@ angular.module('creapp3App')
           console.log('adding', $scope.req);
           $http.post('/api/buyreqs', $scope.req).then(function(){
             showToast('Your requirement was saved !');
-            $scope.req = _.cloneDeep(appConstants.emptyReq);
-            $state.go('myreqs.list');
+            $state.go('buyreqs.details.views', {id: $scope.req._id});
           }, function(){
             showToast('There was an issue in saving your requisition');
           });
@@ -76,8 +75,7 @@ angular.module('creapp3App')
           console.log('saving', $scope.req);
           $http.put(api + $scope.req._id, $scope.req).then(function(){
             showToast('Your requirement edits were saved !');
-            $scope.req = _.cloneDeep(appConstants.emptyReq);
-            $state.go('myreqs.list');
+            $state.go('buyreqs.details.views', {id: $scope.req._id});
           }, function(){
             showToast('There was an issue in saving your edits');
           });
@@ -86,8 +84,7 @@ angular.module('creapp3App')
         $scope.deleteReq = function(){
           $http.delete('/api/buyreqs/' + $scope.req._id).then(function(){
             showToast('Your requirement was deleted !');
-            $scope.req = _.cloneDeep(appConstants.emptyReq);
-            $state.go('myreqs.list');
+            $state.go('buyreqs.browse.views');
           }, function(){
             showToast('There was an issue deleting your requisition');
           });
