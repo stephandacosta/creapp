@@ -3,6 +3,8 @@
 angular.module('creapp3App')
   .factory('pictureuploadService', function ($rootScope, $http, $mdPanel, $mdMedia) {
 
+    var timestamp = new Date().getTime();
+
     var loadPictureForm = function(files){
       var file = files[0];
       if (!file.type.match(/image.*/)) {
@@ -79,11 +81,14 @@ angular.module('creapp3App')
 
 
     var getBrokerPictureLink = function(userId){
-      return 'https://creapp.blob.core.windows.net/brokerpics/'+userId;
+      return 'https://creapp.blob.core.windows.net/brokerpics/'+userId + '?'+ timestamp;
     };
 
 
     return {
+      updateTimestamp: function(){
+        timestamp = new Date().getTime();
+      },
       loadPictureForm : loadPictureForm,
       showPictureUpload : showPictureUpload,
       updateCroppedImage : function(picture){

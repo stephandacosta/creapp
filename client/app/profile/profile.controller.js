@@ -60,6 +60,7 @@ angular.module('creapp3App')
         stopProgress();
         // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
         // location.reload();
+        pictureuploadService.updateTimestamp();
         $scope.edit.mode = false;
       });
     };
