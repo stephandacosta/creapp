@@ -15,9 +15,6 @@ angular.module('creapp3App')
       }
     };
 
-
-
-
     var showPictureUpload = function (imagesrc) {
 
       var config = {
@@ -58,45 +55,28 @@ angular.module('creapp3App')
       return blob;
     };
 
+    var getSignature = function(){
+      return $http.jsonp('/api/pictures/getsignature?callback=JSON_CALLBACK');
+    };
 
     // add loading bar
     // https://github.com/chieffancypants/angular-loading-bar
-    var uploadImageToStorage = function(callback){
+    var uploadImageToStorage = function(signature){
       var blob = getBlob();
-      // get signature
-      $http.jsonp("/api/pictures/getsignature?callback=JSON_CALLBACK")
-      .then(function(result){
-        // upload blob
-        $http.put('https://creapp.blob.core.windows.net/brokerpics/'+result.data.userId+'?'+result.data.url,
-        blob,
-        {headers: {'x-ms-blob-type': 'BlockBlob'}}
-        ).then(function(result){
-            console.log(result);
-            callback(true);
-          },function(error){
-            console.log('failed to upload');
-            console.log(error);
-            callback(false);
-          });
-      }, function(error){
-        console.log('failed to get signature');
-        console.log(error);
-        callback(false);
-      });
+      // upload blob
+      console.log('signature', signature);
+      return $http.put(
+                'https://creapp.blob.core.windows.net/brokerpics/'+signature.data.userId+'?'+signature.data.url,
+                blob,
+                {headers: {'x-ms-blob-type': 'BlockBlob'}}
+              );
     };
 
-    var deleteImageFromStorage = function(callback){
+    var deleteImageFromStorage = function(){
       // server to restore default image
-      $http.delete('api/pictures')
-        .then(function(result){
-          console.log(result);
-          callback(true);
-        },function(error){
-          console.log('failed to delete');
-          console.log(error);
-          callback(false);
-        });
+      return $http.delete('api/pictures');
     };
+
 
     var getBrokerPictureLink = function(userId){
       return 'https://creapp.blob.core.windows.net/brokerpics/'+userId;
@@ -108,14 +88,15 @@ angular.module('creapp3App')
       showPictureUpload : showPictureUpload,
       updateCroppedImage : function(picture){
         croppedImage = picture;
-        $rootScope.$broadcast("croppedImage:change");
+        $rootScope.$broadcast('croppedImage:change');
       },
       getCroppedImage : function(){
         return croppedImage;
       },
       getBrokerPictureLink : getBrokerPictureLink,
+      getSignature: getSignature,
       uploadImageToStorage : uploadImageToStorage,
       deleteImageFromStorage : deleteImageFromStorage
     };
 
-  })
+  });
