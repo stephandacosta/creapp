@@ -4,6 +4,15 @@ angular.module('creapp3App')
   .controller('ProfileCtrl', function ($scope, $rootScope, $state, $http, $mdToast, $user, $auth, $timeout, pictureuploadService) {
 
     $scope.updating =  false;
+    var startProgress = function(){
+      $scope.updating = true;
+      console.log('$scope.updating',$scope.updating);
+    };
+    var stopProgress = function(){
+      $scope.updating = false;
+      console.log('$scope.updating',$scope.updating);
+    };
+
     $scope.broker = $user.currentUser;
     var userId;
 
@@ -48,12 +57,15 @@ angular.module('creapp3App')
       .then(function(user){
         console.log('user profile saved and picture resolved', user);
         showToast('user profile successfully updated');
+        stopProgress();
         // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
-        location.reload();
+        // location.reload();
+        $scope.edit.mode = false;
       });
     };
 
     $scope.saveUserProfile = function(){
+      startProgress();
       if ($scope.edit.hasPicStaged){
         // case when a picture is staged and need to be updated on server
         pictureuploadService.getSignature()
@@ -67,6 +79,7 @@ angular.module('creapp3App')
         .then(updateUserEdits)
         .catch(function(error){
           console.log('profile update problem', error);
+          stopProgress();
         });
       } else if ($scope.edit.deletePicture) {
         // case when a picture needs to be deleted on server
@@ -81,12 +94,14 @@ angular.module('creapp3App')
         .then(updateUserEdits)
         .catch(function(error){
           console.log('profile update problem', error);
+          stopProgress();
         });
       } else {
         // no change in customData.hasPicture property
         updateUserEdits()
         .catch(function(error){
           console.log('profile update problem', error);
+          stopProgress();
         });
       }
     };

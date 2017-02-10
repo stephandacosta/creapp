@@ -1,4 +1,7 @@
-<div flex>
+<div layout="row" flex ng-if="updating" layout-align="center center">
+  <md-progress-circular ng-if="updating" md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+</div>
+<div flex ng-if="!updating">
   <div layout="row" >
     <md-button ng-if="!edit.mode" class="md-raised md-primary" ng-click="editProfile()">Edit Profile</md-button>
     <md-button ng-if="edit.mode" class="md-raised md-primary" ng-click="viewProfile()">View Profile</md-button>
