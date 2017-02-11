@@ -36,10 +36,8 @@ angular.module('creapp')
             mapService.panTo(scope.req.center);
             // mapService.zoomOut();
             if (!_.isUndefined(scope.req.polygon) && scope.req.polygon.length>0){
-              console.log('should add free draw layer');
               mapService.addFreeDrawLayer(scope.req);
             } else if (scope.req.radius>0){
-              console.log('should add circle');
               var radiusMeters = scope.req.radius*1000/0.621371;
               // **** could add popup with location on click or hover ?
               mapService.drawCircle(scope.req.center, radiusMeters, function(){});

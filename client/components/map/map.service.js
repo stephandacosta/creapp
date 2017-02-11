@@ -138,12 +138,14 @@ angular.module('creapp')
     };
 
     var addFreeDrawLayer = function(req){
-      map.panTo(req.center);
+      // change to fit to bounds
       if (req.polygon.length > 0){
         var latLngs = [];
         req.polygon.forEach(function(point){
           latLngs.push(L.latLng(point[0], point[1]));
         });
+        var polygon = L.polyline(latLngs);
+        map.fitBounds(polygon.getBounds());
         freeDraw.create(latLngs);
       }
     };
