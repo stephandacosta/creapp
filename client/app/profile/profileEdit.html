@@ -1,7 +1,9 @@
 <md-content layout="row">
   <!-- <span flex></span> -->
   <div flex layout="column" style="max-width:625px;">
+
     <md-card>
+
       <md-card-header>
         <md-card-header-text>
           <div layout="row" >
@@ -26,55 +28,59 @@
           </div>
         </md-card-header-text>
       </md-card-header>
+
       <md-divider></md-divider>
+
       <md-card-title>
         <md-card-title-text>
+          <div layout="row" layout-xs="column" ng-if="edit.mode">
+            <div layout="row">
+              <span  class="md-body-1">Email:</span>
+              <span  class="md-body-1" editable-text="broker.email"></span>
+            </div>
+            <span style="font-style: italic;color:red;">(hidden to public)</span>
+          </div>
 
+          <span class="md-body-1" ng-if="!edit.mode && broker.customData.phone && broker.customData.phone!=='hidden'">
+            tel: {{broker.customData.phone}}
+          </span>
+          <div layout="row" layout-xs="column" ng-if="edit.mode">
+            <div layout="row">
+              <span class="md-body-1">
+                tel:
+              </span>
+              <span class="md-body-1 edit" editable-text="broker.customData.phone" placeholder="(000)0000 000"></span>
+            </div>
+            <span ng-if="broker.customData.privatePhone" style="font-style: italic;color:red;">
+              (hidden to public)
+            </span>
+            <span ng-if="!(broker.customData.privatePhone)" style="font-style: italic;color:red;">
+              (shown to everybody)
+            </span>
+            <md-checkbox ng-model="broker.customData.privatePhone" aria-label="private" style="margin-left:10px;">
+              <span style="color:#9c27b0;">Keep Phone Private</span>
+            </md-checkbox>
+          </div>
+          <a class="md-subhead" ng-if="!edit.mode && broker.customData.loopnet" target="_blank" href="http://www.loopnet.com/profile/{{broker.customData.loopnet}}">
+            Loopnet Profile
+          </a>
+            <!-- <label class="md-title">Loopnet Profile</label> -->
+            <div ng-if="edit.mode" layout="row">
+              <span>http://www.loopnet.com/profile/</span>
+              <span flex editable-text="broker.customData.loopnet" placeholder="john-doe" style="word-wrap: break-word;"></span>
+            </div>
+          <a class="md-subhead" ng-if="!edit.mode && broker.customData.linkedin" target="_blank" href="http://www.linkedin.com/{{broker.customData.linkedin}}">
+            Linkedin Profile
+          </a>
 
-                  <div layout="row" layout-xs="column" ng-if="edit.mode">
-                    <div layout="row">
-                      <span  class="md-body-1">Email:</span>
-                      <span  class="md-body-1" editable-text="broker.email"></span>
-                    </div>
-                    <span style="font-style: italic;color:red;">(hidden to public)</span>
-                  </div>
-
-                  <span class="md-body-1" ng-if="!edit.mode && broker.customData.phone && broker.customData.phone!=='hidden'">
-                    tel: {{broker.customData.phone}}
-                  </span>
-                  <div layout="row" layout-xs="column" ng-if="edit.mode">
-                    <div layout="row">
-                      <span class="md-body-1">
-                        tel:
-                      </span>
-                      <span class="md-body-1 edit" editable-text="broker.customData.phone" placeholder="(000)0000 000"></span>
-                    </div>
-                    <span ng-if="broker.customData.privatePhone" style="font-style: italic;color:red;">
-                      (hidden to public)
-                    </span>
-                    <span ng-if="!(broker.customData.privatePhone)" style="font-style: italic;color:red;">
-                      (shown to everybody)
-                    </span>
-                    <md-checkbox ng-model="broker.customData.privatePhone" aria-label="private" style="margin-left:10px;">
-                      <span style="color:#9c27b0;">Keep Phone Private</span>
-                    </md-checkbox>
-                  </div>
-                  <a class="md-subhead" ng-if="!edit.mode && broker.customData.loopnet" target="_blank" href="http://www.loopnet.com/profile/{{broker.customData.loopnet}}">Loopnet Profile</a>
-                    <!-- <label class="md-title">Loopnet Profile</label> -->
-                    <div ng-if="edit.mode" layout="row">
-                      <span>http://www.loopnet.com/profile/</span>
-                      <span flex editable-text="broker.customData.loopnet" placeholder="john-doe" style="word-wrap: break-word;"></span>
-                    </div>
-
-                  <a class="md-subhead" ng-if="!edit.mode && broker.customData.linkedin" target="_blank" href="http://www.linkedin.com/{{broker.customData.linkedin}}">Linkedin Profile</a>
-
-                  <div ng-if="edit.mode" layout="row">
-                    <span>http://www.linkedin.com/</span>
-                    <span editable-text="broker.customData.linkedin"
-                          placeholder="in/john-doe">
-                    </span>
-                  </div>
+          <div ng-if="edit.mode" layout="row">
+            <span>http://www.linkedin.com/</span>
+            <span editable-text="broker.customData.linkedin"
+                  placeholder="in/john-doe">
+            </span>
+          </div>
         </md-card-title-text>
+
         <md-card-title-media>
             <img class="md-media-md" id="brokerpic" ng-src="{{brokerpic}}" onerror="angular.element(this).scope().getDefaultPic(this)" class="md-media-sm card-media"></img>
             <md-card-actions ng-if="edit.mode" layout="column" layout-align="start center">
@@ -88,21 +94,12 @@
         </md-card-title-media>
       </md-card-title>
 
-
      <md-card-content layout="column">
-
-
-
-
         <span ng-if="!edit.mode && broker.customData.summary" class="md-subtitle"><h4>Summary</h4></span>
         <span ng-if="!edit.mode && broker.customData.summary" class="md-body-1">{{broker.customData.summary}}</span>
         <textarea flex ng-if="edit.mode" rows="4" ng-model="broker.customData.summary" class="md-body-1"></textarea>
       </md-card-content>
 
-
-
-
     </md-card>
 
-  <!-- <span flex></span> -->
 </md-content>

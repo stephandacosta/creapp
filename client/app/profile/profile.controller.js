@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('creapp3App')
-  .controller('ProfileCtrl', function ($scope, $rootScope, $state, $http, $mdToast, $user, $auth, $timeout, pictureuploadService) {
+  .controller('ProfileCtrl', function ($scope, $state, $http, $mdToast, $user, $auth, pictureuploadService) {
 
     $scope.updating =  false;
     var startProgress = function(){

@@ -3,7 +3,7 @@
 angular.module('creapp3App')
   .directive('profileEdit', function ($rootScope, $timeout, pictureuploadService, fieldValidation) {
     return {
-      templateUrl: 'app/profile/profileCard.html',
+      templateUrl: 'app/profile/profileEdit.html',
       restrict: 'E',
       scope: {
         broker: '=user',
