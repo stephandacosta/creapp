@@ -1,22 +1,14 @@
 'use strict';
 
 angular.module('creapp3App')
-  .factory('pictureuploadService', function ($rootScope, $http, $mdPanel, $mdMedia) {
+  .factory('pictureuploadService', function ($rootScope, $http, $mdPanel) {
 
+    // timestamp used to remove use of cached picture on update
     var timestamp = new Date().getTime();
+    // holds the cropped image
+    var croppedImage;
 
-    var loadPictureForm = function(files){
-      var file = files[0];
-      if (!file.type.match(/image.*/)) {
-        // this file is not an image.
-        console.log('not an image')
-      } else {
-        var img = document.createElement("img");
-        img.src = window.URL.createObjectURL(file);
-        showPictureUpload(img.src);
-      }
-    };
-
+    // panel for image cropping
     var showPictureUpload = function (imagesrc) {
 
       var config = {
@@ -37,12 +29,23 @@ angular.module('creapp3App')
 
       var panelRef = $mdPanel.create(config);
       panelRef.open()
-          .finally(function() {
-            panelRef = undefined;
-          });
+      .finally(function() {
+        panelRef = undefined;
+      });
     };
 
-    var croppedImage;
+    // trigger the picture cropping pannel after file selection
+    var loadPictureForm = function(files){
+      var file = files[0];
+      if (!file.type.match(/image.*/)) {
+        // this file is not an image.
+        console.log('not an image');
+      } else {
+        var img = document.createElement('img');
+        img.src = window.URL.createObjectURL(file);
+        showPictureUpload(img.src);
+      }
+    };
 
     // convert image url to blob
     var getBlob = function(){
@@ -57,29 +60,29 @@ angular.module('creapp3App')
       return blob;
     };
 
+    // get signature to get write access to profile picture
     var getSignature = function(){
       return $http.jsonp('/api/pictures/getsignature?callback=JSON_CALLBACK');
     };
 
-    // add loading bar
-    // https://github.com/chieffancypants/angular-loading-bar
+    // promise that returns after picture has been uploaded
     var uploadImageToStorage = function(signature){
       var blob = getBlob();
       // upload blob
-      console.log('signature', signature);
       return $http.put(
-                'https://creapp.blob.core.windows.net/brokerpics/'+signature.data.userId+'?'+signature.data.url,
-                blob,
-                {headers: {'x-ms-blob-type': 'BlockBlob'}}
-              );
+        'https://creapp.blob.core.windows.net/brokerpics/'+signature.data.userId+'?'+signature.data.url,
+        blob,
+        {headers: {'x-ms-blob-type': 'BlockBlob'}}
+      );
     };
 
+    // promise that returns after picture has been deleted in storage
     var deleteImageFromStorage = function(){
       // server to restore default image
       return $http.delete('api/pictures');
     };
 
-
+    // returns broker picture link to image storage
     var getBrokerPictureLink = function(userId){
       return 'https://creapp.blob.core.windows.net/brokerpics/'+userId + '?'+ timestamp;
     };
