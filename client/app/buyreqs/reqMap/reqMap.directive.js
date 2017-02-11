@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('creapp3App')
-  .directive('reqMap', function ($state, $compile, $timeout, $location, mapService, geosearchService) {
+angular.module('creapp')
+  .directive('reqMap', function ($state, $compile, $timeout, $location, mapService) {
     return {
       restrict: 'AE',
       scope: {

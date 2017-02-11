@@ -1,4 +1,6 @@
-angular.module('creapp3App')
+'use strict';
+
+angular.module('creapp')
   .controller('mailboxCtrl', function ($scope, $http, $mdToast, $mdSidenav, $mdMedia) {
 
     $scope.main = {};
@@ -14,7 +16,7 @@ angular.module('creapp3App')
 
     $scope.main.openMailList = function(){
       $scope.main.openedMailList = !$scope.main.openedMailList;
-    }
+    };
 
     $scope.$watch(function() { return $mdMedia('gt-xs'); }, function(big) {
       $scope.main.bigScreen = big;
@@ -31,14 +33,14 @@ angular.module('creapp3App')
     };
 
     var getMails = function(){
-      $http.get('/api/mails').then(response => {
+      $http.get('/api/mails').then(function(response) {
         $scope.main.messages = response.data;
         $scope.main.selected = $scope.main.messages[0];
       });
     };
 
     $scope.main.deleteMsg = function(){
-      $http.delete('/api/mails/' + $scope.main.selected._id).then(response => {
+      $http.delete('/api/mails/' + $scope.main.selected._id).then(function() {
         showToast('the message was deleted');
         getMails();
         $scope.main.selected = null;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('profileEdit', function ($rootScope, $timeout, pictureuploadService, fieldValidation) {
     return {
       templateUrl: 'app/profile/profileEdit.html',
@@ -9,7 +9,7 @@ angular.module('creapp3App')
         broker: '=user',
         edit: '=edit',
       },
-      link: function(scope,el,attrs){
+      link: function(scope){
 
         var userId;
         scope.edit.hasPicStaged = false;
@@ -22,7 +22,7 @@ angular.module('creapp3App')
           if (!isUndef){
             console.log(scope.broker);
             if (scope.broker.userId){
-              userId = scope.broker.userId
+              userId = scope.broker.userId;
             } else {
               userId = scope.broker.href.substr(scope.broker.href.lastIndexOf('/') + 1);
             }
@@ -32,7 +32,7 @@ angular.module('creapp3App')
 
         scope.validate = function(value, fieldtype){
           return fieldValidation.validate(value, fieldtype);
-        }
+        };
 
         scope.getDefaultPic = function(img){
           //avoid infinite loop

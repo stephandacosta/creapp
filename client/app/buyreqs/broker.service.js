@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .service('brokerService',function(){
     this.broker='';
     this.brokerId='';

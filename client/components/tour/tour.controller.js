@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('tourPanelCtrl', function(mdPanelRef, tourService){
     this._mdPanelRef = mdPanelRef;
     // $scope.msg = locals.msg;

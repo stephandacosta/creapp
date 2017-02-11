@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('introService', function($mdToast, $mdPanel, $timeout, $mdMedia){
 
     var panelRef;

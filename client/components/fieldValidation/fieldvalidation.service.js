@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('fieldValidation', function (appConstants) {
 
     var validate = function(value, field){
@@ -32,7 +32,7 @@ angular.module('creapp3App')
       } else {
         return 'unknown';
       }
-    }
+    };
 
 
     return {
@@ -40,4 +40,4 @@ angular.module('creapp3App')
       getStateName: getStateName
     };
 
-  })
+  });

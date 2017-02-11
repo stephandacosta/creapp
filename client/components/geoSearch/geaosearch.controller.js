@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('geoInputPanelCtrl', function($scope, mdPanelRef, geosearchService, mapService, appConstants){
     this._mdPanelRef = mdPanelRef;
     this.states = appConstants.states.map(function(state){

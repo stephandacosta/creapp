@@ -2,7 +2,7 @@
 
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('freeDraw', function () {
 
     var area = {};

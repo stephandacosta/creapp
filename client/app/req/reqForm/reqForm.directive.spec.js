@@ -3,7 +3,7 @@
 describe('Directive: reqForm', function () {
 
   // load the directive's module and view
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
   beforeEach(module('app/req/reqForm/reqForm.html'));
 
   var element, scope;

@@ -28,7 +28,7 @@ class MainController {
 
 }
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('MainController', MainController);
 
 })();

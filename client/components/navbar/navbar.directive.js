@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',

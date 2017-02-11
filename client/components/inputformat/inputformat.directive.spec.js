@@ -3,7 +3,7 @@
 describe('Directive: inputformat', function () {
 
   // load the directive's module
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
 
   var element,
     scope;

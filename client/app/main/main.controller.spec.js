@@ -3,7 +3,7 @@
 describe('Controller: MainController', function() {
 
   // load the controller's module
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
   beforeEach(module('stateMock'));
 
   var scope;

@@ -3,7 +3,7 @@
 describe('Controller: RegisterCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
 
   var RegisterCtrl, scope;
 

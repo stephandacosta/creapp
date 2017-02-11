@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('footer', function() {
     return {
       templateUrl: 'components/footer/footer.html',

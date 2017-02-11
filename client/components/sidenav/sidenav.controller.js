@@ -1,7 +1,6 @@
 'use strict';
 
-
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('SidenavController', function($scope, $state, tourService, introService, $mdSidenav, $mdToast, $user){
 
 
@@ -20,8 +19,8 @@ angular.module('creapp3App')
           // console.log('The current user is', user);
           var userId = user.href.substr(user.href.lastIndexOf('/') + 1);
           $scope.profileLink = location.host + '/browse?broker=' + userId;
-          var clipboard = new Clipboard('#shareProfile');
-          clipboard.on('success', function(e) {
+          var clipboard = new window.Clipboard('#shareProfile');
+          clipboard.on('success', function() {
             $mdSidenav('left').toggle();
             $mdToast.show(
               $mdToast.simple()

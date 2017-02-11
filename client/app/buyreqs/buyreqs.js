@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('buyreqs', {
@@ -9,12 +9,11 @@ angular.module('creapp3App')
         template: '<div flex layout="row" ui-view></div>',
         controller: 'BuyreqsCtrl',
         resolve: {
-          buyReqs: function(buyreqsService, $stateParams){
+          buyReqs: function(buyreqsService){
             var api = '/api/buyreqs';
             return buyreqsService.getBuyReqs(api);
           },
           brokerSet: function(buyreqsService, $stateParams, $user, brokerService){
-            var brokerSettings = {};
             if ($stateParams.broker){
               // api = '/api/buyreqs/brokerreqs/' + $stateParams.broker;
               brokerService.broker = 'My Broker';
@@ -33,8 +32,8 @@ angular.module('creapp3App')
                 brokerService.broker = 'Any';
                 brokerService.brokerOptions = ['Any'];
                 brokerService.brokerId = '';
-                return true;
                 console.log(error);
+                return true;
               });
             }
           }
@@ -114,80 +113,6 @@ angular.module('creapp3App')
           'details2': { templateUrl: 'app/buyreqs/reqDetails/reqDetails2.html' },
           'details3': { templateUrl: 'app/buyreqs/reqDetails/reqDetails3.html' }
         },
-      })
-
-
-
-
-
-
-      .state('myreqs', {
-        url: '/myreqs',
-        templateUrl: 'app/buyreqs/buyreqs.html',
-        controller: 'BuyreqsCtrl',
-        onExit: function(buyreqs){
-          buyreqs.resetBuyreqs();
-        },
-        sp: {
-          authenticate: true
-        }
-      })
-      .state('myreqs.list', {
-        url: '/list',
-        templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams, mapService){
-          buyreqs.updateUrl('/api/buyreqs/myreqs');
-          buyreqs.updateBuyReqs();
-          buyreqs.updateSelectedReq();
-        },
-        sp: {
-          authenticate: true
-        }
-      })
-      .state('myreqs.detail', {
-        url: '/detail/{id}',
-        templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        onEnter: function(buyreqs,$stateParams){
-          buyreqs.updateUrl('/api/buyreqs/myreqs');
-          buyreqs.updateSelectedReq($stateParams.id);
-        },
-        sp: {
-          authenticate: true
-        }
-      })
-      .state('brokerreqs', {
-        url: '/broker/{brokerId}',
-        templateUrl: 'app/buyreqs/buyreqs.html',
-        controller: 'BuyreqsCtrl',
-        resolve: {
-          broker : function($http, $stateParams){
-            return $http.get('/api/users/' + $stateParams.brokerId).then (function (response) {
-              return response.data;
-            });
-          }
-        },
-        onEnter: function(introService,broker){
-          introService.showBrokerPanel(broker);
-        },
-        onExit: function(buyreqs){
-          buyreqs.resetBuyreqs();
-        }
-      })
-      .state('brokerreqs.list', {
-        url: '/list',
-        templateUrl: 'app/buyreqs/reqList/reqList.html',
-        onEnter: function(buyreqs,$stateParams, mapService){
-          buyreqs.updateUrl('/api/buyreqs/brokerreqs/' + $stateParams.brokerId);
-          buyreqs.updateBuyReqs();
-          buyreqs.updateSelectedReq();
-        }
-      })
-      .state('brokerreqs.detail', {
-        url: '/detail/{id}',
-        templateUrl: 'app/buyreqs/reqDetails/reqSummary.html',
-        onEnter: function(buyreqs,$stateParams){
-          buyreqs.updateUrl('/api/buyreqs');
-          buyreqs.updateSelectedReq($stateParams.id);
-        }
       });
+
   });

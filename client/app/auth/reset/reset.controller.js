@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('ResetCtrl', function ($scope) {
     $scope.message = 'Hello';
   });

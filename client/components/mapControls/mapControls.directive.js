@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('mapControls', function ($rootScope, $state, geosearchService) {
     return {
       templateUrl: 'components/mapControls/mapControls.html',
       restrict: 'E',
-      link: function(scope, attrs, elem){
+      link: function(scope){
 
         scope.state=$state.current.name;
 

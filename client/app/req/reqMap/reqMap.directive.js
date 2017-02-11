@@ -2,7 +2,7 @@
 
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('reqMapedit', function ($timeout, $state, geosearchService, freeDraw, mapService) {
     return {
       template: '<div></div>',
@@ -41,9 +41,8 @@ angular.module('creapp3App')
             } else if (scope.req.radius>0){
               console.log('should add circle');
               var radiusMeters = scope.req.radius*1000/0.621371;
-              mapService.drawCircle(scope.req.center, radiusMeters, function(){
-                resetLocationDetails();
-              });
+              // **** could add popup with location on click or hover ?
+              mapService.drawCircle(scope.req.center, radiusMeters, function(){});
             }
           } else {
             mapService.resetBounds();

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('pictureuploadService', function ($rootScope, $http, $mdPanel) {
 
     // timestamp used to remove use of cached picture on update

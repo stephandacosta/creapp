@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('reqMapTab', function ($timeout, buyreqs, mapService) {
     return {
       restrict: 'E',

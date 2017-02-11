@@ -3,7 +3,7 @@
 describe('Directive: reqFilter', function () {
 
   // load the directive's module and view
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
   beforeEach(module('app/buyreqs/reqFilter/reqFilter.html'));
 
   var element, scope;

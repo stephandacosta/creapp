@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('reqForm', function ($rootScope, appConstants, $http, $state, $mdToast, $mdMedia, $timeout, geosearchService, fieldValidation, mapService, freeDraw) {
     return {
       templateUrl: 'app/req/reqForm/reqForm.html',
@@ -12,8 +12,6 @@ angular.module('creapp3App')
       controller: function($scope){
 
         $scope.types = appConstants.creTypes;
-
-        var currentState = $state.current.name;
 
         $scope.$watch('landandprop',function(newValue){
           if (newValue === 'landOnly') {
@@ -188,7 +186,7 @@ angular.module('creapp3App')
               var radiusMeters = $scope.circleDraw.radius*1000/0.621371;
               mapService.clearLayers();
               freeDraw.clear();
-              var circleLayer = mapService.drawCircle(results.point, radiusMeters, function(){
+              mapService.drawCircle(results.point, radiusMeters, function(){
                 resetLocationDetails();
               });
               $scope.req.center = results.point;

@@ -3,7 +3,7 @@
 describe('Controller: BuyreqsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
 
   var BuyreqsCtrl, scope;
 

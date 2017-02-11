@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('geosearchService', function ($http, $q, $mdPanel, $mdMedia, appConstants) {
 
     var getLocationNominatim = function(query){

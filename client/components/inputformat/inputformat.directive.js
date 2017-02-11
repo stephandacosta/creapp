@@ -3,14 +3,14 @@
 
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('number', ['$filter',function ($filter) {
     return {
       require: '?ngModel',
       link: function (scope, elem, attrs, ctrl) {
-        if (!ctrl) return;
-        ctrl.$formatters.unshift(function (a) {
-          return $filter('number')(ctrl.$modelValue)
+        if (!ctrl) {return;}
+        ctrl.$formatters.unshift(function () {
+          return $filter('number')(ctrl.$modelValue);
         });
         ctrl.$parsers.unshift(function (viewValue) {
           var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
@@ -24,9 +24,9 @@ angular.module('creapp3App')
     return {
       require: '?ngModel',
       link: function (scope, elem, attrs, ctrl) {
-        if (!ctrl) return;
-        ctrl.$formatters.unshift(function (a) {
-          return $filter('currency')(ctrl.$modelValue, '$', 0)
+        if (!ctrl) {return;}
+        ctrl.$formatters.unshift(function () {
+          return $filter('currency')(ctrl.$modelValue, '$', 0);
         });
         ctrl.$parsers.unshift(function (viewValue) {
           var plainNumber = viewValue.replace(/[^\d]/g, '');
@@ -36,12 +36,12 @@ angular.module('creapp3App')
       }
     };
   }])
-  .directive('dollarspersqft', ['$filter',function ($filter) {
+  .directive('dollarspersqft', ['$filter',function () {
     return {
       require: '?ngModel',
       link: function (scope, elem, attrs, ctrl) {
-        if (!ctrl) return;
-        ctrl.$formatters.unshift(function (a) {
+        if (!ctrl) {return;}
+        ctrl.$formatters.unshift(function () {
           return '$/sqft ' + (ctrl.$modelValue===undefined ? '' : ctrl.$modelValue);
         });
         ctrl.$parsers.unshift(function (viewValue) {
@@ -52,4 +52,4 @@ angular.module('creapp3App')
         });
       }
     };
-  }]);;
+  }]);

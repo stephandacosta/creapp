@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('ProfileCtrl', function ($scope, $state, $http, $mdToast, $user, $auth, pictureuploadService) {
 
     $scope.updating =  false;
@@ -18,6 +18,18 @@ angular.module('creapp3App')
 
     var getUserId = function(){
       return $scope.broker.href.substr($scope.broker.href.lastIndexOf('/') + 1);
+    };
+
+
+    //function to show toasts
+    var showToast = function(msg){
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent(msg)
+        .position('top left')
+        .parent(document.getElementById('toasts'))
+        .hideDelay(3000)
+      );
     };
 
     var resetEdits = function(){
@@ -108,7 +120,7 @@ angular.module('creapp3App')
     };
 
     $scope.deleteAccount = function(){
-      $http.delete('/api/users').then(function(res){
+      $http.delete('/api/users').then(function(){
           // hack: refresh document to get user refreshed (the current sdk methods always get from cache)
         $auth.endSession()
           .then(function(){
@@ -121,22 +133,10 @@ angular.module('creapp3App')
             $state.go('buyreqs.browse.views');
           });
       }, function(err){
+        console.log(err);
         showToast('there was a problem deleting the account');
         $state.go('buyreqs.browse.views');
       });
-    }
-
-    //function to show toasts
-    var showToast = function(msg){
-      $mdToast.show(
-        $mdToast.simple()
-        .textContent(msg)
-        .position('top left')
-        .parent(document.getElementById('toasts'))
-        .hideDelay(3000)
-      );
     };
-
-
 
   });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('mailFormCtrl', function ($scope, $mdDialog, $http, $mdToast, userId, brokerName, buyreqId, buyreqTitle) {
 
 

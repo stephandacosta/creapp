@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .controller('introCtrl', function(mdPanelRef, introService, tourService, $http, $mdToast, broker){
     if(broker){
       this.broker = broker;
@@ -36,7 +36,7 @@ angular.module('creapp3App')
       message: ''
     };
     this.sendBuyerInfo = function(){
-      var panel = this._mdPanelRef
+      var panel = this._mdPanelRef;
       var success = function(){
         panel.close()
         .finally(function(){

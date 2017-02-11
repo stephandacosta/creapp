@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
     .factory('tourService', function($mdToast, $mdPanel, $mdMedia, $mdSidenav, $user, $timeout){
 
       // MdPanelPosition.xPosition = {
@@ -216,27 +216,7 @@ angular.module('creapp3App')
           }
         ]
       };
-
-
-      var nextTooltip = function(){
-        if (++index <= tooltipList.length ){
-          if (_.isUndefined(tooltipList[index].condition) || tooltipList[index].condition()){
-            if (!_.isUndefined(tooltipList[index].action)){
-              tooltipList[index].action().then(function(){
-                showCustomPanel();
-              });
-            } else {
-              showCustomPanel();
-            }
-          } else {
-            nextTooltip();
-          }
-        } else {
-          index = 0;
-        }
-      };
-
-
+      
       var detachHotzones = function(){
         var hotzone = document.getElementsByClassName('hotzone');
         angular.element(hotzone).detach();
@@ -320,6 +300,24 @@ angular.module('creapp3App')
               outerWrapper.className += ' tourPanelWrapper';
               panelRef = undefined;
             });
+      };
+
+      var nextTooltip = function(){
+        if (++index <= tooltipList.length ){
+          if (_.isUndefined(tooltipList[index].condition) || tooltipList[index].condition()){
+            if (!_.isUndefined(tooltipList[index].action)){
+              tooltipList[index].action().then(function(){
+                showCustomPanel();
+              });
+            } else {
+              showCustomPanel();
+            }
+          } else {
+            nextTooltip();
+          }
+        } else {
+          index = 0;
+        }
       };
 
       return {

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('creapp3App', [
-  'creapp3App.constants',
+angular.module('creapp', [
+  'creapp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',

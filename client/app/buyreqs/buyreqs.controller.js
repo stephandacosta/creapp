@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .filter('checkmark', function(){
     return function(input) {
       return input ? '\u2713' : '\u2718';
@@ -52,8 +52,8 @@ angular.module('creapp3App')
       return function(req){
         var _bounds = bounds;
         return req.polygon.some(function(point){
-          return (point[0] >= _bounds[0][0] && point[0] <= _bounds[1][0]
-          && point[1] >= _bounds[0][1] && point[1] <= _bounds[1][1]);
+          return (point[0] >= _bounds[0][0] && point[0] <= _bounds[1][0] &&
+            point[1] >= _bounds[0][1] && point[1] <= _bounds[1][1]);
         });
       };
     };
@@ -130,8 +130,8 @@ angular.module('creapp3App')
       });
     };
 
-    var clipboard = new Clipboard('#sharebutton');
-    clipboard.on('success', function(e) {
+    var clipboard = new window.Clipboard('#sharebutton');
+    clipboard.on('success', function() {
       $mdToast.show(
         $mdToast.simple()
         .textContent('link has been copied to your clipboard, paste it anywhere')

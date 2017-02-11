@@ -2,11 +2,11 @@
 
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .factory('mapService', function ($rootScope, $location, $timeout, $state, freeDraw, mapBoundsService) {
 
    var map;
-   var polygonsLayer, baseLayer, highlightedLayer, markerGroup;
+   var polygonsLayer, highlightedLayer, markerGroup;
   //  var searchBounds;
    var state;
    var editCircle;

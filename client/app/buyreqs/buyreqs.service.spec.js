@@ -3,7 +3,7 @@
 describe('Service: buyreqs', function () {
 
   // load the service's module
-  beforeEach(module('creapp3App'));
+  beforeEach(module('creapp'));
 
   // instantiate service
   var buyreqs;

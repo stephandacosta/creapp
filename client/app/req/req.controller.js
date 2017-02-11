@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('creapp3App')
-  .controller('reqCtrl', function ( appConstants, $scope, $mdMedia, freeDraw) {
+angular.module('creapp')
+  .controller('reqCtrl', function ( appConstants, $scope, $mdMedia) {
 
     // main will be shared in child scopes
     $scope.main = {};

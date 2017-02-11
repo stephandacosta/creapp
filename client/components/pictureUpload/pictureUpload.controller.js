@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
 .controller('pictureUploadCtrl', function($scope, mdPanelRef, pictureuploadService, bigImage){
 
   $scope._mdPanelRef = mdPanelRef;

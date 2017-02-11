@@ -1,4 +1,6 @@
-angular.module('creapp3App')
+'use strict';
+
+angular.module('creapp')
   .directive('mailbutton', function ($mdDialog) {
     return {
       templateUrl: 'components/mailbutton/mailbutton.html',
@@ -7,7 +9,7 @@ angular.module('creapp3App')
         broker: '=broker',
         buyreq: '=buyreq'
       },
-      link: function (scope, element, attrs) {
+      link: function (scope) {
 
         scope.showMailForm = function(ev){
 

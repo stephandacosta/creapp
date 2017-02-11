@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('creapp3App')
+angular.module('creapp')
   .directive('sidenav', () => ({
     templateUrl: 'components/sidenav/sidenav.html',
     restrict: 'E',

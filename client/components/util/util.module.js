@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('creapp3App.util', []);
+angular.module('creapp.util', []);
