@@ -74,12 +74,13 @@ angular.module('creapp')
         },
         url: '/detail/{id}',
         resolve: {
-          selectedReq: function($stateParams, $location, buyReqs, buyreqsService, pictureuploadService){
+          selectedReq: function($stateParams, $location, buyReqs, buyreqsService, brokerService, pictureuploadService){
             var getBrokerInfo = function(req){
               return buyreqsService.getBroker(req.user).then(function(broker){
                 req.broker = broker;
                 req.shareLink = $location.host + '/browse/detail/' + req._id;
                 req.broker.brokerpic = pictureuploadService.getBrokerPictureLink(req.broker.userId);
+                req.userIsOwner = (req.broker.userId === brokerService.brokerId);
                 return req;
               })
               .catch(function(error){
@@ -101,7 +102,6 @@ angular.module('creapp')
         },
         controller: function($scope, selectedReq, brokerService){
           $scope.main.selectedReq = selectedReq;
-          $scope.isOwner = (selectedReq.broker.userId === brokerService.brokerId);
         }
       })
       .state('buyreqs.details.views', {
