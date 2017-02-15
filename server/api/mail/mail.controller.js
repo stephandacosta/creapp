@@ -140,7 +140,7 @@ export function create(req, res) {
       to: account.email,
       // EmailTemplate renders html and text but no subject so we need to
       // set it manually either here or in the defaults section of templateSender()
-      subject: 'Interest in your buy requirement'
+      subject: 'Interest in your requirement'
     },
     {
       brokerName: account.givenName,
