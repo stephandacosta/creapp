@@ -36,6 +36,9 @@ module.exports = function(config) {
       'client/bower_components/ng-img-crop/compile/minified/ng-img-crop.js',
       'client/bower_components/angular-editable-text/dist/angular-editable-text.js',
       'client/bower_components/leaflet.freedraw/dist/leaflet-freedraw.web.js',
+      'client/bower_components/SHA-1/sha1.js',
+      'client/bower_components/angulartics/src/angulartics.js',
+      'client/bower_components/angulartics-google-tag-manager/lib/angulartics-google-tag-manager.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',
