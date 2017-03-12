@@ -13,6 +13,8 @@ angular.module('creapp')
 
         $scope.types = appConstants.creTypes;
 
+        if (!$scope.req.type) {$scope.req.type =  'Any';}
+
         $scope.$watch('landandprop',function(newValue){
           if (newValue === 'landOnly') {
             $scope.req.landOnly = true;
@@ -57,17 +59,53 @@ angular.module('creapp')
           }
         };
 
+        $scope.formErrors = {
+          area: false,
+          buytype: false
+        };
+        // check req has center  and area
+        $scope.checkReqArea = function(req){
+          var req = req || $scope.req;
+          if (req.center &&
+            req.center.length===2 &&
+            req.radius > 0){
+              $scope.formErrors.area = false;
+          } else {
+            $scope.formErrors.area = true;
+          }
+        };
+
+        // check req has buy type
+        $scope.checkReqBuyType = function(req){
+          var req = req || $scope.req;
+          if (req.buy || req.exchange || req.lease){
+            $scope.formErrors.buytype = false;
+          } else {
+            $scope.formErrors.buytype = true;
+          }
+        };
+
+        var checkReqSubmit = function(req){
+          var req = req || $scope.req;
+          $scope.checkReqArea(req);
+          $scope.checkReqBuyType(req);
+        }
+
+
+
         // post the req
         $scope.addReq = function(){
           // other properties such as user, date creation are added server side
           // post req to server then drop toast
-          console.log('adding', $scope.req);
-          $http.post('/api/buyreqs', $scope.req).then(function(){
-            showToast('Your requirement was saved !');
-            $state.go('buyreqs.details.views', {id: $scope.req._id});
-          }, function(){
-            showToast('There was an issue in saving your requisition');
-          });
+          checkReqSubmit($scope.req)
+          if (!$scope.formErrors.area && !$scope.formErrors.buytype){
+            $http.post('/api/buyreqs', $scope.req).then(function(){
+              showToast('Your requirement was saved !');
+              $state.go('buyreqs.details.views', {id: $scope.req._id});
+            }, function(){
+              showToast('There was an issue in saving your requisition');
+            });
+          }
         };
 
         // save req changes
@@ -75,12 +113,14 @@ angular.module('creapp')
           // put req to server then drop toast
           var api = '/api/buyreqs/';
           console.log('saving', $scope.req);
-          $http.put(api + $scope.req._id, $scope.req).then(function(){
-            showToast('Your requirement edits were saved !');
-            $state.go('buyreqs.details.views', {id: $scope.req._id});
-          }, function(){
-            showToast('There was an issue in saving your edits');
-          });
+          if ($scope.checkReqArea($scope.req) && $scope.checkReqBuyType($scope.req)){
+            $http.put(api + $scope.req._id, $scope.req).then(function(){
+              showToast('Your requirement edits were saved !');
+              $state.go('buyreqs.details.views', {id: $scope.req._id});
+            }, function(){
+              showToast('There was an issue in saving your edits');
+            });
+          }
         };
 
         $scope.deleteReq = function(){
@@ -141,6 +181,7 @@ angular.module('creapp')
           delete $scope.req.postcode;
           delete $scope.req.road;
           delete $scope.req.state;
+          $scope.checkReqArea($scope.req);
           $scope.$apply();
         };
 
@@ -153,6 +194,7 @@ angular.module('creapp')
             $scope.req.polygon = area.polygon;
             setLocationDetails(area.center[0], area.center[1]);
           }
+          $scope.checkReqArea($scope.req);
         });
 
 
@@ -202,6 +244,7 @@ angular.module('creapp')
               $scope.req.postcode = results.address.postcode;
               $scope.req.landmark  = results.address.landmark;
               $scope.req.state = $scope.circleDraw.selectedState;
+              $scope.checkReqArea($scope.req);
             });
         };
 

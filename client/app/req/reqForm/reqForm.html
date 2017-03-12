@@ -25,12 +25,22 @@
   </md-button>
 </md-toolbar>
 
-<md-content class="editForm" flex layout="column" layout-padding>
+<div class="errors" ng-if="formErrors.area">
+  Please add area
+</div>
+<div class="errors" ng-if="formErrors.buytype">
+  Please choose buying type
+</div>
+
+
+
+<form name="reqForm" class="editForm" flex layout="column" layout-padding>
+
 
   <div flex layout="column" style="display: block;">
     <md-input-container flex layout-fill>
       <label>Type</label>
-      <md-select ng-model="req.type">
+      <md-select ng-model="req.type" required>
         <md-option ng-repeat="type in types" value="{{type}}">
           {{type}}
         </md-option>
@@ -41,7 +51,13 @@
     <div style="display: block;">
     <md-input-container layout-fill>
       <label>Title</label>
-      <input type="text" md-maxlength="36" ng-model="req.title" required>
+      <input name="title" type="text" md-maxlength="36" ng-model="req.title" ng-minlength="10"
+       ng-maxlength="36" required>
+      <div class="errors" ng-messages="reqForm.title.$error">
+        <div ng-message="required">Required</div>
+        <div ng-message="minlength">Your field is too short</div>
+        <div ng-message="maxlength">Your field is too long</div>
+      </div>
     </md-input-container>
   </div>
 
@@ -57,6 +73,9 @@
                Input Location
         </md-radio-button>
       </md-radio-group>
+      <div class="errors" ng-if="formErrors.area">
+        Please add area
+      </div>
 
       <div class="drawcontrols" ng-if="input.type==='draw'" layout="column">
         <br>
@@ -123,7 +142,11 @@
       <legend> Description </legend>
       <md-input-container flex layout-fill>
         <!-- <label>Description</label> -->
-        <textarea ng-model="req.info" md-maxlength="500" required aria-label="description"></textarea>
+        <textarea name="description" ng-model="req.info" md-maxlength="500" ng-maxlength="36" required aria-label="description"></textarea>
+        <div class="errors" ng-messages="reqForm.description.$error">
+          <div ng-message="maxlength">Your field is too long</div>
+          <div ng-message="required">Please enter description</div>
+        </div>
       </md-input-container>
     </fieldset>
   </div>
@@ -162,82 +185,65 @@
   </fieldset>
   </div>
 
-
-
   <div style="display: block;">
-  </div>
-
-  <div style="display: block;">
-      <div flex>
-        <md-checkbox ng-if="!req.buy" ng-click="scrollDown()" class="md-primary" ng-model="req.buy" aria-label="buy">
-          Buy
-        </md-checkbox>
-        <fieldset ng-if="req.buy">
-          <legend>
-            <md-checkbox class="md-primary" ng-model="req.buy" aria-label="buy">
-              Buy
-            </md-checkbox>
-          </legend>
-          <div ng-if="req.buy" layout-gt-sm="row" layout="column">
+    <div class="errors" ng-if="formErrors.buytype">
+      Please choose buying type
+    </div>
+    <div flex>
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.buy" aria-label="buy">
+        Buy
+      </md-checkbox>
+      <fieldset ng-if="req.buy">
+        <div ng-if="req.buy" layout-gt-sm="row" layout="column">
+          <md-input-container>
+            <label>Min Buy Price $</label>
+            <input type="text" ng-model="req.buy_min_price" dollars required></input>
+          </md-input-container>
+          <md-input-container>
+            <label>Max Buy Price $</label>
+            <input type="text" ng-model="req.buy_max_price" dollars required>
+          </md-input-container>
+        </div>
+      </fieldset>
+    </div>
+    <br>
+    <div flex>
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.exchange" aria-label="exchange">
+        Exchange
+      </md-checkbox>
+      <fieldset ng-if="req.exchange">
+        <div ng-if="req.exchange" layout-gt-sm="row" layout="column">
+          <md-input-container>
+            <label>Min Exchange Price $</label>
+            <input type="text" ng-model="req.exchange_min_price" dollars required></input>
+          </md-input-container>
+          <md-input-container>
+            <label>Max Exchange Price $</label>
+            <input type="text" ng-model="req.exchange_max_price" dollars required>
+          </md-input-container>
+        </div>
+      </fieldset>
+    </div>
+    <br>
+    <div flex>
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.lease" aria-label="lease">
+        Lease
+      </md-checkbox>
+      <fieldset ng-if="req.lease">
+        <div ng-if="req.lease" layout-gt-sm="row" layout="column">
             <md-input-container>
-              <label>Min Buy Price $</label>
-              <input type="text" ng-model="req.buy_min_price" dollars required></input>
+              <label>Min Lease Price $/sqft</label>
+              <input type="text" ng-model="req.lease_min_price" dollarspersqft required></input>
             </md-input-container>
             <md-input-container>
-              <label>Max Buy Price $</label>
-              <input type="text" ng-model="req.buy_max_price" dollars required>
+              <label>Max Lease Price $/sqft</label>
+              <input type="text" ng-model="req.lease_max_price" dollarspersqft required>
             </md-input-container>
-          </div>
-        </fieldset>
-      </div>
-      <br>
-      <div flex>
-        <md-checkbox ng-if="!req.exchange" ng-click="scrollDown()" class="md-primary" ng-model="req.exchange" aria-label="exchange">
-          Exchange
-        </md-checkbox>
-        <fieldset ng-if="req.exchange">
-          <legend>
-            <md-checkbox class="md-primary" ng-model="req.exchange" aria-label="exchange">
-              Exchange
-            </md-checkbox>
-          </legend>
-          <div ng-if="req.exchange" layout-gt-sm="row" layout="column">
-            <md-input-container>
-              <label>Min Exchange Price $</label>
-              <input type="text" ng-model="req.exchange_min_price" dollars required></input>
-            </md-input-container>
-            <md-input-container>
-              <label>Max Exchange Price $</label>
-              <input type="text" ng-model="req.exchange_max_price" dollars required>
-            </md-input-container>
-          </div>
-        </fieldset>
-      </div>
-      <br>
-      <div flex>
-        <md-checkbox ng-if="!req.lease" ng-click="scrollDown()" class="md-primary" ng-model="req.lease" aria-label="lease">
-          Lease
-        </md-checkbox>
-        <fieldset ng-if="req.lease">
-          <legend>
-            <md-checkbox class="md-primary" ng-model="req.lease" aria-label="lease">
-              Lease
-            </md-checkbox>
-          </legend>
-          <div ng-if="req.lease" layout-gt-sm="row" layout="column">
-              <md-input-container>
-                <label>Min Lease Price $/sqft</label>
-                <input type="text" ng-model="req.lease_min_price" dollarspersqft required></input>
-              </md-input-container>
-              <md-input-container>
-                <label>Max Lease Price $/sqft</label>
-                <input type="text" ng-model="req.lease_max_price" dollarspersqft required>
-              </md-input-container>
-          </div>
-        </fieldset>
-      </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
 
   <span id=bottom></span>
 
-</md-content>
+</form>

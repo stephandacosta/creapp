@@ -5,6 +5,7 @@ angular.module('creapp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngMessages',
   'ngMaterial',
   'ui.router',
   'stormpath',
