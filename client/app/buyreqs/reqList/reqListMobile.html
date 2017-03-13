@@ -1,8 +1,12 @@
   <md-button hide-gt-xs ng-click="toggleMap()" class="md-primary md-fab tour-map-mob md-fab-top-right" style="z-index: 1000;">
-    <md-icon
+    <md-icon ng-if="!showMap"
     style="font-size: 38px;padding-right: 14px;padding-bottom: 14px;">
     language
     </md-icon>
+    <md-icon ng-if="showMap"
+    style="font-size: 38px;padding-right: 14px;padding-bottom: 14px;">
+    list
+    </md-icon>
   </md-button>
-  <div ng-show="!showMap" ui-view="list" flex layout="column"></div>
-  <div ng-show="showMap" ui-view="map" flex layout="column"></div>
+  <div ng-if="!showMap" ui-view="list" flex layout="column"></div>
+  <div ng-if="showMap" ui-view="map" flex layout="column"></div>

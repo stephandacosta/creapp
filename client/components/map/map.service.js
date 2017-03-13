@@ -162,17 +162,6 @@ angular.module('creapp')
       });
     };
 
-    // var resetBounds = function(){
-    //   state = 'search';
-    //   if (!_.isUndefined(searchBounds)){
-    //     map.fitBounds(searchBounds);
-    //     // map.flyToBounds(searchBounds);
-    //   } else if (!_.isUndefined(map)) {
-    //     map.zoomOut();
-    //   }
-    // };
-
-
     // var contained = function(container,containee){
     //   var sw=0, ne=1, x = 0, y = 1;
     //   return (container[sw][x] <= containee[sw][x]) &&
