@@ -1,7 +1,7 @@
 
 
 <div flex layout = "column" md-whiteframe="6d">
-    <mailbutton broker="broker" buyreq="main.selectedReq"></mailbutton>
+    <mailbutton broker="main.selectedReq.broker" buyreq="main.selectedReq"></mailbutton>
     <div layout = "column">
       <span class="md-display-1" style="color: #009688;">{{main.selectedReq.broker.fullName}}</span>
       <span class="md-subhead">RE License #: {{main.selectedReq.broker.customData.license}} </span>
