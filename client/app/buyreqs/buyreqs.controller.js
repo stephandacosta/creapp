@@ -94,7 +94,7 @@ angular.module('creapp')
     });
 
     $scope.showfilter = false;
-    $scope.openfilter = function(){
+    $scope.toggleFilter = function(){
       $scope.showfilter = !$scope.showfilter;
     };
 
