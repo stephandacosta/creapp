@@ -23,6 +23,10 @@ angular.module('creapp')
 
     $scope.highlightReq = function(req){
       // mapService.addHighlightedLayer(req);
+      delete $scope.main.highlightedReq;
+      $scope.main.filteredReqs.forEach(function(r){
+        r.hover = false;
+      });
       $scope.main.highlightedReq = req;
       req.hover = true;
     };
