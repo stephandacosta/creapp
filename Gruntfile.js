@@ -411,7 +411,11 @@ module.exports = function (grunt) {
       azure: {
         options: {
           remote: 'azure',
-          branch: 'master'
+          branch: 'master',
+          config: {
+            'user.name': 'Creapp',
+            'user.email': 'tech@creapp.us'
+          }
         }
       },
       heroku: {
