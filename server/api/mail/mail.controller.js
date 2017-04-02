@@ -121,7 +121,7 @@ export function show(req, res) {
 
 function createMail(addition, res) {
   return function(prom) {
-    console.log(prom);
+    // console.log(prom);
     return Mail.create(addition)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -131,7 +131,7 @@ function createMail(addition, res) {
 export function create(req, res) {
   var addition = req.body;
   addition.read = false;
-  console.log('addition',addition);
+  // console.log('addition',addition);
   require('../user/user.controller').getEmail(addition.user, function(account){
     var sendNotification = transporter.templateSender(new EmailTemplate(templateDir), {
       from: '"CREapp notification" <notification@creapp.us>'

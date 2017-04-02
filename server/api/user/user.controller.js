@@ -48,7 +48,7 @@ function handleError(res, statusCode) {
 
 // Gets user from the DB
 export function show(req, res) {
-  console.log('params.id',req.params.id);
+  // console.log('params.id',req.params.id);
   var href = 'https://api.stormpath.com/v1/accounts/' + req.params.id;
   client.getAccount(href, { expand: 'customData' }, function(err, account) {
       if (err) {

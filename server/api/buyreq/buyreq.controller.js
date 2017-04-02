@@ -78,7 +78,7 @@ function checkUserInGroup(res, user, groupName){
           reject;
         }
         groups.items.forEach(function(group) {
-          console.log('group.name', group.name, 'groupName', groupName);
+          // console.log('group.name', group.name, 'groupName', groupName);
           if (group.name === groupName){
             resolve(entity);
           }
@@ -91,10 +91,10 @@ function checkUserInGroup(res, user, groupName){
 
 function checkUserRights(req, res) {
   return function(entity) {
-    console.log(entity);
+    // console.log(entity);
     var userHref = req.user.href;
     var userId = userHref.substr(userHref.lastIndexOf('/') + 1);
-    console.log('buyreq user:', entity.user, 'requesting user:', userId);
+    // console.log('buyreq user:', entity.user, 'requesting user:', userId);
     if (entity.user !== userId ) {
       checkUserInGroup(res, req.user, 'admins')(entity);
     }
@@ -140,7 +140,7 @@ export function show(req, res) {
 
 // Gets user of single Buyreq from the DB
 export function getUser(req, res) {
-  console.log('params.id',req.params.id);
+  // console.log('params.id',req.params.id);
   var href = 'https://api.stormpath.com/v1/accounts/' + req.params.id;
   client.getAccount(href, function(err, account) {
       if (err) {

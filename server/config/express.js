@@ -21,6 +21,10 @@ import mongoose from 'mongoose';
 var mongoStore = connectMongo(session);
 
 export default function(app) {
+  app.get('/_ah/health', (req, res) => {
+    res.status(200).send('Health Check')
+  });
+
   var env = app.get('env');
 
   app.set('views', config.root + '/server/views');

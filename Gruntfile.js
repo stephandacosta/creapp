@@ -386,7 +386,7 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             'package.json',
-            'web.config',
+            'app.yaml',
             '<%= yeoman.server %>/**/*',
             '!<%= yeoman.server %>/config/local.env.sample.js'
           ]
@@ -566,6 +566,14 @@ module.exports = function (grunt) {
           src: ['**/*.js'],
           dest: '<%= yeoman.dist %>/<%= yeoman.server %>'
         }]
+      }
+    },
+
+
+    shell: {
+      gcpDeploy: {
+        command: 'gcloud app deploy --project creapp-147921',
+        cwd: 'dist'
       }
     },
 
@@ -785,6 +793,10 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'shell:gcpDeploy'
   ]);
 
   grunt.registerTask('default', [
