@@ -1,12 +1,52 @@
-  <md-button hide-gt-xs ng-click="toggleMap()" class="md-primary md-fab tour-map-mob md-fab-top-right" style="z-index: 1000;">
-    <md-icon ng-if="!showMap"
-    style="font-size: 38px;padding-right: 14px;padding-bottom: 14px;">
-    language
-    </md-icon>
-    <md-icon ng-if="showMap"
-    style="font-size: 38px;padding-right: 14px;padding-bottom: 14px;">
-    list
-    </md-icon>
-  </md-button>
-  <div ng-if="!showMap" ui-view="list" flex layout="column"></div>
-  <div ng-if="showMap" ui-view="map" flex layout="column"></div>
+<div layout="column" flex>
+
+  <div>
+    <md-toolbar class="md-primary md-hue-2" layout="row">
+      <div class="md-toolbar-tools">
+        <!-- <span flex></span> -->
+        <span style="font-size:smaller"> {{main.filteredReqs.length}} reqs filtered from {{main.buyReqs.length}} </span>
+        <md-button hide-gt-xs ng-click="toggleFilterSidenav()" class="md-primary md-raised tour-map-mob" style="z-index: 1000;margin:10px;">
+          <md-icon>
+            filter_list
+          </md-icon>
+        </md-button>
+        <md-button hide-gt-xs ng-click="toggleMap()" class="md-primary md-raised tour-map-mob" style="z-index: 1000;margin:10px;">
+          <md-icon ng-if="!showMap">
+            public
+          </md-icon>
+          <md-icon ng-if="showMap">
+            list
+          </md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  </div>
+
+
+  <md-content flex layout-fill  layout="row">
+
+    <?-- map -->
+    <div ui-view="map" layout-fill flex style="position:absolute;z-index:2000;" ng-style="{'left':mapLeftPosition}"></div>
+
+    <?-- sidenav for the filters -->
+    <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: rgb(26, 31, 30);">
+      <md-toolbar layout="row" style="background-color: rgb(26, 31, 30);">
+        <h1 class="md-toolbar-tools">Filters</h1>
+        <span flex></span>
+        <md-button ng-click="toggleFilterList()" style="min-width:0;">
+          <md-icon style="font-size:30px;">close</md-icon>
+        </md-button>
+      </md-toolbar>
+      <div req-filter layout="column"></div>
+    </md-sidenav>
+
+    <?-- list -->
+    <div flex style="overflow:scroll;">
+      <div ui-view="list" flex layout="column"></div>
+    </div>
+
+  </md-content>
+
+
+
+</div>

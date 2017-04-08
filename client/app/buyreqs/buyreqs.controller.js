@@ -6,7 +6,7 @@ angular.module('creapp')
       return input ? '\u2713' : '\u2718';
     };
   })
-  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyReqs, mapService, mapBoundsService, brokerService, filterService, $mdDialog) {
+  .controller('BuyreqsCtrl', function (appConstants, $rootScope, $timeout, $scope, $filter, $mdComponentRegistry, $mdMedia, $mdToast, buyReqs, mapService, mapBoundsService, brokerService, filterService, $mdDialog, $mdSidenav) {
     //add mdMedia service for use in template via ngStyle
     $scope.$mdMedia = $mdMedia;
 
@@ -86,32 +86,48 @@ angular.module('creapp')
       // filteredReqs is watched in map directive
     };
 
-    $scope.$watchCollection('search', function() {
-      applyFilters();
-    });
+    // applyfilters on map bounds change
+    $scope.$on('mapbounds:change', applyFilters);
 
-
-    $scope.$watchCollection(function(){
-      return mapBoundsService.getListBounds();
-    }, function(){
-      applyFilters();
-    });
-
-    $scope.showfilter = false;
-    $scope.toggleFilter = function(){
-      $scope.showfilter = !$scope.showfilter;
+    // mobile filter sidenav toggle
+    $scope.toggleFilterSidenav = function(){
+      $mdSidenav('filterSidenav').toggle();
     };
 
+    // open filter selections
+    $scope.toggleFilter = function($mdMenu, ev){
+      $mdMenu.open(ev);
+    };
+
+    // select filter value then close filter selection
+    $scope.filterSelect = function(field, value){
+      $scope.search[field] = value;
+      applyFilters();
+      if ($mdComponentRegistry.get( 'filterSidenav')){
+        $timeout(function(){
+          $mdSidenav('filterSidenav').toggle();
+        },500);
+      }
+    };
+
+    // select map filter on/off
     $scope.toggleMapFilter = function(){
       filterService.search.mapfilter = !filterService.search.mapfilter;
     };
 
+    // toggle map on mobile
     $scope.showMap = false;
+    $scope.mapLeftPosition = '100vw';
     $scope.toggleMap = function(){
-      $scope.showMap = !$scope.showMap;
-      if ($scope.showMap){
-        $timeout(function(){mapService.invalidateSize(); },200);
-      }
+        $scope.showMap = !$scope.showMap;
+        $scope.mapLeftPosition = '0';
+        if ($scope.showMap){
+          $scope.mapLeftPosition = '0';
+          $timeout(function(){mapService.invalidateSize(); },100);
+        } else {
+          $scope.mapLeftPosition = '100vw';
+        }
+
     };
 
     $scope.showProfile = function(ev){

@@ -1,39 +1,42 @@
-<div layout="column">
-  <div layout="row" layout-padding ng-if="owners.length>1">
-    <span flex></span>
-    <label style="font-weight: bolder;">Owner</label>
-    <span flex></span>
-    <md-select  flex="60" ng-model="search.owner" ng-change="toggleFilter()" style="padding:0;margin:0;" aria-label="type">
-      <md-option ng-repeat="owner in owners" value="{{owner}}">
-        {{owner}}
-      </md-option>
-    </md-select>
-  </div>
-  <div layout="row" layout-padding>
-    <span flex></span>
-    <label style="font-weight: bolder;">Type</label>
-    <span flex></span>
-    <md-select  flex="60" ng-model="search.type"  ng-change="toggleFilter()" style="padding:0;margin:0;" aria-label="type">
-      <md-option ng-repeat="type in types" value="{{type}}">
-        {{type}}
-      </md-option>
-    </md-select>
-  </div>
+<!-- <div class="md-toolbar-tools" layout="row" layout-padding style="height:100px;"> -->
 
-    <!-- <div flex-gt-xs layout-padding>
-      <label>Max Price: {{max_price}}$/sqft (out of {{maxPrice}})</label>
-      <md-slider-container>
-        <md-slider class="md-primary" ng-model="price" min="0" max="{{maxPrice}}" step="0.1" aria-label="max price">
-        </md-slider>
-      </md-slider-container>
-    </div>
+<h2 hide-xs class="md-headline" style="margin:11px;"> Filters:</h2>
 
-    <div flex-gt-xs layout-padding>
-      <label>Min Area: {{min_sqft}} sqft (out of {{maxSqft}})</label>
-      <md-slider-container>
-        <md-slider class="md-primary" ng-model="sqft" min="0" max="{{maxSqft}}" step="10" aria-label="max square feet">
-        </md-slider>
-      </md-slider-container>
-    </div> -->
-
+<div style="padding:8px:">
+  <md-button class="md-accent md-ink-ripple filter" ng-click="filterSelect('mapfilter', !search.mapfilter)">
+    <md-icon ng-if="search.mapfilter">check_circle</md-icon>
+    <md-icon ng-if="!search.mapfilter">crop_square</md-icon>
+    Map
+  </md-button>
 </div>
+
+<md-menu ng-if="owners.length>1" md-offset="0 50">
+  <md-button aria-label="broker filter" class="md-accent md-ink-ripple filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
+    <md-icon >arrow_drop_down</md-icon>
+    Broker: {{search.owner}}
+  </md-button>
+  <md-menu-content width="2">
+    <md-menu-item ng-repeat="owner in owners">
+      <md-button ng-click="filterSelect('owner',owner)">
+        {{owner}}
+      <md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>
+
+<md-menu md-offset="0 50">
+  <md-button aria-label="type filter" class="md-accent md-ink-ripple filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
+    <md-icon>arrow_drop_down</md-icon>
+    Type: {{search.type}}
+  </md-button>
+  <md-menu-content width="2">
+    <md-menu-item ng-repeat="type in types">
+      <md-button ng-click="filterSelect('type',type)">
+        {{type}}
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>
+
+
+<!-- </div> -->
