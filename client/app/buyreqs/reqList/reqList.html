@@ -1,34 +1,52 @@
-<md-content flex layout="column" class="tour-list">
-  <md-list ng-hide="search.reqID">
+<md-content flex layout="column" class="tour-list" style="padding:0 7px 0 7px;">
+  <md-list style="padding:0;">
     <md-list-item
       class="md-3-line md-offset md-warn"
       ng-repeat="buyreq in main.filteredReqs track by buyreq._id"
       ui-sref="buyreqs.details.views({id: buyreq._id})"
       ng-mouseenter="highlightReq(buyreq)"
       ng-mouseleave="unhighlightReq(buyreq)"
-      ng-style="{'background-color': buyreq.hover ? 'rgba(224, 64, 251, 0.27)' : null}">
-      <div flex layout="row" layout-align="start start">
+      ng-style="{'background-color': buyreq.hover ? 'rgba(224, 64, 251, 0.27)' : null}"
+      md-whiteframe="5"
+      style="margin-top:10px;margin-bottom:10px;padding-bottom:6px;">
+      <div flex layout="row" layout-align="start start" >
 
         <div class="md-list-item-text" style="max-width:410px;">
-          <h3 class="md-title" style="color:#3F51B5">{{buyreq.transactionTitle}} - {{buyreq.type}} in {{buyreq.stateName}}</h3>
-          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.title}}</h3>
-          <p class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">{{buyreq.radius}}mi. from {{buyreq.road}} in {{(buyreq.town?buyreq.town:buyreq.city)}}</p>
-          <p ng-if="buyreq.buy">Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }} </p>
-          <p ng-if="buyreq.exchange">Exchange Price: {{ buyreq.exchange_min_price | currency:"$" : 0 }} - {{ buyreq.exchange_max_price | currency:"$" : 0 }} </p>
-          <p ng-if="buyreq.lease">Lease Price: {{ buyreq.lease_min_price | currency:"$" : 2 }} - {{ buyreq.lease_max_price | currency:"$" : 2 }} /sqft</p>
-          <p>Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft</p>
+          <h2 class="md-title" style="color:#3F51B5;margin:0px">{{buyreq.transactionTitle}}</h2>
+          <h2 class="md-title" style="margin:0px">{{buyreq.type}} in {{buyreq.stateName}}</h2>
+          <h3 class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">
+            <md-icon>description</md-icon>
+            {{buyreq.title}}
+          </h3>
+          <p class="md-subhead" style="overflow-wrap:break-word;max-width:800px;">
+            <md-icon>place</md-icon>
+            {{buyreq.radius}}mi. from {{buyreq.road}} in {{(buyreq.town?buyreq.town:buyreq.city)}}
+          </p>
+          <p ng-if="buyreq.buy">
+            <md-icon>monetization_on</md-icon>
+            Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }}
+          </p>
+          <p ng-if="buyreq.exchange">
+            <md-icon>swap_horiz</md-icon>
+            Exchange Price: {{ buyreq.exchange_min_price | currency:"$" : 0 }} - {{ buyreq.exchange_max_price | currency:"$" : 0 }}
+          </p>
+          <p ng-if="buyreq.lease">
+            <md-icon>insert_link</md-icon>
+            Lease Price: {{ buyreq.lease_min_price | currency:"$" : 2 }} - {{ buyreq.lease_max_price | currency:"$" : 2 }} /sqft
+          </p>
+          <p>
+            <md-icon>aspect_ratio</md-icon>
+            Area: {{ buyreq.min_sqft | number:0 }}sqft - {{ buyreq.max_sqft | number:0 }}sqft
+          </p>
         </div>
 
         <!-- <span flex></span> -->
 
-        <div layout="column">
-          <md-icon class="md-secondary" >
-            <i class="material-icons" style="font-size:32px;">chevron_right</i>
-          </md-icon>
-        </div>
+        <md-button layout="column"  class="md-fab md-mini md-fab-top-right" style="background-color:rgba(38, 165, 153, 0.68)" ui-sref="buyreqs.details.views({id: buyreq._id})">
+          <md-icon>chevron_right</md-icon>
+        </md-button>
 
       </div>
-      <md-divider></md-divider>
     </md-list-item>
   </md-list>
 <md-content>
