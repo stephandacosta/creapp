@@ -27,11 +27,13 @@
             Buy Price: {{ buyreq.buy_min_price | currency:"$" : 0 }} - {{ buyreq.buy_max_price | currency:"$" : 0 }}
           </p>
           <p ng-if="buyreq.exchange">
-            <md-icon>swap_horiz</md-icon>
+            <md-icon ng-if="!buyreq.buy">monetization_on</md-icon>
+            <md-icon ng-if="buyreq.buy"></md-icon>
             Exchange Price: {{ buyreq.exchange_min_price | currency:"$" : 0 }} - {{ buyreq.exchange_max_price | currency:"$" : 0 }}
           </p>
           <p ng-if="buyreq.lease">
-            <md-icon>insert_link</md-icon>
+            <md-icon ng-if="!buyreq.buy && !buyreq.exchange">monetization_on</md-icon>
+            <md-icon ng-if="buyreq.buy || buyreq.exchange"></md-icon>
             Lease Price: {{ buyreq.lease_min_price | currency:"$" : 2 }} - {{ buyreq.lease_max_price | currency:"$" : 2 }} /sqft
           </p>
           <p>
