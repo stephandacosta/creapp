@@ -23,10 +23,10 @@
   </div>
 
 
-  <md-content flex layout-fill  layout="row">
+  <md-content flex layout-fill style="overflow:hidden;" layout="row">
 
     <?-- map -->
-    <div ui-view="map" layout-fill flex style="position:absolute;z-index:2000;" ng-style="{'left':mapLeftPosition}"></div>
+    <div ui-view="map" layout-fill flex style="position:absolute;" ng-style="{'left':mapLeftPosition}"></div>
 
     <?-- sidenav for the filters -->
     <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: rgb(26, 31, 30);">
