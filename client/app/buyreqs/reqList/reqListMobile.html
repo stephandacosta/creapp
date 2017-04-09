@@ -22,27 +22,32 @@
   </div>
 
 
-  <md-content flex layout-fill style="overflow:hidden;" layout="row">
-
-    <!-- map -->
-    <div ui-view="map" layout-fill flex style="position:absolute;" ng-style="{'left':mapLeftPosition}"></div>
+  <md-content flex layout-fill class="flip-container" ng-class="{'flipped': showMap}" layout="row">
 
     <!-- sidenav for the filters -->
     <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: rgb(26, 31, 30);">
       <md-toolbar layout="row" style="background-color: rgb(26, 31, 30);">
         <h1 class="md-toolbar-tools">Filters</h1>
         <span flex></span>
-        <md-button ng-click="toggleFilterList()" style="min-width:0;">
+        <md-button ng-click="toggleFilterSidenav()" style="min-width:0;">
           <md-icon style="font-size:30px;">close</md-icon>
         </md-button>
       </md-toolbar>
       <div req-filter layout="column"></div>
     </md-sidenav>
 
-    <!-- list -->
-    <div flex style="overflow:scroll;">
-      <div ui-view="list" flex layout="column"></div>
+    <div flex layout-fill class="flipper">
+
+      <!-- list -->
+      <div class="front reqlist" style="overflow:scroll;">
+        <div ui-view="list" flex layout="column"></div>
+      </div>
+
+      <!-- map -->
+      <div class="back" ui-view="map"  ></div>
+
     </div>
+
 
   </md-content>
 
