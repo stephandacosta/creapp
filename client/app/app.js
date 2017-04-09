@@ -27,7 +27,12 @@ angular.module('creapp', [
   .config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
     .primaryPalette('teal')
-    .accentPalette('purple');
+    .accentPalette('purple', {
+      'default': '800', // by default use shade 400 from the pink palette for primary intentions
+      'hue-1': 'A400', // use shade 100 for the <code>md-hue-1</code> class
+      'hue-2': '200', // use shade 600 for the <code>md-hue-2</code> class
+      'hue-3': 'A700'
+    });
   })
 
 // do not hijack clicks on mobile (needed to leaflet clicks to be caught)

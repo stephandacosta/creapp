@@ -1,7 +1,7 @@
 
-  <div flex="40" layout="column" style="min-width:420px;">
+  <div flex="40" layout="column" style="min-width:420px;margin: 10px 10px 0 10px;">
 
-    <md-toolbar class="md-primary md-hue-2" layout="row">
+    <md-toolbar class="md-primary md-hue-2" layout="row" md-whiteframe="7">
       <div class="md-toolbar-tools">
         <span style="font-size:smaller"> {{main.filteredReqs.length}} reqs filtered from {{main.buyReqs.length}} </span>
       </div>
@@ -12,6 +12,6 @@
   </div>
 
   <div flex layout-fill layout="column" style="min-width:580px;">
-    <div req-filter layout="row"></div>
-    <div ui-view="map" flex layout-fill><div>
+    <div req-filter layout="row" md-whiteframe="3" style="margin:5px;"></div>
+    <div ui-view="map" flex layout-fill md-whiteframe="3" style="margin:5px;"><div>
   </div>

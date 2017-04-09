@@ -3,7 +3,7 @@
 <h2 hide-xs class="md-headline" style="margin:11px;"> Filters:</h2>
 
 <div style="padding:8px:">
-  <md-button class="md-accent md-ink-ripple filter" ng-click="filterSelect('mapfilter', !search.mapfilter)">
+  <md-button class="md-accent md-ink-ripple md-raised filter" ng-click="filterSelect('mapfilter', !search.mapfilter)">
     <md-icon ng-if="search.mapfilter">check_circle</md-icon>
     <md-icon ng-if="!search.mapfilter">crop_square</md-icon>
     Map
@@ -11,7 +11,7 @@
 </div>
 
 <md-menu ng-if="owners.length>1" md-offset="0 50">
-  <md-button aria-label="broker filter" class="md-accent md-ink-ripple filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
+  <md-button aria-label="broker filter" class="md-accent md-ink-ripple md-raised filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
     <md-icon >arrow_drop_down</md-icon>
     Broker: {{search.owner}}
   </md-button>
@@ -25,7 +25,7 @@
 </md-menu>
 
 <md-menu md-offset="0 50">
-  <md-button aria-label="type filter" class="md-accent md-ink-ripple filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
+  <md-button aria-label="type filter" class="md-accent md-ink-ripple md-raised filter tour-filter-desk" ng-click="toggleFilter($mdMenu, $event)">
     <md-icon>arrow_drop_down</md-icon>
     Type: {{search.type}}
   </md-button>
