@@ -25,12 +25,12 @@
   <md-content flex layout-fill class="flip-container" ng-class="{'flipped': showMap}" layout="row">
 
     <!-- sidenav for the filters -->
-    <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: rgb(26, 31, 30);">
-      <md-toolbar layout="row" style="background-color: rgb(26, 31, 30);">
+    <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: #083e37;">
+      <md-toolbar layout="row" style="background-color: #072521">
         <h1 class="md-toolbar-tools">Filters</h1>
         <span flex></span>
-        <md-button ng-click="toggleFilterSidenav()" style="min-width:0;">
-          <md-icon style="font-size:30px;">close</md-icon>
+        <md-button class="md-fab md-primary md-fab-top-right" ng-click="toggleFilterSidenav()">
+          <md-icon>close</md-icon>
         </md-button>
       </md-toolbar>
       <div req-filter layout="column"></div>

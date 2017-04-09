@@ -3,15 +3,20 @@
         md-component-id="left"
         md-whiteframe="4"
         style="background-color: #1a1f1e;">
-  <md-toolbar layout="row" class="md-theme-indigo">
-    <h1 class="md-toolbar-tools">Menu</h1>
-    <span flex></span>
-    <md-button ng-click="closeSidenav()" style="min-width:0;">
-      <md-icon style="font-size:30px;">close</md-icon>
-    </md-button>
-  </md-toolbar>
+  <md-button class="md-fab md-primary md-fab-top-right" ng-click="closeSidenav()">
+    <md-icon>close</md-icon>
+  </md-button>
 
   <md-content style="background-color: #1a1f1e;" layout="column">
+
+
+    <md-toolbar layout="row" class="md-primary md-hue-2">
+      <h1 class="md-toolbar-tools">
+        Main
+      </h1>
+    </md-toolbar>
+    <md-divider style="border-color: #009688;"></md-divider>
+
 
     <md-button class="md-primary tour-create" ui-sref="buyreqs.browse.views" ng-click="closeSidenav()">
       <md-icon>view_list</md-icon>
@@ -27,17 +32,17 @@
     </md-button>
 
 
-    <md-toolbar layout="row">
-      <!-- <md-icon>person</md-icon> -->
+    <md-toolbar layout="row" class="md-primary md-hue-2">
       <h1 class="md-toolbar-tools">
         Account
       </h1>
     </md-toolbar>
+    <md-divider style="border-color: #009688;"></md-divider>
 
     <md-button if-not-user class="md-primary" ui-sref="login" ng-click="closeSidenav()">
       Login
     </md-button>
-    <md-divider if-user style="border-color: #009688;"></md-divider>
+    <md-divider if-not-user style="border-color: #009688;"></md-divider>
     <md-button if-not-user class="md-primary tour-register" ui-sref="register" ng-click="closeSidenav()">
       Register
     </md-button>
@@ -63,10 +68,10 @@
     </md-button>
 
 
-    <md-toolbar layout="row">
-      <!-- <md-icon>info</md-icon> -->
+    <md-toolbar layout="row" class="md-primary md-hue-2">
       <h1 class="md-toolbar-tools">Info</h1>
     </md-toolbar>
+    <md-divider style="border-color: #009688;"></md-divider>
 
     <md-button class="md-primary tour-about" ui-sref="about" ng-click="closeSidenav()">
       <md-icon>info</md-icon>
