@@ -573,7 +573,7 @@ module.exports = function (grunt) {
     shell: {
       gcpDeploy: {
         command: 'gcloud app deploy --project creapp-147921',
-        cwd: 'dist'
+        cwd: '<%= yeoman.dist %>'
       }
     },
 
