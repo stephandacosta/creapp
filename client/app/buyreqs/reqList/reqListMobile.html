@@ -3,7 +3,6 @@
   <div>
     <md-toolbar class="md-primary md-hue-2" layout="row">
       <div class="md-toolbar-tools">
-        <!-- <span flex></span> -->
         <span style="font-size:smaller"> {{main.filteredReqs.length}} reqs filtered from {{main.buyReqs.length}} </span>
         <md-button hide-gt-xs ng-click="toggleFilterSidenav()" class="md-primary md-raised tour-map-mob" style="z-index: 1000;margin:10px;">
           <md-icon>
@@ -25,10 +24,10 @@
 
   <md-content flex layout-fill style="overflow:hidden;" layout="row">
 
-    <?-- map -->
+    <!-- map -->
     <div ui-view="map" layout-fill flex style="position:absolute;" ng-style="{'left':mapLeftPosition}"></div>
 
-    <?-- sidenav for the filters -->
+    <!-- sidenav for the filters -->
     <md-sidenav md-component-id="filterSidenav" class="md-sidenav-left" style="background-color: rgb(26, 31, 30);">
       <md-toolbar layout="row" style="background-color: rgb(26, 31, 30);">
         <h1 class="md-toolbar-tools">Filters</h1>
@@ -40,7 +39,7 @@
       <div req-filter layout="column"></div>
     </md-sidenav>
 
-    <?-- list -->
+    <!-- list -->
     <div flex style="overflow:scroll;">
       <div ui-view="list" flex layout="column"></div>
     </div>
