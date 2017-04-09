@@ -30,6 +30,11 @@ angular.module('creapp', [
     .accentPalette('purple');
   })
 
+// do not hijack clicks on mobile (needed to leaflet clicks to be caught)
+  .config(function($mdGestureProvider) {
+    $mdGestureProvider.skipClickHijack();
+  })
+
   // stormpath init
   .run(function($stormpath){
     $stormpath.uiRouter({
