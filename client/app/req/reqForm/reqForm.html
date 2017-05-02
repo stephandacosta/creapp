@@ -229,8 +229,9 @@
 
   <span id=bottom></span>
 
-</form>
+  <md-button ng-if="'req.edit.views' | isState" class="md-raised md-warn md-ink-ripple" ng-click="deleteReq()">
+    Delete
+  </md-button>
 
-<md-button ng-if="'req.edit.views' | isState" flex="30" class="md-raised md-warn md-ink-ripple" ng-click="deleteReq()">
-  Delete
-</md-button>
+
+</form>
