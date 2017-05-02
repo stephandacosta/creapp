@@ -13,7 +13,8 @@ angular.module('creapp', [
   'ngImgCrop',
   'gg.editableText',
   'angulartics',
-  'angulartics.google.tagmanager'
+  'angulartics.google.tagmanager',
+  'angulartics.segment'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
