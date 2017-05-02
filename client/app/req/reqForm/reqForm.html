@@ -1,29 +1,18 @@
 
 
-<md-toolbar layout="row" ng-if="'req.add' | isState" class="md-primary md-hue-2">
-  <md-button flex="30" class="md-raised md-primary md-hue-1 md-ink-ripple" ng-click="addReq()">
+<md-toolbar layout="row" class="md-primary md-hue-2">
+  <md-button ng-if="'req.add.views' | isState" flex="30" class="md-raised md-primary md-hue-1 md-ink-ripple" ng-click="addReq()">
     Publish
   </md-button>
-  <md-button flex="30" class="md-ink-ripple" ng-click="cancel()">
-    Cancel
-  </md-button>
-  <span hide-gt-xs flex></span>
-  <md-button hide-gt-xs ng-click="toggleEditForm()" class="md-accent md-raised" style="width:40px;min-width: 0;padding: 0 6px 10px 0px;">
-    <md-icon style="font-size:32px">language</md-icon>
-  </md-button>
-</md-toolbar>
-
-<md-toolbar layout="row" ng-if="'req.edit' | isState" class="md-primary md-hue-2">
-  <md-button flex="30" class="md-raised md-primary md-hue-1 md-ink-ripple" ng-click="saveEdit()" >
+  <md-button ng-if="'req.edit.views' | isState" flex="30" class="md-raised md-primary md-hue-1 md-ink-ripple" ng-click="saveEdit()" >
     Save
   </md-button>
   <md-button flex="30" class="md-ink-ripple" ng-click="cancel()">
     Cancel
   </md-button>
-  <md-button flex="30" class="md-raised md-warn md-ink-ripple" ng-click="deleteReq()">
-    Delete
-  </md-button>
+  <span hide-gt-xs flex></span>
 </md-toolbar>
+
 
 <div class="errors" ng-if="formErrors.area">
   Please add area
@@ -37,21 +26,21 @@
 <form name="reqForm" class="editForm" flex layout="column" layout-padding>
 
 
-  <div flex layout="column" style="display: block;">
+  <div style="display: block;">
     <md-input-container flex layout-fill>
       <label>Type</label>
-      <md-select ng-model="req.type" required>
+      <md-select ng-model="main.req.type" required>
         <md-option ng-repeat="type in types" value="{{type}}">
           {{type}}
         </md-option>
       </md-select>
     </md-input-container>
-    </div>
-    <!-- <span flex></span> -->
-    <div style="display: block;">
+  </div>
+  <!-- <span flex></span> -->
+  <div style="display: block;">
     <md-input-container layout-fill>
       <label>Title</label>
-      <input name="title" type="text" md-maxlength="36" ng-model="req.title" ng-minlength="10"
+      <input name="title" type="text" md-maxlength="36" ng-model="main.req.title" ng-minlength="10"
        ng-maxlength="36" required>
       <div class="errors" ng-messages="reqForm.title.$error">
         <div ng-message="required">Required</div>
@@ -65,7 +54,7 @@
     <fieldset layout="column">
       <legend> Location Input </legend>
 
-      <md-radio-group ng-model="input.type">
+      <md-radio-group ng-model="input.type" ng-change="setMode('edit')">
         <md-radio-button value="draw" class="md-primary" aria-label="draw">
                Draw on map
         </md-radio-button>
@@ -84,16 +73,10 @@
           <i class="material-icons"  style="vertical-align:middle;">touch_app</i>
           edit or delete area
         </md-button>
-        <md-button class="md-primary md-raised" ng-click="setMode('all')" ng-disabled="drawmode==='all'" style="margin-left:0;">
+        <md-button class="md-primary md-raised" ng-click="setMode('all');toggleMap()" ng-disabled="drawmode==='all'" style="margin-left:0;">
           <i class="material-icons"  style="vertical-align:middle;">edit</i>
           draw new area
         </md-button>
-        <br>
-        <md-button class="md-primary md-raised" hide-gt-xs ng-click="toggleEditForm()" style="margin-left:0;">
-          <md-tooltip md-direction="right" style="z-index:1000;">edit requirement</md-tooltip>
-          <i class="material-icons"  style="vertical-align:middle;">rate_review</i>
-        </md-button>
-        <br>
       </div>
 
       <div layout="column" ng-if="input.type==='circle'">
@@ -111,7 +94,7 @@
             <md-option ng-value="state" ng-repeat="state in circleDraw.states">{{ state }}</md-option>
           </md-select>
         </md-input-container>
-        <md-button class="md-raised md-primary" layout-fill ng-click="circleDraw.drawCircle()">
+        <md-button class="md-raised md-primary" layout-fill ng-click="circleDraw.drawCircle();toggleMap()">
           Draw
         </md-button>
       </div>
@@ -121,16 +104,16 @@
 
 
 
-  <div style="display: block;" ng-if="req.center.length>0">
+  <div style="display: block;" ng-if="main.req.center.length>0">
     <fieldset layout="column">
       <legend> Location </legend>
-      <span flex editable-text="req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
-      <span flex editable-text="req.road" placeholder="address" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.city" placeholder="city" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.town" placeholder="town" on-change="validate(value, 'string')"></span>
-      <span flex editable-text="req.county" placeholder="county" on-change="validate(value, 'string')"></span>
-      <span flex >{{req.state}}</span>
+      <span flex editable-text="main.req.radius" placeholder="radius" on-change="validate(value, 'string')">miles from:</span>
+      <span flex editable-text="main.req.road" placeholder="address" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="main.req.postcode" placeholder="postcode" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="main.req.city" placeholder="city" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="main.req.town" placeholder="town" on-change="validate(value, 'string')"></span>
+      <span flex editable-text="main.req.county" placeholder="county" on-change="validate(value, 'string')"></span>
+      <span flex >{{main.req.state}}</span>
       <md-button class="md-primary md-fab md-mini md-raised" ng-click="updateLocation()">
         <md-icon>loop</md-icon>
       </md-button>
@@ -142,7 +125,7 @@
       <legend> Description </legend>
       <md-input-container flex layout-fill>
         <!-- <label>Description</label> -->
-        <textarea name="description" ng-model="req.info" md-maxlength="500" ng-maxlength="36" required aria-label="description"></textarea>
+        <textarea name="description" ng-model="main.req.info" md-maxlength="500" ng-maxlength="500" required aria-label="description"></textarea>
         <div class="errors" ng-messages="reqForm.description.$error">
           <div ng-message="maxlength">Your field is too long</div>
           <div ng-message="required">Please enter description</div>
@@ -159,11 +142,11 @@
     <div layout="column">
       <md-input-container>
         <label>Min Area sqft</label>
-        <input type="text" ng-model="req.min_sqft" number required>
+        <input type="text" ng-model="main.req.min_sqft" number required>
       </md-input-container>
       <md-input-container>
         <label>Max Area sqft</label>
-        <input type="text" ng-model="req.max_sqft" number required>
+        <input type="text" ng-model="main.req.max_sqft" number required>
       </md-input-container>
     </div>
     <md-input-container flex layout="column">
@@ -172,12 +155,12 @@
           <md-radio-button value="landOnly" class="md-primary"> Land Only </md-radio-button>
         </md-radio-group>
       <!-- <div flex>
-        <md-checkbox class="md-primary" ng-model="req.landOnly" aria-label="land only">
+        <md-checkbox class="md-primary" ng-model="main.req.landOnly" aria-label="land only">
           Land Only
         </md-checkbox>
       </div>
       <div flex>
-        <md-checkbox class="md-primary" ng-model="req.landWithProperty" aria-label="land with property">
+        <md-checkbox class="md-primary" ng-model="main.req.landWithProperty" aria-label="land with property">
           Land and Property
         </md-checkbox>
       </div> -->
@@ -190,54 +173,54 @@
       Please choose buying type
     </div>
     <div flex>
-      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.buy" aria-label="buy">
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="main.req.buy" aria-label="buy">
         Buy
       </md-checkbox>
-      <fieldset ng-if="req.buy">
-        <div ng-if="req.buy" layout-gt-sm="row" layout="column">
+      <fieldset ng-if="main.req.buy">
+        <div ng-if="main.req.buy" layout-gt-sm="row" layout="column">
           <md-input-container>
             <label>Min Buy Price $</label>
-            <input type="text" ng-model="req.buy_min_price" dollars required></input>
+            <input type="text" ng-model="main.req.buy_min_price" dollars required></input>
           </md-input-container>
           <md-input-container>
             <label>Max Buy Price $</label>
-            <input type="text" ng-model="req.buy_max_price" dollars required>
+            <input type="text" ng-model="main.req.buy_max_price" dollars required>
           </md-input-container>
         </div>
       </fieldset>
     </div>
     <br>
     <div flex>
-      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.exchange" aria-label="exchange">
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="main.req.exchange" aria-label="exchange">
         Exchange
       </md-checkbox>
-      <fieldset ng-if="req.exchange">
-        <div ng-if="req.exchange" layout-gt-sm="row" layout="column">
+      <fieldset ng-if="main.req.exchange">
+        <div ng-if="main.req.exchange" layout-gt-sm="row" layout="column">
           <md-input-container>
             <label>Min Exchange Price $</label>
-            <input type="text" ng-model="req.exchange_min_price" dollars required></input>
+            <input type="text" ng-model="main.req.exchange_min_price" dollars required></input>
           </md-input-container>
           <md-input-container>
             <label>Max Exchange Price $</label>
-            <input type="text" ng-model="req.exchange_max_price" dollars required>
+            <input type="text" ng-model="main.req.exchange_max_price" dollars required>
           </md-input-container>
         </div>
       </fieldset>
     </div>
     <br>
     <div flex>
-      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="req.lease" aria-label="lease">
+      <md-checkbox ng-click="scrollDown()" ng-change="checkReqBuyType()" class="md-primary" ng-model="main.req.lease" aria-label="lease">
         Lease
       </md-checkbox>
-      <fieldset ng-if="req.lease">
-        <div ng-if="req.lease" layout-gt-sm="row" layout="column">
+      <fieldset ng-if="main.req.lease">
+        <div ng-if="main.req.lease" layout-gt-sm="row" layout="column">
             <md-input-container>
               <label>Min Lease Price $/sqft</label>
-              <input type="text" ng-model="req.lease_min_price" dollarspersqft required></input>
+              <input type="text" ng-model="main.req.lease_min_price" dollarspersqft required></input>
             </md-input-container>
             <md-input-container>
               <label>Max Lease Price $/sqft</label>
-              <input type="text" ng-model="req.lease_max_price" dollarspersqft required>
+              <input type="text" ng-model="main.req.lease_max_price" dollarspersqft required>
             </md-input-container>
         </div>
       </fieldset>
@@ -247,3 +230,7 @@
   <span id=bottom></span>
 
 </form>
+
+<md-button ng-if="'req.edit.views' | isState" flex="30" class="md-raised md-warn md-ink-ripple" ng-click="deleteReq()">
+  Delete
+</md-button>

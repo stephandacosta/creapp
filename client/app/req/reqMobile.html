@@ -1,0 +1,27 @@
+
+<md-button hide-gt-xs ng-click="toggleMap()" class="md-fab md-accent md-raised md-fab-top-right" style="z-index: 500;">
+  <md-icon ng-if="!showMap">public</md-icon>
+  <md-icon ng-if="showMap">list</md-icon>
+</md-button>
+
+
+<md-content flex layout-fill class="flip-container" ng-class="{'flipped': showMap}" layout="row">
+
+  <div flex layout-fill class="flipper">
+
+    <div class="front reqlist" style="overflow:scroll;">
+      <div ui-view="form" flex layout="column"></div>
+    </div>
+
+    <div class="back" style="background-color:white;">
+      <div layout="row" md-whiteframe="3" style="margin:5px;">
+        <md-button class="md-accent">
+          {{(drawmode==='all'?'draw area on map':'edit area on map')}}
+        </md-button>
+      </div>
+      <div ui-view="map" flex layout-fill ></div>
+    </div>
+
+  </div>
+
+</md-content>

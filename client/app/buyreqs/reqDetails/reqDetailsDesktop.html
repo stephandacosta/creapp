@@ -1,9 +1,9 @@
 <div flex="60" layout="column" layout-padding style="min-height:675px;">
   <div layout="row">
-    <md-button if-user ng-if="main.selectedReq.userIsOwner" class="md-primary" style="border:solid 2px;"  ui-sref="req.edit({id: main.selectedReq._id})">
+    <md-button if-user ng-if="main.selectedReq.userIsOwner" class="md-primary" style="border:solid 2px;"  ui-sref="req.edit.views({id: main.selectedReq._id})">
       edit
     </md-button>
-    <md-button if-user-in-group="admins" class="md-primary md-raised"  ui-sref="req.edit({id: main.selectedReq._id})">
+    <md-button if-user-in-group="admins" class="md-primary md-raised"  ui-sref="req.edit.views({id: main.selectedReq._id})">
       admin edit
     </md-button>
     <span flex></span>

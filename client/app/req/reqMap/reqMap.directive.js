@@ -3,15 +3,14 @@
 // import { NONE, CREATE, EDIT, DELETE, APPEND, ALL, polygons } from 'FreeDraw';
 
 angular.module('creapp')
-  .directive('reqMapedit', function ($timeout, $state, geosearchService, freeDraw, mapService) {
+  .directive('reqMapedit', function ($timeout, $state, freeDraw, geosearchService, mapService) {
     return {
-      template: '<div></div>',
-      restrict: 'E',
+      restrict: 'AE',
       scope: {
-        req: '=req',
-        drawmode: '=drawmode'
+        req: '=req'
+        // drawmode: '=drawmode'
       },
-      link: function (scope, element) {
+      link: function (scope, element, attrs) {
 
         var currentState = $state.current.name;
 
@@ -20,6 +19,8 @@ angular.module('creapp')
 
         mapService.addMaptoElement(element[0], true);
         mapService.addFreeDraw();
+
+        freeDraw.setMode('edit');
 
         // clear polygons for button click
         // scope.clearPolygons = function(){
@@ -32,7 +33,7 @@ angular.module('creapp')
         // invalidateSize because the map container size was dynamicaly changed by ng-material
         $timeout(function(){
           mapService.invalidateSize();
-          if (currentState === 'req.edit' &&  scope.req) {
+          if (currentState === 'req.edit.views' &&  scope.req) {
             mapService.panTo(scope.req.center);
             // mapService.zoomOut();
             if (!_.isUndefined(scope.req.polygon) && scope.req.polygon.length>0){

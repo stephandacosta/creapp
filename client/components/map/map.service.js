@@ -61,6 +61,9 @@ angular.module('creapp')
         destroycallback();
       })
       .addTo(map);
+      $timeout(function(){
+        map.fitBounds(editCircle.getBounds());
+      });
     };
 
 
@@ -172,7 +175,7 @@ angular.module('creapp')
 
     var resetBounds = function(){
       map.whenReady(function(){
-        if (init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add')){
+        if (init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add.views')){
           init = false;
           var listBounds = mapBoundsService.getListBounds();
           if (_.isArray(listBounds) && listBounds.length > 0){
@@ -185,7 +188,7 @@ angular.module('creapp')
     };
 
     var updateListBounds = function() {
-      if (!init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add')) {
+      if (!init && ($state.current.name === 'buyreqs.browse.views' || $state.current.name === 'req.add.views')) {
         var bounds = map.getBounds();
         var boundsArray = [
           [bounds._southWest.lat, bounds._southWest.lng],
@@ -207,21 +210,6 @@ angular.module('creapp')
         init=true;
         map.on('load moveend', updateListBounds);
       },
-      // addDetailMap : function(element, req){
-      //   //create map
-      //   console.log('creating detail map');
-      //   map = new L.Map(element, {zoomControl:false});
-      //   L.tileLayer(mapSettings.tileUrl, {
-      //     attribution: mapSettings.attribution
-      //   }).on('load', function(){ tilesLoaded = true;}).addTo(map);
-      //   state = 'req';
-      //   if (req.polygon.length > 0){
-      //     highlightedLayer = L.polygon(req.polygon);
-      //   } else {
-      //     highlightedLayer = L.circle(req.center,req.radius*1000/0.621371);
-      //   }
-      //   highlightedLayer.setStyle({color:'#E040FB', fillColor: '#E040FB'}).addTo(map);
-      // },
       addFreeDraw : function(){
         freeDraw.addToMap(map);
       },

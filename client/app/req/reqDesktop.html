@@ -1,0 +1,13 @@
+
+  <div flex="40" layout="column" style="min-width:420px;margin: 10px 10px 0 10px;">
+    <div ui-view="form" layout="column"  style="overflow:scroll;"></div>
+  </div>
+
+  <div flex layout-fill layout="column" style="min-width:580px;">
+    <div ng-if="(drawmode==='all')" layout="row" md-whiteframe="3" style="margin:5px;">
+      <md-button class="md-accent">
+        {{(drawmode==='all'?'draw area on map':'')}}
+      </md-button>
+    </div>
+    <div ui-view="map" flex layout-fill md-whiteframe="3" style="margin:5px;"><div>
+  </div>

@@ -13,7 +13,6 @@ angular.module('creapp')
     freeDraw.options.mode = window.FreeDraw.ALL;
 
     var setMode = function (mode) {
-      // console.log('mode',mode);
       var modemap={
         edit: (window.FreeDraw.EDIT | window.FreeDraw.DELETE),
         all: window.FreeDraw.ALL
